@@ -109,7 +109,7 @@ export function useTranslateThread() {
           }));
         }
       } catch {
-        toast.error("Couldn't translate this email");
+        toast.error("无法翻译此邮件");
         return;
       } finally {
         update((current) => ({ ...current, loading: false }));
@@ -122,7 +122,7 @@ export function useTranslateThread() {
         )
       ) {
         toast.info(
-          `Already in ${getLanguageName(targetLanguage) ?? "your language"}`,
+          `已使用${getLanguageName(targetLanguage) ?? "你的语言"}`,
         );
       }
     },

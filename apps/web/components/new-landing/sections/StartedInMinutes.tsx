@@ -40,11 +40,11 @@ export function StartedInMinutes({ title, subtitle }: StartedInMinutesProps) {
         <CardWrapper className="w-full grid grid-cols-1 lg:grid-cols-3 gap-5">
           <BlurFade inView>
             <DisplayCard
-              title="Connect your Google or Microsoft email"
-              description="Link your Gmail or Outlook in two clicks to get started."
+              title="连接 Google 或 Microsoft 邮箱"
+              description="连接 Gmail 或 Outlook 后即可开始。"
               icon={
                 <Badge variant="dark-gray" size="sm" icon={<Connect />}>
-                  STEP 1
+                  第 1 步
                 </Badge>
               }
               centerContent={true}
@@ -70,11 +70,11 @@ export function StartedInMinutes({ title, subtitle }: StartedInMinutesProps) {
           </BlurFade>
           <BlurFade delay={0.25} inView>
             <DisplayCard
-              title="Organizes your inbox exactly how you want it"
-              description="Smart categories set up automatically. Use our categories or create your own."
+              title="按你的需求整理收件箱"
+              description="自动设置智能分类，也可创建自定义分类。"
               icon={
                 <Badge variant="dark-gray" size="sm" icon={<AutoOrganize />}>
-                  STEP 2
+                  第 2 步
                 </Badge>
               }
               centerContent
@@ -83,30 +83,30 @@ export function StartedInMinutes({ title, subtitle }: StartedInMinutesProps) {
               <div className="flex flex-col gap-2 scale-[110%]">
                 <div className="flex gap-2">
                   <Badge variant="purple" icon={<Newsletter />}>
-                    Newsletter
+                    订阅邮件
                   </Badge>
                   <Badge variant="dark-blue" icon={<Envelope />}>
-                    To Reply
+                    待回复
                   </Badge>
                   <Badge variant="green" icon={<Megaphone />}>
-                    Marketing
+                    营销
                   </Badge>
                   <Badge variant="yellow" icon={<Calendar />}>
-                    Calendar
+                    日历
                   </Badge>
                 </div>
                 <div className="flex gap-2">
                   <Badge variant="red" icon={<Bell />}>
-                    Notification
+                    通知
                   </Badge>
                   <Badge variant="light-blue" icon={<SnowFlake />}>
-                    Cold Email
+                    陌生推广邮件
                   </Badge>
                   <Badge variant="orange" icon={<Team />}>
-                    Team
+                    团队
                   </Badge>
                   <Badge variant="pink" icon={<Fire />}>
-                    Urgent
+                    紧急
                   </Badge>
                 </div>
               </div>
@@ -114,18 +114,18 @@ export function StartedInMinutes({ title, subtitle }: StartedInMinutesProps) {
           </BlurFade>
           <BlurFade delay={0.25 * 2} inView>
             <DisplayCard
-              title="Pre-drafted replies based on your email history and calendar"
-              description="Every email you get needing a reply will have a pre-written draft."
+              title="结合邮件历史和日历预先起草回复"
+              description="为需要回复的邮件准备草稿。"
               icon={
                 <Badge variant="dark-gray" size="sm" icon={<SparkleBlue />}>
-                  STEP 3
+                  第 3 步
                 </Badge>
               }
             >
               <div className="pt-6 pl-6">
                 <Image
                   src="/images/new-landing/new-message.png"
-                  alt="Pre-drafted replies"
+                  alt="回复草稿"
                   width={1407}
                   height={852}
                   sizes="(min-width: 1280px) 333px, (min-width: 1152px) 312px, (min-width: 1024px) calc(33.333vw - 72px), (min-width: 768px) calc(100vw - 432px), (min-width: 640px) calc(100vw - 192px), calc(100vw - 112px)"

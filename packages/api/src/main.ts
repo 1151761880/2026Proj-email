@@ -35,12 +35,12 @@ async function main() {
   program
     .name("inbox-zero-api")
     .description(
-      "CLI tool for managing Inbox Zero through the external API.\n\n" +
+      "CLI tool for managing 十组邮件小助手 through the external API.\n\n" +
         "This binary is intended for bots, automation, and API-driven workflows.\n" +
         "For self-hosting and Docker setup, use `inbox-zero` instead.",
     )
     .version(packageJson.version, "-v, --version")
-    .option("-k, --api-key <key>", "Inbox Zero API key")
+    .option("-k, --api-key <key>", "十组邮件小助手 API key")
     .option(
       "-b, --base-url <url>",
       "Optional override for self-hosted or custom API deployments",

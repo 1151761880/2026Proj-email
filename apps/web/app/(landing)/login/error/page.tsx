@@ -25,36 +25,36 @@ import {
 
 const errorMessages: Record<string, { title: string; description: string }> = {
   email_not_found: {
-    title: "Account Not Authorized",
+    title: "账户未获授权",
     description:
-      "Your account is not authorized to access this application. This may be because your email is not part of the allowed organization. Please contact your administrator or try signing in with a different account.",
+      "此账户无权访问应用，可能不属于允许的组织。请联系管理员或使用其他账户登录。",
   },
   signup_not_allowed: {
-    title: "Sign-up Restricted",
+    title: "注册受限",
     description:
-      "This deployment only allows sign-up from specific email addresses or domains. Please contact your administrator or try signing in with a different account.",
+      "此部署仅允许指定邮箱或域名注册。请联系管理员或使用其他账户。",
   },
   email_already_linked: {
-    title: "Email Already Linked",
+    title: "邮箱已关联",
     description: getEmailAlreadyLinkedDescription(),
   },
   account_not_linked: {
-    title: "Sign-in Method Doesn't Match",
+    title: "登录方式不匹配",
     description:
-      "An account already exists for this email, but it was created with a different sign-in method or a different provider account. Sign in the way you originally signed up, or contact support so we can reconnect the two.",
+      "此邮箱已注册，但使用了其他登录方式或服务商账户。请使用原登录方式，或联系支持重新关联。",
   },
   org_invite_invalid_code: {
-    title: "Organization Invite Sign-in Failed",
+    title: "组织邀请登录失败",
     description:
-      "We couldn't complete sign-in while joining this organization. Please start from the invitation link again. If it still fails, sign in with the original account for this mailbox, then accept the invite again.",
+      "加入组织时未能完成登录。请重新打开邀请链接；若仍失败，请先用此邮箱原账户登录，再接受邀请。",
   },
   invalid_code: {
-    title: "Sign-in Session Expired",
+    title: "登录会话已过期",
     description:
-      "Your sign-in link is no longer valid. This can happen if the login flow was opened twice, timed out, or already used. Please start sign-in again from the login page.",
+      "登录链接已失效，可能重复打开、超时或已使用。请从登录页面重新开始。",
   },
   requiresreconsent: {
-    title: "Permissions need to be refreshed",
+    title: "需要刷新权限",
     description: getRequiresReconsentDescription(),
   },
 };
@@ -115,7 +115,7 @@ function LoginErrorContent() {
         description={description}
         button={
           <Button asChild>
-            <Link href="/login">Log In</Link>
+            <Link href="/login">登录</Link>
           </Button>
         }
       />

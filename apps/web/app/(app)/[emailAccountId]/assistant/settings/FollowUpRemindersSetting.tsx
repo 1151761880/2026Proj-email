@@ -86,8 +86,8 @@ function FollowUpRemindersSettingContent() {
 
   return (
     <SettingCard
-      title="Follow-up reminders"
-      description="Label emails where you haven't heard back or haven't replied."
+      title="跟进提醒"
+      description="标记尚未收到回复或尚未回复的邮件。"
       right={
         isLoading ? (
           <Skeleton className="h-5 w-9" />
@@ -97,7 +97,7 @@ function FollowUpRemindersSettingContent() {
               <Dialog open={open} onOpenChange={setOpen}>
                 <DialogTrigger asChild>
                   <Button variant="outline" size="sm">
-                    Configure
+                    配置
                   </Button>
                 </DialogTrigger>
                 <FollowUpSettingsDialogContent
@@ -191,7 +191,7 @@ function FollowUpSettingsDialog({
     updateFollowUpSettingsAction.bind(null, emailAccountId),
     {
       onSuccess: () => {
-        toastSuccess({ description: "Settings saved!" });
+        toastSuccess({ description: "设置已保存！" });
         onSuccess();
       },
       onError: (error) => {
@@ -239,13 +239,12 @@ function FollowUpSettingsDialog({
   return (
     <DialogContent>
       <DialogHeader>
-        <DialogTitle>Follow-up reminders</DialogTitle>
+        <DialogTitle>跟进提醒</DialogTitle>
         <DialogDescription>
-          Get reminded about conversations that need attention.
+          提醒你关注需要处理的会话。
           <br />
-          We'll add a <Badge color="blue">Follow-up</Badge>{" "}
-          {terminology.label.singular} so you can easily find them. Saturdays
-          and Sundays do not count.
+          将添加一个 <Badge color="blue">跟进</Badge>{" "}
+          {terminology.label.singular} ，方便查找。周六、周日不计入等待时间。
         </DialogDescription>
       </DialogHeader>
 
@@ -253,7 +252,7 @@ function FollowUpSettingsDialog({
         <Input
           type="number"
           name="followUpAwaitingReplyDays"
-          label="Remind me when they haven't replied after"
+          label="对方未回复时提醒，等待天数"
           registerProps={register("followUpAwaitingReplyDays")}
           error={errors.followUpAwaitingReplyDays}
           min={0.001}
@@ -265,7 +264,7 @@ function FollowUpSettingsDialog({
         <Input
           type="number"
           name="followUpNeedsReplyDays"
-          label="Remind me when I haven't replied after"
+          label="我未回复时提醒，等待天数"
           registerProps={register("followUpNeedsReplyDays")}
           error={errors.followUpNeedsReplyDays}
           min={0.001}
@@ -281,10 +280,10 @@ function FollowUpSettingsDialog({
                 htmlFor="followUpAutoDraftEnabled"
                 className="block text-sm font-medium text-foreground"
               >
-                Auto-generate drafts
+                自动生成草稿
               </label>
               <p className="text-muted-foreground text-sm">
-                Draft a nudge when you haven't heard back.
+                未收到回复时起草跟进邮件。
               </p>
             </div>
             <Toggle
@@ -297,7 +296,7 @@ function FollowUpSettingsDialog({
 
         <div className="flex items-center gap-2">
           <Button type="submit" size="sm" loading={isExecuting}>
-            Save
+            保存
           </Button>
           <Button
             type="button"
@@ -306,25 +305,25 @@ function FollowUpSettingsDialog({
             loading={isScanning}
             onClick={() => {
               startScanTiming();
-              toast.info("Scanning your emails...", {
+              toast.info("正在扫描邮件…", {
                 description:
-                  "This may take a few minutes depending on how many emails need to be checked.",
+                  "所需时间取决于待检查邮件的数量，可能需要几分钟。",
               });
               executeScan({});
             }}
           >
-            Find follow-ups
+            查找待跟进会话
           </Button>
         </div>
 
         {showChannelsHint && (
           <MutedText>
-            Want pings in your chat app?{" "}
+            在聊天应用中接收提醒{" "}
             <Link
               href={prefixPath(emailAccountId, "/channels")}
               className="text-foreground underline"
             >
-              Configure on the Channels page
+              前往消息渠道页面配置
             </Link>
             .
           </MutedText>
@@ -343,16 +342,16 @@ function showScanCompleteToast(
       emailAddress,
       `label:${FOLLOW_UP_LABEL}`,
     );
-    toast.success("Scan complete!", {
-      description: "View your follow-ups in Gmail.",
+    toast.success("扫描完成！", {
+      description: "在 Gmail 中查看待跟进邮件。",
       action: {
-        label: "View",
+        label: "查看",
         onClick: () => window.open(searchUrl, "_blank"),
       },
     });
   } else {
-    toast.success("Scan complete!", {
-      description: `Look for the "${FOLLOW_UP_LABEL}" category in Outlook.`,
+    toast.success("扫描完成！", {
+      description: `在 Outlook 中查找“${FOLLOW_UP_LABEL}”分类。`,
     });
   }
 }

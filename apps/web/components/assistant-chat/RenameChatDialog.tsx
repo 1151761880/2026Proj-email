@@ -60,7 +60,7 @@ export function RenameChatDialog({
     renameChatAction.bind(null, emailAccountId),
     {
       onSuccess: () => {
-        toastSuccess({ description: "Chat renamed." });
+        toastSuccess({ description: "对话已重命名。" });
         onRenamed();
         globalMutate(`/api/chats/${chatId}`);
         onOpenChange(false);
@@ -83,7 +83,7 @@ export function RenameChatDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Rename chat</DialogTitle>
+          <DialogTitle>重命名对话</DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Input
@@ -100,14 +100,14 @@ export function RenameChatDialog({
               onClick={() => onOpenChange(false)}
               disabled={isExecuting}
             >
-              Cancel
+              取消
             </Button>
             <Button
               type="submit"
               loading={isExecuting}
               disabled={!isDirty || !isValid}
             >
-              Save
+              保存
             </Button>
           </DialogFooter>
         </form>

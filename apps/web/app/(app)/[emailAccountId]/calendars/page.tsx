@@ -11,8 +11,8 @@ export default async function CalendarsPage() {
     <PageWrapper>
       <TimezoneDetector />
       <PageHeader
-        title="Calendars"
-        description="Powering AI scheduling and meeting briefs."
+        title="日历"
+        description="为 AI 排期和会前简报提供日历信息。"
       />
       <div className="mt-6 max-w-4xl space-y-4">
         <CalendarConnections />

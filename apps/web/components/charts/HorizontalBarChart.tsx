@@ -62,7 +62,7 @@ export function HorizontalBarChart({
             </div>
             <div className="flex-shrink-0">
               <span className="text-sm text-gray-600">
-                {item.value.toLocaleString()}
+                {item.value.toLocaleString("zh-CN")}
               </span>
             </div>
           </div>

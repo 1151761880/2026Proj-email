@@ -35,9 +35,9 @@ test("suggests contacts in every recipient field and reuses cached searches", as
     });
   });
   await openMail(page);
-  await page.getByRole("button", { name: /^Compose/ }).click();
-  const dialog = page.getByRole("dialog", { name: "New Message" });
-  const to = dialog.getByRole("combobox", { name: "To", exact: true });
+  await page.getByRole("button", { name: /写邮件/ }).click();
+  const dialog = page.getByRole("dialog", { name: "新邮件" });
+  const to = dialog.getByRole("combobox", { name: "收件人", exact: true });
   await to.fill("contact");
   await expect(
     page.getByRole("option", { name: "First Contact" }),
@@ -83,7 +83,7 @@ test("suggests contacts in every recipient field and reuses cached searches", as
   }
   expect(queries.filter((query) => query === "contact")).toHaveLength(1);
 
-  const bcc = dialog.getByRole("combobox", { name: "Bcc", exact: true });
+  const bcc = dialog.getByRole("combobox", { name: "密送", exact: true });
   await bcc.fill("manual@example.com");
   await bcc.press("Enter");
   await expect(
@@ -106,9 +106,9 @@ for (const theme of ["light", "dark"] as const) {
       await route.fulfill({ json: { contacts: [] } });
     });
     await openMail(page);
-    await page.getByRole("button", { name: /^Compose/ }).click();
-    const dialog = page.getByRole("dialog", { name: "New Message" });
-    const to = dialog.getByRole("combobox", { name: "To", exact: true });
+    await page.getByRole("button", { name: /写邮件/ }).click();
+    const dialog = page.getByRole("dialog", { name: "新邮件" });
+    const to = dialog.getByRole("combobox", { name: "收件人", exact: true });
     await to.fill("ali");
     const alice = page.getByRole("option", {
       name: /Alice Example.*alice@example.com/,

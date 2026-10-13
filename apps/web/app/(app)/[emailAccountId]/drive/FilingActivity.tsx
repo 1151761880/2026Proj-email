@@ -50,20 +50,20 @@ export function FilingActivity() {
 
   return (
     <div>
-      <SectionHeader className="mb-3">Recent Activity</SectionHeader>
+      <SectionHeader className="mb-3">近期动态</SectionHeader>
       <LoadingContent loading={isLoading} error={error}>
         {data?.filings.length === 0 ? (
-          <MutedText className="italic">No recently filed documents.</MutedText>
+          <MutedText className="italic">近期暂无已整理文档。</MutedText>
         ) : (
           <div className="rounded-lg border">
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>File</TableHead>
-                  <TableHead>Folder</TableHead>
-                  <TableHead className="w-[100px]">When</TableHead>
+                  <TableHead>文件</TableHead>
+                  <TableHead>文件夹</TableHead>
+                  <TableHead className="w-[100px]">触发条件</TableHead>
                   <TableHead className="w-[80px] text-center">
-                    Correct?
+                    是否正确？
                   </TableHead>
                   <TableHead className="w-[50px]" />
                 </TableRow>
@@ -83,7 +83,7 @@ export function FilingActivity() {
             </Table>
             {data && data.total > 10 && (
               <MutedText className="p-3 border-t">
-                Showing {data.filings.length} of {data.total} filings
+                显示 {data.filings.length} of {data.total} filings
               </MutedText>
             )}
           </div>
@@ -141,14 +141,14 @@ function FilingRow({
 
       if (result?.serverError) {
         setVote(previousValue);
-        toastError({ description: "Failed to submit feedback" });
+        toastError({ description: "提交反馈失败" });
         return;
       }
 
       onFeedbackSaved();
     } catch {
       setVote(previousValue);
-      toastError({ description: "Failed to submit feedback" });
+      toastError({ description: "提交反馈失败" });
     } finally {
       setIsSubmitting(false);
     }
@@ -176,14 +176,14 @@ function FilingRow({
 
         if (result?.serverError) {
           setVote(voteBeforeDropdownRef.current);
-          toastError({ description: "Failed to move file" });
+          toastError({ description: "移动文件失败" });
           return;
         }
 
-        toastSuccess({ description: `Moved to ${folderName}` });
+        toastSuccess({ description: `已移至 ${folderName}` });
       } catch {
         setVote(voteBeforeDropdownRef.current);
-        toastError({ description: "Failed to move file" });
+        toastError({ description: "移动文件失败" });
       } finally {
         setIsSubmitting(false);
       }
@@ -206,14 +206,14 @@ function FilingRow({
 
       if (result?.serverError) {
         setVote(previousValue);
-        toastError({ description: "Failed to submit feedback" });
+        toastError({ description: "提交反馈失败" });
         return;
       }
 
       onFeedbackSaved();
     } catch {
       setVote(previousValue);
-      toastError({ description: "Failed to submit feedback" });
+      toastError({ description: "提交反馈失败" });
     } finally {
       setIsSubmitting(false);
     }
@@ -280,7 +280,7 @@ function FilingRow({
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
                 <DropdownMenuLabel>
-                  Which folder does this file belong in?
+                  此文件应放入哪个文件夹？
                 </DropdownMenuLabel>
                 {otherFolders.map((folder) => (
                   <DropdownMenuItem
@@ -300,7 +300,7 @@ function FilingRow({
                 <DropdownMenuItem
                   onClick={() => setVote(voteBeforeDropdownRef.current)}
                 >
-                  Cancel
+                  取消
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -323,7 +323,7 @@ function FilingRow({
             target="_blank"
             rel="noopener noreferrer"
             className="text-muted-foreground hover:text-foreground"
-            aria-label={`Open ${filing.filename} in drive`}
+            aria-label={`在云存储中打开 ${filing.filename}`}
           >
             <ExternalLinkIcon className="size-4" />
           </a>
@@ -344,7 +344,7 @@ function FolderCell({
     return (
       <Tooltip content={filing.reasoning || "Doesn't match preferences"}>
         <span className="flex items-center gap-1.5 text-muted-foreground italic">
-          Skipped
+          已跳过
           <InfoIcon className="size-3.5 shrink-0" />
         </span>
       </Tooltip>

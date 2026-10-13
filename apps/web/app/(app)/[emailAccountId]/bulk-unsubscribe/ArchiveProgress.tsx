@@ -31,11 +31,11 @@ export const ArchiveProgress = memo(() => {
     <ProgressPanel
       totalItems={totalItems}
       remainingItems={activeItems}
-      inProgressText={`Archiving senders...${failedItems ? ` ${failedItems} failed.` : ""}`}
+      inProgressText={`正在归档发件人邮件…${failedItems ? `${failedItems} 项失败。` : ""}`}
       completedText={
         failedItems
-          ? `Archiving finished: ${completedItems} succeeded, ${failedItems} failed.`
-          : "Archiving complete!"
+          ? `归档结束：成功 ${completedItems} 项，失败 ${failedItems} 项。`
+          : "归档完成！"
       }
       itemLabel="senders"
     />

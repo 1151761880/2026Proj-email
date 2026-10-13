@@ -20,26 +20,21 @@ import { LoadingContent } from "@/components/LoadingContent";
 export function LearnedPatternsSetting() {
   return (
     <SettingCard
-      title="Learned patterns"
-      description="View the patterns the assistant has learned from your email history."
+      title="已学习的规律"
+      description="查看助手从邮件历史中学习的规律。"
       right={
         <Dialog>
           <DialogTrigger asChild>
             <Button variant="outline" size="sm">
-              View
+              查看
             </Button>
           </DialogTrigger>
           {/* Scroll inside the content row (not DialogContent itself) so the close button stays visible */}
           <DialogContent className="max-w-4xl grid-rows-[auto_minmax(0,1fr)] overflow-hidden">
             <DialogHeader>
-              <DialogTitle>Learned patterns</DialogTitle>
+              <DialogTitle>已学习的规律</DialogTitle>
               <DialogDescription>
-                When the AI processes your emails, it learns which senders or
-                email types consistently match the same rules. For example, it
-                might learn that emails from newsletter@example.com always match
-                your "Newsletter" rule. These learned patterns help the AI make
-                faster, more accurate decisions over time. You can view, edit,
-                or remove patterns that have been learned.
+                AI 会在处理邮件时学习哪些发件人或邮件类型经常匹配同一规则。例如，newsletter@example.com 的邮件始终匹配“订阅邮件”规则。这些规律有助于更快、更准确地处理邮件，你可以查看、编辑或删除它们。
               </DialogDescription>
             </DialogHeader>
             <div className="min-w-0 overflow-y-auto">
@@ -60,7 +55,7 @@ function Content() {
       {data?.groups.length === 0 ? (
         <Card>
           <CardContent className="flex items-center justify-center p-6">
-            <TypographyP>No learned patterns found yet.</TypographyP>
+            <TypographyP>暂无学习规律。</TypographyP>
           </CardContent>
         </Card>
       ) : (

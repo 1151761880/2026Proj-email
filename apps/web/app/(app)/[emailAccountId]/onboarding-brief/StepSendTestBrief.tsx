@@ -69,10 +69,9 @@ export function StepSendTestBrief({ onNext }: { onNext: () => void }) {
       </div>
 
       <div className="text-center">
-        <PageHeading className="mt-4">Send a Test Brief</PageHeading>
+        <PageHeading className="mt-4">发送测试简报</PageHeading>
         <TypographyP className="mt-2 max-w-lg mx-auto">
-          Pick an upcoming meeting and we'll send you a sample brief so you can
-          see exactly what you'll receive.
+          选择即将开始的会议，发送一份示例简报供你查看。
         </TypographyP>
       </div>
 
@@ -82,13 +81,13 @@ export function StepSendTestBrief({ onNext }: { onNext: () => void }) {
             <div className="flex flex-col items-center gap-4 rounded-xl border bg-card p-6 text-center">
               <CalendarIcon className="h-8 w-8 text-muted-foreground" />
               <div>
-                <p className="font-medium">No upcoming meetings found</p>
+                <p className="font-medium">未找到即将开始的会议</p>
                 <p className="text-sm text-muted-foreground mt-1">
-                  We couldn't find any upcoming meetings with external guests.
+                  未找到即将开始的外部会议。
                 </p>
               </div>
               <Button onClick={onNext} variant="outline">
-                Skip for now
+                暂时跳过
               </Button>
             </div>
           ) : (
@@ -165,12 +164,12 @@ export function StepSendTestBrief({ onNext }: { onNext: () => void }) {
             {briefSent ? (
               <>
                 <CheckIcon className="mr-2 h-4 w-4" />
-                Brief sent! Check your inbox
+                简报已发送，请查看收件箱
               </>
             ) : (
               <>
                 <Send className="mr-2 h-4 w-4" />
-                Send Test Brief
+                发送测试简报
               </>
             )}
           </Button>

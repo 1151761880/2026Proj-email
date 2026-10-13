@@ -63,7 +63,7 @@ export function buildBookingLinkDescription(bookingLink: BookingLinkMetadata) {
   const description = bookingLink.description?.trim();
   if (description) return description;
 
-  return `${bookingLink.durationMinutes} min meeting`;
+  return `${bookingLink.durationMinutes} 分钟会议`;
 }
 
 function getBookingLinkUrl(slug: string) {

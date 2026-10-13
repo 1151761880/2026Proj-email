@@ -21,7 +21,7 @@ export function DecisionModelSection() {
     updateDecisionModelSettingsAction,
     {
       onSuccess: () => {
-        toastSuccess({ description: "Settings updated!" });
+        toastSuccess({ description: "设置已更新！" });
       },
       onError: (error) => {
         toastError({
@@ -41,15 +41,14 @@ export function DecisionModelSection() {
   return (
     <Item size="sm">
       <ItemContent>
-        <ItemTitle>Specialized decision model</ItemTitle>
+        <ItemTitle>专用决策模型</ItemTitle>
         <ItemDescription>
-          Use an optional decision model for rule matching and other structured
-          decisions. Falls back to your AI model if unavailable.
+          可指定用于规则匹配等结构化决策的模型，不可用时回退到当前 AI 模型。
         </ItemDescription>
       </ItemContent>
       <ItemActions>
         <Switch
-          aria-label="Specialized decision model"
+          aria-label="专用决策模型"
           checked={data.decisionModelEnabled}
           onCheckedChange={(decisionModelEnabled) => {
             mutate({ ...data, decisionModelEnabled }, false);

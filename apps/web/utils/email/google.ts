@@ -1035,7 +1035,7 @@ export class GmailProvider implements EmailProvider {
         headerMessageId,
         references: parentReferences,
       }),
-      headers: { "X-Mailer": "Inbox Zero Web" },
+      headers: { "X-Mailer": "十组邮件小助手 Web" },
     });
 
     const result = await uploadGmailDraftMessage(

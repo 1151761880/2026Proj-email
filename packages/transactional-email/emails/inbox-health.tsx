@@ -41,20 +41,20 @@ export default function InboxHealthEmail(props: InboxHealthEmailProps) {
       unsubscribeToken={unsubscribeToken}
       preview={`We found ${senderCountText} you rarely read. Clean them up in one click.`}
       eyebrow="Inbox Health"
-      title={`We found ${senderCountText} you rarely read`}
+      title={`发现 ${senderCountText} 位你很少阅读的发件人`}
       subtitle={
         <>
-          Unsubscribing from them could save you around{" "}
+          退订后预计可减少{" "}
           <span className="font-semibold text-[#242424]">
             {yearlyEmailsAvoided.toLocaleString("en-US")} emails
           </span>{" "}
-          a year.
+          （每年）。
         </>
       }
     >
       <StatsEmailCard
-        title="Rarely read senders"
-        description="Based on the last 3 months of your inbox."
+        title="很少阅读的发件人"
+        description="基于最近三个月的收件箱数据。"
         footnote={
           hiddenCount > 0
             ? `And ${hiddenCount} more ${hiddenCount === 1 ? "sender" : "senders"}.`
@@ -62,7 +62,7 @@ export default function InboxHealthEmail(props: InboxHealthEmailProps) {
         }
         cta={{
           href: selectSuggestedUrl,
-          label: "Unsubscribe in one click",
+          label: "一键退订",
           primary: true,
         }}
       >
@@ -89,31 +89,31 @@ InboxHealthEmail.PreviewProps = {
   yearlyEmailsAvoided: 1248,
   senders: [
     {
-      name: "Daily Deals",
+      name: "每日优惠",
       email: "deals@shopping.example.com",
       count: 92,
       readPercentage: 2,
     },
     {
-      name: "Tech Newsletter",
+      name: "科技订阅",
       email: "newsletter@technews.example.com",
       count: 64,
       readPercentage: 8,
     },
     {
-      name: "Promo Updates",
+      name: "促销更新",
       email: "promo@retailer.example.com",
       count: 48,
       readPercentage: 0,
     },
     {
-      name: "Webinar Invites",
+      name: "网络研讨会邀请",
       email: "events@saas.example.com",
       count: 35,
       readPercentage: 11,
     },
     {
-      name: "Job Alerts",
+      name: "职位提醒",
       email: "alerts@jobs.example.com",
       count: 26,
       readPercentage: 15,
@@ -158,7 +158,7 @@ function SenderRow({
           {sender.count.toLocaleString("en-US")} emails
         </Text>
         <Text className="m-0 pt-0.5 text-[13px] leading-5 text-[#848484]">
-          {sender.readPercentage}% read
+          {sender.readPercentage}% 已读
         </Text>
       </Column>
     </Row>

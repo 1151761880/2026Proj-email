@@ -158,7 +158,7 @@ function ComponentsDemo() {
               </CardContent>
               <CardFooter>
                 <ShadButton variant="outline" className="w-full">
-                  Action
+                  操作
                 </ShadButton>
               </CardFooter>
             </Card>
@@ -178,7 +178,7 @@ function ComponentsDemo() {
               </CardContent>
               <CardFooter>
                 <ShadButton variant="outline" size="sm" className="w-full">
-                  Action
+                  操作
                 </ShadButton>
               </CardFooter>
             </Card>
@@ -189,21 +189,21 @@ function ComponentsDemo() {
               icon={<SparklesIcon className="size-5" />}
               title="Action Card (Green)"
               description="This is the default green variant of the ActionCard component."
-              action={<ShadButton variant="primaryBlack">Click Me</ShadButton>}
+              action={<ShadButton variant="primaryBlack">点击这里</ShadButton>}
             />
             <ActionCard
               variant="blue"
               icon={<SparklesIcon className="size-5" />}
               title="Action Card (Blue)"
               description="This is the blue variant of the ActionCard component."
-              action={<ShadButton variant="primaryBlack">Click Me</ShadButton>}
+              action={<ShadButton variant="primaryBlack">点击这里</ShadButton>}
             />
             <ActionCard
               variant="destructive"
               icon={<SparklesIcon className="size-5" />}
               title="Action Card (Destructive)"
               description="This is the destructive variant of the ActionCard component."
-              action={<ShadButton variant="primaryBlack">Click Me</ShadButton>}
+              action={<ShadButton variant="primaryBlack">点击这里</ShadButton>}
             />
           </div>
         </div>
@@ -273,8 +273,8 @@ function ComponentsDemo() {
             <Suspense>
               <Tabs defaultValue="account" className="w-[400px]">
                 <TabsList>
-                  <TabsTrigger value="account">Account</TabsTrigger>
-                  <TabsTrigger value="password">Password</TabsTrigger>
+                  <TabsTrigger value="account">账户</TabsTrigger>
+                  <TabsTrigger value="password">密码</TabsTrigger>
                 </TabsList>
                 <TabsContent value="account">Account content</TabsContent>
                 <TabsContent value="password">Password content</TabsContent>
@@ -288,22 +288,22 @@ function ComponentsDemo() {
           <div className="mt-4 space-y-2">
             <AlertBasic
               title="Alert title default"
-              description="Alert description"
+              description="提示说明"
               variant="default"
             />
             <AlertBasic
               title="Alert title success"
-              description="Alert description"
+              description="提示说明"
               variant="success"
             />
             <AlertBasic
               title="Alert title destructive"
-              description="Alert description"
+              description="提示说明"
               variant="destructive"
             />
             <AlertBasic
               title="Alert title blue"
-              description="Alert description"
+              description="提示说明"
               variant="blue"
             />
           </div>
@@ -325,7 +325,7 @@ function ComponentsDemo() {
               successfully!
             </Notice>
             <Notice variant="error">
-              <strong>Error:</strong> Something went wrong. Please try again.
+              <strong>错误：</strong> Something went wrong. Please try again.
             </Notice>
           </div>
         </div>
@@ -369,9 +369,9 @@ function ComponentsDemo() {
           <div className="mt-4">
             <DismissibleVideoCard
               icon={<SparklesIcon className="h-5 w-5" />}
-              title="Getting started with AI Assistant"
+              title="智能助手入门"
               description={
-                "Learn how to use the AI Assistant to automatically label, archive, and more."
+                "了解如何使用智能助手自动添加标签、归档及执行其他操作。"
               }
               muxPlaybackId="TYo3SIMdhg008x022H79400CxeRSiB6mLyuwHx8Szc00Rec"
               storageKey={`video-dismissible-${Date.now()}`}
@@ -400,66 +400,66 @@ function ComponentsDemo() {
               actions={[
                 {
                   type: ActionType.LABEL,
-                  label: "Label",
+                  label: "标签",
                   id: "label",
                 },
                 {
                   type: ActionType.MOVE_FOLDER,
-                  label: "Move to folder",
+                  label: "移至文件夹",
                   id: "move_folder",
                   folderName: "Marketing",
                 },
                 {
                   type: ActionType.ARCHIVE,
-                  label: "Archive",
+                  label: "归档",
                   id: "archive",
                 },
                 {
                   type: ActionType.DRAFT_EMAIL,
-                  label: "Draft",
+                  label: "草稿",
                   id: "draft",
                 },
                 {
                   type: ActionType.DRAFT_EMAIL,
-                  label: "Draft",
+                  label: "草稿",
                   id: "draft-with-content",
                   content: "Hi, I'd like to discuss the project with you.",
                 },
                 {
                   type: ActionType.REPLY,
-                  label: "Reply",
+                  label: "回复",
                   id: "reply",
                 },
                 {
                   type: ActionType.SEND_EMAIL,
-                  label: "Send",
+                  label: "发送",
                   id: "send",
                 },
                 {
                   type: ActionType.SEND_EMAIL,
-                  label: "Send",
+                  label: "发送",
                   id: "send-with-to",
                   to: "test@example.com",
                 },
                 {
                   type: ActionType.FORWARD,
-                  label: "Forward",
+                  label: "转发",
                   id: "forward",
                 },
                 {
                   type: ActionType.FORWARD,
-                  label: "Forward",
+                  label: "转发",
                   id: "forward-with-to",
                   to: "test@example.com",
                 },
                 {
                   type: ActionType.MARK_SPAM,
-                  label: "Mark as spam",
+                  label: "标为垃圾邮件",
                   id: "mark_spam",
                 },
                 {
                   type: ActionType.MARK_READ,
-                  label: "Mark as read",
+                  label: "标为已读",
                   id: "mark_read",
                 },
                 {
@@ -469,7 +469,7 @@ function ComponentsDemo() {
                 },
                 {
                   type: ActionType.DIGEST,
-                  label: "Digest",
+                  label: "摘要",
                   id: "digest",
                 },
                 {
@@ -479,7 +479,7 @@ function ComponentsDemo() {
                 },
               ]}
               provider="gmail"
-              labels={[{ id: "label", name: "Label" }]}
+              labels={[{ id: "label", name: "标签" }]}
             />
           </div>
         </div>
@@ -494,7 +494,7 @@ function ComponentsDemo() {
                   actionItems: [
                     {
                       type: ActionType.LABEL,
-                      label: "Label",
+                      label: "标签",
                       id: "label",
                     },
                   ],
@@ -517,7 +517,7 @@ function ComponentsDemo() {
                     actionItems: [
                       {
                         type: ActionType.LABEL,
-                        label: "Urgent",
+                        label: "紧急",
                         id: "label1",
                       },
                     ],
@@ -543,7 +543,7 @@ function ComponentsDemo() {
                     actionItems: [
                       {
                         type: ActionType.LABEL,
-                        label: "Important",
+                        label: "重要",
                         id: "label2",
                       },
                     ],
@@ -569,7 +569,7 @@ function ComponentsDemo() {
                     actionItems: [
                       {
                         type: ActionType.LABEL,
-                        label: "Newsletter",
+                        label: "订阅邮件",
                         id: "label3",
                       },
                     ],
@@ -627,7 +627,7 @@ function ComponentsDemo() {
                   actionItems: [
                     {
                       type: ActionType.LABEL,
-                      label: "Label",
+                      label: "标签",
                       id: "label",
                     },
                   ],
@@ -645,7 +645,7 @@ function ComponentsDemo() {
                   actionItems: [
                     {
                       type: ActionType.LABEL,
-                      label: "To Reply",
+                      label: "待回复",
                       id: "label",
                     },
                     {
@@ -676,7 +676,7 @@ function ComponentsDemo() {
                   actionItems: [
                     {
                       type: ActionType.LABEL,
-                      label: "Important",
+                      label: "重要",
                       id: "label",
                     },
                   ],
@@ -824,11 +824,11 @@ function ComponentsDemo() {
           <div className="underline">MultiSelectFilter</div>
           <div className="mt-4">
             <MultiSelectFilter
-              title="Categories"
+              title="分类"
               options={[
-                { label: "Receipts", value: "receipts" },
-                { label: "Newsletters", value: "newsletters" },
-                { label: "Updates", value: "updates" },
+                { label: "收据", value: "receipts" },
+                { label: "订阅邮件", value: "newsletters" },
+                { label: "更新", value: "updates" },
                 { label: "Alerts", value: "alerts" },
               ]}
               selectedValues={selectedValues}
@@ -846,7 +846,7 @@ function ComponentsDemo() {
             </div>
             <div className="space-y-1.5">
               <Label htmlFor="demo-input-disabled">Input, disabled</Label>
-              <Input id="demo-input-disabled" placeholder="Disabled" disabled />
+              <Input id="demo-input-disabled" placeholder="已禁用" disabled />
             </div>
             <div className="space-y-1.5">
               <Label htmlFor="demo-textarea">Textarea</Label>
@@ -856,15 +856,15 @@ function ComponentsDemo() {
               />
             </div>
             <div className="space-y-1.5">
-              <Label htmlFor="demo-select">Select</Label>
+              <Label htmlFor="demo-select">选择</Label>
               <Select value={demoCategory} onValueChange={setDemoCategory}>
                 <SelectTrigger id="demo-select">
                   <SelectValue placeholder="Pick a category" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="receipts">Receipts</SelectItem>
-                  <SelectItem value="newsletters">Newsletters</SelectItem>
-                  <SelectItem value="updates">Updates</SelectItem>
+                  <SelectItem value="receipts">收据</SelectItem>
+                  <SelectItem value="newsletters">订阅邮件</SelectItem>
+                  <SelectItem value="updates">更新</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -872,9 +872,9 @@ function ComponentsDemo() {
               name="demo-native-select"
               label="Select, native"
               options={[
-                { label: "Receipts", value: "receipts" },
-                { label: "Newsletters", value: "newsletters" },
-                { label: "Updates", value: "updates" },
+                { label: "收据", value: "receipts" },
+                { label: "订阅邮件", value: "newsletters" },
+                { label: "更新", value: "updates" },
               ]}
             />
           </div>
@@ -901,7 +901,7 @@ function ComponentsDemo() {
                 value={emailTags}
                 onChange={setEmailTags}
                 placeholder="Enter email addresses"
-                label="Email addresses"
+                label="邮箱地址"
                 validate={(email) =>
                   isValidEmail(email)
                     ? null
@@ -932,7 +932,7 @@ function ComponentsDemo() {
               description="Receive notifications about new emails and important updates"
               right={
                 <ShadButton variant="outline" size="sm">
-                  Configure
+                  配置
                 </ShadButton>
               }
             />
@@ -941,7 +941,7 @@ function ComponentsDemo() {
               description="Automatically respond to incoming emails when you're away"
               right={
                 <ShadButton variant="ghost" size="sm">
-                  Edit
+                  编辑
                 </ShadButton>
               }
             />
@@ -964,16 +964,16 @@ function ComponentsDemo() {
           <div className="mt-4 max-w-lg space-y-4">
             <RadioCardGroup
               name="demoJoinRule"
-              ariaLabel="Which meetings to join"
+              ariaLabel="参加的会议范围"
               value={joinRule}
               onChange={setJoinRule}
               options={[
-                { value: "all", label: "Every call with a video link" },
+                { value: "all", label: "所有包含视频链接的会议" },
                 {
                   value: "external",
-                  label: "Only calls with people outside my company",
+                  label: "仅包含公司外部人员的会议",
                 },
-                { value: "off", label: "Only the ones I turn on myself" },
+                { value: "off", label: "仅我手动启用的会议" },
               ]}
             />
 
@@ -1005,7 +1005,7 @@ function ComponentsDemo() {
             <ListCard>
               <Item>
                 <ItemContent>
-                  <ItemTitle>Email me the notes</ItemTitle>
+                  <ItemTitle>通过邮件发送笔记</ItemTitle>
                   <ItemDescription>
                     Send the summary to your inbox after each call
                   </ItemDescription>
@@ -1030,7 +1030,7 @@ function ComponentsDemo() {
                   <ItemTitle>Row without a description</ItemTitle>
                 </ItemContent>
                 <ShadButton variant="outline" size="sm">
-                  Configure
+                  配置
                 </ShadButton>
               </Item>
             </ListCard>
@@ -1219,7 +1219,7 @@ function EmailRowExample() {
                   </MessageText>
                 </div>
                 <div className="ml-4 shrink-0">
-                  <ShadButton size="sm">Test</ShadButton>
+                  <ShadButton size="sm">测试</ShadButton>
                 </div>
               </div>
             </TableCell>

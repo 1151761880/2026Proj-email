@@ -170,7 +170,7 @@ async function handleApprove(filingId: string): Promise<void> {
   });
 }
 
-const TO_DELETE_FOLDER = "Inbox Zero - To Delete";
+const TO_DELETE_FOLDER = "十组邮件小助手 - To Delete";
 
 async function handleUndo({
   filingId,

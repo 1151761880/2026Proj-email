@@ -31,7 +31,7 @@ export function SharedConversationList() {
         <div className="space-y-2">
           {!conversations.data?.conversations.length && (
             <p className="text-muted-foreground text-sm">
-              No shared conversations yet.
+              暂无共享会话。
             </p>
           )}
           {conversations.data?.conversations.map((conversation) => (
@@ -42,14 +42,14 @@ export function SharedConversationList() {
             >
               <span>
                 <span className="block font-medium">
-                  Conversation shared by {conversation.publisher}
+                  会话共享者 {conversation.publisher}
                 </span>
                 <span className="text-muted-foreground text-xs">
-                  {conversation.commentCount} comments ·{" "}
-                  {new Date(conversation.updatedAt).toLocaleString()}
+                  {conversation.commentCount} 条评论 ·{" "}
+                  {new Date(conversation.updatedAt).toLocaleString("zh-CN")}
                 </span>
               </span>
-              {conversation.unread && <Badge>Unread</Badge>}
+              {conversation.unread && <Badge>未读</Badge>}
             </Link>
           ))}
         </div>

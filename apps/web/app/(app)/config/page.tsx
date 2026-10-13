@@ -58,43 +58,43 @@ export default async function AdminConfigPage() {
 
   return (
     <PageWrapper className="max-w-2xl mx-auto">
-      <PageHeader title="App Configuration" />
+      <PageHeader title="应用配置" />
 
       <div className="space-y-4 mt-4">
-        <Section title="Application">
-          <Row label="Version" value={info.version} />
-          <Row label="Environment" value={info.environment} />
-          <Row label="Base URL" value={info.baseUrl} />
+        <Section title="应用">
+          <Row label="版本" value={info.version} />
+          <Row label="环境" value={info.environment} />
+          <Row label="基础地址" value={info.baseUrl} />
         </Section>
 
-        <Section title="Features">
+        <Section title="功能">
           <Row
-            label="Email Send"
+            label="邮件发送"
             value={info.features.emailSendEnabled ? "Enabled" : "Disabled"}
           />
           <Row
-            label="Contacts"
+            label="联系人"
             value={info.features.contactsEnabled ? "Enabled" : "Disabled"}
           />
           <Row
-            label="Gmail Other Contacts"
+            label="Gmail 其他联系人"
             value={
               info.features.gmailOtherContactsEnabled ? "Enabled" : "Disabled"
             }
           />
           <Row
-            label="AI Model Settings"
+            label="AI 模型设置"
             value={
               info.features.aiModelSettingsDisabled ? "Disabled" : "Enabled"
             }
           />
           <Row
-            label="Bypass Premium"
+            label="跳过高级版限制"
             value={info.features.bypassPremiumChecks ? "Yes" : "No"}
           />
         </Section>
 
-        <Section title="Auth Providers">
+        <Section title="登录服务">
           <Row
             label="Google"
             value={info.providers.google ? "Configured" : "Not configured"}
@@ -104,7 +104,7 @@ export default async function AdminConfigPage() {
             value={info.providers.microsoft ? "Configured" : "Not configured"}
           />
           <Row
-            label="Microsoft Tenant"
+            label="Microsoft 租户"
             value={
               info.providers.microsoftTenantConfigured
                 ? "Single tenant"
@@ -115,14 +115,14 @@ export default async function AdminConfigPage() {
 
         {isUserAdmin && (
           <>
-            <Section title="LLM Configuration">
-              <Row label="Default Provider" value={info.llm.defaultProvider} />
-              <Row label="Default Model" value={info.llm.defaultModel} />
-              <Row label="Economy Provider" value={info.llm.economyProvider} />
-              <Row label="Economy Model" value={info.llm.economyModel} />
+            <Section title="大模型配置">
+              <Row label="默认服务商" value={info.llm.defaultProvider} />
+              <Row label="默认模型" value={info.llm.defaultModel} />
+              <Row label="经济型服务商" value={info.llm.economyProvider} />
+              <Row label="经济型模型" value={info.llm.economyModel} />
             </Section>
 
-            <Section title="Integrations">
+            <Section title="集成">
               <Row
                 label="Redis"
                 value={

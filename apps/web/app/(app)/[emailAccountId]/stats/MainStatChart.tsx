@@ -9,12 +9,12 @@ import { BarChart } from "@/app/(app)/[emailAccountId]/stats/BarChart";
 import { COLORS } from "@/utils/colors";
 
 const chartConfig = {
-  received: { label: "Received", color: COLORS.analytics.blue },
-  sent: { label: "Sent", color: COLORS.analytics.purple },
-  read: { label: "Read", color: COLORS.analytics.pink },
-  unread: { label: "Unread", color: COLORS.analytics.lightPink },
-  archived: { label: "Archived", color: COLORS.analytics.green },
-  inbox: { label: "Inbox", color: COLORS.analytics.lightGreen },
+  received: { label: "已接收", color: COLORS.analytics.blue },
+  sent: { label: "已发送", color: COLORS.analytics.purple },
+  read: { label: "已读", color: COLORS.analytics.pink },
+  unread: { label: "未读", color: COLORS.analytics.lightPink },
+  archived: { label: "已归档", color: COLORS.analytics.green },
+  inbox: { label: "收件箱", color: COLORS.analytics.lightGreen },
 } satisfies ChartConfig;
 
 function getActiveChart(activChart: keyof typeof chartConfig): string[] {
@@ -85,7 +85,7 @@ export function MainStatChart(props: {
                 {chartConfig[chart].label}
               </span>
               <span className="text-lg leading-none font-bold sm:text-3xl">
-                {total[key].toLocaleString()}
+                {total[key].toLocaleString("zh-CN")}
               </span>
             </button>
           );

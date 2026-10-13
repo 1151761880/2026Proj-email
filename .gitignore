@@ -23,7 +23,6 @@ node_modules
 # misc
 .DS_Store
 *.pem
-.conductor/settings.local.toml
 
 # debug
 npm-debug.log*
@@ -93,24 +92,12 @@ copilot/environments/**/manifest.yml
 
 /apps/web/app/(app)/\[emailAccountId\]/demo/*
 
-# Cursor
-.cursor/plans/
-
 # AI SDK devtools
 .devtools/
 
 # browser QA flow results
 qa/browser-flows/results/*
 !qa/browser-flows/results/README.md
-
-# local skills
-.claude/skills/local/
-.agents/skills/local/
-
-# local claude hooks (personal nested repo)
-.claude/local/
-.claude/scheduled_tasks.lock
-.claude/worktrees/
 
 # eval reports
 eval-results/

@@ -97,7 +97,7 @@ const ENVIRONMENT_NAME_ERROR =
 // ═══════════════════════════════════════════════════════════════════════════
 
 export async function runAwsSetup(options: AwsSetupOptions) {
-  p.intro("AWS Copilot Setup for Inbox Zero");
+  p.intro("AWS Copilot Setup for 十组邮件小助手");
 
   const environmentError = validateEnvironmentName(options.environment);
   if (environmentError) {

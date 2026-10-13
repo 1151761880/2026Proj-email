@@ -25,7 +25,7 @@ export function IntroStep({
       <div className="text-center">
         <Image
           src="/images/illustrations/home-office.svg"
-          alt="clean up"
+          alt="整理"
           width={200}
           height={200}
           className="mx-auto dark:brightness-90 dark:invert"
@@ -33,22 +33,22 @@ export function IntroStep({
         />
 
         <TypographyH3 className="mt-2">
-          Let's get your inbox cleaned up in 5 minutes
+          快速整理收件箱
         </TypographyH3>
 
         {unhandledCount === null ? (
           <SectionDescription className="mx-auto mt-2 max-w-prose">
-            Checking your inbox...
+            正在检查收件箱…
           </SectionDescription>
         ) : (
           <>
             <SectionDescription className="mx-auto mt-2 max-w-prose">
-              You have {unhandledCount.toLocaleString()}{" "}
+              你有 {unhandledCount.toLocaleString("zh-CN")}{" "}
               {cleanAction === CleanAction.ARCHIVE ? "unarchived" : "unread"}{" "}
-              emails in your inbox.
+              封收件箱邮件。
             </SectionDescription>
             <SectionDescription className="mx-auto mt-2 max-w-prose">
-              Let's clean up your inbox while keeping important emails safe.
+              整理收件箱并保留重要邮件。
             </SectionDescription>
           </>
         )}
@@ -64,7 +64,7 @@ export function IntroStep({
             }}
             disabled={unhandledCount === null}
           >
-            Next
+            下一步
           </Button>
         </div>
       </div>

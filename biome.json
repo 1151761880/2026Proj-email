@@ -103,9 +103,7 @@
       "!**/*.svg",
       "!.turbo",
       "!.next",
-      "!sw.js",
-      "!.vscode",
-      "!.claude"
+      "!sw.js"
     ]
   },
   "assist": {

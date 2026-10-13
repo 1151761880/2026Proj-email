@@ -9,11 +9,11 @@ export default function ColdEmailBlockerPage() {
   return (
     <PageWrapper>
       <PageHeader
-        title="Cold Email Blocker"
+        title="陌生邮件拦截"
         video={{
-          title: "Getting started with Cold Email Blocker",
+          title: "陌生邮件拦截入门",
           description:
-            "Learn how to review blocked cold emails, rescue a sender, and choose what happens to cold emails.",
+            "了解如何检查被拦截邮件、恢复发件人和设置处理方式。",
           muxPlaybackId: "E29tx0001FmSQqASvIM7r87P9Pro3cq0202AiZ8rOKzsyJM",
         }}
       />

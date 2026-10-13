@@ -67,7 +67,7 @@ function renderInternalTeamNote(internalTeamMembers: InternalTeamMember[]) {
 
   return (
     <Text className="text-xs text-gray-500 mt-4 mb-0 italic">
-      Also attending: {names} (internal team members)
+      其他参会者： {names} （内部成员）
     </Text>
   );
 }
@@ -89,17 +89,17 @@ export default function MeetingBriefingEmail({
           <Container className="mx-auto w-full max-w-[600px] p-0">
             <Section className="px-8 pt-6 pb-2">
               <Text className="text-base text-gray-900 mt-0 mb-0">
-                Briefing for <strong>{meetingTitle}</strong>
+                会议简报 <strong>{meetingTitle}</strong>
               </Text>
               <Text className="text-base text-gray-900 mt-0 mb-0">
-                Starting at <strong>{formattedTime}</strong>
+                开始时间 <strong>{formattedTime}</strong>
               </Text>
             </Section>
 
             <Section className="px-8 pt-2 pb-6">
               {videoConferenceLink && (
                 <Text className="text-sm text-gray-700 mt-0 mb-2">
-                  - Join link:{" "}
+                  - 会议链接：{" "}
                   <Link
                     href={videoConferenceLink}
                     className="text-blue-600 underline"
@@ -110,7 +110,7 @@ export default function MeetingBriefingEmail({
               )}
               {eventUrl && (
                 <Text className="text-sm text-gray-700 mt-0 mb-0">
-                  - Calendar link:{" "}
+                  - 日历链接：{" "}
                   <Link href={eventUrl} className="text-blue-600 underline">
                     {eventUrl}
                   </Link>
@@ -121,7 +121,7 @@ export default function MeetingBriefingEmail({
             {briefingContent.priorities.length > 0 && (
               <Section className="px-8 pb-4">
                 <Text className="text-sm text-gray-900 mt-0 mb-2">
-                  <strong>Meeting priorities</strong>
+                  <strong>会议重点</strong>
                 </Text>
                 {briefingContent.priorities.map((priority, index) => (
                   <Text
@@ -143,8 +143,7 @@ export default function MeetingBriefingEmail({
 
             <Section className="px-8 pb-6">
               <Text className="text-xs text-gray-400 mt-0 mb-0 italic">
-                Note: This briefing is AI-generated and may be inaccurate,
-                especially for common names.
+                此简报由 AI 生成，可能不准确，同名人员的信息尤其需要核实。
               </Text>
             </Section>
 
@@ -152,15 +151,14 @@ export default function MeetingBriefingEmail({
 
             <Section className="px-8 pb-8">
               <Text className="text-xs text-gray-500 mt-0 mb-2">
-                You're receiving this briefing because you enabled Meeting
-                Briefs in your Inbox Zero settings.
+                你在十组邮件小助手中启用了会前简报，因此收到此邮件。
               </Text>
               <Text className="text-xs text-gray-500 mt-0 mb-0">
                 <Link
                   href={`${baseUrl}/${emailAccountId}/briefs`}
                   className="text-gray-600 underline"
                 >
-                  Manage settings
+                  管理设置
                 </Link>
               </Text>
             </Section>
@@ -217,5 +215,5 @@ export function generateMeetingBriefingSubject(
 ): string {
   const { meetingTitle, formattedTime } = props;
 
-  return `Briefing for ${meetingTitle}, starting at ${formattedTime}`;
+  return `${meetingTitle} 会前简报，开始时间：${formattedTime}`;
 }

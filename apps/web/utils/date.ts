@@ -7,6 +7,7 @@ import { isWeekend } from "date-fns/isWeekend";
 import { startOfDay } from "date-fns/startOfDay";
 import { subDays } from "date-fns/subDays";
 import { TZDate } from "@date-fns/tz";
+import { zhCN } from "date-fns/locale/zh-CN";
 import { createScopedLogger } from "@/utils/logger";
 import { captureException } from "@/utils/error";
 
@@ -70,13 +71,13 @@ export function formatShortDate(
  *   is never filed under a section that has already passed.
  */
 export function formatDateGroupLabel(date: Date, now: Date = new Date()) {
-  if (isSameDay(date, now)) return "Today";
-  if (isSameDay(date, subDays(now, 1))) return "Yesterday";
-  if (date > now) return format(date, "MMMM do, yyyy");
-  if (date >= startOfDay(subDays(now, 6))) return "Last 7 days";
-  if (isSameMonth(date, now)) return "Earlier this month";
-  if (isSameYear(date, now)) return format(date, "MMMM");
-  return format(date, "MMMM yyyy");
+  if (isSameDay(date, now)) return "今天";
+  if (isSameDay(date, subDays(now, 1))) return "昨天";
+  if (date > now) return format(date, "yyyy年M月d日", { locale: zhCN });
+  if (date >= startOfDay(subDays(now, 6))) return "最近 7 天";
+  if (isSameMonth(date, now)) return "本月较早";
+  if (isSameYear(date, now)) return format(date, "M月", { locale: zhCN });
+  return format(date, "yyyy年M月", { locale: zhCN });
 }
 
 export function dateToSeconds(date: Date) {
@@ -119,7 +120,7 @@ export function formatRelativeTimeForLLM(date: Date) {
 
 // Format: Mar 18, 2025
 export function formatDateSimple(date: Date) {
-  return date.toLocaleDateString("en-US", {
+  return date.toLocaleDateString("zh-CN", {
     month: "short",
     day: "numeric",
     year: "numeric",
@@ -285,7 +286,7 @@ function getNextZonedMidnight(date: Date, timezone: string) {
 
 const shortDateFormats = {
   // Numeric hours avoid leading zeros (3:44 PM, not 03:44 PM).
-  time: { hour: "numeric", minute: "2-digit" },
+  time: { hour: "numeric", minute: "2-digit", hour12: false },
   date: { month: "short", day: "numeric" },
   dateWithYear: { month: "short", day: "numeric", year: "numeric" },
 } satisfies Record<string, Intl.DateTimeFormatOptions>;
@@ -299,7 +300,7 @@ const shortDateFormatters = new Map<
 function shortDateFormatter(kind: keyof typeof shortDateFormats) {
   let formatter = shortDateFormatters.get(kind);
   if (!formatter) {
-    formatter = new Intl.DateTimeFormat(undefined, shortDateFormats[kind]);
+    formatter = new Intl.DateTimeFormat("zh-CN", shortDateFormats[kind]);
     shortDateFormatters.set(kind, formatter);
   }
   return formatter;

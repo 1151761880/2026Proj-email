@@ -30,9 +30,9 @@ export function ErrorDisplay(props: {
           <EmptyMedia variant="icon">
             <WifiOffIcon />
           </EmptyMedia>
-          <EmptyTitle>You're offline</EmptyTitle>
+          <EmptyTitle>当前离线</EmptyTitle>
           <EmptyDescription>
-            Check your internet connection and try again.
+            请检查网络连接后重试。
           </EmptyDescription>
         </EmptyHeader>
       </Empty>
@@ -46,7 +46,7 @@ export function ErrorDisplay(props: {
           <EmptyMedia variant="icon" className="bg-destructive/10">
             <AlertCircle className="text-destructive" />
           </EmptyMedia>
-          <EmptyTitle>There was an error</EmptyTitle>
+          <EmptyTitle>发生错误</EmptyTitle>
           <EmptyDescription>{errorMessage}</EmptyDescription>
         </EmptyHeader>
       </Empty>
@@ -60,13 +60,13 @@ export function ErrorDisplay(props: {
           <EmptyMedia variant="icon" className="bg-destructive/10">
             <AlertCircle className="text-destructive" />
           </EmptyMedia>
-          <EmptyTitle>There was an error</EmptyTitle>
+          <EmptyTitle>发生错误</EmptyTitle>
           <EmptyDescription>
-            Please refresh or contact support at{" "}
+            请刷新页面或联系支持：{" "}
             <a href={`mailto:${env.NEXT_PUBLIC_SUPPORT_EMAIL}`}>
               {env.NEXT_PUBLIC_SUPPORT_EMAIL}
             </a>{" "}
-            if the error persists.
+            （若问题持续）。
           </EmptyDescription>
         </EmptyHeader>
       </Empty>
@@ -78,9 +78,9 @@ export function ErrorDisplay(props: {
 
 export const NotLoggedIn = () => (
   <div className="flex flex-col items-center justify-center sm:p-20 md:p-32">
-    <div className="text-lg text-gray-700">You are not signed in 😞</div>
+    <div className="text-lg text-gray-700">尚未登录</div>
     <Button variant="outline" className="mt-2" onClick={() => logOut("/login")}>
-      Sign in
+      登录
     </Button>
     <div className="mt-8">
       <Image
@@ -111,7 +111,7 @@ const safeErrorToString = (
     try {
       return JSON.stringify(error);
     } catch {
-      return "Invalid data format";
+      return "数据格式无效";
     }
   }
   return String(error);

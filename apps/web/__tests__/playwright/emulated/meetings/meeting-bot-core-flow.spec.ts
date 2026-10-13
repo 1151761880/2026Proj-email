@@ -25,24 +25,24 @@ test("enables the notetaker and persists meeting choices, notes, and settings", 
   await openMeetings(page, fixture);
 
   await expect(
-    page.getByRole("heading", { name: "Never write meeting notes again" }),
+    page.getByRole("heading", { name: "自动记录会议笔记" }),
   ).toBeVisible({ timeout: 60_000 });
-  await page.getByRole("button", { name: "Get started" }).click();
+  await page.getByRole("button", { name: "开始使用" }).click();
   await expect(
-    page.getByRole("heading", { name: "Which meetings should we join?" }),
+    page.getByRole("heading", { name: "需要参加哪些会议？" }),
   ).toBeVisible();
   await page
-    .getByRole("group", { name: "Which meetings to join" })
-    .getByText("Only the ones I turn on myself", { exact: true })
+    .getByRole("group", { name: "参加的会议范围" })
+    .getByText("仅我手动启用的会议", { exact: true })
     .click();
   await page
-    .getByRole("button", { name: "Start recording my meetings" })
+    .getByRole("button", { name: "开始记录我的会议" })
     .click();
 
   await expect(
-    page.getByRole("heading", { name: "Meetings", exact: true }),
+    page.getByRole("heading", { name: "会议", exact: true }),
   ).toBeVisible({ timeout: 60_000 });
-  await expect(page.getByRole("heading", { name: "Up next" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "即将开始" })).toBeVisible();
 
   const upcomingToggle = page.getByRole("switch", {
     name: "Record Product planning with notetaker",
@@ -68,24 +68,24 @@ test("enables the notetaker and persists meeting choices, notes, and settings", 
   await expect(meetingDialog).toContainText(
     "We will ship the onboarding improvements on Friday.",
   );
-  await expect(meetingDialog).toContainText("Follow-up draft is ready");
-  await meetingDialog.getByRole("button", { name: "Close" }).click();
+  await expect(meetingDialog).toContainText("跟进草稿已准备好");
+  await meetingDialog.getByRole("button", { name: "关闭" }).click();
 
-  await page.getByRole("button", { name: "Settings" }).click();
+  await page.getByRole("button", { name: "设置" }).click();
   const settingsDialog = page.getByRole("dialog", {
-    name: "Notetaker settings",
+    name: "会议记录设置",
   });
   const recapToggle = settingsDialog.getByRole("switch", {
-    name: "Email me the notes",
+    name: "通过邮件发送笔记",
   });
   await expect(recapToggle).toBeChecked();
   await recapToggle.click();
-  await expect(page.getByText("Settings saved", { exact: true })).toBeVisible();
-  await settingsDialog.getByRole("button", { name: "Close" }).click();
+  await expect(page.getByText("设置已保存", { exact: true })).toBeVisible();
+  await settingsDialog.getByRole("button", { name: "关闭" }).click();
 
   await page.reload();
   await expect(
-    page.getByRole("heading", { name: "Meetings", exact: true }),
+    page.getByRole("heading", { name: "会议", exact: true }),
   ).toBeVisible({ timeout: 60_000 });
   await expect(
     page.getByRole("switch", {
@@ -93,18 +93,18 @@ test("enables the notetaker and persists meeting choices, notes, and settings", 
     }),
   ).toBeChecked({ timeout: 60_000 });
 
-  await page.getByRole("button", { name: "Settings" }).click();
+  await page.getByRole("button", { name: "设置" }).click();
   const persistedSettingsDialog = page.getByRole("dialog", {
-    name: "Notetaker settings",
+    name: "会议记录设置",
   });
   await expect(
     persistedSettingsDialog.getByRole("radio", {
-      name: "Only the ones I turn on myself",
+      name: "仅我手动启用的会议",
     }),
   ).toBeChecked();
   await expect(
     persistedSettingsDialog.getByRole("switch", {
-      name: "Email me the notes",
+      name: "通过邮件发送笔记",
     }),
   ).not.toBeChecked();
 });

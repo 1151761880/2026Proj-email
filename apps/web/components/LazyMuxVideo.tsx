@@ -12,7 +12,7 @@ export const LazyMuxVideo = dynamic(
     ssr: false,
     loading: () => (
       <div role="status" className="flex size-full items-center justify-center">
-        <span className="sr-only">Loading video</span>
+        <span className="sr-only">正在加载视频</span>
         <Loader2Icon
           aria-hidden="true"
           className="size-8 animate-spin text-white/70"

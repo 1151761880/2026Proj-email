@@ -49,8 +49,8 @@ export function HiddenAiDraftLinksSetting() {
 
   return (
     <SettingCard
-      title="Allow hidden links in AI drafts"
-      description="Let AI-generated drafts use custom anchor text like 'click here'. This is more convenient, but it hides the full destination and any data in the link."
+      title="允许 AI 草稿使用链接文字"
+      description="允许 AI 草稿使用“点击这里”等链接文字。阅读更方便，但不会直接显示完整目标地址和链接中的数据。"
       right={
         <LoadingContent
           loading={isLoading}

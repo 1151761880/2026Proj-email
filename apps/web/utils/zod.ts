@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+z.config(z.locales.zhCN());
+
 // Parses boolean env vars: "false" → false, any other value → true, unset → uses .default()
 export const booleanString = z.preprocess((val) => {
   if (!val) return;

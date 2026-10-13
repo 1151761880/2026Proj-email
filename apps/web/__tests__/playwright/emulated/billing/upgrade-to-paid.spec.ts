@@ -37,7 +37,7 @@ test("starts a trial from the post-onboarding upgrade page", async ({
 
   await page.goto("/welcome-upgrade");
   await expect(
-    page.getByRole("heading", { name: "Start your 7-day FREE trial" }),
+    page.getByRole("heading", { name: "开始 7 天免费试用" }),
   ).toBeVisible({ timeout: 60_000 });
   await loadedSignedInUser;
 
@@ -54,7 +54,7 @@ test("starts a trial from the post-onboarding upgrade page", async ({
   await page.goto("/premium");
   await expect(
     page.locator(`button[aria-describedby="${STARTER_TIER}"]`),
-  ).toHaveText("Current plan", { timeout: 60_000 });
+  ).toHaveText("当前套餐", { timeout: 60_000 });
 });
 
 test("records the paid conversion once the first invoice is paid", async ({

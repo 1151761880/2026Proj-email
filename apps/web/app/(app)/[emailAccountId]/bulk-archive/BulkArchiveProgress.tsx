@@ -42,11 +42,11 @@ export function BulkArchiveProgress({
     <ProgressPanel
       totalItems={totalItems}
       remainingItems={activeItems}
-      inProgressText={`Archiving ${Math.min(settledItems + 1, totalItems)} of ${totalItems} senders...${failedSuffix}`}
+      inProgressText={`正在归档 ${Math.min(settledItems + 1, totalItems)} / ${totalItems} 位发件人的邮件…${failedSuffix}`}
       completedText={
         failedItems
-          ? `Archiving finished: ${completedItems} succeeded, ${failedItems} failed.`
-          : `Archiving complete! ${completedItems} senders processed!`
+          ? `归档结束：成功 ${completedItems} 项，失败 ${failedItems} 项。`
+          : `归档完成！已处理 ${completedItems} 位发件人！`
       }
       itemLabel="senders"
     />

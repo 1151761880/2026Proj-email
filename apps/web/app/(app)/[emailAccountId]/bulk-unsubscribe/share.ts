@@ -12,9 +12,9 @@ export function buildShareText({
   yearlyEmails,
 }: ShareParams): string {
   const lists = senderCount === 1 ? "email list" : "email lists";
-  const base = `I just unsubscribed from ${senderCount} ${lists} with Inbox Zero`;
+  const base = `I just unsubscribed from ${senderCount} ${lists} with 十组邮件小助手`;
   if (yearlyEmails != null) {
-    return `${base} — that's ~${yearlyEmails.toLocaleString("en-US")} fewer emails a year. ${link}`;
+    return `${base}，每年约减少 ${yearlyEmails.toLocaleString("zh-CN")} 封邮件。${link}`;
   }
   return `${base}. ${link}`;
 }
@@ -53,12 +53,12 @@ export function buildCelebrationSubline({
 }): string {
   const yearlyEmails = projectYearlyEmails({ emailCount, dateRange });
   if (yearlyEmails != null) {
-    return `At their current pace, that's about ${yearlyEmails.toLocaleString("en-US")} fewer ${yearlyEmails === 1 ? "email" : "emails"} a year.`;
+    return `按当前频率估算，每年约减少 ${yearlyEmails.toLocaleString("zh-CN")} 封邮件。`;
   }
   if (emailCount > 0) {
-    return `That's ${emailCount.toLocaleString("en-US")} ${emailCount === 1 ? "email" : "emails"} you won't get again.`;
+    return `将不再收到这 ${emailCount.toLocaleString("zh-CN")} 封邮件。`;
   }
-  return "Those senders won't reach your inbox again.";
+  return "这些发件人的邮件将不再进入收件箱。";
 }
 
 function roundEstimate(value: number): number {

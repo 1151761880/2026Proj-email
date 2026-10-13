@@ -2,6 +2,8 @@
 
 import type React from "react";
 import { useEffect } from "react";
+import { setDefaultOptions } from "date-fns/setDefaultOptions";
+import { zhCN } from "date-fns/locale/zh-CN";
 import { usePathname } from "next/navigation";
 import {
   SAVE_OFFLINE_MAIL,
@@ -21,6 +23,7 @@ import {
 } from "@/utils/desktop-app";
 
 const DESKTOP_WEB_UPDATE_TOAST_ID = "desktop-web-update";
+setDefaultOptions({ locale: zhCN });
 const DESKTOP_WEB_UPDATE_RELOAD_GRACE_MS = 3000;
 
 export function GlobalProviders(props: { children: React.ReactNode }) {
@@ -95,12 +98,12 @@ function ManageServiceWorker() {
 
       lastPromptedAt = now;
       writeDesktopWebUpdateLastPromptedAt(now);
-      toast.info("Update available", {
+      toast.info("有可用更新", {
         action: {
-          label: "Reload",
+          label: "重新加载",
           onClick: activateWaitingWorker,
         },
-        description: "Reload Inbox Zero to use the latest version.",
+        description: "重新加载十组邮件小助手以使用最新版本。",
         duration: Number.POSITIVE_INFINITY,
         id: DESKTOP_WEB_UPDATE_TOAST_ID,
       });

@@ -44,7 +44,7 @@ test("captures queued reply and reconnect", async ({ page }, testInfo) => {
     window.dispatchEvent(new Event("offline"));
   });
   await expect.poll(() => page.evaluate(() => navigator.onLine)).toBe(false);
-  await page.getByRole("button", { name: "Send", exact: true }).click();
+  await page.getByRole("button", { name: "发送", exact: true }).click();
   await expect
     .poll(() =>
       readLatestMailMutation(page, {
@@ -58,7 +58,7 @@ test("captures queued reply and reconnect", async ({ page }, testInfo) => {
     hasText: "Email queued. It will send when you're back online.",
   });
   const delivery = page.getByRole("region", {
-    name: "Reply delivery status",
+    name: "回复投递状态",
   });
   await expect(
     delivery.getByText("Waiting for connection", { exact: true }),
@@ -140,7 +140,7 @@ test("restores a queued reply for editing without sending a duplicate", async ({
     window.dispatchEvent(new Event("offline"));
   });
   await expect.poll(() => page.evaluate(() => navigator.onLine)).toBe(false);
-  await page.getByRole("button", { name: "Send", exact: true }).click();
+  await page.getByRole("button", { name: "发送", exact: true }).click();
   await expect
     .poll(() =>
       readLatestMailMutation(page, {
@@ -150,11 +150,11 @@ test("restores a queued reply for editing without sending a duplicate", async ({
       }),
     )
     .toMatchObject({ status: "reconciling" });
-  const delivery = page.getByRole("region", { name: "Reply delivery status" });
+  const delivery = page.getByRole("region", { name: "回复投递状态" });
   await expect(
     delivery.getByText("Waiting for connection", { exact: true }),
   ).toBeVisible();
-  await delivery.getByRole("button", { name: "Edit reply" }).click();
+  await delivery.getByRole("button", { name: "编辑回复" }).click();
   const restored = page
     .locator('[data-thread-message-id="msg_playwright_reply"]')
     .locator("[contenteditable='true']");
@@ -210,10 +210,10 @@ test("captures thread reading and reply states", async ({ page }, testInfo) => {
   );
   await capturePlaywrightCheckpoint(page, testInfo, "02-expanded-history");
   await page
-    .getByRole("button", { name: "Show details", exact: true })
+    .getByRole("button", { name: "显示详情", exact: true })
     .last()
     .click();
-  await expect(page.getByText("From", { exact: true })).toBeVisible();
+  await expect(page.getByText("发件人", { exact: true })).toBeVisible();
   await capturePlaywrightCheckpoint(page, testInfo, "03-header-details");
   await page.goto(`/${emailAccountId}/mail?thread-id=thr_playwright_reply`);
   const replyMessage = page.locator(
@@ -227,18 +227,18 @@ test("captures thread reading and reply states", async ({ page }, testInfo) => {
   await expect(
     replyMessage.getByText("Please reply to this seeded conversation."),
   ).toBeVisible();
-  const toolbar = page.getByRole("group", { name: "Thread actions" });
+  const toolbar = page.getByRole("group", { name: "会话操作" });
   await expect(
-    toolbar.getByRole("button", { name: "Reply", exact: true }),
+    toolbar.getByRole("button", { name: "回复", exact: true }),
   ).toHaveCount(0);
-  await expect(toolbar.getByRole("button", { name: /^Delete/ })).toHaveCount(0);
+  await expect(toolbar.getByRole("button", { name: /删除/ })).toHaveCount(0);
   await capturePlaywrightCheckpoint(page, testInfo, "04-single-message");
-  await toolbar.getByRole("button", { name: /^More actions/ }).click();
-  await expect(page.getByRole("menuitem", { name: /^Delete/ })).toBeVisible();
+  await toolbar.getByRole("button", { name: /更多操作/ }).click();
+  await expect(page.getByRole("menuitem", { name: /删除/ })).toBeVisible();
   await capturePlaywrightCheckpoint(page, testInfo, "25-thread-actions-menu");
   await page.keyboard.press("Escape");
   await replyMessage
-    .getByRole("button", { name: "Reply", exact: true })
+    .getByRole("button", { name: "回复", exact: true })
     .click();
   const editor = page.locator("[contenteditable='true']");
   await expect(editor).toBeVisible();
@@ -249,11 +249,11 @@ test("captures thread reading and reply states", async ({ page }, testInfo) => {
   await capturePlaywrightCheckpoint(page, testInfo, "06-populated-reply");
   await page.getByRole("button", { name: /^Draft to Leslie/ }).click();
   await expect(
-    page.getByRole("combobox", { name: "Cc", exact: true }),
+    page.getByRole("combobox", { name: "抄送", exact: true }),
   ).toBeVisible();
   await capturePlaywrightCheckpoint(page, testInfo, "07-reply-recipients");
   await page
-    .getByRole("button", { name: "Hide recipients", exact: true })
+    .getByRole("button", { name: "隐藏收件人", exact: true })
     .click();
   await expect(editor).toContainText(
     "Thanks Leslie, Thursday at 2 pm works for me.",
@@ -299,7 +299,7 @@ test("captures a longer thread and draft collapse", async ({
     "A second message proves the complete conversation is rendered.",
   );
   await capturePlaywrightCheckpoint(page, testInfo, "14-long-thread");
-  await page.getByRole("button", { name: "Reply", exact: true }).last().click();
+  await page.getByRole("button", { name: "回复", exact: true }).last().click();
   const editor = page.locator("[contenteditable='true']");
   await editor.fill("This reply should survive collapsing its parent message.");
   const header = page
@@ -321,7 +321,7 @@ test("captures a longer thread and draft collapse", async ({
 function replyToSeededWorkflowMessage(page: Page) {
   return page
     .locator('[data-thread-message-id="msg_playwright_reply"]')
-    .getByRole("button", { name: "Reply", exact: true });
+    .getByRole("button", { name: "回复", exact: true });
 }
 
 async function openSeededWorkflowReplyEditor(page: Page) {
@@ -330,7 +330,7 @@ async function openSeededWorkflowReplyEditor(page: Page) {
   );
   const collapsed = message.locator('[role="button"][aria-expanded="false"]');
   if (await collapsed.count()) await collapsed.click();
-  const editor = page.getByRole("textbox", { name: "Email message" });
+  const editor = page.getByRole("textbox", { name: "邮件内容" });
   if (!(await editor.count()) || !(await editor.first().isVisible())) {
     await replyToSeededWorkflowMessage(page).click();
   }

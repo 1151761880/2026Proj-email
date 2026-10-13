@@ -36,7 +36,7 @@ export class MailPanelErrorBoundary extends Component<
             error={this.state.error}
             reset={this.reset}
             title={this.props.title}
-            description="Try again, or select another folder or conversation. If the problem continues, contact support with the reference below."
+            description="请重试或选择其他文件夹或会话。若问题持续，请提供下方参考信息并联系支持。"
             onBack={this.props.onBack}
           />
         </div>

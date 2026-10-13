@@ -47,32 +47,32 @@ test("adds, inspects, and removes a custom MCP server", async ({
 
   await openIntegrations(page);
 
-  await page.getByRole("button", { name: "Add custom server" }).click();
-  const dialog = page.getByRole("dialog", { name: "Add custom server" });
+  await page.getByRole("button", { name: "添加自定义服务器" }).click();
+  const dialog = page.getByRole("dialog", { name: "添加自定义服务器" });
   await expect(dialog).toBeVisible();
-  await dialog.getByLabel("Name", { exact: true }).fill(SERVER_NAME);
-  await dialog.getByLabel("Server URL").fill(emulator.url);
+  await dialog.getByLabel("名称", { exact: true }).fill(SERVER_NAME);
+  await dialog.getByLabel("服务器地址").fill(emulator.url);
   await dialog.getByRole("combobox").click();
-  await page.getByRole("option", { name: "API key" }).click();
-  await dialog.getByLabel("API key").fill(API_KEY);
+  await page.getByRole("option", { name: "API 密钥" }).click();
+  await dialog.getByLabel("API 密钥").fill(API_KEY);
   await capturePlaywrightCheckpoint(page, testInfo, "add-custom-server-dialog");
 
-  await dialog.getByRole("button", { name: "Add server" }).click();
-  await expect(page.getByText("Server added", { exact: true })).toBeVisible({
+  await dialog.getByRole("button", { name: "添加服务器" }).click();
+  await expect(page.getByText("服务器已添加", { exact: true })).toBeVisible({
     timeout: 120_000,
   });
   await expect(dialog).toBeHidden();
 
   const row = getIntegrationRow(page, SERVER_NAME);
-  await expect(row.getByText("Custom", { exact: true })).toBeVisible({
+  await expect(row.getByText("自定义", { exact: true })).toBeVisible({
     timeout: 60_000,
   });
-  await expect(row.getByText("Connected", { exact: false })).toBeVisible();
+  await expect(row.getByText("已连接", { exact: false })).toBeVisible();
   await expect(row.getByText("127.0.0.1", { exact: true })).toBeVisible();
   await row.scrollIntoViewIfNeeded();
   await capturePlaywrightCheckpoint(page, testInfo, "custom-server-connected");
 
-  await row.getByRole("button", { name: "Integration actions" }).click();
+  await row.getByRole("button", { name: "集成操作" }).click();
   await page
     .getByRole("menuitem", { name: "Manage tools (2 of 3 on)" })
     .click();
@@ -93,8 +93,8 @@ test("adds, inspects, and removes a custom MCP server", async ({
   await updateToolCard.scrollIntoViewIfNeeded();
   await capturePlaywrightCheckpoint(page, testInfo, "custom-server-tools");
 
-  await row.getByRole("button", { name: "Integration actions" }).click();
-  const removeItem = page.getByRole("menuitem", { name: "Remove" });
+  await row.getByRole("button", { name: "集成操作" }).click();
+  const removeItem = page.getByRole("menuitem", { name: "移除" });
   await expect(removeItem).toBeVisible();
   await removeItem.hover();
   await capturePlaywrightCheckpoint(page, testInfo, "custom-server-remove");

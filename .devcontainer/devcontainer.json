@@ -1,5 +1,5 @@
 {
-  "name": "Inbox Zero Dev",
+  "name": "十组邮件小助手 Dev",
   "dockerComposeFile": "docker-compose.yml",
   "service": "app",
   "workspaceFolder": "/workspaces/inbox-zero",

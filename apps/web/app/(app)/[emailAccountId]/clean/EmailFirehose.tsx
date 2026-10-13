@@ -90,9 +90,9 @@ export function EmailFirehose({
       <Tabs defaultValue="done" className="w-full">
         <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="done">
-            {action === CleanAction.ARCHIVE ? "Archived" : "Marked read"}
+            {action === CleanAction.ARCHIVE ? "已归档" : "已标为已读"}
           </TabsTrigger>
-          <TabsTrigger value="keep">Kept</TabsTrigger>
+          <TabsTrigger value="keep">已保留</TabsTrigger>
         </TabsList>
         <div
           ref={parentRef}
@@ -139,11 +139,11 @@ export function EmailFirehose({
             <div className="flex h-full flex-col items-center justify-center py-20 text-muted-foreground">
               {stats.total ? (
                 <span>
-                  {stats.total} emails processed. {stats.done}{" "}
-                  {action === CleanAction.ARCHIVE ? "archived" : "marked read"}.
+                  {stats.total} 封邮件已处理。 {stats.done}{" "}
+                  {action === CleanAction.ARCHIVE ? "archived" : "已标为已读"}.
                 </span>
               ) : (
-                <span>No emails yet</span>
+                <span>暂无邮件</span>
               )}
             </div>
           )}

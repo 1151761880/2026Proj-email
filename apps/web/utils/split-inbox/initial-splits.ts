@@ -2,9 +2,9 @@ import type { MailSplit } from "@/utils/split-inbox/split-query";
 import { MailSplitFilterKind } from "@/generated/prisma/enums";
 
 export const INITIAL_MAIL_SPLITS = [
-  { name: "All", matchAll: true, filters: { create: [] } },
+  { name: "全部", matchAll: true, filters: { create: [] } },
   {
-    name: "Unread",
+    name: "未读",
     matchAll: true,
     filters: {
       create: [{ kind: MailSplitFilterKind.UNREAD, value: null, order: 0 }],
@@ -17,7 +17,7 @@ export function ensureAllMailSplit(splits: (MailSplit & { order: number })[]) {
 
   // Older accounts may have deleted All before the default tab was protected.
   return [
-    { id: "all", name: "All", order: -1, matchAll: true, filters: [] },
+    { id: "all", name: "全部", order: -1, matchAll: true, filters: [] },
     ...splits,
   ];
 }

@@ -69,7 +69,7 @@ export function LoginForm({
           callbackURL,
         });
         if (!result.url) {
-          throw new Error("Missing Google sign-in redirect URL");
+          throw new Error("缺少 Google 登录跳转地址");
         }
         redirectToSafeUrl(result.url, { allowExternal: true });
       } else {
@@ -88,7 +88,7 @@ export function LoginForm({
       const description = getSocialSignInErrorMessage(error);
       logger.error("Error signing in with Google", { error });
       toastError({
-        title: "Error signing in with Google",
+        title: "Google 登录失败",
         description,
       });
     } finally {
@@ -119,7 +119,7 @@ export function LoginForm({
               height={24}
               unoptimized
             />
-            <span className="ml-2">Sign in with Google</span>
+            <span className="ml-2">使用 Google 登录</span>
           </span>
         </Button>
       ) : null}
@@ -138,7 +138,7 @@ export function LoginForm({
               height={24}
               unoptimized
             />
-            <span className="ml-2">Sign in with Microsoft</span>
+            <span className="ml-2">使用 Microsoft 登录</span>
           </span>
         </Button>
       ) : null}
@@ -159,7 +159,7 @@ export function LoginForm({
             })
           }
         >
-          Continue with Apple
+          使用 Apple 继续
         </UIButton>
       ) : null}
 
@@ -169,7 +169,7 @@ export function LoginForm({
             <Link
               href={buildRedirectUrl("/login/email", { next: callbackURL })}
             >
-              Email code (existing accounts)
+              邮件验证码（已有账户）
             </Link>
           </UIButton>
           {showSsoLogin && (
@@ -177,14 +177,14 @@ export function LoginForm({
               <Link
                 href={buildRedirectUrl("/login/sso", { next: callbackURL })}
               >
-                Continue with SSO
+                通过单点登录继续
               </Link>
             </UIButton>
           )}
           {otherOptions && (
             <UIButton variant="ghost" size="lg" asChild>
               <Link href={buildRedirectUrl("/login", { next: callbackURL })}>
-                Back
+                返回
               </Link>
             </UIButton>
           )}
@@ -194,7 +194,7 @@ export function LoginForm({
           <Link
             href={buildRedirectUrl("/login/options", { next: callbackURL })}
           >
-            Other options
+            其他方式
           </Link>
         </UIButton>
       )}
@@ -256,7 +256,7 @@ async function handleSocialSignIn({
     const description = getSocialSignInErrorMessage(error);
     logger.error(`Error signing in with ${providerName}`, { error });
     toastError({
-      title: `Error signing in with ${providerName}`,
+      title: `${providerName} 登录失败`,
       description,
     });
   } finally {
@@ -267,13 +267,13 @@ async function handleSocialSignIn({
 function getSocialSignInErrorMessage(error: unknown) {
   if (error instanceof Error && error.message) {
     if (isNetworkSignInError(error.message)) {
-      return "Could not start sign-in. Please check that this app is opened from its configured public URL, then try again.";
+      return "无法开始登录。请确认使用已配置的公开地址访问应用后重试。";
     }
 
     return error.message;
   }
 
-  return "Please try again or contact support.";
+  return "请重试或联系支持。";
 }
 
 function getSignInErrorCode(error: unknown) {

@@ -177,7 +177,7 @@ export function HtmlEmail({
           type="button"
           aria-expanded={showReplies}
           aria-label={
-            showReplies ? "Hide quoted content" : "Show quoted content"
+            showReplies ? "隐藏引用内容" : "显示引用内容"
           }
           className="mt-1 inline-flex h-5 items-center rounded-full bg-muted px-2 text-muted-foreground transition-colors hover:bg-muted/80 hover:text-foreground"
           onClick={() => setShowReplies(!showReplies)}

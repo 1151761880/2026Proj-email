@@ -84,7 +84,7 @@ export const MailSplitTabs = memo(function MailSplitTabs({
     () =>
       [
         ...allLabels,
-        ...(isGoogle ? [{ id: GmailLabel.IMPORTANT, name: "Important" }] : []),
+        ...(isGoogle ? [{ id: GmailLabel.IMPORTANT, name: "重要" }] : []),
       ].map((label) => ({
         id: `label:${label.id}`,
         name: label.name,

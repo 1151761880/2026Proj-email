@@ -11,7 +11,7 @@ export function getBrandTitle(pageTitle: string) {
 }
 
 export function getPossessiveBrandName() {
-  return BRAND_NAME.endsWith("s") ? `${BRAND_NAME}'` : `${BRAND_NAME}'s`;
+  return `${BRAND_NAME}的`;
 }
 
 export function toAbsoluteUrl(urlOrPath: string) {

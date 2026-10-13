@@ -4,7 +4,7 @@ export type HourFormat = "12h" | "24h";
 export type Slot = { endTime: string; startTime: string };
 
 export function formatShortWeekdayName(date: Date) {
-  return new Intl.DateTimeFormat("en-US", { weekday: "short" }).format(date);
+  return new Intl.DateTimeFormat("zh-CN", { weekday: "short" }).format(date);
 }
 
 export function startOfMonth(date: Date) {
@@ -88,7 +88,7 @@ export function formatSelectedDateHeading(key: string) {
   // local day).
   const [year, month, day] = key.split("-").map(Number);
   const date = new Date(Date.UTC(year, month - 1, day, 12));
-  return new Intl.DateTimeFormat("en-US", {
+  return new Intl.DateTimeFormat("zh-CN", {
     weekday: "short",
     month: "short",
     day: "numeric",
@@ -101,7 +101,7 @@ export function formatSlotTime(
   timezone: string,
   hourFormat: HourFormat,
 ) {
-  return new Intl.DateTimeFormat("en-US", {
+  return new Intl.DateTimeFormat("zh-CN", {
     hour: "numeric",
     minute: "2-digit",
     timeZone: timezone,
@@ -116,7 +116,7 @@ export function detectDefaultHourFormat(): HourFormat {
 }
 
 export function formatLongDateTime(value: string, timezone: string) {
-  return new Intl.DateTimeFormat("en-US", {
+  return new Intl.DateTimeFormat("zh-CN", {
     weekday: "short",
     month: "short",
     day: "numeric",
@@ -135,7 +135,7 @@ export function getApiError(body: unknown) {
   ) {
     return (body as { error: string }).error;
   }
-  return "Something went wrong";
+  return "发生错误";
 }
 
 function isValidDate(date: Date | null): date is Date {

@@ -1,127 +1,101 @@
-[![](apps/web/app/opengraph-image.jpg)](https://www.getinboxzero.com)
+# 十组邮件小助手
 
-<p align="center">
-  <a href="https://www.getinboxzero.com">
-    <h1 align="center">Inbox Zero - your 24/7 AI email assistant</h1>
-  </a>
-  <p align="center">
-    Organizes your inbox, pre-drafts replies, manages your calendar, and organizes attachments. Chat with it from Slack or Telegram to manage your inbox on the go. Open source alternative to Fyxer, but more customizable and secure.
-    <br />
-    <a href="https://www.getinboxzero.com">Website</a>
-    ·
-    <a href="https://www.getinboxzero.com/discord">Discord</a>
-    ·
-    <a href="https://github.com/elie222/inbox-zero/issues">Issues</a>
-  </p>
-</p>
+十组邮件小助手提供 Gmail / Outlook 邮件管理、智能分类、回复草稿、批量退订、归档、日历预约和邮件统计。界面默认使用简体中文。
 
-<div align="center">
+## 主要功能
 
-![Stars](https://img.shields.io/github/stars/elie222/inbox-zero?labelColor=black&style=for-the-badge&color=2563EB)
-![Forks](https://img.shields.io/github/forks/elie222/inbox-zero?labelColor=black&style=for-the-badge&color=2563EB)
+- **邮箱与智能助手**：查看邮件，用自然语言查找信息、配置规则和起草回复。
+- **邮件整理**：逐封给出分类和原文证据；保护星标、待处理邮件；勾选后确认归档，并保存操作日志。
+- **批量退订与归档**：按发件人或分类整理不需要的邮件。
+- **跟进与摘要**：追踪待回复会话，按计划接收邮件摘要。
+- **日历和会议**：设置可预约时间、预约链接、会前简报及会议记录。
+- **附件与集成**：连接 Google Drive、OneDrive，以及 Slack、Telegram、Teams 等应用。
 
-<a href="https://trendshift.io/repositories/6400" target="_blank"><img src="https://trendshift.io/api/badge/repositories/6400" alt="elie222%2Finbox-zero | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/></a>
+## Windows 本地运行
 
-[![Sponsor](https://readme.cash/i/hg3bchcqpo.svg)](https://readme.cash/c/hg3bchcqpo)
+运行环境要求 Node.js 24；pnpm 版本由根目录 `package.json` 固定。
 
-[![Vercel OSS Program](https://vercel.com/oss/program-badge.svg)](https://vercel.com/oss)
+已完成便携运行环境准备时，双击根目录的 **Start-ProjectEmail.cmd**。启动器会运行项目独立的 PostgreSQL、Redis、邮箱服务模拟器和网页应用，不注册 Windows 服务。
 
-</div>
-
-## Mission
-
-To help you spend less time in your inbox, so you can focus on what matters most.
-
-## Features
-
-- **AI Personal Assistant:** Organizes your inbox and pre-drafts replies in your tone and style.
-- **AI Rules for email:** Explain in plain English how your AI should handle your inbox.
-- **Reply Zero:** Track emails to reply to and those awaiting responses.
-- **Bulk Unsubscriber:** One-click unsubscribe and archive emails you never read.
-- **Bulk Archiver:** Clean up your inbox by bulk archiving old emails.
-- **Cold Email Blocker:** Auto‑block cold emails.
-- **Email Analytics:** Track your activity and trends over time.
-- **Meeting Briefs:** Get personalized briefings before every meeting, pulling context from your email and calendar.
-- **Smart Filing:** Automatically save email attachments to Google Drive or OneDrive.
-- **Slack & Telegram Integration:** Chat with your AI assistant from Slack or Telegram to manage your inbox without leaving the apps you already use.
-
-
-Learn more in our [docs](https://docs.getinboxzero.com).
-
-## Feature Screenshots
-
-| ![AI Assistant](.github/screenshots/email-assistant.png) |        ![Reply Zero](.github/screenshots/reply-zero.png)        |
-| :------------------------------------------------------: | :-------------------------------------------------------------: |
-|                      _AI Assistant_                      |                          _Reply Zero_                           |
-|  ![Gmail Client](.github/screenshots/email-client.png)   | ![Bulk Unsubscriber](.github/screenshots/bulk-unsubscriber.png) |
-|                      _Gmail client_                      |                       _Bulk Unsubscriber_                       |
-
-## Demo Video
-
-[![Inbox Zero demo](https://img.youtube.com/vi/UusnveLKwWM/maxresdefault.jpg)](https://youtu.be/UusnveLKwWM)
-
-## Built with
-
-- [Next.js](https://nextjs.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [shadcn/ui](https://ui.shadcn.com/)
-- [Prisma](https://www.prisma.io/)
-- [Upstash](https://upstash.com/)
-- [Turborepo](https://turbo.build/)
-- [Popsy Illustrations](https://popsy.co/)
-
-## Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=elie222/inbox-zero&type=Date)](https://www.star-history.com/#elie222/inbox-zero&Date)
-
-## Feature Requests
-
-To request a feature open a [GitHub issue](https://github.com/elie222/inbox-zero/issues), or join our [Discord](https://www.getinboxzero.com/discord).
-
-## Getting Started
-
-We offer a hosted version of Inbox Zero at [getinboxzero.com](https://www.getinboxzero.com).
-
-### Self-Hosting
-
-The fastest way to self-host Inbox Zero is with the CLI:
-
-> **Prerequisites**: [Docker](https://docs.docker.com/engine/install/) and [Node.js](https://nodejs.org/) v24+
+首次准备运行环境：
 
 ```bash
-npx @inbox-zero/cli setup      # One-time setup wizard
-npx @inbox-zero/cli start      # Start containers
+node apps/web/scripts/local-dev/windows-runtime.mjs
+pnpm install
+pnpm local:start --backend native
 ```
 
-Open http://localhost:3000
+打开 [本地邮箱](http://localhost:3000/mail)，通过 Google 登录选择 `developer@example.com`，或通过 Microsoft 选择 `developer@outlook.test`。这是本地演示账户。
 
-For complete self-hosting instructions, production deployment, OAuth setup, and configuration options, see our **[Self-Hosting Docs](https://docs.getinboxzero.com/hosting/quick-start)**.
-
-### Local Development
-
-> **Prerequisites**: macOS or Linux (WSL on Windows), [Node.js](https://nodejs.org/) v24, and the pnpm version pinned in `package.json`. Install either [Docker Desktop](https://docs.docker.com/desktop/) with Compose or native PostgreSQL and Redis. On macOS, native services can be installed with `brew install postgresql@16 redis`.
+按 **Ctrl-C** 停止应用及本次启动的服务。再次运行同一命令即可恢复；若端口被占用：
 
 ```bash
-git clone https://github.com/elie222/inbox-zero.git
-cd inbox-zero
+pnpm local:start --port 3001
+```
+
+## macOS / Linux
+
+安装 Node.js 24、对应版本的 pnpm，以及 Docker Compose 或本机 PostgreSQL / Redis，然后在项目根目录运行：
+
+```bash
 pnpm install
 pnpm local:start
 ```
 
-Open http://localhost:3000/mail and sign in with Google as `developer@example.com`, or Microsoft as `developer@outlook.test`. The Google mailbox contains demo messages. Demo users have onboarding completed, and premium checks are bypassed for local development.
+macOS 原生数据库可使用 `brew install postgresql@16 redis` 安装。可用 `--backend native` 或 `--backend docker` 指定启动方式；更多参数见 `pnpm local:start --help`。
 
-The command starts an isolated database, Redis and its HTTP endpoint, both mail-provider emulators, billing and email-delivery emulators, an LLM emulator, and Next.js. It applies migrations and waits for services to become ready. No OAuth credentials or AI API keys are required. AI responses are canned; this mode exercises application flows, not model quality.
+## 本地数据和演示范围
 
-Existing `.env` files are left unchanged and ignored by this launcher. Generated credentials, seed data, and the current service addresses are stored under `.context/local-dev/`. Native database data stays there; Docker database data stays in a volume unique to the checkout. Restarts preserve database data and credentials. Redis caches and provider/emulator state start fresh on each run.
+启动器的数据、凭据及当前服务地址保存在 `.context/local-dev/`，便携运行环境保存在 `.context/native/`。重启会保留数据库与凭据；邮箱模拟器、Redis 缓存及其他模拟服务会重新初始化。已有环境文件不会被本地启动器覆盖。
 
-Press **Ctrl-C** to stop the app and the services this command started. Start it again with the same command. If port 3000 is occupied, use `pnpm local:start --port 3001`. Native PostgreSQL and Redis are selected when available; use `--backend docker` or `--backend native` to select explicitly. A checkout-specific loopback port prevents concurrent launchers; the operating system releases that lock after a crash, and stale PID files are replaced automatically. Services use automatically assigned ports, so existing databases and Redis instances are not reused or stopped.
+本地演示使用模拟邮箱、计费、邮件投递及 AI 服务。AI 返回预设结果，用于验证应用操作流程。连接真实邮箱及模型时，需要使用自己的 OAuth、数据库和 AI 配置。
 
-Run `pnpm local:start --help` for options. If an unrelated process occupies the reported lock port, stop that process or use a different checkout location. PostgreSQL data must be opened with the same major version that created it. If you upgrade your native PostgreSQL major version, back up or move `.context/local-dev/postgres` before starting a new cluster.
+升级原生 PostgreSQL 主版本前，请备份数据库；同一数据目录应由创建它的数据库主版本打开。
 
-For development against real providers, continue to use `pnpm setup`, your own environment files, and `pnpm dev`. See the **[Contributing Guide](https://docs.getinboxzero.com/contributing)** for configuration and devcontainer setup.
+## 品牌与中文界面
 
-## Contributing
+默认项目名称为“十组邮件小助手”。需要定制时，在部署环境中配置：
 
-View open tasks in [GitHub Issues](https://github.com/elie222/inbox-zero/issues) and join our [Discord](https://www.getinboxzero.com/discord) to discuss what's being worked on.
+```dotenv
+NEXT_PUBLIC_BRAND_NAME=十组邮件小助手
+NEXT_PUBLIC_SLACK_BOT_NAME=十组邮件小助手
+NEXT_PUBLIC_SUPPORT_EMAIL=
+# NEXT_PUBLIC_BRAND_LOGO_URL=/your-logo.svg
+# NEXT_PUBLIC_BRAND_ICON_URL=/your-icon.png
+```
 
-Docker images are automatically built on every push to `main` and tagged with the commit SHA (e.g., `elie222/inbox-zero:abc1234`). The `latest` tag always points to the most recent main build. Formal releases use version tags (e.g., `v2.26.0`).
+界面文案直接使用简体中文，日历和日期采用中文区域设置。邮箱原文、用户自定义标签、服务商名称、API 字段、工作区依赖和已有数据库标识保持其原有含义。
+
+## 邮件整理配置
+
+侧栏的“邮件整理”使用独立的测试邮箱，内含 12 封固定邮件。分类建议包含原文证据；默认不勾选归档项；归档前需要确认，并记录日志。可重置测试邮箱或导入邮件，也可验证故障重试。
+
+真实 DeepSeek 配置仅存于服务端 `apps/web/.env.local`，此功能与已有自动化规则独立。配置方式及针对性测试见 [邮件整理说明](docs/zh-CN/mail-triage.mdx)。
+
+## 项目文档
+
+中文版入口为 [文档索引](docs/README.md)，按项目说明、使用手册、部署运维和开发接口组织。初次运行见 [快速开始](docs/zh-CN/quick-start.mdx)，技术组成见 [总体架构](docs/zh-CN/architecture.mdx)。
+
+开始整理时的原文及资源已备份到 `archives/documentation/2026-10-13-original.tar.gz`。原有文档继续作为参考保留，文档站导航使用 `docs/zh-CN/` 中的中文版。
+
+## 检查与测试
+
+```bash
+pnpm test path/to/test-file.test.ts
+pnpm check
+pnpm -F inbox-zero-ai test:playwright:emulated <area-or-spec>
+```
+
+浏览器检查需要相应的本地服务。修改界面文案后，同步修改依赖可见名称的测试定位器。
+
+## 可选外部 AI 接入
+
+供 Cursor、OpenClaw 等外部工具调用邮箱的接入包暂存于 `extras/ai-integrations/`，包括 MCP 插件、API 技能包及其发现入口，当前不启用。需要使用时，按 [MCP 插件说明](extras/ai-integrations/plugins/inbox-zero-mcp/README.md) 或 [API 技能说明](extras/ai-integrations/clawhub/README.md) 手动安装或恢复入口。
+
+开发工具的专用规则和工作区配置已移除；启动和检查命令见上文。
+
+## 开源来源
+
+本项目基于 [原始开源仓库](https://github.com/elie222/inbox-zero)进行中文适配和品牌定制。许可证与原作者归属保留在 [LICENSE](LICENSE)；上游接口、公开包名及协议标识用于兼容现有依赖。
+
+技术栈包括 Next.js、React、Tailwind CSS、shadcn/ui、Prisma 和 Turborepo。

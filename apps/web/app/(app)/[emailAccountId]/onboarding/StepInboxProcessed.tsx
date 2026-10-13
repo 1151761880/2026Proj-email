@@ -98,13 +98,13 @@ export function StepInboxProcessedView({
       <div className="mb-6 text-center">
         <PageHeading className="mb-3">
           {hasDrafts
-            ? `${label.pluralCapitalized} and drafts are ready`
-            : `${label.pluralCapitalized} are ready`}
+            ? `${label.pluralCapitalized}已完成，草稿已准备好`
+            : `${label.pluralCapitalized}已完成`}
         </PageHeading>
         <TypographyP className="text-muted-foreground">
           {hasDrafts
-            ? `We ${pastVerb} your last ${ONBOARDING_PROCESS_EMAILS_COUNT} emails and drafted replies. Nothing was archived.`
-            : `We ${pastVerb} your last ${ONBOARDING_PROCESS_EMAILS_COUNT} emails. Nothing was archived.`}
+            ? `已整理最近 ${ONBOARDING_PROCESS_EMAILS_COUNT} 封邮件并起草回复，未归档任何邮件。`
+            : `已整理最近 ${ONBOARDING_PROCESS_EMAILS_COUNT} 封邮件，未归档任何邮件。`}
         </TypographyP>
       </div>
 
@@ -120,7 +120,7 @@ export function StepInboxProcessedView({
         <ContinueButton onClick={onNext} size="lg" />
         {!isPremium && (
           <p className="max-w-md text-center text-sm text-muted-foreground">
-            Upgrade on the next step to process new emails automatically
+            下一步升级后可自动处理新邮件
           </p>
         )}
       </div>
@@ -143,7 +143,7 @@ function InboxPreview({
 }) {
   return (
     <section
-      aria-label="Recently organized emails"
+      aria-label="最近整理的邮件"
       className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"
     >
       <div
@@ -192,7 +192,7 @@ function EmailRow({
         {email.hasDraft && (
           <Badge color={getActionColor(ActionType.DRAFT_EMAIL)}>
             <ReplyIcon className="mr-1 size-3" />
-            Draft
+            草稿
           </Badge>
         )}
         <span className="whitespace-nowrap text-xs text-muted-foreground tabular-nums">
@@ -206,7 +206,7 @@ function EmailRow({
 function InboxPreviewSkeleton() {
   return (
     <section
-      aria-label="Loading recently organized emails"
+      aria-label="正在加载最近整理的邮件"
       className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"
     >
       <ul className="divide-y divide-slate-100 py-3.5">

@@ -64,22 +64,21 @@ export function ConfirmationStep({
     <div className="text-center">
       <Image
         src="/images/illustrations/business-success-chart.svg"
-        alt="clean up"
+        alt="整理"
         width={200}
         height={200}
         className="mx-auto dark:brightness-90 dark:invert"
         unoptimized
       />
 
-      <TypographyH3 className="mt-2">Ready to clean up your inbox</TypographyH3>
+      <TypographyH3 className="mt-2">准备整理收件箱</TypographyH3>
 
       <ul className="mx-auto mt-4 max-w-prose list-disc space-y-2 pl-4 text-left">
         <li>
-          We'll process {PREVIEW_RUN_COUNT} emails in an initial clean up.
+          将处理 {PREVIEW_RUN_COUNT} 封邮件，作为首轮整理。
         </li>
         <li>
-          If you're happy with the results, we'll continue to process the rest
-          of your inbox.
+          确认结果符合预期后，可继续处理收件箱中的其余邮件。
         </li>
         {/* TODO: we should count only emails we're processing */}
         {/* <li>
@@ -89,21 +88,20 @@ export function ConfirmationStep({
         <li>
           {action === CleanAction.ARCHIVE ? (
             <>
-              Archived emails will be labeled{" "}
-              <Badge color="green">Archived</Badge> in Gmail.
+              归档邮件将添加标签{" "}
+              <Badge color="green">已归档</Badge> （Gmail）。
             </>
           ) : (
             <>
-              Emails marked as read will be labeled{" "}
-              <Badge color="green">Read</Badge> in Gmail.
+              标为已读的邮件将添加标签{" "}
+              <Badge color="green">已读</Badge> （Gmail）。
             </>
           )}
         </li>
-        <li>No emails are deleted - everything can be found in search.</li>
+        <li>不会删除邮件，所有邮件仍可通过搜索找到。</li>
         {reuseSettings && (
           <li>
-            We'll use your settings from the last time you cleaned your inbox.
-            You can adjust these{" "}
+            将使用上次整理时的设置，你可以修改{" "}
             <Link
               className="font-semibold hover:underline"
               href={prefixPath(emailAccountId, "/clean/onboarding")}
@@ -117,7 +115,7 @@ export function ConfirmationStep({
 
       <div className="mt-6">
         <Button size="lg" onClick={handleStartCleaning}>
-          Start Cleaning
+          开始整理
         </Button>
       </div>
 
@@ -125,12 +123,12 @@ export function ConfirmationStep({
         <MutedText className="mt-6 flex items-center justify-center space-x-6">
           <FooterLink
             icon={HistoryIcon}
-            text="History"
+            text="历史记录"
             href={prefixPath(emailAccountId, "/clean/history")}
           />
           <FooterLink
             icon={SettingsIcon}
-            text="Edit settings"
+            text="编辑设置"
             href={prefixPath(emailAccountId, "/clean/onboarding")}
           />
         </MutedText>

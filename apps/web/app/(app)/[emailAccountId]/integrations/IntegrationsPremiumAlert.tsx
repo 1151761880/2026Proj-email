@@ -12,11 +12,11 @@ export function IntegrationsPremiumAlert() {
     <>
       <ActionCard
         icon={<CrownIcon className="h-5 w-5" />}
-        title="Plus Plan Required"
-        description="Connect your CRM and tools to help the AI draft better replies and generate richer meeting briefs."
+        title="需要进阶版"
+        description="连接 CRM 等工具，帮助 AI 起草更准确的回复和更丰富的会前简报。"
         action={
           <Button variant="primaryBlack" onClick={openModal}>
-            Upgrade
+            升级
           </Button>
         }
       />

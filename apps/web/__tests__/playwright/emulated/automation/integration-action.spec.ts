@@ -27,7 +27,7 @@ test("configures and persists a Todoist rule action", async ({ page }) => {
   await page.goto(`/${emailAccountId}/automation`);
   await expectVisibleAfterTransientFetch(
     page,
-    page.getByRole("heading", { name: "AI Assistant", exact: true }),
+    page.getByRole("heading", { name: "智能助手", exact: true }),
   );
   const integrationsResponse = await page.request.get("/api/mcp/integrations", {
     headers: { "x-email-account-id": emailAccountId },
@@ -35,20 +35,20 @@ test("configures and persists a Todoist rule action", async ({ page }) => {
   expect(integrationsResponse.ok()).toBe(true);
 
   const addRuleManually = page.getByRole("button", {
-    name: "Add rule manually",
+    name: "手动添加规则",
   });
   await expect(async () => {
     if (await addRuleManually.isVisible()) return;
-    await page.getByRole("button", { name: "Add Rule" }).click();
+    await page.getByRole("button", { name: "添加规则" }).click();
     await expect(addRuleManually).toBeVisible({ timeout: 5000 });
   }).toPass({ timeout: 30_000 });
   await addRuleManually.click();
 
-  const createDialog = page.getByRole("dialog", { name: "Create Rule" });
+  const createDialog = page.getByRole("dialog", { name: "创建规则" });
   await expect(createDialog).toBeVisible();
   await createDialog
     .getByPlaceholder(
-      "e.g. Newsletters, regular content from publications, blogs, or services I've subscribed to",
+      "例如：来自已订阅的刊物、博客或服务的定期邮件",
     )
     .fill("Emails that contain a task I need to complete");
   await createDialog.getByRole("combobox").first().click();
@@ -69,12 +69,12 @@ test("configures and persists a Todoist rule action", async ({ page }) => {
   await page.getByRole("option", { name: "Work", exact: true }).click();
   const dueDateSelect = getLabeledSelect(createDialog, "Due date");
   await dueDateSelect.click();
-  await page.getByRole("option", { name: "Tomorrow", exact: true }).click();
+  await page.getByRole("option", { name: "明天", exact: true }).click();
 
   await createDialog
-    .getByRole("textbox", { name: "Rule name" })
+    .getByRole("textbox", { name: "规则名称" })
     .fill(RULE_NAME);
-  await createDialog.getByRole("button", { name: "Create" }).click();
+  await createDialog.getByRole("button", { name: "创建" }).click();
   await expect
     .poll(() => getTodoistRuleState(emailAccountId), { timeout: 120_000 })
     .toMatchObject({
@@ -94,10 +94,10 @@ test("configures and persists a Todoist rule action", async ({ page }) => {
   await page.reload();
   const ruleRow = page.getByRole("row").filter({ hasText: RULE_NAME });
   await expect(ruleRow).toBeVisible({ timeout: 60_000 });
-  await ruleRow.getByRole("button", { name: "Toggle menu" }).click();
-  await page.getByRole("menuitem", { name: "Edit manually" }).click();
+  await ruleRow.getByRole("button", { name: "展开或收起菜单" }).click();
+  await page.getByRole("menuitem", { name: "手动编辑" }).click();
 
-  const editDialog = page.getByRole("dialog", { name: "Edit Rule" });
+  const editDialog = page.getByRole("dialog", { name: "编辑规则" });
   await expect(editDialog.getByRole("combobox").first()).toContainText(
     "Add Todoist task",
   );
@@ -106,7 +106,7 @@ test("configures and persists a Todoist rule action", async ({ page }) => {
   ).toHaveValue("Review the request");
   await expect(getLabeledSelect(editDialog, "Project")).toContainText("Work");
   await expect(getLabeledSelect(editDialog, "Due date")).toContainText(
-    "Tomorrow",
+    "明天",
   );
 });
 

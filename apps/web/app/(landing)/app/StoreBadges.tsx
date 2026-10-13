@@ -18,14 +18,14 @@ export function StoreBadges({ className }: { className?: string }) {
     >
       <StoreBadge
         href="/ios"
-        label="Download on the"
+        label="下载平台："
         store="App Store"
         icon={<Apple className="size-7" />}
         onClick={() => landingPageAnalytics.appDownloadClicked(posthog, "ios")}
       />
       <StoreBadge
         href="/android"
-        label="Get it on"
+        label="下载平台："
         store="Google Play"
         icon={<PlayIcon />}
         onClick={() =>

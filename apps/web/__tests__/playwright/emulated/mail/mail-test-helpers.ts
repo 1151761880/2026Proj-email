@@ -23,7 +23,7 @@ export async function openMail(page: Page) {
     waitUntil: "domcontentloaded",
   });
 
-  const conversations = page.getByRole("listbox", { name: "Conversations" });
+  const conversations = page.getByRole("listbox", { name: "会话" });
   await expect(conversations).toBeVisible({ timeout: 60_000 });
 
   return { conversations, emailAccountId };
@@ -88,7 +88,7 @@ export async function expectThreadReaderBody(
 export async function openMailboxFromSidebar(page: Page, name: string) {
   const link = page.getByRole("link", { name: new RegExp(`^${name}`) });
   if (!(await link.isVisible())) {
-    await page.getByRole("button", { name: "Mail", exact: true }).click();
+    await page.getByRole("button", { name: "邮箱", exact: true }).click();
   }
   await link.click();
 }

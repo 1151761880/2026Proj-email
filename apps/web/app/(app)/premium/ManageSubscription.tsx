@@ -49,7 +49,7 @@ export function ManageSubscription({
       {premium?.stripeSubscriptionId && (
         <Button loading={loadingBillingPortal} onClick={openBillingPortal}>
           <CreditCardIcon className="mr-2 h-4 w-4" />
-          Manage{hasBothStripeAndLemon ? " Stripe" : ""} subscription
+          管理{hasBothStripeAndLemon ? " Stripe" : ""} subscription
         </Button>
       )}
 
@@ -61,7 +61,7 @@ export function ManageSubscription({
             rel="noopener noreferrer"
           >
             <CreditCardIcon className="mr-2 h-4 w-4" />
-            Manage{hasBothStripeAndLemon ? " Lemon" : ""} subscription
+            管理{hasBothStripeAndLemon ? " Lemon" : ""} subscription
           </Link>
         </Button>
       )}
@@ -74,7 +74,7 @@ export function ManageSubscription({
             rel="noopener noreferrer"
           >
             <CreditCardIcon className="mr-2 h-4 w-4" />
-            Manage in App Store
+            在 App Store 管理
           </Link>
         </Button>
       )}
@@ -105,7 +105,7 @@ export function ViewInvoicesButton({
           loading={loading}
           onClick={openBillingPortal}
         >
-          {hasBoth ? "Stripe invoices" : "Invoices"}
+          {hasBoth ? "Stripe 发票" : "发票"}
         </Button>
       )}
 
@@ -116,7 +116,7 @@ export function ViewInvoicesButton({
             target="_blank"
             rel="noopener noreferrer"
           >
-            {hasBoth ? "Lemon invoices" : "Invoices"}
+            {hasBoth ? "Lemon 发票" : "发票"}
           </Link>
         </Button>
       )}

@@ -16,25 +16,25 @@ test("keeps keyboard focus in the composer and follows the message field order",
   page,
 }) => {
   await openMail(page);
-  await page.getByRole("button", { name: /^Compose/ }).click();
+  await page.getByRole("button", { name: /写邮件/ }).click();
 
-  const dialog = page.getByRole("dialog", { name: "New Message" });
-  const toField = dialog.getByRole("combobox", { name: "To" });
+  const dialog = page.getByRole("dialog", { name: "新邮件" });
+  const toField = dialog.getByRole("combobox", { name: "收件人" });
   await expect(toField).toBeFocused();
 
   for (const field of [
-    dialog.getByRole("combobox", { exact: true, name: "Cc" }),
-    dialog.getByRole("combobox", { exact: true, name: "Bcc" }),
-    dialog.getByPlaceholder("Subject"),
-    dialog.getByRole("textbox", { name: "Email message" }),
+    dialog.getByRole("combobox", { exact: true, name: "抄送" }),
+    dialog.getByRole("combobox", { exact: true, name: "密送" }),
+    dialog.getByPlaceholder("主题"),
+    dialog.getByRole("textbox", { name: "邮件内容" }),
     dialog.getByRole("button", { name: "Show signature" }),
-    dialog.getByRole("button", { exact: true, name: "Send" }),
-    dialog.getByRole("button", { name: "Send later" }),
-    dialog.getByRole("button", { name: "Remind me" }),
-    dialog.getByRole("button", { name: "Insert snippet" }),
-    dialog.getByRole("button", { name: "Attach files" }),
-    dialog.getByRole("button", { name: "Insert inline images" }),
-    dialog.getByRole("button", { name: "Discard draft" }),
+    dialog.getByRole("button", { exact: true, name: "发送" }),
+    dialog.getByRole("button", { name: "定时发送" }),
+    dialog.getByRole("button", { name: "提醒我" }),
+    dialog.getByRole("button", { name: "插入快捷片段" }),
+    dialog.getByRole("button", { name: "添加附件" }),
+    dialog.getByRole("button", { name: "插入内嵌图片" }),
+    dialog.getByRole("button", { name: "丢弃草稿" }),
   ]) {
     await page.keyboard.press("Tab");
     await expect(field).toBeFocused();
@@ -44,7 +44,7 @@ test("keeps keyboard focus in the composer and follows the message field order",
   // escaping the non-modal composer.
   await page.keyboard.press("Tab");
   await expect(
-    dialog.getByRole("button", { name: "Expand compose" }),
+    dialog.getByRole("button", { name: "展开写信窗口" }),
   ).toBeFocused();
 });
 
@@ -52,17 +52,17 @@ test("opens the snippet picker from slash in the composer", async ({
   page,
 }, testInfo) => {
   await openMail(page);
-  await page.getByRole("button", { name: /^Compose/ }).click();
+  await page.getByRole("button", { name: /写邮件/ }).click();
 
-  const dialog = page.getByRole("dialog", { name: "New Message" });
-  const editor = dialog.getByRole("textbox", { name: "Email message" });
+  const dialog = page.getByRole("dialog", { name: "新邮件" });
+  const editor = dialog.getByRole("textbox", { name: "邮件内容" });
   await editor.click();
   await page.keyboard.type("/");
 
-  const picker = page.getByRole("listbox", { name: "Snippets" });
+  const picker = page.getByRole("listbox", { name: "快捷片段" });
   await expect(picker).toBeVisible();
   await expect(
-    page.getByRole("option", { name: /Turn into snippet/ }),
+    page.getByRole("option", { name: /保存为快捷片段/ }),
   ).toBeVisible();
   await capturePlaywrightCheckpoint(page, testInfo, "slash-snippet-picker");
 
@@ -76,7 +76,7 @@ test("opens the snippet picker from slash in the composer", async ({
   await expect(picker).toBeVisible();
   await page.keyboard.press("Enter");
   await expect(
-    page.getByRole("dialog", { name: "Save snippet" }),
+    page.getByRole("dialog", { name: "保存快捷片段" }),
   ).toBeVisible();
   // Save snippet is a modal, so the composer is aria-hidden and no longer
   // matches getByRole("dialog", { name: "New Message" }).
@@ -87,13 +87,13 @@ test("focuses the message field from the empty composer body", async ({
   page,
 }) => {
   await openMail(page);
-  await page.getByRole("button", { name: /^Compose/ }).click();
+  await page.getByRole("button", { name: /写邮件/ }).click();
 
-  const dialog = page.getByRole("dialog", { name: "New Message" });
+  const dialog = page.getByRole("dialog", { name: "新邮件" });
   const editorRoot = dialog.locator("[data-email-editor-root]");
   const editor = editorRoot.locator("[contenteditable='true']");
   await expect(editor).toBeVisible();
-  await dialog.getByPlaceholder("Subject").focus();
+  await dialog.getByPlaceholder("主题").focus();
   await expect(editor).not.toBeFocused();
 
   // The empty composer's content is a single paragraph at the top, so the
@@ -107,11 +107,11 @@ test("keeps the collapsed signature when typing after clicking below it", async 
   page,
 }, testInfo) => {
   await openMail(page);
-  await page.getByRole("button", { name: /^Compose/ }).click();
+  await page.getByRole("button", { name: /写邮件/ }).click();
 
-  const dialog = page.getByRole("dialog", { name: "New Message" });
+  const dialog = page.getByRole("dialog", { name: "新邮件" });
   const editorRoot = dialog.locator("[data-email-editor-root]");
-  const editor = dialog.getByRole("textbox", { name: "Email message" });
+  const editor = dialog.getByRole("textbox", { name: "邮件内容" });
   const toggle = dialog.getByRole("button", { name: "Show signature" });
   await expect(toggle).toBeVisible();
   await expect(editor.locator("[data-smartmail]")).toHaveCount(0);
@@ -132,7 +132,7 @@ test("keeps the collapsed signature when typing after clicking below it", async 
   await expect(toggle).toBeVisible();
   await toggle.click();
   const signature = editor.locator("[data-smartmail]");
-  await expect(signature).toContainText("Inbox Zero");
+  await expect(signature).toContainText("十组邮件小助手");
   expect(
     await editor.evaluate((element) => {
       const signatureElement = element.querySelector("[data-smartmail]");
@@ -158,23 +158,23 @@ test("keeps the collapsed signature when typing after clicking below it", async 
 
 test("edits the signature and its links in place", async ({ page }) => {
   await openMail(page);
-  await page.getByRole("button", { name: /^Compose/ }).click();
+  await page.getByRole("button", { name: /写邮件/ }).click();
 
-  const dialog = page.getByRole("dialog", { name: "New Message" });
-  const editor = dialog.getByRole("textbox", { name: "Email message" });
+  const dialog = page.getByRole("dialog", { name: "新邮件" });
+  const editor = dialog.getByRole("textbox", { name: "邮件内容" });
   await editor.pressSequentially("Draft body");
   await dialog.getByRole("button", { name: "Show signature" }).click();
 
   const signature = editor.locator("[data-smartmail]");
-  const footerLink = signature.getByRole("link", { name: "Inbox Zero" });
-  await selectEditorText(editor, "Inbox Zero");
+  const footerLink = signature.getByRole("link", { name: "十组邮件小助手" });
+  await selectEditorText(editor, "十组邮件小助手");
   await editor.press("ControlOrMeta+k");
-  const editLinkDialog = dialog.getByRole("dialog", { name: "Edit link" });
-  await expect(editLinkDialog.getByLabel("Link address")).toHaveValue(/^http/);
+  const editLinkDialog = dialog.getByRole("dialog", { name: "编辑链接" });
+  await expect(editLinkDialog.getByLabel("链接地址")).toHaveValue(/^http/);
   await editLinkDialog
-    .getByLabel("Link address")
+    .getByLabel("链接地址")
     .fill("https://example.com/signature");
-  await editLinkDialog.getByRole("button", { name: "Update" }).click();
+  await editLinkDialog.getByRole("button", { name: "更新" }).click();
   await expect(footerLink).toHaveAttribute(
     "href",
     "https://example.com/signature",
@@ -182,7 +182,7 @@ test("edits the signature and its links in place", async ({ page }) => {
 
   await selectEditorText(editor, "Sent with");
   await page.keyboard.type("Written with");
-  await expect(signature).toContainText("Written with Inbox Zero");
+  await expect(signature).toContainText("Written with 十组邮件小助手");
   await expect(editor.locator(":scope > div").first()).toHaveText("Draft body");
 });
 
@@ -190,19 +190,19 @@ test("restores a new message draft after closing the composer", async ({
   page,
 }, testInfo) => {
   await openMail(page);
-  await page.getByRole("button", { name: /^Compose/ }).click();
+  await page.getByRole("button", { name: /写邮件/ }).click();
 
-  const dialog = page.getByRole("dialog", { name: "New Message" });
-  const toField = dialog.getByRole("combobox", { name: "To" });
-  const subjectField = dialog.getByPlaceholder("Subject");
-  const messageField = dialog.getByRole("textbox", { name: "Email message" });
+  const dialog = page.getByRole("dialog", { name: "新邮件" });
+  const toField = dialog.getByRole("combobox", { name: "收件人" });
+  const subjectField = dialog.getByPlaceholder("主题");
+  const messageField = dialog.getByRole("textbox", { name: "邮件内容" });
   await toField.fill("recipient@example.com");
   await subjectField.fill("Preserved compose draft");
   await messageField.fill("Keep this message after closing.");
 
-  await dialog.getByRole("button", { name: "Close compose" }).click();
+  await dialog.getByRole("button", { name: "关闭写信窗口" }).click();
   await expect(dialog).toBeHidden();
-  await page.getByRole("button", { name: /^Compose/ }).click();
+  await page.getByRole("button", { name: /写邮件/ }).click();
 
   await expect(
     dialog.getByRole("button", { name: "Remove recipient@example.com" }),
@@ -220,10 +220,10 @@ test("restores a new message draft after closing the composer", async ({
     "restored-new-message-draft",
   );
 
-  await dialog.getByRole("button", { name: "Discard draft" }).click();
+  await dialog.getByRole("button", { name: "丢弃草稿" }).click();
   await expect(dialog).toBeHidden();
 
-  await page.getByRole("button", { name: /^Compose/ }).click();
+  await page.getByRole("button", { name: /写邮件/ }).click();
   await expect(toField).toHaveValue("");
   await expect(
     dialog.getByRole("button", { name: "Remove recipient@example.com" }),
@@ -232,17 +232,17 @@ test("restores a new message draft after closing the composer", async ({
   await expect(messageField).not.toContainText(
     "Keep this message after closing.",
   );
-  await dialog.getByRole("button", { name: "Discard draft" }).click();
+  await dialog.getByRole("button", { name: "丢弃草稿" }).click();
   await expect(dialog).toBeHidden();
 });
 
 test("links URLs while typing and pasting", async ({ page }, testInfo) => {
   await openMail(page);
-  await page.getByRole("button", { name: /^Compose/ }).click();
-  const dialog = page.getByRole("dialog", { name: "New Message" });
-  const editor = dialog.getByRole("textbox", { name: "Email message" });
+  await page.getByRole("button", { name: /写邮件/ }).click();
+  const dialog = page.getByRole("dialog", { name: "新邮件" });
+  const editor = dialog.getByRole("textbox", { name: "邮件内容" });
   await editor.pressSequentially("Visit example.com/docs");
-  await expect(dialog.getByRole("listbox", { name: "Snippets" })).toHaveCount(
+  await expect(dialog.getByRole("listbox", { name: "快捷片段" })).toHaveCount(
     0,
   );
   await editor.press("Space");
@@ -270,12 +270,12 @@ test("keeps editing state stable across formatting, links, paste, and files", as
   page,
 }, testInfo) => {
   await openMail(page);
-  await page.getByRole("button", { name: /^Compose/ }).click();
+  await page.getByRole("button", { name: /写邮件/ }).click();
 
-  const dialog = page.getByRole("dialog", { name: "New Message" });
+  const dialog = page.getByRole("dialog", { name: "新邮件" });
   const editor = dialog.locator("[contenteditable='true']");
   const formatting = page.getByRole("toolbar", {
-    name: "Selection formatting",
+    name: "选中文字格式",
   });
 
   await expect(dialog).toBeVisible();
@@ -285,12 +285,12 @@ test("keeps editing state stable across formatting, links, paste, and files", as
   ).toHaveCount(0);
   await expect(dialog).toHaveAttribute("data-compose-expanded", "false");
   await expect(
-    dialog.getByRole("button", { name: "Expand compose" }),
+    dialog.getByRole("button", { name: "展开写信窗口" }),
   ).toBeVisible();
   await dialog
-    .getByRole("combobox", { name: "To" })
+    .getByRole("combobox", { name: "收件人" })
     .fill("teammate@example.com");
-  await dialog.getByPlaceholder("Subject").fill("Project update");
+  await dialog.getByPlaceholder("主题").fill("Project update");
   await editor.pressSequentially("Alpha omega");
   for (const _character of "omega") {
     await editor.press("ArrowLeft");
@@ -301,7 +301,7 @@ test("keeps editing state stable across formatting, links, paste, and files", as
     mimeType: "text/plain",
     buffer: Buffer.from("Attachment contents"),
   });
-  await expect(dialog.getByRole("list", { name: "Attachments" })).toContainText(
+  await expect(dialog.getByRole("list", { name: "附件" })).toContainText(
     "notes.txt",
   );
   await editor.pressSequentially("middle ");
@@ -321,7 +321,7 @@ test("keeps editing state stable across formatting, links, paste, and files", as
   await expect(editor.locator("b, strong", { hasText: "rich" })).toBeVisible();
 
   await selectEditorText(editor, "middle");
-  await formatting.getByRole("button", { name: "Bold" }).click();
+  await formatting.getByRole("button", { name: "加粗" }).click();
   await expect(
     editor.locator("b, strong", { hasText: "middle" }),
   ).toBeVisible();
@@ -334,8 +334,8 @@ test("keeps editing state stable across formatting, links, paste, and files", as
       : null;
   });
   await editor.press("ControlOrMeta+k");
-  const addLinkDialog = dialog.getByRole("dialog", { name: "Add link" });
-  await addLinkDialog.getByLabel("Link address").fill("example.com/first");
+  const addLinkDialog = dialog.getByRole("dialog", { name: "添加链接" });
+  await addLinkDialog.getByLabel("链接地址").fill("example.com/first");
   // The panel opens next to the text it links, not at a fixed corner.
   const panelBox = await addLinkDialog.boundingBox();
   if (!selectionBox || !panelBox) throw new Error("Link panel has no anchor");
@@ -347,35 +347,35 @@ test("keeps editing state stable across formatting, links, paste, and files", as
   ).toBeLessThan(24);
   expect(Math.abs(panelBox.x - selectionBox.left)).toBeLessThan(24);
   await capturePlaywrightCheckpoint(page, testInfo, "composer-link-panel");
-  await addLinkDialog.getByRole("button", { name: "Add" }).click();
+  await addLinkDialog.getByRole("button", { name: "添加" }).click();
   const link = editor.getByRole("link", { name: "omega" });
   await expect(link).toHaveAttribute("href", "https://example.com/first");
 
   await selectEditorText(editor, "omega");
-  await formatting.getByRole("button", { name: "Add or edit link" }).click();
-  const editLinkDialog = dialog.getByRole("dialog", { name: "Edit link" });
+  await formatting.getByRole("button", { name: "添加或编辑链接" }).click();
+  const editLinkDialog = dialog.getByRole("dialog", { name: "编辑链接" });
   await editLinkDialog
-    .getByLabel("Link address")
+    .getByLabel("链接地址")
     .fill("https://example.com/updated");
-  await editLinkDialog.getByRole("button", { name: "Update" }).click();
+  await editLinkDialog.getByRole("button", { name: "更新" }).click();
   await expect(link).toHaveAttribute("href", "https://example.com/updated");
 
   await selectEditorText(editor, "omega");
-  await formatting.getByRole("button", { name: "Add or edit link" }).click();
+  await formatting.getByRole("button", { name: "添加或编辑链接" }).click();
   await dialog
-    .getByRole("dialog", { name: "Edit link" })
-    .getByRole("button", { name: "Remove" })
+    .getByRole("dialog", { name: "编辑链接" })
+    .getByRole("button", { name: "移除" })
     .click();
   await expect(editor.getByRole("link", { name: "omega" })).toHaveCount(0);
 
   await selectEditorText(editor, "omega");
   await editor.press("ControlOrMeta+k");
   const cancelLink = dialog
-    .getByRole("dialog", { name: "Add link" })
-    .getByRole("button", { name: "Cancel" });
+    .getByRole("dialog", { name: "添加链接" })
+    .getByRole("button", { name: "取消" });
   await cancelLink.focus();
   await cancelLink.press("Escape");
-  await expect(dialog.getByRole("dialog", { name: "Add link" })).toHaveCount(0);
+  await expect(dialog.getByRole("dialog", { name: "添加链接" })).toHaveCount(0);
   await expect(editor).toBeFocused();
 
   await dialog.getByTestId("compose-inline-image-input").setInputFiles({
@@ -387,19 +387,19 @@ test("keeps editing state stable across formatting, links, paste, and files", as
     ),
   });
   await expect(editor.locator("img[data-content-id]")).toHaveCount(1);
-  await expect(dialog.getByRole("list", { name: "Attachments" })).toContainText(
+  await expect(dialog.getByRole("list", { name: "附件" })).toContainText(
     "inline.png",
   );
 
   await selectEditorText(editor, "middle");
-  await formatting.getByRole("button", { name: "Right-to-left text" }).click();
+  await formatting.getByRole("button", { name: "从右到左" }).click();
   await expect(editor.locator("[dir='rtl']")).toHaveCount(1);
-  await formatting.getByRole("button", { name: "Left-to-right text" }).click();
+  await formatting.getByRole("button", { name: "从左到右" }).click();
   await expect(editor.locator("[dir='ltr']")).toHaveCount(1);
   await expect(editor.locator("[dir='rtl']")).toHaveCount(0);
   await selectEditorText(editor, "middle");
   await expect(
-    page.getByRole("toolbar", { name: "Selection formatting" }),
+    page.getByRole("toolbar", { name: "选中文字格式" }),
   ).toBeVisible();
   await capturePlaywrightCheckpoint(page, testInfo, "composer-selection");
 
@@ -407,14 +407,14 @@ test("keeps editing state stable across formatting, links, paste, and files", as
   await expect(formatting).toBeHidden();
   await capturePlaywrightCheckpoint(page, testInfo, "composer-compact");
 
-  await dialog.getByRole("button", { name: "Expand compose" }).click();
+  await dialog.getByRole("button", { name: "展开写信窗口" }).click();
   await expect(dialog).toHaveAttribute("data-compose-expanded", "true");
   await expect(
-    dialog.getByRole("button", { name: "Restore compose" }),
+    dialog.getByRole("button", { name: "还原写信窗口" }),
   ).toBeVisible();
   await capturePlaywrightCheckpoint(page, testInfo, "composer-expanded");
 
-  await dialog.getByRole("button", { name: "Restore compose" }).click();
+  await dialog.getByRole("button", { name: "还原写信窗口" }).click();
   await expect(dialog).toHaveAttribute("data-compose-expanded", "false");
 });
 
@@ -423,25 +423,25 @@ test("does not add a line break for the send shortcut", async ({
 }, testInfo) => {
   const { conversations, emailAccountId } = await openMail(page);
   const subject = `Shortcut Message ${testInfo.retry}`;
-  await page.getByRole("button", { name: /^Compose/ }).click();
+  await page.getByRole("button", { name: /写邮件/ }).click();
 
-  const dialog = page.getByRole("dialog", { name: "New Message" });
+  const dialog = page.getByRole("dialog", { name: "新邮件" });
   const editor = dialog.locator("[contenteditable='true']");
   await dialog
-    .getByRole("combobox", { name: "To" })
+    .getByRole("combobox", { name: "收件人" })
     .fill("recipient@example.com");
-  await dialog.getByPlaceholder("Subject").fill(subject);
+  await dialog.getByPlaceholder("主题").fill(subject);
   await editor.pressSequentially("Draft body");
   await dialog.getByRole("button", { name: "Show signature" }).click();
   const signature = editor.locator("[data-smartmail]");
   await expect(signature).toBeVisible();
-  await dialog.getByRole("button", { name: "Remove signature" }).click();
+  await dialog.getByRole("button", { name: "移除签名" }).click();
   await expect(signature).toHaveCount(0);
 
   await editor.press("ControlOrMeta+Enter");
 
   await expect(dialog).toBeHidden();
-  await expect(page.getByText("Email sent!", { exact: true })).toBeVisible();
+  await expect(page.getByText("邮件已发送！", { exact: true })).toBeVisible();
   await openMailboxFromSidebar(page, "Sent");
   await waitForComposeOutboxSend(page, emailAccountId);
   const sentConversation = conversationWithSubject(
@@ -464,13 +464,13 @@ test("attaches files and discards a compose draft with shortcuts", async ({
   page,
 }, testInfo) => {
   await openMail(page);
-  await page.getByRole("button", { name: /^Compose/ }).click();
+  await page.getByRole("button", { name: /写邮件/ }).click();
 
-  const dialog = page.getByRole("dialog", { name: "New Message" });
+  const dialog = page.getByRole("dialog", { name: "新邮件" });
   const editor = dialog.locator("[contenteditable='true']");
-  const attachButton = dialog.getByRole("button", { name: "Attach files" });
+  const attachButton = dialog.getByRole("button", { name: "添加附件" });
   await attachButton.hover();
-  await expect(page.getByRole("tooltip")).toContainText("Attach files");
+  await expect(page.getByRole("tooltip")).toContainText("添加附件");
   await expect(page.getByRole("tooltip").locator("kbd")).toHaveText([
     "⌘",
     "shift",
@@ -486,7 +486,7 @@ test("attaches files and discards a compose draft with shortcuts", async ({
     mimeType: "text/plain",
     buffer: Buffer.from("Attachment contents"),
   });
-  await expect(dialog.getByRole("list", { name: "Attachments" })).toContainText(
+  await expect(dialog.getByRole("list", { name: "附件" })).toContainText(
     "notes.txt",
   );
 
@@ -504,9 +504,9 @@ test("edits a table signature with a hosted logo in place", async ({
 
   try {
     await page.goto(`/${emailAccountId}/mail?accountScope=all`);
-    await page.getByRole("button", { name: /^Compose/ }).click();
-    const dialog = page.getByRole("dialog", { name: "New Message" });
-    await dialog.getByRole("combobox", { name: "From" }).click();
+    await page.getByRole("button", { name: /写邮件/ }).click();
+    const dialog = page.getByRole("dialog", { name: "新邮件" });
+    await dialog.getByRole("combobox", { name: "发件人" }).click();
     await page
       .getByRole("option", {
         name: `${secondAccount.name} (${secondAccount.email})`,
@@ -514,7 +514,7 @@ test("edits a table signature with a hosted logo in place", async ({
       })
       .click();
 
-    const editor = dialog.getByRole("textbox", { name: "Email message" });
+    const editor = dialog.getByRole("textbox", { name: "邮件内容" });
     await editor.pressSequentially("Body before the signature");
     await dialog.getByRole("button", { name: "Show signature" }).click();
     const signature = editor.locator("[data-smartmail]");
@@ -540,7 +540,7 @@ test("edits a table signature with a hosted logo in place", async ({
       "Body before the signature",
     );
     await capturePlaywrightCheckpoint(page, testInfo, "edited-table-signature");
-    await dialog.getByRole("button", { name: "Discard draft" }).click();
+    await dialog.getByRole("button", { name: "丢弃草稿" }).click();
   } finally {
     await deleteSecondEmailAccount(secondAccount.accountId);
   }
@@ -550,9 +550,9 @@ test("keeps pasted layout safely and restores it with the draft", async ({
   page,
 }, testInfo) => {
   await openMail(page);
-  await page.getByRole("button", { name: /^Compose/ }).click();
-  const dialog = page.getByRole("dialog", { name: "New Message" });
-  const editor = dialog.getByRole("textbox", { name: "Email message" });
+  await page.getByRole("button", { name: /写邮件/ }).click();
+  const dialog = page.getByRole("dialog", { name: "新邮件" });
+  const editor = dialog.getByRole("textbox", { name: "邮件内容" });
   await editor.pressSequentially("Numbers below");
   await editor.press("Enter");
   await editor.evaluate((element) => {
@@ -577,15 +577,15 @@ test("keeps pasted layout safely and restores it with the draft", async ({
   ).toBeUndefined();
   await capturePlaywrightCheckpoint(page, testInfo, "pasted-styled-table");
 
-  await dialog.getByRole("button", { name: "Close compose" }).click();
+  await dialog.getByRole("button", { name: "关闭写信窗口" }).click();
   await expect(dialog).toBeHidden();
-  await page.getByRole("button", { name: /^Compose/ }).click();
+  await page.getByRole("button", { name: /写邮件/ }).click();
   await expect(editor).toContainText("Numbers below");
   await expect(editor.getByRole("cell", { name: "Pasted cell" })).toHaveCSS(
     "color",
     "rgb(11, 110, 79)",
   );
-  await dialog.getByRole("button", { name: "Discard draft" }).click();
+  await dialog.getByRole("button", { name: "丢弃草稿" }).click();
   await expect(dialog).toBeHidden();
 });
 

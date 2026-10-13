@@ -13,6 +13,7 @@ export const fullSuites = [
   "cleanup/analytics.spec.ts",
   "cleanup/bulk-archive.spec.ts",
   "cleanup/bulk-unsubscribe.spec.ts",
+  "cleanup/mail-triage.spec.ts",
   "integrations",
   "mail",
   "meetings",
@@ -31,6 +32,7 @@ const suiteEntryFiles = new Map([
   ["channels", ["app/(app)/[emailAccountId]/channels/page.tsx"]],
   ["chat", ["app/(app)/[emailAccountId]/assistant/page.tsx"]],
   ["cleanup/analytics.spec.ts", ["app/(app)/[emailAccountId]/stats/page.tsx"]],
+  ["cleanup/mail-triage.spec.ts", ["app/(app)/[emailAccountId]/mail-triage/page.tsx"]],
   [
     "cleanup/bulk-archive.spec.ts",
     ["app/(app)/[emailAccountId]/bulk-archive/page.tsx"],

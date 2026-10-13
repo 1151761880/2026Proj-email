@@ -53,11 +53,11 @@ export function MailSearchFiltersForm({
 
   return (
     <form
-      aria-label="Search options"
+      aria-label="搜索选项"
       className="grid gap-3"
       onSubmit={handleSubmit}
     >
-      <FilterField id="mail-search-from" label="From">
+      <FilterField id="mail-search-from" label="发件人">
         <Input
           id="mail-search-from"
           value={fields.from}
@@ -66,7 +66,7 @@ export function MailSearchFiltersForm({
         />
       </FilterField>
 
-      <FilterField id="mail-search-to" label="To">
+      <FilterField id="mail-search-to" label="收件人">
         <Input
           id="mail-search-to"
           value={fields.to}
@@ -75,7 +75,7 @@ export function MailSearchFiltersForm({
         />
       </FilterField>
 
-      <FilterField id="mail-search-subject" label="Subject">
+      <FilterField id="mail-search-subject" label="主题">
         <Input
           id="mail-search-subject"
           value={fields.subject}
@@ -84,7 +84,7 @@ export function MailSearchFiltersForm({
         />
       </FilterField>
 
-      <FilterField id="mail-search-has-words" label="Has the words">
+      <FilterField id="mail-search-has-words" label="包含以下文字">
         <Input
           id="mail-search-has-words"
           value={fields.hasWords}
@@ -93,7 +93,7 @@ export function MailSearchFiltersForm({
         />
       </FilterField>
 
-      <FilterField id="mail-search-doesnt-have" label="Doesn't have">
+      <FilterField id="mail-search-doesnt-have" label="不包含以下文字">
         <Input
           id="mail-search-doesnt-have"
           value={fields.doesntHave}
@@ -104,7 +104,7 @@ export function MailSearchFiltersForm({
 
       {isGmail ? (
         <>
-          <FilterField id="mail-search-size" label="Size">
+          <FilterField id="mail-search-size" label="大小">
             <div className="grid grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)_auto] items-center gap-2">
               <Select
                 value={fields.sizeComparison}
@@ -118,14 +118,14 @@ export function MailSearchFiltersForm({
                 <SelectTrigger
                   id="mail-search-size"
                   type="button"
-                  aria-label="Size comparison"
+                  aria-label="大小比较"
                   className={mailSelectTriggerClassName}
                 >
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="greater">greater than</SelectItem>
-                  <SelectItem value="less">less than</SelectItem>
+                  <SelectItem value="greater">大于</SelectItem>
+                  <SelectItem value="less">小于</SelectItem>
                 </SelectContent>
               </Select>
               <Input
@@ -133,7 +133,7 @@ export function MailSearchFiltersForm({
                 min="0"
                 step="any"
                 inputMode="decimal"
-                aria-label="Size amount"
+                aria-label="大小数值"
                 value={fields.sizeValue}
                 onChange={(event) => update("sizeValue", event.target.value)}
                 className={mailControlClassName}
@@ -146,7 +146,7 @@ export function MailSearchFiltersForm({
               >
                 <SelectTrigger
                   type="button"
-                  aria-label="Size unit"
+                  aria-label="大小单位"
                   className={`${mailSelectTriggerClassName} w-20`}
                 >
                   <SelectValue />
@@ -159,7 +159,7 @@ export function MailSearchFiltersForm({
             </div>
           </FilterField>
 
-          <FilterField id="mail-search-date-within" label="Date within">
+          <FilterField id="mail-search-date-within" label="日期范围">
             <div className="grid grid-cols-[10rem_minmax(0,1fr)] items-center gap-2">
               <Select
                 value={fields.dateWithin}
@@ -173,7 +173,7 @@ export function MailSearchFiltersForm({
                 <SelectTrigger
                   id="mail-search-date-within"
                   type="button"
-                  aria-label="Date range"
+                  aria-label="日期范围"
                   className={mailSelectTriggerClassName}
                 >
                   <SelectValue />
@@ -188,7 +188,7 @@ export function MailSearchFiltersForm({
               </Select>
               <Input
                 type="date"
-                aria-label="Date"
+                aria-label="日期"
                 value={fields.date}
                 onChange={(event) => update("date", event.target.value)}
                 className={mailControlClassName}
@@ -196,7 +196,7 @@ export function MailSearchFiltersForm({
             </div>
           </FilterField>
 
-          <FilterField id="mail-search-in" label="Search">
+          <FilterField id="mail-search-in" label="搜索">
             <Select
               value={fields.searchIn}
               onValueChange={(value) => update("searchIn", value)}
@@ -216,7 +216,7 @@ export function MailSearchFiltersForm({
                 ))}
                 {extraLocations.length ? (
                   <SelectGroup>
-                    <SelectLabel>Labels</SelectLabel>
+                    <SelectLabel>标签</SelectLabel>
                     {extraLocations.map((location) => (
                       <SelectItem
                         key={location.name}
@@ -244,7 +244,7 @@ export function MailSearchFiltersForm({
                 htmlFor="mail-search-has-attachment"
                 className="font-normal text-sm"
               >
-                Has attachment
+                包含附件
               </Label>
             </div>
             <div className="flex items-center gap-2">
@@ -259,7 +259,7 @@ export function MailSearchFiltersForm({
                 htmlFor="mail-search-exclude-chats"
                 className="font-normal text-sm"
               >
-                Don't include chats
+                不包含聊天
               </Label>
             </div>
           </div>
@@ -268,7 +268,7 @@ export function MailSearchFiltersForm({
 
       <div className="flex justify-end pt-1">
         <Button type="submit" variant="gradient" size="sm">
-          Search
+          搜索
         </Button>
       </div>
     </form>

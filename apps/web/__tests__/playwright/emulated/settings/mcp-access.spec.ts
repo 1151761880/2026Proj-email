@@ -29,13 +29,13 @@ test("requires client consent, enforces read-only access, and disconnects existi
   test.setTimeout(360_000);
   await openSettings(page);
   const accountSection = page.locator("section").filter({
-    has: page.getByRole("heading", { name: "Account", exact: true }),
+    has: page.getByRole("heading", { name: "账户", exact: true }),
   });
   const developerSection = page.locator("section").filter({
-    has: page.getByRole("heading", { name: "Developer", exact: true }),
+    has: page.getByRole("heading", { name: "开发者", exact: true }),
   });
   await expect(accountSection.getByText("MCP", { exact: true })).toBeVisible();
-  await expect(developerSection.getByText("API Access")).toBeVisible();
+  await expect(developerSection.getByText("API 访问")).toBeVisible();
   await expect(developerSection.getByText("MCP", { exact: true })).toBeHidden();
   const toggle = page.getByRole("switch", { name: "MCP", exact: true });
   await expect(toggle).toBeEnabled();
@@ -43,7 +43,7 @@ test("requires client consent, enforces read-only access, and disconnects existi
   await expect(toggle).not.toBeChecked();
   await expect(toggle).toBeEnabled();
   await expect(
-    accountSection.getByRole("button", { name: "Connect", exact: true }),
+    accountSection.getByRole("button", { name: "连接", exact: true }),
   ).toBeHidden();
   await capturePlaywrightCheckpoint(
     accountSection,
@@ -89,18 +89,18 @@ test("requires client consent, enforces read-only access, and disconnects existi
     page.getByRole("heading", { name: "Connect Playwright MCP client?" }),
   ).toBeVisible();
   await expect(
-    page.getByRole("checkbox", { name: "Read and search mail (required)" }),
+    page.getByRole("checkbox", { name: "读取和搜索邮件（必需）" }),
   ).toBeDisabled();
   await expect(
-    page.getByRole("checkbox", { name: "Stay connected when you are away" }),
+    page.getByRole("checkbox", { name: "离开时保持连接" }),
   ).toBeChecked();
   await expect(
     page.getByRole("checkbox", {
-      name: "Create drafts, organize mail, and manage rules",
+      name: "创建草稿、整理邮件和管理规则",
     }),
   ).toBeHidden();
   await capturePlaywrightCheckpoint(page, testInfo, "mcp-consent");
-  await page.getByRole("button", { name: "Allow" }).click();
+  await page.getByRole("button", { name: "允许" }).click();
   await page.waitForURL("https://client.example.com/callback**");
   const callback = new URL(page.url());
   expect(callback.searchParams.get("state")).toBe("playwright-state");
@@ -160,8 +160,8 @@ test("requires client consent, enforces read-only access, and disconnects existi
 
   await page.goto("/settings");
   await expect(toggle).toBeChecked();
-  await page.getByRole("button", { name: "Connect", exact: true }).click();
-  const connectDialog = page.getByRole("dialog", { name: "Connect MCP" });
+  await page.getByRole("button", { name: "连接", exact: true }).click();
+  const connectDialog = page.getByRole("dialog", { name: "连接 MCP" });
   await expect(connectDialog.locator('input[name="copy-input"]')).toHaveValue(
     resource,
   );
@@ -169,21 +169,21 @@ test("requires client consent, enforces read-only access, and disconnects existi
     connectDialog.getByText("ChatGPT, Claude, or Cursor"),
   ).toBeVisible();
   await expect(
-    connectDialog.getByRole("link", { name: "Full setup guide" }),
+    connectDialog.getByRole("link", { name: "完整配置指南" }),
   ).toHaveAttribute("href", "https://docs.getinboxzero.com/essentials/mcp");
   await capturePlaywrightCheckpoint(connectDialog, testInfo, "mcp-connect-url");
   await page.keyboard.press("Escape");
-  await page.getByRole("button", { name: /^MCP apps/ }).click();
-  const appsDialog = page.getByRole("dialog", { name: "MCP apps" });
+  await page.getByRole("button", { name: /MCP 应用/ }).click();
+  const appsDialog = page.getByRole("dialog", { name: "MCP 应用" });
   await expect(
     appsDialog.getByText("Playwright MCP client", { exact: true }),
   ).toBeVisible();
   await appsDialog
     .getByRole("button", { name: "Disconnect Playwright MCP client" })
     .click();
-  await expect(page.getByText("Disconnected", { exact: true })).toBeVisible();
+  await expect(page.getByText("未连接", { exact: true })).toBeVisible();
   await page.keyboard.press("Escape");
-  await expect(page.getByRole("button", { name: /^MCP apps/ })).toHaveCount(0);
+  await expect(page.getByRole("button", { name: /MCP 应用/ })).toHaveCount(0);
   const disconnected = await request.post(resource, {
     headers,
     data: { jsonrpc: "2.0", id: 4, method: "tools/list" },
@@ -199,7 +199,7 @@ test("requires client consent, enforces read-only access, and disconnects existi
   });
   expect(revoked.status()).toBe(401);
   await toggle.click();
-  await expect(page.getByRole("dialog", { name: "Connect MCP" })).toBeVisible();
+  await expect(page.getByRole("dialog", { name: "连接 MCP" })).toBeVisible();
   await page.keyboard.press("Escape");
   await expect(toggle).toBeChecked();
   await expect(toggle).toBeEnabled();

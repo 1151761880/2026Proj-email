@@ -9,14 +9,14 @@ export default function ThankYouPage() {
     <BasicLayout>
       <div className="pb-40 pt-60">
         <CardBasic className="mx-auto max-w-xl text-center">
-          <PageHeading>Thank you!</PageHeading>
+          <PageHeading>感谢使用！</PageHeading>
           <div className="mt-2">
             <TypographyP>
-              Your premium purchase was successful. Thank you for supporting us!
+              高级版购买成功，感谢支持！
             </TypographyP>
           </div>
           <Button className="mt-4" size="xl" link={{ href: "/setup" }}>
-            Continue
+            继续
           </Button>
         </CardBasic>
       </div>

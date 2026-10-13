@@ -61,7 +61,7 @@ export function collectWindows(
       if (start === null || end === null || end <= start) {
         return {
           windows: null,
-          error: `${DAY_LABELS[weekday]}: end time must be after start time.`,
+          error: `${DAY_LABELS[weekday]}：结束时间必须晚于开始时间。`,
         };
       }
       dayWindows.push({ weekday, startMinutes: start, endMinutes: end });
@@ -71,7 +71,7 @@ export function collectWindows(
       if (dayWindows[i].startMinutes < dayWindows[i - 1].endMinutes) {
         return {
           windows: null,
-          error: `${DAY_LABELS[weekday]}: time ranges overlap.`,
+          error: `${DAY_LABELS[weekday]}：时间段存在重叠。`,
         };
       }
     }
@@ -79,7 +79,7 @@ export function collectWindows(
   }
 
   if (windows.length === 0) {
-    return { windows: null, error: "Add at least one available time range." };
+    return { windows: null, error: "请至少添加一个可预约时间段。" };
   }
 
   return { windows, error: null };

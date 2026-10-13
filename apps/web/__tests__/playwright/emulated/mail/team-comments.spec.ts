@@ -33,13 +33,13 @@ test("publisher shares with a teammate who never received the mail and both see 
     );
     const publisherDiscussion = page.getByTestId("publisher-discussion");
     await expect(
-      publisherDiscussion.getByLabel("Internal comment"),
+      publisherDiscussion.getByLabel("内部评论"),
     ).toHaveCount(0);
     await openTeamComments(page);
     await publisherDiscussion
-      .getByRole("button", { name: "Share", exact: true })
+      .getByRole("button", { name: "分享", exact: true })
       .click();
-    const dialog = page.getByRole("dialog", { name: "Share conversation" });
+    const dialog = page.getByRole("dialog", { name: "共享会话" });
     await expect(dialog).toContainText("including future replies");
     await dialog.getByLabel("Shared Teammate").check();
     await capturePlaywrightCheckpoint(
@@ -47,7 +47,7 @@ test("publisher shares with a teammate who never received the mail and both see 
       testInfo,
       "publisher-share-disclosure-and-selection",
     );
-    await dialog.getByRole("button", { name: "Share conversation" }).click();
+    await dialog.getByRole("button", { name: "共享会话" }).click();
     await expect(dialog).toBeHidden({ timeout: 30_000 });
     const conversationId = await readSharedConversationId(
       page,
@@ -74,8 +74,8 @@ test("publisher shares with a teammate who never received the mail and both see 
     );
 
     const comment = "Synthetic internal decision for the team";
-    await teammate.page.getByLabel("Internal comment").fill(comment);
-    await teammate.page.getByRole("button", { name: "Post comment" }).click();
+    await teammate.page.getByLabel("内部评论").fill(comment);
+    await teammate.page.getByRole("button", { name: "发表评论" }).click();
     await expect(teammate.page.getByText(comment)).toBeVisible();
     await expect(publisherDiscussion.getByText(comment)).toBeVisible({
       timeout: 5000,
@@ -106,16 +106,16 @@ test("publisher shares with a teammate who never received the mail and both see 
       '[data-thread-message-id="msg_playwright_reader_1"]',
     );
     const replyButton = receivedMail.getByRole("button", {
-      name: "Reply",
+      name: "回复",
       exact: true,
     });
     if (!(await replyButton.isVisible())) await receivedMail.click();
     await replyButton.click();
     await receivedMail
-      .getByRole("textbox", { name: "Email message" })
+      .getByRole("textbox", { name: "邮件内容" })
       .fill(replyBody);
     await page
-      .getByRole("button", { name: "Send", exact: true })
+      .getByRole("button", { name: "发送", exact: true })
       .first()
       .click();
     await expect
@@ -215,7 +215,7 @@ test("mentioning a teammate in the first comment shares the conversation with th
     );
     const publisherDiscussion = page.getByTestId("publisher-discussion");
     await openTeamComments(page);
-    const composer = publisherDiscussion.getByLabel("Internal comment");
+    const composer = publisherDiscussion.getByLabel("内部评论");
     await composer.pressSequentially("@Shared");
     await page.getByRole("option", { name: /Shared Teammate/ }).click();
     await composer.pressSequentially("can you take a look?");
@@ -224,10 +224,10 @@ test("mentioning a teammate in the first comment shares the conversation with th
     );
     await capturePlaywrightCheckpoint(page, testInfo, "mention-to-share");
     await publisherDiscussion
-      .getByRole("button", { name: "Post comment" })
+      .getByRole("button", { name: "发表评论" })
       .click();
     await expect(
-      publisherDiscussion.getByRole("region", { name: "Internal discussion" }),
+      publisherDiscussion.getByRole("region", { name: "内部讨论" }),
     ).toContainText("can you take a look?", { timeout: 30_000 });
 
     const conversationId = await readSharedConversationId(

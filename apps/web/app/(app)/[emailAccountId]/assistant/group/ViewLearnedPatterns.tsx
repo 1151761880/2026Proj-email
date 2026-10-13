@@ -91,7 +91,7 @@ function ViewGroupInner({ groupId }: { groupId: string }) {
                 onClick={() => setShowAddItem(true)}
               >
                 <PlusIcon className="mr-2 h-4 w-4" />
-                Add pattern
+                添加规律
               </Button>
             </div>
           </div>
@@ -108,7 +108,7 @@ function ViewGroupInner({ groupId }: { groupId: string }) {
               <GroupItems items={group.items} mutate={mutate} />
             ) : (
               <MessageText className="my-4 px-4">
-                No learned patterns yet
+                暂无学习规律
               </MessageText>
             ))}
         </LoadingContent>
@@ -150,10 +150,10 @@ const AddGroupItemForm = ({
       });
       if (result?.serverError) {
         toastError({
-          description: `Failed to add pattern. ${result.serverError || ""}`,
+          description: `添加规律失败。${result.serverError || ""}`,
         });
       } else {
-        toastSuccess({ description: "Pattern added!" });
+        toastSuccess({ description: "规律已添加！" });
       }
       mutate();
       onClose();
@@ -178,8 +178,8 @@ const AddGroupItemForm = ({
         <Select
           label=""
           options={[
-            { label: "From", value: GroupItemType.FROM },
-            { label: "Subject", value: GroupItemType.SUBJECT },
+            { label: "发件人", value: GroupItemType.FROM },
+            { label: "主题", value: GroupItemType.SUBJECT },
           ]}
           {...register("type", { required: true })}
           error={errors.type}
@@ -202,10 +202,10 @@ const AddGroupItemForm = ({
               handleSubmit(onSubmit)();
             }}
           >
-            Add
+            添加
           </Button>
           <Button variant="outline" size="sm" onClick={onClose}>
-            Cancel
+            取消
           </Button>
         </div>
       </div>
@@ -213,8 +213,8 @@ const AddGroupItemForm = ({
       <div className="mt-4 flex justify-end">
         <Toggle
           name="exclude"
-          tooltipText="When enabled, never match this pattern."
-          label="Exclude"
+          tooltipText="启用后始终排除此规律。"
+          label="排除"
           enabled={exclude}
           onChange={setExclude}
         />
@@ -239,8 +239,7 @@ function GroupItems({
       <GroupItemList
         title={
           <div className="flex items-center gap-x-1.5">
-            When these patterns are encountered, the rule will automatically
-            match:
+            遇到以下规律时自动匹配规则：
           </div>
         }
         items={groupedByStatus.include || []}
@@ -250,7 +249,7 @@ function GroupItems({
         <GroupItemList
           title={
             <div className="flex items-center gap-x-1.5">
-              When these patterns are encountered, the rule will never match:
+              遇到以下规律时始终排除此规则：
             </div>
           }
           items={groupedByStatus.exclude || []}
@@ -295,7 +294,7 @@ function GroupItemList({
                   {isCreatedRecently ||
                     (isUpdatedRecently && (
                       <Badge variant="green" className="mr-1">
-                        {isCreatedRecently ? "New!" : "Updated"}
+                        {isCreatedRecently ? "新增！" : "已更新"}
                       </Badge>
                     ))}
 
@@ -305,7 +304,7 @@ function GroupItemList({
                 </div>
               </TableCell>
               <TableCell className="flex items-center justify-end gap-4 py-2 text-right">
-                <Tooltip content="Date added">
+                <Tooltip content="添加日期">
                   <MutedText className="hidden sm:block">
                     {formatShortDate(new Date(item.createdAt))}
                   </MutedText>
@@ -320,11 +319,11 @@ function GroupItemList({
                     });
                     if (result?.serverError) {
                       toastError({
-                        description: `Failed to remove ${item.value}. ${result.serverError || ""}`,
+                        description: `移除 ${item.value} 失败。${result.serverError || ""}`,
                       });
                     } else {
                       toastSuccess({
-                        description: "Removed learned pattern!",
+                        description: "学习规律已移除！",
                       });
                       mutate();
                     }
@@ -340,7 +339,7 @@ function GroupItemList({
         {items.length === 0 && (
           <TableRow>
             <TableCell colSpan={3}>
-              <MessageText>No items</MessageText>
+              <MessageText>暂无项目</MessageText>
             </TableCell>
           </TableRow>
         )}
@@ -358,7 +357,7 @@ export function GroupItemDisplay({
     <>
       {item.exclude && (
         <Badge variant="destructive" className="mr-2">
-          Exclude
+          排除
         </Badge>
       )}
       <Badge variant="secondary" className="mr-2">

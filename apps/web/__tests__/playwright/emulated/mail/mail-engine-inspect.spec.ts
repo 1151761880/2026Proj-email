@@ -51,7 +51,7 @@ test("exposes engine diagnostics after metadata coverage", async ({
   expect(inspect.coverageComplete).toBe(true);
   await expect(
     page.getByRole("heading", {
-      name: "Reconnect this account to continue syncing.",
+      name: "重新连接此账户以继续同步。",
     }),
   ).toHaveCount(0);
 });
@@ -95,11 +95,11 @@ test("serves a second tab as a follower of the owner engine", async ({
   const follower = await page.context().newPage();
   await follower.goto(page.url(), { waitUntil: "domcontentloaded" });
   await expect(
-    follower.getByRole("listbox", { name: "Conversations" }),
+    follower.getByRole("listbox", { name: "会话" }),
   ).toBeVisible({ timeout: 60_000 });
   await expect(
     follower
-      .getByRole("listbox", { name: "Conversations" })
+      .getByRole("listbox", { name: "会话" })
       .getByRole("option"),
   ).not.toHaveCount(0);
   await expect
@@ -153,7 +153,7 @@ test("opens account reconnect from blocked_auth catch-up", async ({
   });
   await expect(
     page.getByRole("heading", {
-      name: "Reconnect this account to continue syncing.",
+      name: "重新连接此账户以继续同步。",
     }),
   ).toBeVisible({ timeout: 60_000 });
   expect(changeRequests).toBeGreaterThan(0);
@@ -185,7 +185,7 @@ test("opens account reconnect from blocked_auth catch-up", async ({
   await page.route("**/api/google/linking/auth-url**", fulfillReconnect);
   await page.route("**/api/outlook/linking/auth-url**", fulfillReconnect);
   await capturePlaywrightCheckpoint(page, testInfo, "mail-engine-blocked-auth");
-  await page.getByRole("button", { name: "Reconnect" }).click();
+  await page.getByRole("button", { name: "重新连接" }).click();
   await expect(page).toHaveURL(
     new RegExp(`${emailAccountId}/mail\\?reconnect=blocked`),
   );
@@ -231,7 +231,7 @@ test("serves two accounts through one owner and takes over when that owner leave
       .toEqual({ role: "follower", accountId: secondAccount.id });
     await expect(
       other
-        .getByRole("listbox", { name: "Conversations" })
+        .getByRole("listbox", { name: "会话" })
         .getByRole("option")
         .first(),
     ).toBeVisible({ timeout: 60_000 });
@@ -320,7 +320,7 @@ test("joins two different accounts when both tabs start together", async ({
       ).toBe(accountId);
       await expect(
         tab
-          .getByRole("listbox", { name: "Conversations" })
+          .getByRole("listbox", { name: "会话" })
           .getByRole("option")
           .first(),
       ).toBeVisible({ timeout: 60_000 });

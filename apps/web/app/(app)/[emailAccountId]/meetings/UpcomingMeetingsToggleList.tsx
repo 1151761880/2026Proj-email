@@ -69,7 +69,7 @@ export function UpcomingMeetingsToggleList({
 
   return (
     <div>
-      <TypographyH3>Up next</TypographyH3>
+      <TypographyH3>即将开始</TypographyH3>
 
       <LoadingContent
         loading={isLoading}
@@ -78,10 +78,10 @@ export function UpcomingMeetingsToggleList({
       >
         {isLocked && (
           <Alert className="mt-4">
-            <AlertTitle>Meeting recording requires the Plus plan</AlertTitle>
+            <AlertTitle>会议记录需要进阶版</AlertTitle>
             <AlertDescription className="flex flex-wrap items-center justify-between gap-2">
-              Upgrade to have meetings recorded and summarized automatically.
-              <UpgradeToPlusButton tooltip="Upgrade to the Plus plan to record and summarize your meetings." />
+              升级后可自动录制会议并生成摘要。
+              <UpgradeToPlusButton tooltip="升级进阶版后可录制会议并生成摘要。" />
             </AlertDescription>
           </Alert>
         )}
@@ -92,7 +92,7 @@ export function UpcomingMeetingsToggleList({
               <EmptyMedia variant="icon">
                 <CalendarIcon />
               </EmptyMedia>
-              <EmptyTitle>No upcoming calls with a video link</EmptyTitle>
+              <EmptyTitle>暂无包含视频链接的会议</EmptyTitle>
             </EmptyHeader>
           </Empty>
         ) : (
@@ -123,7 +123,7 @@ export function UpcomingMeetingsToggleList({
                   {!detailMeetingId && (
                     <Toggle
                       name={`join-${event.id}`}
-                      ariaLabel={`Record ${event.title}`}
+                      ariaLabel={`录制 ${event.title}`}
                       enabled={joining}
                       // A downgraded user must still be able to cancel a booked
                       // meeting; only creating a new booking is gated.

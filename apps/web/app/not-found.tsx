@@ -20,18 +20,18 @@ export default function NotFound() {
   return (
     <BasicLayout>
       <ErrorPage
-        title="Page Not Found"
-        description="The requested page does not exist. Return home, read the agent instructions, or search the documentation."
+        title="页面不存在"
+        description="请求的页面不存在。可返回首页或查看使用文档。"
         button={
           <div className="flex flex-wrap justify-center gap-2">
             <Button asChild>
-              <Link href="/">Return Home</Link>
+              <Link href="/">返回首页</Link>
             </Button>
             <Button variant="outline" asChild>
-              <Link href="/llms.txt">Agent Instructions</Link>
+              <Link href="/llms.txt">助手使用说明</Link>
             </Button>
             <Button variant="outline" asChild>
-              <Link href="https://docs.getinboxzero.com">Documentation</Link>
+              <Link href="https://docs.getinboxzero.com">使用文档</Link>
             </Button>
           </div>
         }

@@ -20,7 +20,7 @@ export function OrgAnalyticsConsentBanner() {
     updateAnalyticsConsentAction.bind(null, emailAccountId),
     {
       onSuccess: () => {
-        toastSuccess({ description: "Analytics access granted to admins!" });
+        toastSuccess({ description: "已向管理员开放统计权限！" });
         mutate();
       },
       onError: (error) => {
@@ -58,7 +58,7 @@ export function OrgAnalyticsConsentBanner() {
       description={description}
       action={
         <Button onClick={handleAllow} loading={isPending}>
-          Allow Access
+          允许访问
         </Button>
       }
     />

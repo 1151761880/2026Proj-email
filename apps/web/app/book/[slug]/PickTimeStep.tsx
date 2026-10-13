@@ -64,7 +64,7 @@ export function PickTimeStep({
             <div className="min-w-0 text-sm font-semibold text-foreground">
               {selectedDateKey
                 ? formatSelectedDateHeading(selectedDateKey)
-                : "Pick a date"}
+                : "选择日期"}
             </div>
             <HourFormatToggle value={hourFormat} onChange={setHourFormat} />
           </div>
@@ -74,7 +74,7 @@ export function PickTimeStep({
             <p className="text-sm text-red-500">{error}</p>
           ) : slotsForDay.length === 0 ? (
             <p className="text-sm text-muted-foreground">
-              No slots available on this day.
+              当天没有可预约时间。
             </p>
           ) : (
             <div className="flex max-h-[min(50vh,22rem)] flex-col gap-1.5 overflow-y-auto pr-1 md:max-h-none md:min-h-0 md:flex-1">

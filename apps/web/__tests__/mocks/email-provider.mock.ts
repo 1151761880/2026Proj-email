@@ -112,7 +112,7 @@ export function createMockEmailProvider(
     updateLabel: vi.fn().mockResolvedValue(undefined),
     getOrCreateInboxZeroLabel: vi
       .fn()
-      .mockResolvedValue({ id: "iz-label", name: "Inbox Zero", type: "user" }),
+      .mockResolvedValue({ id: "iz-label", name: "十组邮件小助手", type: "user" }),
 
     // Thread/message actions
     archiveThread: vi.fn().mockResolvedValue(undefined),

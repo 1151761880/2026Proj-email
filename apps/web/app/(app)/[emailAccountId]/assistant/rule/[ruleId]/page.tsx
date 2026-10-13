@@ -14,11 +14,10 @@ export default async function RulePage(props: {
     <div>
       {searchParams.new === "true" && (
         <TopSection
-          title="Here are your rule settings!"
+          title="以下是你的规则设置！"
           descriptionComponent={
             <p>
-              These rules were AI generated, feel free to adjust them to your
-              needs.
+              这些规则由 AI 生成，可根据需要调整。
             </p>
           }
         />

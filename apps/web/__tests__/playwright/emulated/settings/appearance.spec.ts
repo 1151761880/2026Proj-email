@@ -23,7 +23,7 @@ test("persists the global appearance across reloads", async ({ page }) => {
 
   previousTheme = await page.evaluate(() => localStorage.getItem("theme"));
   const darkModeToggle = page.getByRole("switch", {
-    name: "Toggle dark mode",
+    name: "切换深色模式",
   });
   await expect(darkModeToggle).toBeEnabled();
   const enableDarkMode = !(await darkModeToggle.isChecked());
@@ -38,10 +38,10 @@ test("persists the global appearance across reloads", async ({ page }) => {
 
   await page.reload();
   await expect(
-    page.getByRole("heading", { name: "Settings", exact: true }),
+    page.getByRole("heading", { name: "设置", exact: true }),
   ).toBeVisible({ timeout: 60_000 });
   await expect(
-    page.getByRole("switch", { name: "Toggle dark mode" }),
+    page.getByRole("switch", { name: "切换深色模式" }),
   ).toBeChecked({ checked: enableDarkMode });
   await expectThemeClass(page, enableDarkMode);
 });

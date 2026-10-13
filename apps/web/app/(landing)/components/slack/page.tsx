@@ -54,19 +54,19 @@ type SlackPreview = {
 
 const slackPreviews: SlackPreview[] = [
   {
-    title: "Channel confirmation",
-    text: "✅ Inbox Zero connected! You can mention <@UAPP123> in this channel to chat about your emails. If you enable meeting briefs or attachment filing notifications, I can send those here too.",
+    title: "渠道确认",
+    text: "✅ 十组邮件小助手 connected! You can mention <@UAPP123> in this channel to chat about your emails. If you enable meeting briefs or attachment filing notifications, I can send those here too.",
   },
   {
-    title: "Connection onboarding DM",
-    text: "✅ Inbox Zero connected. Next, open Channels in Inbox Zero to choose where messages go. To use a private channel, invite <@UAPP123> there. You can also DM me anytime to chat about your emails.",
+    title: "连接配置私信",
+    text: "✅ 十组邮件小助手 connected. Next, open Channels in 十组邮件小助手 to choose where messages go. To use a private channel, invite <@UAPP123> there. You can also DM me anytime to chat about your emails.",
   },
   {
-    title: "Automation channel message",
+    title: "自动化渠道消息",
     text: "Rule matched: a high priority email needs review.\n\n_Reply with <@UAPP123> to chat about your emails._",
   },
   {
-    title: "Draft reply notification",
+    title: "回复草稿通知",
     blocks: buildSlackRuleNotificationPreviewBlocks({
       actionId: "demo-draft-action",
       actionType: ActionType.DRAFT_MESSAGING_CHANNEL,
@@ -83,13 +83,13 @@ const slackPreviews: SlackPreview[] = [
       draftContent:
         "Thanks for sending this over. The checklist covers SSO and billing handoff, and I added a rollback section for the implementation team to review.",
       openLink: {
-        label: "Open in Gmail",
+        label: "在 Gmail 中打开",
         url: "https://mail.example.com/thread/demo",
       },
     }) as SlackBlock[],
   },
   {
-    title: "Email notification",
+    title: "邮件通知",
     blocks: buildSlackRuleNotificationPreviewBlocks({
       actionId: "demo-notify-action",
       actionType: ActionType.NOTIFY_MESSAGING_CHANNEL,
@@ -102,13 +102,13 @@ const slackPreviews: SlackPreview[] = [
           "Your receipt is attached. Please review the account details and forward this to the finance workspace if everything looks correct.",
       },
       openLink: {
-        label: "Open in Gmail",
+        label: "在 Gmail 中打开",
         url: "https://mail.example.com/thread/demo",
       },
     }) as SlackBlock[],
   },
   {
-    title: "Follow-up awaiting reply",
+    title: "等待对方回复",
     blocks: buildFollowUpReminderBlocks({
       subject: "Contract terms and final approval next steps",
       counterpartyName: "Jane Partner",
@@ -118,12 +118,12 @@ const slackPreviews: SlackPreview[] = [
       snippet:
         "Wanted to check whether the redlines have landed.\n> On Friday, Jane wrote: We will review this with legal and reply shortly.",
       threadLink: "https://mail.example.com/thread/awaiting",
-      threadLinkLabel: "Open in Gmail",
+      threadLinkLabel: "在 Gmail 中打开",
       trackerId: "tracker-awaiting",
     }) as SlackBlock[],
   },
   {
-    title: "Follow-up needs reply",
+    title: "等待我回复",
     blocks: buildFollowUpReminderBlocks({
       subject:
         "Implementation questions for the migration plan and launch timeline",
@@ -137,7 +137,7 @@ const slackPreviews: SlackPreview[] = [
     }) as SlackBlock[],
   },
   {
-    title: "Digest with overflow",
+    title: "超出长度的摘要",
     blocks: buildDigestBlocks({
       date: new Date("2026-04-21T09:00:00Z"),
       ruleNames: {
@@ -162,7 +162,7 @@ const slackPreviews: SlackPreview[] = [
     }) as SlackBlock[],
   },
   {
-    title: "Meeting briefing",
+    title: "会前简报",
     blocks: buildMeetingBriefingBlocks({
       meetingTitle: "Customer implementation review",
       formattedTime: "Today at 2:00 PM",
@@ -195,7 +195,7 @@ const slackPreviews: SlackPreview[] = [
     }) as SlackBlock[],
   },
   {
-    title: "Document filed",
+    title: "文档已整理",
     blocks: buildDocumentFiledBlocks({
       filename: "invoice-2026-04.pdf",
       folderPath: "Finance/Invoices/2026",
@@ -205,7 +205,7 @@ const slackPreviews: SlackPreview[] = [
     }) as SlackBlock[],
   },
   {
-    title: "Document filing question",
+    title: "文档整理询问",
     blocks: buildDocumentAskBlocks({
       filename: "contract-draft-v2.docx",
       senderEmail: "legal@example.com",
@@ -214,7 +214,7 @@ const slackPreviews: SlackPreview[] = [
     }) as SlackBlock[],
   },
   {
-    title: "App Home",
+    title: "应用首页",
     blocks: buildAppHomeBlocks().blocks as SlackBlock[],
   },
 ];
@@ -224,11 +224,11 @@ export default function SlackComponentsPage() {
     <Container size="6xl">
       <div className="space-y-8 py-8">
         <div className="space-y-3">
-          <TextLink href="/components">← Components</TextLink>
+          <TextLink href="/components">← 组件</TextLink>
           <div className="space-y-2">
-            <PageHeading>Slack Components</PageHeading>
+            <PageHeading>Slack 组件</PageHeading>
             <PageSubHeading>
-              Storybook-style previews for Slack messages sent by Inbox Zero.
+              十组邮件小助手的 Slack 消息组件预览。
             </PageSubHeading>
           </div>
         </div>
@@ -260,7 +260,7 @@ function SlackPreviewCard({ preview }: { preview: SlackPreview }) {
           <div className="min-w-0 flex-1">
             <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
               <span className="text-[15px] font-bold leading-5 text-[#f8f8f8]">
-                Inbox Zero
+                十组邮件小助手
               </span>
               <span className="rounded bg-[#383a40] px-1 text-[10px] font-bold leading-4 text-[#d1d2d3]">
                 APP
@@ -466,7 +466,7 @@ function renderSlackLink(part: string, index: number) {
   const value = part.slice(1, -1);
 
   if (value.startsWith("@")) {
-    const displayName = value === "@UAPP123" ? "@Inbox Zero" : value;
+    const displayName = value === "@UAPP123" ? "@十组邮件小助手" : value;
 
     return (
       <span

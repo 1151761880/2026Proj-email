@@ -657,7 +657,7 @@ function resolveFolderTarget(
     // Use the folder name from our records if available, otherwise use a default
     const staleFolderName =
       folders.find((f) => f.id === analysis.folderId)?.name ||
-      "Inbox Zero Filed";
+      "十组邮件小助手 Filed";
     logger.warn("Could not find folder from AI response, creating new folder", {
       folderId: analysis.folderId,
       fallbackPath: staleFolderName,
@@ -676,7 +676,7 @@ function resolveFolderTarget(
   return {
     driveConnection: connection,
     folderId: "root",
-    folderPath: analysis.folderPath || "Inbox Zero Filed",
+    folderPath: analysis.folderPath || "十组邮件小助手 Filed",
     needsToCreateFolder: true,
   };
 }

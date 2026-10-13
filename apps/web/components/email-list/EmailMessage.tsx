@@ -341,7 +341,7 @@ export function EmailMessage({
           {!isDraftRow && threadTranslation?.loading && (
             <p className="mb-3 flex items-center gap-1.5 text-muted-foreground text-xs">
               <LoadingMiniSpinner />
-              Translating…
+              正在翻译…
             </p>
           )}
           {!isDraftRow && translation && (
@@ -531,7 +531,7 @@ function MessageHeader({
         <>
           <button
             aria-expanded={showDetails}
-            aria-label={showDetails ? "Hide details" : "Show details"}
+            aria-label={showDetails ? "隐藏详情" : "显示详情"}
             className="group/details flex min-w-0 items-center gap-2 rounded-md text-left outline-none focus-visible:ring-2 focus-visible:ring-ring"
             onClick={toggleDetails}
             type="button"
@@ -550,9 +550,9 @@ function MessageHeader({
             </span>
           </button>
           {canResearchSender && (
-            <Tooltip content="View public profile">
+            <Tooltip content="查看公开资料">
               <Button
-                aria-label={`View public profile for ${senderName}`}
+                aria-label={`查看 ${senderName} 的公开资料`}
                 onClick={(event) => {
                   event.stopPropagation();
                   onOpenSenderContext?.(message);
@@ -577,7 +577,7 @@ function MessageHeader({
 
       {hasDraft &&
         (!expanded || message.labelIds?.includes(GmailLabel.DRAFT)) && (
-          <span className="shrink-0 text-primary text-xs">Draft</span>
+          <span className="shrink-0 text-primary text-xs">草稿</span>
         )}
 
       <div className="ml-auto flex shrink-0 items-center gap-2">
@@ -592,7 +592,7 @@ function MessageHeader({
                     variant="ghostMuted"
                   >
                     <ReplyIcon className="size-3.5" />
-                    <span className="sr-only">Reply</span>
+                    <span className="sr-only">回复</span>
                   </Button>
                 </Tooltip>
                 <Tooltip shortcuts={["forward"]}>
@@ -602,7 +602,7 @@ function MessageHeader({
                     variant="ghostMuted"
                   >
                     <ForwardIcon className="size-3.5" />
-                    <span className="sr-only">Forward</span>
+                    <span className="sr-only">转发</span>
                   </Button>
                 </Tooltip>
               </>
@@ -738,7 +738,7 @@ function ReplyPanel({
           return false;
         }
       } catch {
-        toastError({ description: "Failed to discard draft" });
+        toastError({ description: "丢弃草稿失败" });
         onRestoreCompose(composeSession);
         return false;
       } finally {
@@ -771,10 +771,10 @@ function ReplyPanel({
     return (
       <div className="mt-5 flex gap-2">
         <Button onClick={refetch} size="sm" variant="outline">
-          Load message to forward
+          加载待转发邮件
         </Button>
         <Button onClick={onCloseCompose} size="sm" variant="ghost">
-          Cancel
+          取消
         </Button>
       </div>
     );
@@ -959,7 +959,7 @@ function TranslationNotice({
         }}
         type="button"
       >
-        {showOriginal ? "Show translation" : "Show original"}
+        {showOriginal ? "显示译文" : "显示原文"}
       </button>
     </p>
   );
@@ -972,7 +972,7 @@ function MessageBodyLoading() {
       role="status"
     >
       <LoadingMiniSpinner />
-      Loading message…
+      正在加载邮件…
     </p>
   );
 }

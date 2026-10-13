@@ -150,7 +150,7 @@ export function DriveSetup() {
                 });
                 setFilingStates((prev) => ({
                   ...prev,
-                  [key]: { status: "error", error: "Unknown error" },
+                  [key]: { status: "error", error: "未知错误" },
                 }));
               }
             })
@@ -172,7 +172,7 @@ export function DriveSetup() {
       onError: (err) => {
         analytics.captureAction("auto_file_preview_failed");
         toastError({
-          title: "Error fetching preview",
+          title: "获取预览失败",
           description:
             err instanceof Error
               ? err.message
@@ -211,7 +211,7 @@ export function DriveSetup() {
           reason: "server_error",
         });
         toastError({
-          title: "Error starting auto-filing",
+          title: "启动自动整理失败",
           description: result.serverError,
         });
         setUserPhase("previewing");
@@ -219,14 +219,14 @@ export function DriveSetup() {
       }
 
       analytics.captureAction("auto_file_enabled");
-      toastSuccess({ description: "Auto-filing started!" });
+      toastSuccess({ description: "自动整理已启动！" });
       await mutateEmail();
     } catch (error) {
       analytics.captureAction("auto_file_enable_failed", {
         reason: "exception",
       });
       toastError({
-        title: "Error starting auto-filing",
+        title: "启动自动整理失败",
         description:
           error instanceof Error
             ? error.message
@@ -239,11 +239,11 @@ export function DriveSetup() {
   return (
     <div className="mx-auto max-w-2xl py-8">
       <div className="text-center">
-        <TypographyH3>Let's set up auto-filing</TypographyH3>
+        <TypographyH3>配置自动整理</TypographyH3>
         <SectionDescription className="mx-auto mt-3 max-w-xl">
-          We'll file attachments from your emails into your{" "}
+          将把邮件附件整理到你的{" "}
           {providerInfo?.name || "drive"}.<br />
-          Just tell us where and how.
+          请说明存放位置和整理方式。
         </SectionDescription>
       </div>
 
@@ -252,8 +252,7 @@ export function DriveSetup() {
           <DriveConnectionCard connection={connection} />
         ) : (
           <TypographyP>
-            No drive connection found. Please connect your drive to continue
-            setup.
+            尚未连接云存储，请连接后继续配置。
           </TypographyP>
         )}
       </div>
@@ -340,10 +339,10 @@ function NoAttachmentsMessage({
   return (
     <div className="text-center">
       <MutedText className="mb-4">
-        We couldn't find recent emails with attachments to preview.
+        未找到可预览的近期附件邮件。
       </MutedText>
       <Button onClick={onSkip} loading={isStarting}>
-        Start auto-filing anyway
+        直接启动自动整理
       </Button>
     </div>
   );
@@ -395,16 +394,16 @@ function PreviewResults({
 
   return (
     <div>
-      <TypographyH4>3. See it in action</TypographyH4>
+      <TypographyH4>3. 查看整理效果</TypographyH4>
       <MutedText className="mt-1">{statusMessage}</MutedText>
 
       <div className="mt-4 rounded-lg border">
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>File</TableHead>
-              <TableHead>Folder</TableHead>
-              <TableHead className="w-[100px] text-right">Correct?</TableHead>
+              <TableHead>文件</TableHead>
+              <TableHead>文件夹</TableHead>
+              <TableHead className="w-[100px] text-right">是否正确？</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -427,7 +426,7 @@ function PreviewResults({
       </div>
 
       <p className="mt-3 text-center text-xs text-muted-foreground">
-        Your feedback helps us learn
+        你的反馈有助于改进整理结果
       </p>
 
       <div className="mt-6 flex flex-col items-center gap-2">
@@ -436,10 +435,10 @@ function PreviewResults({
           loading={isStarting}
           disabled={anyFiling}
         >
-          {anyFiling ? "Processing..." : "Looks good, start auto-filing"}
+          {anyFiling ? "正在处理…" : "结果正确，启动自动整理"}
         </Button>
         <p className="text-xs text-muted-foreground">
-          You'll get an email each time we file something. Reply to correct us.
+          每次整理后都会发送邮件，你可以回复修正结果。
         </p>
       </div>
     </div>
@@ -485,10 +484,10 @@ function FilingRow({
         });
         analytics.captureAction("auto_file_preview_item_moved");
         setCorrectedPath(folder.folderPath);
-        toastSuccess({ description: `Moved to ${folder.folderName}` });
+        toastSuccess({ description: `已移至 ${folder.folderName}` });
       } catch {
         setVote(voteBeforeDropdownRef.current);
-        toastError({ description: "Failed to move file" });
+        toastError({ description: "移动文件失败" });
       } finally {
         setIsMoving(false);
       }
@@ -508,7 +507,7 @@ function FilingRow({
 
     if (result?.serverError) {
       setVote(null);
-      toastError({ description: "Failed to submit feedback" });
+      toastError({ description: "提交反馈失败" });
     } else {
       analytics.captureAction("auto_file_preview_feedback_submitted", {
         feedback_positive: true,
@@ -535,7 +534,7 @@ function FilingRow({
 
     if (result?.serverError) {
       setVote(null);
-      toastError({ description: "Failed to submit feedback" });
+      toastError({ description: "提交反馈失败" });
     } else {
       analytics.captureAction("auto_file_preview_feedback_submitted", {
         feedback_positive: false,
@@ -561,7 +560,7 @@ function FilingRow({
 
     if (result?.serverError) {
       setVote(null);
-      toastError({ description: "Failed to submit feedback" });
+      toastError({ description: "提交反馈失败" });
     } else {
       analytics.captureAction("auto_file_preview_feedback_submitted", {
         feedback_positive: false,
@@ -594,7 +593,7 @@ function FilingRow({
             target="_blank"
             rel="noopener noreferrer"
             className="text-muted-foreground hover:text-foreground flex-shrink-0"
-            title="Open email"
+            title="打开邮件"
           >
             <ExternalLinkIcon className="size-3.5" />
           </Link>
@@ -634,7 +633,7 @@ function FilingRow({
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
                 <DropdownMenuLabel>
-                  Which folder does this file belong in?
+                  此文件应放入哪个文件夹？
                 </DropdownMenuLabel>
                 {otherFolders.map((folder) => (
                   <DropdownMenuItem
@@ -649,7 +648,7 @@ function FilingRow({
                 <DropdownMenuItem
                   onClick={() => setVote(voteBeforeDropdownRef.current)}
                 >
-                  Cancel
+                  取消
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -740,19 +739,19 @@ function SetupFolderSelection({
 
   return (
     <div>
-      <TypographyH4>1. Pick your folders</TypographyH4>
+      <TypographyH4>1. 选择文件夹</TypographyH4>
       <MutedText className="mt-1">
-        Which folders can we file to?{" "}
+        允许整理到哪些文件夹？{" "}
         <span className="text-muted-foreground">
-          (We'll only ever put files in folders you select)
+          （仅会将文件放入你选择的文件夹）
         </span>
       </MutedText>
       {staleFolderCount > 0 && (
         <AlertBasic
           className="mt-4"
           variant="blue"
-          title="Deleted folders detected"
-          description={`Removed ${staleFolderCount} deleted folder${staleFolderCount === 1 ? "" : "s"} from your saved list.`}
+          title="检测到已删除的文件夹"
+          description={`已从保存列表移除 ${staleFolderCount} 个已删除文件夹。`}
         />
       )}
 
@@ -790,7 +789,7 @@ function SetupFolderSelection({
                 emailAccountId={emailAccountId}
                 driveConnectionId={driveConnectionId}
                 onFolderCreated={mutateFolders}
-                triggerLabel="Add folder"
+                triggerLabel="添加文件夹"
                 triggerVariant="ghost"
                 triggerSize="xs-2"
                 triggerIcon={PlusIcon}
@@ -848,9 +847,9 @@ function SetupRulesForm({
     async (data) => {
       if (!canPreview) {
         toastError({
-          title: "Setup incomplete",
+          title: "配置未完成",
           description:
-            "Please select at least one folder and describe how you organize files.",
+            "请至少选择一个文件夹，并说明文件整理方式。",
         });
         return;
       }
@@ -862,7 +861,7 @@ function SetupRulesForm({
           reason: "server_error",
         });
         toastError({
-          title: "Error saving rules",
+          title: "保存规则失败",
           description: result.serverError,
         });
       } else {
@@ -886,14 +885,13 @@ function SetupRulesForm({
 
   return (
     <div>
-      <h3 className="text-lg font-semibold">2. Describe how you organize</h3>
-      <MutedText className="mt-1">Tell us in plain English</MutedText>
+      <h3 className="text-lg font-semibold">2. 说明整理方式</h3>
+      <MutedText className="mt-1">用自然语言说明</MutedText>
       <form onSubmit={handleSubmit(onSubmit)} className="mt-4 space-y-3">
         <Input
           type="textarea"
           name="filingPrompt"
-          placeholder={`Contracts go to Transactions by property address.
-Receipts go to Receipts by month.`}
+          placeholder={"合同按房产地址放入交易文件夹，收据按月份放入收据文件夹。"}
           registerProps={register("filingPrompt")}
           error={errors.filingPrompt}
           autosizeTextarea
@@ -910,8 +908,8 @@ Receipts go to Receipts by month.`}
               loading={isLoading}
             >
               {isLoading
-                ? "Finding recent attachments..."
-                : "Preview with my recent emails"}
+                ? "正在查找近期附件…"
+                : "使用近期邮件预览"}
             </Button>
           </div>
         )}

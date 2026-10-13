@@ -35,11 +35,11 @@ const defaultPlatforms: Platform[] = [
     comingSoon: true,
   },
   {
-    name: "iOS & Android",
+    name: "iOS 和 Android",
     icon: <Smartphone className="size-10 text-gray-600" strokeWidth={1.5} />,
   },
   {
-    name: "Web",
+    name: "网页版",
     icon: <Globe className="size-10 text-gray-600" strokeWidth={1.5} />,
   },
 ];
@@ -89,7 +89,7 @@ function PlatformIcon({
       <span className="text-sm font-medium text-gray-500">{name}</span>
       {comingSoon && (
         <span className="rounded-full bg-gray-100 px-2 py-0.5 text-[10px] font-medium text-gray-400">
-          Coming soon
+          即将推出
         </span>
       )}
     </div>

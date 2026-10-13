@@ -41,7 +41,7 @@ test("keeps Test row controls inside the phone viewport", async ({
   await capturePlaywrightCheckpoint(page, testInfo, "mobile-test");
   await expectNoHorizontalOverflow(row.locator("xpath=ancestor::table/.."));
   await expectInViewport(
-    row.getByRole("button", { name: "Test", exact: true }),
+    row.getByRole("button", { name: "测试", exact: true }),
   );
 });
 
@@ -93,7 +93,7 @@ for (const ruleName of [
     await expectNoHorizontalOverflow(row.locator("xpath=ancestor::table/.."));
     await expectInViewport(row.getByText(ruleName, { exact: true }));
     await expectInViewport(
-      row.getByRole("button", { name: "Fix", exact: true }),
+      row.getByRole("button", { name: "修正", exact: true }),
     );
   });
 }
@@ -104,11 +104,11 @@ test("aligns the signature editor and preview at phone width", async ({
   const emailAccountId = await getEmailAccountId(page);
   await markAutomationOnboardingViewed(page);
   await page.goto(`/${emailAccountId}/automation?tab=settings`);
-  await getAutomationSettingsCard(page, "Email signature")
-    .getByRole("button", { name: "Edit", exact: true })
+  await getAutomationSettingsCard(page, "邮件签名")
+    .getByRole("button", { name: "编辑", exact: true })
     .click();
   const dialog = page.getByRole("dialog", {
-    name: "Email signature",
+    name: "邮件签名",
     exact: true,
   });
   const editor = dialog.locator("#signature");
@@ -122,7 +122,7 @@ test("aligns the signature editor and preview at phone width", async ({
     editorBox!.y + editorBox!.height,
   );
   await expectNoHorizontalOverflow(dialog);
-  await dialog.getByRole("button", { name: "Close", exact: true }).click();
+  await dialog.getByRole("button", { name: "关闭", exact: true }).click();
   await expect(dialog).toBeHidden();
 });
 
@@ -163,31 +163,31 @@ test("keeps learned patterns closable and the add form usable on phones", async 
     }),
   );
   await page.goto(`/${emailAccountId}/automation?tab=settings`);
-  await getAutomationSettingsCard(page, "Learned patterns")
-    .getByRole("button", { name: "View", exact: true })
+  await getAutomationSettingsCard(page, "已学习的规律")
+    .getByRole("button", { name: "查看", exact: true })
     .click();
   const dialog = page.getByRole("dialog", {
-    name: "Learned patterns",
+    name: "已学习的规律",
     exact: true,
   });
   await dialog
-    .getByRole("button", { name: "Add pattern", exact: true })
+    .getByRole("button", { name: "添加规律", exact: true })
     .click();
   const input = dialog.getByPlaceholder("e.g. hello@company.com");
   await input.fill("receipts@example.com");
   await capturePlaywrightCheckpoint(page, testInfo, "mobile-patterns-add");
   expect((await input.boundingBox())!.width).toBeGreaterThan(180);
   await expectInViewport(
-    dialog.getByRole("button", { name: "Close", exact: true }),
+    dialog.getByRole("button", { name: "关闭", exact: true }),
   );
   await expectNoHorizontalOverflow(dialog);
   await dialog.locator("div.overflow-y-auto").evaluate((element) => {
     element.scrollTop = element.scrollHeight;
   });
   await expectInViewport(
-    dialog.getByRole("button", { name: "Close", exact: true }),
+    dialog.getByRole("button", { name: "关闭", exact: true }),
   );
-  await dialog.getByRole("button", { name: "Close", exact: true }).click();
+  await dialog.getByRole("button", { name: "关闭", exact: true }).click();
   await expect(dialog).toBeHidden();
 });
 
@@ -223,7 +223,7 @@ test("keeps calendar options and availability controls on phones", async ({
   );
   await page.goto(`/${emailAccountId}/calendars`);
   const options = page.getByRole("button", {
-    name: "Calendar options",
+    name: "日历选项",
     exact: true,
   });
   await expect(options).toBeVisible();
@@ -231,11 +231,11 @@ test("keeps calendar options and availability controls on phones", async ({
   await expectInViewport(options);
   await options.click();
   await expect(
-    page.getByRole("menuitem", { name: "Disconnect", exact: true }),
+    page.getByRole("menuitem", { name: "断开连接", exact: true }),
   ).toBeVisible();
   await page.keyboard.press("Escape");
   const availability = page
-    .getByRole("heading", { name: "Availability", exact: true })
+    .getByRole("heading", { name: "可预约时间", exact: true })
     .locator("xpath=ancestor::section");
   await expect(
     availability.locator('input[type="time"]').first(),
@@ -267,7 +267,7 @@ test("keeps integration requests accessible on phones", async ({
   await markAutomationOnboardingViewed(page);
   await page.goto(`/${emailAccountId}/integrations`);
   const request = page.getByRole("button", {
-    name: "Request an Integration",
+    name: "申请集成",
     exact: true,
   });
   await expect(request).toBeVisible();
@@ -277,7 +277,7 @@ test("keeps integration requests accessible on phones", async ({
   await expect(page.getByRole("dialog")).toBeVisible();
   await page
     .getByRole("dialog")
-    .getByRole("button", { name: "Close", exact: true })
+    .getByRole("button", { name: "关闭", exact: true })
     .click();
 });
 

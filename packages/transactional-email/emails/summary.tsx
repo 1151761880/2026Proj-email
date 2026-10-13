@@ -59,14 +59,14 @@ export default function SummaryEmail(props: SummaryEmailProps) {
       baseUrl={baseUrl}
       unsubscribeToken={unsubscribeToken}
       preview={`${preview}. Here's your week in email.`}
-      eyebrow={<>Weekly Update &middot; {formatPeriod(periodEnd)}</>}
-      title="Your week in email"
-      subtitle="Here's how your assistant handled your inbox this week."
+      eyebrow={<>每周更新 · {formatPeriod(periodEnd)}</>}
+      title="本周邮件概况"
+      subtitle="以下是助手本周处理收件箱的情况。"
     >
       <StatStrip
         stats={[
-          { value: archivedEmailCount, label: "archived for you" },
-          { value: coldEmailCount, label: "cold emails blocked" },
+          { value: archivedEmailCount, label: "已归档" },
+          { value: coldEmailCount, label: "封陌生推广邮件已拦截" },
         ]}
       />
 
@@ -182,9 +182,9 @@ function ArchivedEmails({
 
   return (
     <StatsEmailCard
-      title="Archived For You"
-      badge={{ label: `${archivedEmailCount} this week`, ...BADGES.green }}
-      description="Emails your rules labeled and moved out of your inbox."
+      title="已归档"
+      badge={{ label: `本周 ${archivedEmailCount}`, ...BADGES.green }}
+      description="根据规则添加标签并移出收件箱的邮件。"
       footnote={
         hiddenCount > 0
           ? `And ${hiddenCount} more archived ${pluralize(hiddenCount, "email")}.`
@@ -192,7 +192,7 @@ function ArchivedEmails({
       }
       cta={{
         href: `${baseUrl}/automation?tab=history`,
-        label: "View automation history",
+        label: "查看自动化历史",
       }}
     >
       {archivedEmailGroups.map((group) => (
@@ -221,15 +221,15 @@ function ColdEmails({
 
   return (
     <StatsEmailCard
-      title="Cold Email Blocker"
-      badge={{ label: `${coldEmailCount} blocked`, ...BADGES.blue }}
-      description="Unsolicited outreach kept out of your inbox."
+      title="陌生邮件拦截"
+      badge={{ label: `已拦截 ${coldEmailCount}`, ...BADGES.blue }}
+      description="已拦截的陌生推广邮件。"
       footnote={
         hiddenCount > 0
           ? `And ${hiddenCount} more cold ${pluralize(hiddenCount, "email")}.`
           : undefined
       }
-      cta={{ href: `${baseUrl}/cold-email-blocker`, label: "View cold emails" }}
+      cta={{ href: `${baseUrl}/cold-email-blocker`, label: "查看陌生推广邮件" }}
     >
       <EmailList emails={coldEmailers} />
     </StatsEmailCard>
@@ -396,7 +396,7 @@ function formatDay(date: Date) {
 function formatPeriod(end: Date) {
   // Subtract in UTC milliseconds so local DST transitions cannot shift the day.
   const start = new Date(new Date(end).getTime() - 6 * 24 * 60 * 60 * 1000);
-  return `${formatDay(start)} to ${formatDay(end)}`;
+  return `${formatDay(start)} 至 ${formatDay(end)}`;
 }
 
 function pluralize(count: number, word: string) {

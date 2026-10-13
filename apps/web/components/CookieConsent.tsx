@@ -16,21 +16,20 @@ export function CookieConsentBanner() {
 
   return (
     <section
-      aria-label="Cookie consent"
+      aria-label="Cookie 授权"
       className="fixed inset-x-3 bottom-3 z-50 animate-in fade-in slide-in-from-bottom-4 duration-300 sm:inset-x-auto sm:left-4 sm:bottom-4 sm:max-w-sm"
     >
       <div className="rounded-xl border bg-background p-4 shadow-lg">
         <p className="text-sm font-medium text-foreground">
-          We value your privacy
+          尊重你的隐私
         </p>
         <p className="mt-1 text-sm text-muted-foreground">
-          We use cookies to understand how people use {BRAND_NAME} and to
-          measure our marketing. You can change your choice at any time.{" "}
+          我们使用 Cookie 了解使用情况，产品： {BRAND_NAME} ，并评估推广效果。你可以随时修改选择。{" "}
           <Link
             href="/privacy"
             className="underline underline-offset-4 hover:text-foreground"
           >
-            Privacy policy
+            隐私政策
           </Link>
         </p>
         <div className="mt-4 grid grid-cols-2 gap-2">
@@ -39,14 +38,14 @@ export function CookieConsentBanner() {
             size="sm"
             onClick={() => setCookieConsent("denied")}
           >
-            Reject
+            拒绝
           </Button>
           <Button
             variant="primaryBlack"
             size="sm"
             onClick={() => setCookieConsent("granted")}
           >
-            Accept
+            接受
           </Button>
         </div>
       </div>
@@ -70,7 +69,7 @@ export function CookieSettingsButton({ className }: { className?: string }) {
 
   return (
     <button type="button" className={className} onClick={reopenCookieConsent}>
-      Cookie settings
+      Cookie 设置
     </button>
   );
 }

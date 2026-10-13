@@ -53,11 +53,11 @@ export default async function AutomationPage({
           <div className="flex items-center justify-between">
             <div>
               <PageHeader
-                title="AI Assistant"
+                title="智能助手"
                 video={{
-                  title: "Getting started with AI Personal Assistant",
+                  title: "智能私人助手入门",
                   description:
-                    "Learn how to use the AI Personal Assistant to automatically label, archive, and more.",
+                    "了解如何使用智能私人助手自动添加标签、归档及执行其他操作。",
                   muxPlaybackId:
                     "TYo3SIMdhg008x022H79400CxeRSiB6mLyuwHx8Szc00Rec",
                 }}
@@ -74,8 +74,8 @@ export default async function AutomationPage({
           <DismissibleVideoCard
             className="my-4"
             icon={<SparklesIcon className="h-5 w-5" />}
-            title="Getting started with AI Assistant"
-            description="Learn how to use the AI Assistant to automatically label, archive, and more."
+            title="智能助手入门"
+            description="了解如何使用智能助手自动添加标签、归档及执行其他操作。"
             muxPlaybackId="TYo3SIMdhg008x022H79400CxeRSiB6mLyuwHx8Szc00Rec"
             storageKey="ai-assistant-onboarding-video"
             videoAnalytics={{

@@ -30,7 +30,7 @@ export function UnsubscribeSuggestionRow({
   const content = (
     <>
       <ButtonCheckbox
-        label={`Select ${sender.fromName || sender.name}`}
+        label={`选择 ${sender.fromName || sender.name}`}
         checked={checked}
         onChange={onToggle}
       />
@@ -99,7 +99,7 @@ function ReadPercentage({
           labelClassName,
         )}
       >
-        {readPercentage}% read
+        {readPercentage}% 已读
       </span>
     </div>
   );

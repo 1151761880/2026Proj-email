@@ -51,13 +51,13 @@ export function DelayInputControls({
         </SelectTrigger>
         <SelectContent>
           <SelectItem value="minutes">
-            {value === 1 ? "Minute" : "Minutes"}
+            {value === 1 ? "分钟" : "分钟"}
           </SelectItem>
           <SelectItem value="hours">
-            {value === 60 ? "Hour" : "Hours"}
+            {value === 60 ? "小时" : "小时"}
           </SelectItem>
           <SelectItem value="days">
-            {value === 1440 ? "Day" : "Days"}
+            {value === 1440 ? "天" : "天"}
           </SelectItem>
         </SelectContent>
       </Select>

@@ -55,7 +55,7 @@ export function EndTrialButton({
     setOpen(false);
 
     if (result?.data?.status === "active") {
-      toast.success("Your paid plan is active.");
+      toast.success("付费套餐已启用。");
     } else {
       toast.message("Your trial has ended.");
     }
@@ -71,39 +71,36 @@ export function EndTrialButton({
       <AlertDialogTrigger asChild>
         <Button variant={variant} size={size} className={className}>
           <CreditCardIcon className="mr-2 h-4 w-4" />
-          Start paid plan now
+          立即启用付费套餐
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>End your free trial and pay now?</AlertDialogTitle>
+          <AlertDialogTitle>结束免费试用并立即付款？</AlertDialogTitle>
           <LoadingContent loading={isLoading} error={error}>
             {preview && (
               <AlertDialogDescription asChild>
                 <div className="space-y-2">
                   <p>
-                    We will charge your card{" "}
+                    将从你的付款账户扣款{" "}
                     <span className="font-semibold text-foreground">
                       {formatStripeAmount(preview.amountDue, preview.currency)}
                     </span>{" "}
-                    immediately for the {preview.planName} plan
+                    ，立即启用 {preview.planName} plan
                     {preview.interval
-                      ? `, billed ${billingCadence[preview.interval]}`
+                      ? `，计费周期：${billingCadence[preview.interval]}`
                       : ""}
                     .
                   </p>
                   {preview.trialEnd && (
                     <p>
-                      You do not need to do this to keep using Inbox Zero. Your
-                      trial already includes every paid feature and runs free
-                      until {formatDateSimple(new Date(preview.trialEnd))}, when
-                      the same charge happens automatically.
+                      试用期间可继续使用十组邮件小助手的全部付费功能，免费试用结束时间： {formatDateSimple(new Date(preview.trialEnd))}，届时将自动扣款。
                     </p>
                   )}
                   <p>
-                    Want a different plan or to pay monthly?{" "}
+                    需要其他套餐或按月付款？{" "}
                     <Link href="/premium" className="underline">
-                      Change your plan first
+                      请先更改套餐
                     </Link>
                     .
                   </p>
@@ -113,15 +110,15 @@ export function EndTrialButton({
           </LoadingContent>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Keep my free trial</AlertDialogCancel>
+          <AlertDialogCancel>继续免费试用</AlertDialogCancel>
           <Button
             loading={endingTrial}
             disabled={!preview || isValidating}
             onClick={endTrial}
           >
             {preview
-              ? `Pay ${formatStripeAmount(preview.amountDue, preview.currency)} now`
-              : "Pay now"}
+              ? `立即支付 ${formatStripeAmount(preview.amountDue, preview.currency)}`
+              : "立即付款"}
           </Button>
         </AlertDialogFooter>
       </AlertDialogContent>

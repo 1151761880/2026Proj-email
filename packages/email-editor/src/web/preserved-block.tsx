@@ -34,7 +34,7 @@ export function PreservedBlocksToggle({
   return (
     <button
       aria-expanded={expanded}
-      aria-label={`${expanded ? "Hide" : "Show"} ${hiddenContent}`}
+      aria-label={`${expanded ? "隐藏" : "显示"} ${hiddenContent}`}
       className={styles.preservedToggle}
       onClick={onToggle}
       onMouseDown={(event) => event.preventDefault()}
@@ -57,7 +57,7 @@ export function QuotePreview({ previewHtml }: { previewHtml: string }) {
       sandbox=""
       srcDoc={`<!doctype html><html><head><meta http-equiv="Content-Security-Policy" content="${PREVIEW_CONTENT_POLICY}"><meta name="color-scheme" content="light"><style>html,body{margin:0;padding:0;background:#fff;color:#242424;font:13px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}body{padding:8px}img{max-width:100%;height:auto}table{max-width:100%}a{color:#2563eb}</style></head><body>${previewHtml}</body></html>`}
       tabIndex={-1}
-      title="Quoted message preview"
+      title="引用邮件预览"
     />
   );
 }

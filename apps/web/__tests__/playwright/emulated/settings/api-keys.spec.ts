@@ -24,14 +24,14 @@ test("creates, authorizes, lists, and revokes an API key", async ({
   await openSettings(page);
 
   await expect(
-    page.getByRole("heading", { name: "Developer", exact: true }),
+    page.getByRole("heading", { name: "开发者", exact: true }),
   ).toBeVisible({ timeout: 60_000 });
-  await page.getByRole("button", { name: "Create key" }).click();
+  await page.getByRole("button", { name: "创建密钥" }).click();
 
   const createDialog = page.getByRole("dialog", {
-    name: "Create new secret key",
+    name: "创建新密钥",
   });
-  await createDialog.getByLabel("Name (optional)").fill(API_KEY_NAME);
+  await createDialog.getByLabel("名称（可选）").fill(API_KEY_NAME);
   await expect(createDialog.getByRole("checkbox")).toHaveCount(4);
   for (const name of ["Read rules", "Write rules", "Read stats"]) {
     await expect(createDialog.getByRole("checkbox", { name })).toBeChecked();
@@ -39,8 +39,8 @@ test("creates, authorizes, lists, and revokes an API key", async ({
   await expect(
     createDialog.getByRole("checkbox", { name: "Unsubscribe senders" }),
   ).not.toBeChecked();
-  await createDialog.getByRole("button", { name: "Create" }).click();
-  await expect(page.getByText("API key created!", { exact: true })).toBeVisible(
+  await createDialog.getByRole("button", { name: "创建" }).click();
+  await expect(page.getByText("API 密钥已创建！", { exact: true })).toBeVisible(
     { timeout: 60_000 },
   );
 
@@ -60,13 +60,13 @@ test("creates, authorizes, lists, and revokes an API key", async ({
   expect(invalidResponse.status()).toBe(401);
 
   await page.keyboard.press("Escape");
-  await page.getByRole("button", { name: /^View keys/ }).click();
-  const keysDialog = page.getByRole("dialog", { name: "API Keys" });
+  await page.getByRole("button", { name: /查看密钥/ }).click();
+  const keysDialog = page.getByRole("dialog", { name: "API 密钥" });
   const keyRow = keysDialog.getByRole("row").filter({ hasText: API_KEY_NAME });
   await expect(keyRow).toContainText("Read rules");
-  await keyRow.getByRole("button", { name: "Revoke" }).click();
+  await keyRow.getByRole("button", { name: "撤销" }).click();
   await expect(
-    page.getByText("API key deactivated!", { exact: true }),
+    page.getByText("API 密钥已停用！", { exact: true }),
   ).toBeVisible({ timeout: 60_000 });
   await expect(keyRow).toBeHidden({ timeout: 60_000 });
 

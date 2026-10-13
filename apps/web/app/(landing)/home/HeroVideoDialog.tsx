@@ -18,7 +18,7 @@ const HERO_VIDEO_ID = "YeTrweHxCIM5tcBMXlvRbmDuPqL028lJrmJ3F6ZgwnDY";
 export function HeroVideoDialog({
   playbackId = HERO_VIDEO_ID,
   thumbnailTime,
-  title = "Inbox Zero product video",
+  title = "十组邮件小助手 product video",
 }: {
   playbackId?: string;
   thumbnailTime?: number;
@@ -37,7 +37,7 @@ export function HeroVideoDialog({
         onClick={() => landingPageAnalytics.videoClicked(posthog, playbackId)}
       >
         <LiquidGlassButton
-          aria-label="Play product demo video"
+          aria-label="播放产品演示"
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
         >
           <div>

@@ -20,7 +20,7 @@ microsoft:
   oauth_clients:
     - client_id: emulate-microsoft-client-id
       client_secret: emulate-microsoft-secret
-      name: Inbox Zero Smoke
+      name: 十组邮件小助手 Smoke
       redirect_uris:
         - __PLAYWRIGHT_TEST_REDIRECT_URI__
         - __PLAYWRIGHT_TEST_LINKING_URI__

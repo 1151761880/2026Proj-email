@@ -33,20 +33,20 @@ test("cancelled selection grants nothing; nonparticipants and revoked members ca
     const publisherDiscussion = page.getByTestId("publisher-discussion");
     await openTeamComments(page);
     await publisherDiscussion
-      .getByRole("button", { name: "Share", exact: true })
+      .getByRole("button", { name: "分享", exact: true })
       .click();
-    const dialog = page.getByRole("dialog", { name: "Share conversation" });
+    const dialog = page.getByRole("dialog", { name: "共享会话" });
     await dialog.getByLabel("Shared Teammate").check();
-    await dialog.getByRole("button", { name: "Cancel" }).click();
+    await dialog.getByRole("button", { name: "取消" }).click();
     const unshared = await page.request.get(
       `/api/team-comments/conversations?memberId=${team.publisherMemberId}&emailAccountId=${team.publisher.id}&threadId=thr_playwright_reader`,
     );
     expect(((await unshared.json()) as { source: unknown }).source).toBeNull();
     await publisherDiscussion
-      .getByRole("button", { name: "Share", exact: true })
+      .getByRole("button", { name: "分享", exact: true })
       .click();
     await dialog.getByLabel("Shared Teammate").check();
-    await dialog.getByRole("button", { name: "Share conversation" }).click();
+    await dialog.getByRole("button", { name: "共享会话" }).click();
     await expect(dialog).toBeHidden({ timeout: 30_000 });
     const id = await readSharedConversationId(
       page,
@@ -92,7 +92,7 @@ test("cancelled selection grants nothing; nonparticipants and revoked members ca
       "First message in the reader conversation.",
     );
     await publisherDiscussion
-      .getByRole("button", { name: "Shared participants" })
+      .getByRole("button", { name: "共享成员" })
       .click();
     await page.getByRole("button", { name: "Remove Shared Teammate" }).click();
     await page.keyboard.press("Escape");
@@ -112,14 +112,14 @@ test("cancelled selection grants nothing; nonparticipants and revoked members ca
     );
     expect(denied.ok()).toBe(false);
     await publisherDiscussion
-      .getByRole("button", { name: "Discussion options" })
+      .getByRole("button", { name: "讨论选项" })
       .click();
-    await page.getByRole("menuitem", { name: "Stop sharing" }).click();
+    await page.getByRole("menuitem", { name: "停止共享" }).click();
     await expect(
-      publisherDiscussion.getByRole("region", { name: "Internal discussion" }),
+      publisherDiscussion.getByRole("region", { name: "内部讨论" }),
     ).toHaveCount(0);
     await expect(
-      publisherDiscussion.getByLabel("Internal comment"),
+      publisherDiscussion.getByLabel("内部评论"),
     ).toHaveCount(0);
   } finally {
     await team.cleanup();

@@ -33,7 +33,7 @@ const ReasoningContext = createContext<ReasoningContextValue | null>(null);
 export const useReasoning = () => {
   const context = useContext(ReasoningContext);
   if (!context) {
-    throw new Error("Reasoning components must be used within Reasoning");
+    throw new Error("推理组件需要在推理容器内使用");
   }
   return context;
 };
@@ -119,12 +119,12 @@ export type ReasoningTriggerProps = ComponentProps<
 
 const defaultGetThinkingMessage = (isStreaming: boolean, duration?: number) => {
   if (isStreaming) {
-    return <span className="animate-pulse">Thinking...</span>;
+    return <span className="animate-pulse">正在思考…</span>;
   }
   if (duration === undefined || duration === 0) {
-    return <span>Thought for a few seconds</span>;
+    return <span>已思考几秒</span>;
   }
-  return <span>Thought for {duration} seconds</span>;
+  return <span>思考用时 {duration} seconds</span>;
 };
 
 export const ReasoningTrigger = memo(

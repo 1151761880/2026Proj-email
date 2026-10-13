@@ -71,25 +71,25 @@ test("enables drafting and manages persisted draft knowledge", async ({
   await expect(autoDraftSwitch).toBeChecked();
 
   const knowledgeItem = getAutomationSettingsCard(page, "Draft knowledge base");
-  const manageKnowledge = knowledgeItem.getByRole("button", { name: "Manage" });
+  const manageKnowledge = knowledgeItem.getByRole("button", { name: "管理" });
   await expectVisibleAfterTransientFetch(page, manageKnowledge);
   await expect(manageKnowledge).toBeEnabled({ timeout: 60_000 });
   await manageKnowledge.click();
 
   const knowledgeDialog = page.getByRole("dialog", {
-    name: "Draft knowledge base",
+    name: "回复知识库",
   });
   await expect(
-    knowledgeDialog.getByText("No knowledge entries yet", { exact: true }),
+    knowledgeDialog.getByText("暂无知识库条目", { exact: true }),
   ).toBeVisible({ timeout: 60_000 });
-  await knowledgeDialog.getByRole("button", { name: "Add" }).click();
+  await knowledgeDialog.getByRole("button", { name: "添加" }).click();
 
-  const addDialog = page.getByRole("dialog", { name: "Add Knowledge" });
-  await addDialog.getByRole("textbox", { name: "Title" }).fill(KNOWLEDGE_TITLE);
+  const addDialog = page.getByRole("dialog", { name: "添加知识" });
+  await addDialog.getByRole("textbox", { name: "标题" }).fill(KNOWLEDGE_TITLE);
   await addDialog
     .locator('[contenteditable="true"]')
     .fill("Customers use the product to reach inbox zero every morning.");
-  await addDialog.getByRole("button", { name: "Create" }).click();
+  await addDialog.getByRole("button", { name: "创建" }).click();
   await expect
     .poll(() => getKnowledgeState(emailAccountId), {
       timeout: SERVER_ACTION_TIMEOUT_MS,
@@ -103,16 +103,16 @@ test("enables drafting and manages persisted draft knowledge", async ({
     .getByRole("row")
     .filter({ hasText: KNOWLEDGE_TITLE });
   await expect(knowledgeRow).toBeVisible({ timeout: 60_000 });
-  await knowledgeRow.getByRole("button", { name: "Edit" }).click();
+  await knowledgeRow.getByRole("button", { name: "编辑" }).click();
 
-  const editDialog = page.getByRole("dialog", { name: "Edit Knowledge" });
+  const editDialog = page.getByRole("dialog", { name: "编辑知识" });
   await editDialog
-    .getByRole("textbox", { name: "Title" })
+    .getByRole("textbox", { name: "标题" })
     .fill(UPDATED_KNOWLEDGE_TITLE);
   await editDialog
     .locator('[contenteditable="true"]')
     .fill("Customers use the product to triage important email every morning.");
-  await editDialog.getByRole("button", { name: "Update" }).click();
+  await editDialog.getByRole("button", { name: "更新" }).click();
   await expect
     .poll(() => getKnowledgeState(emailAccountId), {
       timeout: SERVER_ACTION_TIMEOUT_MS,
@@ -129,9 +129,9 @@ test("enables drafting and manages persisted draft knowledge", async ({
   await expect(updatedRow).toBeVisible({ timeout: 60_000 });
   await updatedRow.getByRole("button").last().click();
   const deleteDialog = page.getByRole("alertdialog", {
-    name: "Delete Knowledge Base Entry",
+    name: "删除知识库条目",
   });
-  await deleteDialog.getByRole("button", { name: "Delete" }).click();
+  await deleteDialog.getByRole("button", { name: "删除" }).click();
   await expect
     .poll(() => getKnowledgeState(emailAccountId), {
       timeout: SERVER_ACTION_TIMEOUT_MS,

@@ -45,7 +45,7 @@ export function ActivityLog({
           {entries.length === 0 && loading && (
             <div className="flex items-center gap-2 px-2 py-3 text-xs text-muted-foreground">
               <LoaderIcon className="h-3.5 w-3.5 animate-spin" />
-              Fetching emails...
+              正在获取邮件…
             </div>
           )}
           {entries.map((entry) => (
@@ -88,7 +88,7 @@ function ActivityLogRow({
               </Badge>
             )}
             {!entry.ruleName && isCompleted && (
-              <Badge color="yellow">No match</Badge>
+              <Badge color="yellow">未匹配</Badge>
             )}
           </span>
         </div>

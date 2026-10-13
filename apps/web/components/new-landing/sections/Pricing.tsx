@@ -52,10 +52,10 @@ type PricingTier = Tier & {
 const pricingTiers: PricingTier[] = [
   {
     ...tiers[0],
-    badges: [{ message: "Save 10%", annualOnly: true }],
+    badges: [{ message: "节省 10%", annualOnly: true }],
     button: {
       variant: "secondary-two",
-      content: "Try free for 7 days",
+      content: "免费试用 7 天",
       href: "/login",
     },
     icon: <Briefcase />,
@@ -63,21 +63,21 @@ const pricingTiers: PricingTier[] = [
   {
     ...tiers[1],
     badges: [
-      { message: "Save 20%", annualOnly: true },
-      { message: "Popular", variant: "green" },
+      { message: "节省 20%", annualOnly: true },
+      { message: "热门", variant: "green" },
     ],
     button: {
-      content: "Try free for 7 days",
+      content: "免费试用 7 天",
       href: "/login",
     },
     icon: <Zap />,
   },
   {
     ...tiers[2],
-    badges: [{ message: "Save 16%", annualOnly: true }],
+    badges: [{ message: "节省 16%", annualOnly: true }],
     button: {
       variant: "secondary-two",
-      content: "Try free for 7 days",
+      content: "免费试用 7 天",
       href: "/login",
     },
     icon: <Sparkle />,
@@ -97,8 +97,8 @@ export function Pricing() {
 
   return (
     <Section id="pricing">
-      <SectionHeading>Try for free, affordable paid plans</SectionHeading>
-      <SectionSubtitle>No hidden fees. Cancel anytime.</SectionSubtitle>
+      <SectionHeading>免费试用，灵活付费</SectionHeading>
+      <SectionSubtitle>无隐藏费用，可随时取消。</SectionSubtitle>
       <SectionContent
         noMarginTop
         className="mt-6 flex flex-col items-center justify-center"
@@ -116,7 +116,7 @@ export function Pricing() {
           }}
           className="w-fit rounded-full p-1.5 text-xs font-semibold leading-5 ring-1 ring-inset ring-gray-200 mb-6 shadow-[0_0_7px_0_rgba(0,0,0,0.0.07)]"
         >
-          <Label className="sr-only">Payment frequency</Label>
+          <Label className="sr-only">付款周期</Label>
           {frequencies.map((value) => (
             <Radio
               key={value}
@@ -154,10 +154,9 @@ export function Pricing() {
                   <Sparkle />
                 </div>
                 <div>
-                  <h3 className="font-title text-lg">Enterprise</h3>
+                  <h3 className="font-title text-lg">企业版</h3>
                   <Paragraph size="sm" className="mt-1">
-                    Need SSO, SCIM, on-premise deployment, or a dedicated
-                    account manager?
+                    需要单点登录、SCIM、本地部署或专属支持？
                   </Paragraph>
                 </div>
               </div>
@@ -177,7 +176,7 @@ export function Pricing() {
                   }
                 >
                   <Chat />
-                  <span className="relative z-10">Speak to sales</span>
+                  <span className="relative z-10">联系销售</span>
                 </Link>
               </Button>
             </CardContent>
@@ -238,12 +237,12 @@ function PricingCard({
                   ${price}
                 </div>
                 <Paragraph size="xs" color="light" className="-translate-y-1">
-                  /user /month
+                  / 人 / 月
                 </Paragraph>
               </>
             ) : (
               <div className="font-title text-[#242424] text-[1.7rem] md:text-[2.5rem] leading-tight">
-                Contact us
+                联系我们
               </div>
             )}
           </div>

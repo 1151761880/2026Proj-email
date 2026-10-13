@@ -64,7 +64,7 @@ describe("getHelpText", () => {
     const helpText = getHelpText("teams", HELP_OPTIONS);
     expect(helpText).toContain("Commands:");
     expect(helpText).toContain("Microsoft Teams");
-    expect(helpText).toContain("An active Inbox Zero account is required.");
+    expect(helpText).toContain("An active 十组邮件小助手 account is required.");
     expect(helpText).toContain("https://example.com/channels");
     expect(helpText).toContain("support@example.com");
 

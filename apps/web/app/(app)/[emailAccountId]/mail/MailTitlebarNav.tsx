@@ -51,10 +51,10 @@ export function MailTitlebarNav({
       )}
       {showHistory ? (
         <>
-          <Tooltip content="Back">
+          <Tooltip content="返回">
             <button
               type="button"
-              aria-label="Go back"
+              aria-label="后退"
               disabled={!canGoBack}
               onClick={() => window.history.back()}
               className={historyButton}
@@ -62,10 +62,10 @@ export function MailTitlebarNav({
               <ChevronLeftIcon className="size-4" />
             </button>
           </Tooltip>
-          <Tooltip content="Forward">
+          <Tooltip content="转发">
             <button
               type="button"
-              aria-label="Go forward"
+              aria-label="前进"
               disabled={!canGoForward}
               onClick={() => window.history.forward()}
               className={historyButton}

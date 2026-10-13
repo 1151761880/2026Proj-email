@@ -5,27 +5,27 @@ import {
 } from "@/utils/tokenize-search-query";
 
 export const DATE_WITHIN_OPTIONS = [
-  { value: "1d", name: "1 day", days: 1 },
-  { value: "3d", name: "3 days", days: 3 },
-  { value: "1w", name: "1 week", days: 7 },
-  { value: "2w", name: "2 weeks", days: 14 },
-  { value: "1m", name: "1 month", days: 30 },
-  { value: "2m", name: "2 months", days: 60 },
-  { value: "6m", name: "6 months", days: 180 },
-  { value: "1y", name: "1 year", days: 365 },
+  { value: "1d", name: "1 天", days: 1 },
+  { value: "3d", name: "3 天", days: 3 },
+  { value: "1w", name: "1 周", days: 7 },
+  { value: "2w", name: "2 周", days: 14 },
+  { value: "1m", name: "1 个月", days: 30 },
+  { value: "2m", name: "2 个月", days: 60 },
+  { value: "6m", name: "6 个月", days: 180 },
+  { value: "1y", name: "1 年", days: 365 },
 ] as const;
 
 export type DateWithin = (typeof DATE_WITHIN_OPTIONS)[number]["value"];
 
 export const SEARCH_IN_OPTIONS = [
-  { value: "all", name: "All Mail" },
-  { value: "inbox", name: "Inbox" },
-  { value: "starred", name: "Starred" },
-  { value: "sent", name: "Sent Mail" },
-  { value: "drafts", name: "Drafts" },
-  { value: "spam", name: "Spam" },
-  { value: "trash", name: "Trash" },
-  { value: "anywhere", name: "Mail & Spam & Trash" },
+  { value: "all", name: "所有邮件" },
+  { value: "inbox", name: "收件箱" },
+  { value: "starred", name: "星标邮件" },
+  { value: "sent", name: "已发送" },
+  { value: "drafts", name: "草稿箱" },
+  { value: "spam", name: "垃圾邮件" },
+  { value: "trash", name: "回收站" },
+  { value: "anywhere", name: "所有邮件、垃圾邮件和回收站" },
 ] as const;
 
 export type MailSearchFields = {

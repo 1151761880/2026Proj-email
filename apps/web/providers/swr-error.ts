@@ -39,5 +39,5 @@ export function getSWRFetchErrorMessage(errorData: unknown): string {
       }
     }
   }
-  return "An error occurred while fetching the data.";
+  return "获取数据失败。";
 }

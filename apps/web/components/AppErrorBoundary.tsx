@@ -20,7 +20,7 @@ import { createClientLogger } from "@/utils/logger-client";
 export function AppErrorBoundary({
   error,
   reset,
-  title = "Something went wrong",
+  title = "发生错误",
   description,
   onBack,
 }: {
@@ -78,30 +78,30 @@ export function AppErrorBoundary({
         <div className="mt-6 flex flex-col flex-wrap justify-center gap-2 sm:flex-row">
           <Button onClick={reset} variant="outline">
             <RotateCcw className="mr-2 size-4" />
-            Try again
+            重试
           </Button>
           {onBack && (
             <Button type="button" onClick={onBack} variant="outline">
-              Back to inbox
+              返回收件箱
             </Button>
           )}
           <Button asChild>
             <Link href="/">
               <Home className="mr-2 size-4" />
-              Go home
+              返回首页
             </Link>
           </Button>
         </div>
         {supportReference && (
           <p className="break-all text-xs text-muted-foreground">
-            Support reference:{" "}
+            支持参考信息：{" "}
             <span className="select-all font-mono">{supportReference}</span>
           </p>
         )}
         <p className="mt-6 text-sm text-muted-foreground">
-          If this error persists, please contact support at{" "}
+          若问题持续，请联系支持：{" "}
           <a
-            href={`mailto:${env.NEXT_PUBLIC_SUPPORT_EMAIL}?${new URLSearchParams({ subject: "App error report", body: `Support reference: ${supportReference || error.digest || "Unavailable"}` })}`}
+            href={`mailto:${env.NEXT_PUBLIC_SUPPORT_EMAIL}?${new URLSearchParams({ subject: "App error report", body: `支持参考信息：${supportReference || error.digest || "Unavailable"}` })}`}
             className="break-all underline"
           >
             {env.NEXT_PUBLIC_SUPPORT_EMAIL}

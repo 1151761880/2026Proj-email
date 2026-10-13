@@ -23,27 +23,27 @@ type Award = {
 
 const awards: Award[] = [
   {
-    title: "SOC2 Compliant",
-    description: "Enterprise-grade security. SOC 2 Type 2 certified",
+    title: "SOC 2 合规",
+    description: "安全与隐私保护",
     image: "/images/new-landing/awards/soc-award.png",
   },
   {
-    title: "#1 GitHub Trending",
-    description: "Trusted and loved by developers worldwide",
+    title: "开源项目",
+    description: "源码公开，便于开发者审查",
     image: "/images/new-landing/awards/github-trending-award.png",
     imageSize: 160,
     top: "top-2",
     hideOnMobile: true,
   },
   {
-    title: "#1 Product Hunt",
-    description: "Product of the Day on Product Hunt",
+    title: "产品体验",
+    description: "体验智能邮件管理",
     image: "/images/new-landing/awards/product-hunt-award.png",
     imageSize: 170,
   },
   {
-    title: "12k+ GitHub Stars",
-    description: "Open-source. See exactly what the code does",
+    title: "开源社区",
+    description: "源码开放，便于了解功能实现",
     image: "/images/new-landing/awards/github-stars-award.png",
     imageSize: 170,
     top: "top-3",
@@ -55,11 +55,9 @@ const defaultAwardImageSize = 200;
 export function Awards() {
   return (
     <Section>
-      <SectionHeading>Privacy first and open source</SectionHeading>
+      <SectionHeading>注重隐私，源码开放</SectionHeading>
       <SectionSubtitle>
-        Your data stays private — no AI training, no funny business. We’re fully
-        certified for top-tier security, and you can even self-host Inbox Zero
-        if you want total control.
+        可自主部署十组邮件小助手，并根据实际部署配置管理邮件数据和 AI 服务。
       </SectionSubtitle>
       <SectionContent
         noMarginTop

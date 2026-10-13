@@ -45,7 +45,7 @@ export function CopyInput({
         }}
       >
         <CopyIcon className="mr-2 size-4" />
-        {copied ? "Copied!" : "Copy"}
+        {copied ? "已复制！" : "复制"}
       </Button>
     </div>
   );

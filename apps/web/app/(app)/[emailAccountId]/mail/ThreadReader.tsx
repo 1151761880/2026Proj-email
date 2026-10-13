@@ -154,15 +154,15 @@ export function ThreadReader({
           errorComponent={<ThreadReaderError error={error} onRetry={refetch} />}
           loadingComponent={
             <Loader2Icon
-              aria-label="Loading email"
+              aria-label="正在加载邮件"
               className="size-6 animate-spin text-muted-foreground"
             />
           }
         >
           <MailIcon className="size-6 text-muted-foreground" />
-          <div className="text-foreground text-sm">Nothing selected</div>
+          <div className="text-foreground text-sm">未选择邮件</div>
           <div className="text-muted-foreground text-xs">
-            Pick another view, or head back to the inbox.
+            请选择其他视图或返回收件箱。
           </div>
         </LoadingContent>
       </div>
@@ -212,7 +212,7 @@ export function ThreadReader({
           onClick={onClick}
           variant="outline"
         >
-          {loading ? "Loading messages…" : "Load older messages"}
+          {loading ? "正在加载邮件…" : "加载更早的邮件"}
         </Button>
       )}
       sidePanel={
@@ -292,13 +292,13 @@ function ThreadReaderError({
     <>
       <AlertCircleIcon className="size-6 text-muted-foreground" />
       <div className="text-foreground text-sm">
-        Couldn't open this conversation
+        无法打开此会话
       </div>
       <div className="text-muted-foreground text-xs">
         {getSWRFetchErrorMessage(error?.info)}
       </div>
       <Button className="mt-2" onClick={onRetry} size="sm" variant="outline">
-        Try again
+        重试
       </Button>
     </>
   );

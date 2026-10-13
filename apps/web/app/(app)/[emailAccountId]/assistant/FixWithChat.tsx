@@ -58,8 +58,8 @@ export function FixWithChat({
 
   const selectedRuleName = useMemo(() => {
     if (!data) return null;
-    if (selectedRuleId === NEW_RULE_ID) return "New rule";
-    if (selectedRuleId === NONE_RULE_ID) return "None";
+    if (selectedRuleId === NEW_RULE_ID) return "新建规则";
+    if (selectedRuleId === NONE_RULE_ID) return "无";
     return data.find((r) => r.id === selectedRuleId)?.name ?? null;
   }, [data, selectedRuleId]);
 
@@ -151,13 +151,13 @@ export function FixWithChat({
       <DialogTrigger asChild>
         <Button variant="outline" size="sm">
           <MessageCircleIcon className="mr-2 size-4" />
-          Fix
+          修正
         </Button>
       </DialogTrigger>
 
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Improve Rules</DialogTitle>
+          <DialogTitle>优化规则</DialogTitle>
         </DialogHeader>
 
         <LoadingContent loading={isLoading} error={error}>
@@ -170,12 +170,12 @@ export function FixWithChat({
           ) : data && showExplanation ? (
             <div className="space-y-4">
               <div className="flex items-center gap-2">
-                <span className="text-sm font-medium">Selected rule:</span>
+                <span className="text-sm font-medium">已选规则：</span>
                 <Badge variant="secondary">
                   {selectedRuleId === NEW_RULE_ID
-                    ? "✨ New rule"
+                    ? "✨ 新建规则"
                     : selectedRuleId === NONE_RULE_ID
-                      ? "❌ None"
+                      ? "❌ 无"
                       : data.find((r) => r.id === selectedRuleId)?.name ||
                         "Unknown"}
                 </Badge>
@@ -184,7 +184,7 @@ export function FixWithChat({
               <div>
                 <Label
                   name="explanation"
-                  label="Why should this rule have been applied? (optional)"
+                  label="为什么应当应用此规则？（可选）"
                 />
                 <Textarea
                   id="explanation"
@@ -199,8 +199,7 @@ export function FixWithChat({
                   autoFocus
                 />
                 <p id="explanation-help" className="mt-1 text-xs text-gray-500">
-                  Providing an explanation helps the AI understand your intent
-                  better
+                  说明原因可帮助 AI 更准确地理解你的意图
                 </p>
               </div>
 
@@ -213,9 +212,9 @@ export function FixWithChat({
                     setExplanation("");
                   }}
                 >
-                  Back
+                  返回
                 </Button>
-                <Button onClick={handleSubmit}>Next</Button>
+                <Button onClick={handleSubmit}>下一步</Button>
               </div>
             </div>
           ) : null}
@@ -236,21 +235,21 @@ function RuleMismatch({
 }) {
   return (
     <div>
-      <Label name="matchedRule" label="Matched:" />
+      <Label name="matchedRule" label="匹配结果：" />
       <div className="mt-1">
         {results.length > 0 ? (
           <ResultsDisplay results={results} />
         ) : (
-          <p>No rule matched</p>
+          <p>未匹配任何规则</p>
         )}
       </div>
       <div className="mt-4">
         <ButtonList
-          title="Which rule did you expect it to match?"
-          emptyMessage="You haven't created any rules yet!"
+          title="你希望匹配哪条规则？"
+          emptyMessage="尚未创建任何规则！"
           items={[
-            { id: NONE_RULE_ID, name: "❌ None" },
-            { id: NEW_RULE_ID, name: "✨ New rule" },
+            { id: NONE_RULE_ID, name: "❌ 无" },
+            { id: NEW_RULE_ID, name: "✨ 新建规则" },
             ...rules,
           ]}
           onSelect={onSelectExpectedRuleId}

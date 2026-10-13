@@ -75,8 +75,8 @@ export function MailReaderToolbar({
       <div className="flex items-center gap-1">
         {renderButton({
           action: "back",
-          ariaLabel: "Back to inbox",
-          title: "Back to inbox",
+          ariaLabel: "返回收件箱",
+          title: "返回收件箱",
           variant: "ghost",
           icon: icons?.back,
           onClick: onBackToInbox,
@@ -88,10 +88,10 @@ export function MailReaderToolbar({
           <div className="flex min-w-0 items-center gap-2">
             {isStarred && (
               <span
-                aria-label="Starred conversation"
+                aria-label="已加星标的会话"
                 className="size-1.5 shrink-0 rounded-full bg-yellow-400"
                 role="img"
-                title="Starred conversation"
+                title="已加星标的会话"
               />
             )}
             <h1 className="font-title font-medium text-2xl text-foreground leading-tight tracking-tight">
@@ -103,7 +103,7 @@ export function MailReaderToolbar({
       </div>
 
       <div
-        aria-label="Thread actions"
+        aria-label="会话操作"
         className="ml-auto flex flex-wrap items-center gap-1.5"
         role="group"
       >
@@ -121,14 +121,14 @@ export function MailReaderToolbar({
           onMoveToInbox
             ? {
                 action: "move_to_inbox",
-                ariaLabel: "Move to inbox",
+                ariaLabel: "移至收件箱",
                 variant: "outline",
                 icon: icons?.move_to_inbox,
                 onClick: onMoveToInbox,
               }
             : {
                 action: "archive",
-                ariaLabel: "Archive",
+                ariaLabel: "归档",
                 variant: "outline",
                 icon: icons?.archive,
                 onClick: onArchive,
@@ -174,7 +174,7 @@ export function MailReaderSurface({
   localAvailability,
   renderLoadMoreButton = ({ disabled, loading, onClick }) => (
     <button disabled={disabled} onClick={onClick} type="button">
-      {loading ? "Loading messages…" : "Load older messages"}
+      {loading ? "正在加载邮件…" : "加载更早的邮件"}
     </button>
   ),
 }: MailReaderSurfaceProps) {
@@ -231,7 +231,7 @@ export function MailMessageStack({
           </h2>
           <p className="text-muted-foreground text-sm">{message.from}</p>
           <p className="text-muted-foreground text-xs">
-            {new Date(message.receivedAtMs).toLocaleString([], {
+            {new Date(message.receivedAtMs).toLocaleString("zh-CN", {
               dateStyle: "medium",
               timeStyle: "short",
             })}

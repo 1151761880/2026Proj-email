@@ -221,7 +221,7 @@ export default function ChatPage() {
               </ToolContent>
             </Tool>
 
-            <MutedText>Error:</MutedText>
+            <MutedText>错误：</MutedText>
             <Tool>
               <ToolHeader
                 title="send_email"
@@ -496,7 +496,7 @@ export default function ChatPage() {
               </PromptInputToolbar>
             </PromptInput>
 
-            <MutedText>Error:</MutedText>
+            <MutedText>错误：</MutedText>
             <PromptInput onSubmit={(e) => e.preventDefault()}>
               <PromptInputTextarea disabled />
               <PromptInputToolbar>

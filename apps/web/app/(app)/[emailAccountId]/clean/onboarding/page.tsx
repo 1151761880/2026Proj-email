@@ -41,7 +41,7 @@ export default async function CleanPage(props: {
   });
 
   if (!emailAccount) {
-    return <CardTitle>Email account not found</CardTitle>;
+    return <CardTitle>未找到邮箱账户</CardTitle>;
   }
 
   const emailProvider = await createEmailProvider({

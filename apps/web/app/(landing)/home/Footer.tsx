@@ -8,120 +8,120 @@ import { CookieSettingsButton } from "@/components/CookieConsent";
 export const footerNavigation = {
   main: [
     {
-      name: `${BRAND_NAME} Tabs (Chrome Extension)`,
+      name: `${BRAND_NAME} 标签页（Chrome 扩展）`,
       href: EXTENSION_URL,
       target: "_blank",
     },
-    { name: "AI Email Assistant", href: "/ai-automation" },
-    { name: "Email Client", href: "/email-client" },
-    { name: "Mobile App", href: "/mobile-app" },
-    { name: "Desktop App", href: "/desktop" },
-    { name: "AI Chat for Slack & Telegram", href: "/ai-assistant-chat" },
-    { name: "Slack AI Assistant", href: "/slack-integration" },
-    { name: "Telegram AI Assistant", href: "/telegram-integration" },
-    { name: "Teams AI Assistant", href: "/teams-integration" },
-    { name: "Brief My Meeting", href: "/brief-my-meeting" },
-    { name: "AI Meeting Notetaker", href: "/ai-meeting-notetaker" },
-    { name: "Reply Zero", href: "/reply-zero-ai" },
-    { name: "Bulk Email Unsubscriber", href: "/bulk-email-unsubscriber" },
-    { name: "Clean your inbox", href: "/clean-inbox" },
-    { name: "Cold Email Blocker", href: "/block-cold-emails" },
-    { name: "Email Analytics", href: "/email-analytics" },
-    { name: "Auto Forward Emails", href: "/auto-forward-emails" },
-    { name: "Auto-File Attachments", href: "/auto-file-email-attachments" },
-    { name: "Open Source", href: "/github", target: "_blank" },
+    { name: "智能邮件助手", href: "/ai-automation" },
+    { name: "邮件客户端", href: "/email-client" },
+    { name: "移动应用", href: "/mobile-app" },
+    { name: "桌面应用", href: "/desktop" },
+    { name: "Slack 和 Telegram 智能对话", href: "/ai-assistant-chat" },
+    { name: "Slack 智能助手", href: "/slack-integration" },
+    { name: "Telegram 智能助手", href: "/telegram-integration" },
+    { name: "Teams 智能助手", href: "/teams-integration" },
+    { name: "会前简报", href: "/brief-my-meeting" },
+    { name: "AI 会议记录", href: "/ai-meeting-notetaker" },
+    { name: "回复待办", href: "/reply-zero-ai" },
+    { name: "批量邮件退订", href: "/bulk-email-unsubscriber" },
+    { name: "整理收件箱", href: "/clean-inbox" },
+    { name: "陌生邮件拦截", href: "/block-cold-emails" },
+    { name: "邮件统计", href: "/email-analytics" },
+    { name: "自动转发邮件", href: "/auto-forward-emails" },
+    { name: "自动整理附件", href: "/auto-file-email-attachments" },
+    { name: "开源项目", href: "/github", target: "_blank" },
   ],
   useCases: [
-    { name: "Founder", href: "/founders" },
-    { name: "Small Business", href: "/small-business" },
-    { name: "Content Creator", href: "/creator" },
-    { name: "Realtor", href: "/real-estate" },
-    { name: "Customer Support", href: "/customer-support" },
-    { name: "E-commerce", href: "/ecommerce" },
+    { name: "创业者", href: "/founders" },
+    { name: "小型企业", href: "/small-business" },
+    { name: "内容创作者", href: "/creator" },
+    { name: "房产经纪人", href: "/real-estate" },
+    { name: "客户支持", href: "/customer-support" },
+    { name: "电子商务", href: "/ecommerce" },
   ],
   industries: [
-    { name: "MSPs", href: "/msp" },
-    { name: "Property Management", href: "/property-management" },
-    { name: "Law Firms", href: "/law-firms" },
-    { name: "Accounting Firms", href: "/accounting-firms" },
+    { name: "托管服务商", href: "/msp" },
+    { name: "物业管理", href: "/property-management" },
+    { name: "律师事务所", href: "/law-firms" },
+    { name: "会计师事务所", href: "/accounting-firms" },
   ],
   compare: [
     {
-      name: "Best AI Email Assistants",
+      name: "智能邮件助手对比",
       href: "/blog/post/best-ai-email-assistants",
     },
     {
-      name: "AI Email Assistant Directory",
+      name: "智能邮件助手目录",
       href: "https://aiemailassistants.com",
       target: "_blank",
     },
-    { name: "vs Fyxer.ai", href: "/best-fyxer-alternative" },
-    { name: "vs Superhuman", href: "/best-superhuman-alternative" },
-    { name: "vs Shortwave", href: "/best-shortwave-alternative" },
+    { name: "与 Fyxer.ai 对比", href: "/best-fyxer-alternative" },
+    { name: "与 Superhuman 对比", href: "/best-superhuman-alternative" },
+    { name: "与 Shortwave 对比", href: "/best-shortwave-alternative" },
     {
-      name: "vs Perplexity Email Assistant",
+      name: "与 Perplexity 邮件助手对比",
       href: "/best-perplexity-email-assistant-alternative",
     },
   ],
   tools: [
-    { name: "All Free Email Tools", href: "/tools" },
+    { name: "全部免费邮件工具", href: "/tools" },
     {
-      name: "Email Deliverability Checker",
+      name: "邮件送达检查",
       href: "/tools/email-deliverability-checker",
     },
-    { name: "Gmail Personality Quiz", href: "/tools/gmail-quiz" },
-    { name: "Subject Line Analyzer", href: "/tools/subject-line-analyzer" },
+    { name: "Gmail 使用习惯测试", href: "/tools/gmail-quiz" },
+    { name: "邮件主题分析", href: "/tools/subject-line-analyzer" },
     {
-      name: "Email Signature Generator",
+      name: "邮件签名生成",
       href: "/tools/email-signature-generator",
     },
-    { name: "Meeting Cost Calculator", href: "/tools/meeting-cost-calculator" },
+    { name: "会议成本计算", href: "/tools/meeting-cost-calculator" },
     {
-      name: "Team Email Cost Calculator",
+      name: "团队邮件成本计算",
       href: "/tools/email-cost-calculator",
     },
   ],
   support: [
-    { name: "Pricing", href: "/pricing" },
-    { name: "Support", href: "/support" },
-    { name: "Contact us", href: `mailto:${env.NEXT_PUBLIC_SUPPORT_EMAIL}` },
+    { name: "价格方案", href: "/pricing" },
+    { name: "支持", href: "/support" },
+    { name: "联系我们", href: `mailto:${env.NEXT_PUBLIC_SUPPORT_EMAIL}` },
     {
-      name: "Documentation",
+      name: "使用文档",
       href: "https://docs.getinboxzero.com",
       target: "_blank",
     },
-    { name: "Feature Requests", href: "/feature-requests", target: "_blank" },
-    { name: "Changelog", href: "/changelog", target: "_blank" },
+    { name: "功能建议", href: "/feature-requests", target: "_blank" },
+    { name: "更新记录", href: "/changelog", target: "_blank" },
     {
-      name: "Status",
+      name: "状态",
       href: "https://inbox-zero.openstatus.dev/",
       target: "_blank",
     },
     { name: "CLI", href: "/cli" },
-    { name: "OpenClaw Skill", href: "/openclaw" },
+    { name: "OpenClaw 技能", href: "/openclaw" },
   ],
   company: [
-    { name: "About", href: "/about" },
-    { name: "Affiliates", href: "/affiliates", target: "_blank" },
-    { name: "Blog", href: "/blog" },
-    { name: "Case Studies", href: "/case-studies" },
+    { name: "关于", href: "/about" },
+    { name: "推广合作", href: "/affiliates", target: "_blank" },
+    { name: "博客", href: "/blog" },
+    { name: "使用案例", href: "/case-studies" },
     { name: "Twitter", href: "/twitter", target: "_blank" },
     { name: "GitHub", href: "/github", target: "_blank" },
     { name: "Discord", href: "/discord", target: "_blank" },
-    { name: "OSS Friends", href: "/oss-friends" },
-    { name: "Email Blaster", href: "/game" },
+    { name: "开源伙伴", href: "/oss-friends" },
+    { name: "邮件群发", href: "/game" },
     {
-      name: "Bot Directory",
+      name: "机器人目录",
       href: "https://botdirectory.ai",
       target: "_blank",
     },
     { name: "Rakazo", href: "https://rakazo.com", target: "_blank" },
   ],
   legal: [
-    { name: "Terms", href: "/terms" },
-    { name: "Privacy", href: "/privacy" },
+    { name: "服务条款", href: "/terms" },
+    { name: "隐私政策", href: "/privacy" },
     {
-      name: "SOC2 Compliant",
+      name: "SOC 2 合规",
       href: "https://security.getinboxzero.com",
       target: "_blank",
     },
@@ -171,23 +171,22 @@ export const footerNavigation = {
 const selfHostedFooter = {
   resources: [
     {
-      name: "Documentation",
+      name: "使用文档",
       href: "https://docs.getinboxzero.com",
       target: "_blank",
     },
-    { name: "Contact us", href: `mailto:${env.NEXT_PUBLIC_SUPPORT_EMAIL}` },
+    { name: "联系我们", href: `mailto:${env.NEXT_PUBLIC_SUPPORT_EMAIL}` },
     { name: "GitHub", href: "/github", target: "_blank" },
     { name: "Discord", href: "/discord", target: "_blank" },
   ],
   legal: [
-    { name: "Terms", href: "/terms" },
-    { name: "Privacy", href: "/privacy" },
+    { name: "服务条款", href: "/terms" },
+    { name: "隐私政策", href: "/privacy" },
   ],
 };
 
 export function Footer() {
-  const copyrightName =
-    BRAND_NAME === "Inbox Zero" ? "Inbox Zero Inc." : BRAND_NAME;
+  const copyrightName = BRAND_NAME;
 
   if (env.NEXT_PUBLIC_BYPASS_PREMIUM_CHECKS) {
     return (
@@ -220,14 +219,14 @@ export function Footer() {
             <CookieSettingsButton className="text-sm leading-6 text-gray-600 hover:text-gray-900" />
           </div>
           <p className="mt-6 text-center text-xs leading-5 text-gray-500">
-            Powered by{" "}
+            技术支持{" "}
             <Link
               href="https://getinboxzero.com"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-gray-900"
             >
-              Inbox Zero
+              十组邮件小助手
             </Link>
           </p>
         </div>
@@ -238,37 +237,37 @@ export function Footer() {
   return (
     <footer className="relative">
       <div className="mx-auto max-w-7xl overflow-hidden px-6 py-20 sm:py-24 lg:px-8">
-        <nav aria-label="Footer">
+        <nav aria-label="页脚">
           <div className="mt-16 grid grid-cols-2 gap-8 lg:grid-cols-5 xl:col-span-2 xl:mt-0">
             <div>
-              <FooterList title="Product" items={footerNavigation.main} />
+              <FooterList title="产品" items={footerNavigation.main} />
             </div>
             <div>
-              <FooterList title="Use Cases" items={footerNavigation.useCases} />
+              <FooterList title="使用场景" items={footerNavigation.useCases} />
 
               <div className="mt-6">
                 <FooterList
-                  title="Industries"
+                  title="行业"
                   items={footerNavigation.industries}
                 />
               </div>
 
               <div className="mt-6">
-                <FooterList title="Compare" items={footerNavigation.compare} />
+                <FooterList title="对比" items={footerNavigation.compare} />
               </div>
             </div>
             <div>
-              <FooterList title="Support" items={footerNavigation.support} />
+              <FooterList title="支持" items={footerNavigation.support} />
 
               <div className="mt-6">
-                <FooterList title="Free Tools" items={footerNavigation.tools} />
+                <FooterList title="免费工具" items={footerNavigation.tools} />
               </div>
             </div>
             <div>
-              <FooterList title="Company" items={footerNavigation.company} />
+              <FooterList title="公司" items={footerNavigation.company} />
             </div>
             <div>
-              <FooterList title="Legal" items={footerNavigation.legal} />
+              <FooterList title="法律信息" items={footerNavigation.legal} />
               <CookieSettingsButton className="mt-4 text-sm leading-6 text-gray-600 hover:text-gray-900" />
             </div>
           </div>
@@ -287,8 +286,7 @@ export function Footer() {
           ))}
         </div>
         <p className="mt-10 text-center text-xs leading-5 text-gray-500">
-          &copy; {new Date().getFullYear()} {copyrightName}. All rights
-          reserved.
+          &copy; {new Date().getFullYear()} {copyrightName}。保留所有权利。
         </p>
       </div>
     </footer>

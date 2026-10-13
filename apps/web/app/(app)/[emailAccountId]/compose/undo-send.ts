@@ -77,7 +77,7 @@ export function beginUndoSend({
   unsubscribe = handle.subscribe(inspect);
   toastUndo({
     id: toastId,
-    message: "Email sent!",
+    message: "邮件已发送！",
     shortcut: getShortcutHint("undo"),
     duration,
     // A dismissed toast can still fire during its exit animation, after a
@@ -101,7 +101,7 @@ export async function undoPendingSend() {
     // The send is still held, so the user can try again within the window.
     current.undone = false;
     toastError({
-      description: "Couldn't reach the server to undo. Try again.",
+      description: "无法连接服务器执行撤销，请重试。",
     });
     return false;
   }

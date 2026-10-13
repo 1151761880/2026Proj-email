@@ -44,7 +44,7 @@ test("persists rule delivery, feature routing, and channel disconnection", async
     .toBe(true);
 
   await page.goto(`/${emailAccountId}/channels`);
-  await expect(page.getByRole("heading", { name: "Channels" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "消息渠道" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Telegram" })).toBeVisible({
     timeout: 60_000,
   });
@@ -53,7 +53,7 @@ test("persists rule delivery, feature routing, and channel disconnection", async
     .getByRole("heading", { name: "Telegram" })
     .locator("..");
   await expect(
-    telegramSection.getByText("Connected", { exact: true }),
+    telegramSection.getByText("已连接", { exact: true }),
   ).toBeVisible({ timeout: 60_000 });
 
   const ruleItem = page.locator('[data-slot="item"]', {
@@ -62,7 +62,7 @@ test("persists rule delivery, feature routing, and channel disconnection", async
   const ruleSwitch = ruleItem.getByRole("switch");
   await expect(ruleSwitch).toBeEnabled({ timeout: 60_000 });
   await ruleSwitch.click();
-  await expect(page.getByText("Settings saved", { exact: true })).toBeVisible({
+  await expect(page.getByText("设置已保存", { exact: true })).toBeVisible({
     timeout: 60_000,
   });
   await expect
@@ -97,6 +97,6 @@ test("persists rule delivery, feature routing, and channel disconnection", async
     });
   await page.reload();
   await expect(
-    page.getByText("No channels available.", { exact: true }),
+    page.getByText("暂无可用渠道。", { exact: true }),
   ).toBeVisible({ timeout: 60_000 });
 });

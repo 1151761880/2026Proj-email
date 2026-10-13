@@ -8,7 +8,7 @@ describe("getMeetingBotDisplayName", () => {
         ownerName: "Barbara Dalavecchia",
         ownerEmail: "barbara@example.com",
       }),
-    ).toBe("Barbara's Inbox Zero Notetaker");
+    ).toBe("Barbara's 十组邮件小助手 Notetaker");
   });
 
   it("uses the owner's email when their profile has no name", () => {
@@ -17,7 +17,7 @@ describe("getMeetingBotDisplayName", () => {
         ownerName: null,
         ownerEmail: "barbara@example.com",
       }),
-    ).toBe("barbara@example.com's Inbox Zero Notetaker");
+    ).toBe("barbara@example.com's 十组邮件小助手 Notetaker");
   });
 
   it("stays within Recall's display-name limit", () => {
@@ -27,7 +27,7 @@ describe("getMeetingBotDisplayName", () => {
     });
 
     expect(displayName).toHaveLength(100);
-    expect(displayName.endsWith("'s Inbox Zero Notetaker")).toBe(true);
+    expect(displayName.endsWith("'s 十组邮件小助手 Notetaker")).toBe(true);
   });
 
   it("does not split an astral Unicode character at the display-name limit", () => {
@@ -36,7 +36,7 @@ describe("getMeetingBotDisplayName", () => {
       ownerEmail: "barbara@example.com",
     });
 
-    expect(displayName).toBe(`${"B".repeat(76)}'s Inbox Zero Notetaker`);
+    expect(displayName).toBe(`${"B".repeat(76)}'s 十组邮件小助手 Notetaker`);
     expect(displayName).toHaveLength(99);
   });
 });

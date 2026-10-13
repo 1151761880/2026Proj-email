@@ -3,22 +3,22 @@ title: 'Enterprise SSO and SCIM'
 description: 'Configure SAML SSO and SCIM user provisioning for organization deployments.'
 ---
 
-Inbox Zero supports SAML SSO and SCIM user provisioning for organization deployments.
+十组邮件小助手 supports SAML SSO and SCIM user provisioning for organization deployments.
 
 <Info>
-  If you use the hosted Inbox Zero cloud platform, contact sales to enable SSO or SCIM for your organization. If you self-host Inbox Zero, an app admin configures SSO from the admin page; SCIM credentials are managed in the same admin page.
+  If you use the hosted 十组邮件小助手 cloud platform, contact sales to enable SSO or SCIM for your organization. If you self-host 十组邮件小助手, an app admin configures SSO from the admin page; SCIM credentials are managed in the same admin page.
 </Info>
 
 ## When to Use This
 
-Use SSO and SCIM when your organization wants to manage Inbox Zero access through an identity provider such as Okta, Microsoft Entra ID, or Google Workspace.
+Use SSO and SCIM when your organization wants to manage 十组邮件小助手 access through an identity provider such as Okta, Microsoft Entra ID, or Google Workspace.
 
 - **SSO** lets users sign in with your identity provider instead of a personal login flow.
 - **SCIM** lets your identity provider provision, update, and deprovision users.
 
 ## Prerequisites
 
-- A deployed Inbox Zero instance with a stable `NEXT_PUBLIC_BASE_URL`.
+- A deployed 十组邮件小助手 instance with a stable `NEXT_PUBLIC_BASE_URL`.
 - An admin user listed in `ADMINS`.
 - SAML IdP metadata XML from your identity provider.
 - The organization domain users will sign in with.

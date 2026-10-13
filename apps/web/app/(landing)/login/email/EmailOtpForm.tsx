@@ -57,17 +57,17 @@ export function EmailOtpForm({ callbackURL }: { callbackURL: string }) {
     <form className="space-y-6" onSubmit={submit}>
       <div className="space-y-2 text-center">
         <h1 className="font-title text-2xl">
-          {sentTo ? "Check your email" : "Sign in with email"}
+          {sentTo ? "请查看邮件" : "通过邮件登录"}
         </h1>
         <p className="text-sm text-muted-foreground">
           {sentTo
-            ? "Enter your 6-digit code."
-            : "Email sign-in must be enabled in Settings."}
+            ? "请输入 6 位验证码。"
+            : "请先在设置中启用邮件登录。"}
         </p>
       </div>
       {sentTo ? (
         <div className="space-y-2">
-          <Label htmlFor="login-code">Sign-in code</Label>
+          <Label htmlFor="login-code">登录验证码</Label>
           <Input
             id="login-code"
             autoComplete="one-time-code"
@@ -80,7 +80,7 @@ export function EmailOtpForm({ callbackURL }: { callbackURL: string }) {
         </div>
       ) : (
         <div className="space-y-2">
-          <Label htmlFor="login-email">Email</Label>
+          <Label htmlFor="login-email">邮件</Label>
           <Input
             id="login-email"
             type="email"
@@ -96,7 +96,7 @@ export function EmailOtpForm({ callbackURL }: { callbackURL: string }) {
         </p>
       )}
       <Button className="w-full" type="submit" loading={isSubmitting}>
-        {sentTo ? "Sign in" : "Send code"}
+        {sentTo ? "登录" : "发送验证码"}
       </Button>
       {sentTo ? (
         <Button
@@ -110,14 +110,14 @@ export function EmailOtpForm({ callbackURL }: { callbackURL: string }) {
             resetField("code");
           }}
         >
-          Back
+          返回
         </Button>
       ) : (
         <Button className="w-full" variant="ghost" asChild>
           <Link
             href={buildRedirectUrl("/login/options", { next: callbackURL })}
           >
-            Back
+            返回
           </Link>
         </Button>
       )}

@@ -40,9 +40,9 @@ const geist = Geist({
   display: "swap",
 });
 
-const title = `${BRAND_NAME} | Automate and clean your inbox`;
+const title = `${BRAND_NAME} | 智能整理邮件，轻松管理收件箱`;
 const description =
-  "Your AI executive assistant to reach inbox zero fast. Automate emails, bulk unsubscribe, block cold emails, and analytics. Open-source";
+  "十组邮件小助手，提供智能邮件分类、回复草稿、批量退订、归档、日历和邮件统计。";
 
 const indexingAllowed = isIndexingAllowed(env.NEXT_PUBLIC_BASE_URL);
 
@@ -68,12 +68,12 @@ const jsonLd: WithContext<WebApplication> = {
     availability: "https://schema.org/InStock",
   },
   featureList: [
-    "AI Email Assistant",
-    "Email Automation",
-    "Bulk Unsubscribe",
-    "Cold Email Blocking",
-    "Email Analytics",
-    "Newsletter Management",
+    "智能邮件助手",
+    "邮件自动化",
+    "批量退订",
+    "陌生邮件拦截",
+    "邮件统计",
+    "订阅邮件管理",
   ],
   publisher: {
     "@type": "Organization",
@@ -84,10 +84,6 @@ const jsonLd: WithContext<WebApplication> = {
       "@type": "ImageObject",
       url: toAbsoluteUrl(BRAND_ICON_URL),
     },
-    sameAs: [
-      "https://x.com/inboxzero_ai",
-      "https://github.com/elie222/inbox-zero",
-    ],
     ...(SUPPORT_EMAIL
       ? {
           contactPoint: {
@@ -97,14 +93,6 @@ const jsonLd: WithContext<WebApplication> = {
           },
         }
       : {}),
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "131 Continental Dr, Suite 305",
-      addressLocality: "Newark",
-      addressRegion: "DE",
-      postalCode: "19713",
-      addressCountry: "US",
-    },
   },
 };
 
@@ -122,7 +110,6 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title,
     description,
-    creator: "@inboxzero_ai",
   },
   metadataBase: new URL(env.NEXT_PUBLIC_BASE_URL),
   // issues with robots.txt: https://github.com/vercel/next.js/issues/58615#issuecomment-1852457285
@@ -159,7 +146,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="h-full" suppressHydrationWarning>
+    <html lang="zh-CN" className="h-full" suppressHydrationWarning>
       <body
         className={`h-full ${env.NEXT_PUBLIC_USE_AEONIK_FONT ? aeonikFont.variable : ""} ${geist.variable} font-sans antialiased`}
       >

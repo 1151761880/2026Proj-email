@@ -11,7 +11,7 @@ const emails = [
     subject: "Weekly digest",
     snippet: "- Your weekly roundup of the latest...",
     time: "10:30 AM",
-    label: "Newsletters",
+    label: "订阅邮件",
     labelColor: "bg-purple-600",
   },
   {
@@ -20,7 +20,7 @@ const emails = [
     subject: "Project update",
     snippet: "- Hi! Just wanted to check in on...",
     time: "9:15 AM",
-    label: "To Reply",
+    label: "待回复",
     labelColor: "bg-blue-600",
   },
   {
@@ -29,7 +29,7 @@ const emails = [
     subject: "Quick introduction",
     snippet: "- I came across your profile and...",
     time: "Yesterday",
-    label: "Cold Emails",
+    label: "陌生推广邮件",
     labelColor: "bg-orange-500",
   },
 ];

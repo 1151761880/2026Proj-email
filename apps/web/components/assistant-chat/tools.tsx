@@ -210,16 +210,16 @@ export function SearchInboxResult({ output }: { output: unknown }) {
   >(output, "messages");
 
   return (
-    <SubtleToolCollapsible title="Search Inbox">
+    <SubtleToolCollapsible title="搜索收件箱">
       {queryUsed && (
         <ToolDetailRow
-          label="Query"
+          label="查询"
           value={<span className="font-mono text-xs">{queryUsed}</span>}
         />
       )}
       {error && (
         <div className="space-y-1 text-sm text-muted-foreground">
-          <p>Search results were unavailable for that request.</p>
+          <p>此请求没有可用的搜索结果。</p>
           <p className="text-xs">{error}</p>
         </div>
       )}
@@ -298,14 +298,14 @@ export function ManageInboxResult({
     >
       {isInProgress && (
         <ToolPanel className="border-blue-200 bg-blue-50/60 text-blue-700 dark:border-blue-900 dark:bg-blue-950/20 dark:text-blue-200">
-          <div className="text-sm">Processing senders now.</div>
+          <div className="text-sm">正在处理发件人。</div>
         </ToolPanel>
       )}
 
       {typeof failedCount === "number" && failedCount > 0 && (
         <ToolPanel className="border-red-200 bg-red-50/60 text-red-700 dark:border-red-900 dark:bg-red-950/20 dark:text-red-200">
           <div className="text-sm">
-            Failed on {failedCount} {countLabel}
+            失败项目 {failedCount} {countLabel}
             {failedCount === 1 ? "" : "s"}.
           </div>
         </ToolPanel>
@@ -318,7 +318,7 @@ export function ManageInboxResult({
       )}
 
       {senders && senders.length > 0 && (
-        <ToolSection label="Senders">
+        <ToolSection label="发件人">
           <div className="space-y-2">
             {senders.map((sender) => (
               <ToolPanel
@@ -333,9 +333,7 @@ export function ManageInboxResult({
                   target="_blank"
                   rel="noopener noreferrer"
                   className="shrink-0 text-muted-foreground hover:text-foreground"
-                  aria-label={`View ${sender} in ${
-                    provider === "microsoft" ? "Outlook" : "Gmail"
-                  }`}
+                  aria-label={`在 ${provider === "microsoft" ? "Outlook" : "Gmail"} 查看 ${sender}`}
                 >
                   <ExternalLinkIcon className="size-3.5" />
                 </a>
@@ -360,7 +358,7 @@ export function ManageSenderCategoryResult({ output }: { output: unknown }) {
 
   if (senders.length === 0) {
     return (
-      <BasicToolInfo text={`No senders to archive in "${categoryName}"`} />
+      <BasicToolInfo text={`“${categoryName}”中没有可归档发件人`} />
     );
   }
 
@@ -368,14 +366,14 @@ export function ManageSenderCategoryResult({ output }: { output: unknown }) {
 
   return (
     <CollapsibleToolCard
-      title={`Archived "${categoryName}" category`}
+      title={`已归档“${categoryName}”分类`}
       badge={
         <Badge color="green" className="text-[10px]">
           {sendersCount} sender{sendersCount === 1 ? "" : "s"}
         </Badge>
       }
     >
-      <ToolSection label="Senders">
+      <ToolSection label="发件人">
         <div className="max-h-96 space-y-2 overflow-y-auto pr-1">
           {senders.map((sender) => (
             <ToolPanel
@@ -390,9 +388,7 @@ export function ManageSenderCategoryResult({ output }: { output: unknown }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="shrink-0 text-muted-foreground hover:text-foreground"
-                aria-label={`View ${sender} in ${
-                  provider === "microsoft" ? "Outlook" : "Gmail"
-                }`}
+                aria-label={`在 ${provider === "microsoft" ? "Outlook" : "Gmail"} 查看 ${sender}`}
               >
                 <ExternalLinkIcon className="size-3.5" />
               </a>
@@ -401,7 +397,7 @@ export function ManageSenderCategoryResult({ output }: { output: unknown }) {
         </div>
         {hiddenCount > 0 && (
           <div className="text-xs text-muted-foreground">
-            + {hiddenCount} more sender{hiddenCount === 1 ? "" : "s"} not shown
+            + {hiddenCount} 位其他发件人{hiddenCount === 1 ? "" : "s"} 未显示
           </div>
         )}
       </ToolSection>
@@ -442,7 +438,7 @@ export function ReadEmailResult({ output }: { output: unknown }) {
     : null;
 
   return (
-    <SubtleToolCollapsible title="Read Email">
+    <SubtleToolCollapsible title="读取邮件">
       <div className="space-y-3 text-sm">
         {(subject || from || to || formattedDate) && (
           <div className="space-y-1">
@@ -452,10 +448,10 @@ export function ReadEmailResult({ output }: { output: unknown }) {
               </div>
             )}
             <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground">
-              {from && <InlineMetadataItem label="From" value={from} />}
-              {to && <InlineMetadataItem label="To" value={to} />}
+              {from && <InlineMetadataItem label="发件人" value={from} />}
+              {to && <InlineMetadataItem label="收件人" value={to} />}
               {formattedDate && (
-                <InlineMetadataItem label="Date" value={formattedDate} />
+                <InlineMetadataItem label="日期" value={formattedDate} />
               )}
             </div>
           </div>
@@ -467,7 +463,7 @@ export function ReadEmailResult({ output }: { output: unknown }) {
         )}
         {externalUrl && (
           <ToolExternalLink href={externalUrl}>
-            Open in {provider === "microsoft" ? "Outlook" : "Gmail"}
+            打开位置 {provider === "microsoft" ? "Outlook" : "Gmail"}
           </ToolExternalLink>
         )}
       </div>
@@ -637,7 +633,7 @@ function EmailActionResult({
     setIsConfirming(true);
     try {
       if (!chatId) {
-        toastError({ description: "Could not confirm this email action." });
+        toastError({ description: "无法确认此邮件操作。" });
         return;
       }
 
@@ -658,7 +654,7 @@ function EmailActionResult({
 
       const parsed = parseConfirmationResult(result?.data?.confirmationResult);
       if (!parsed) {
-        toastError({ description: "Could not confirm this email action." });
+        toastError({ description: "无法确认此邮件操作。" });
         return;
       }
 
@@ -667,7 +663,7 @@ function EmailActionResult({
         description: getAssistantEmailSuccessMessage(actionType),
       });
     } catch {
-      toastError({ description: "Could not confirm this email action." });
+      toastError({ description: "无法确认此邮件操作。" });
     } finally {
       setIsConfirming(false);
     }
@@ -689,18 +685,18 @@ function EmailActionResult({
             {recipient}
           </div>
           {cc && (
-            <div className="mt-0.5 text-xs text-muted-foreground">CC: {cc}</div>
+            <div className="mt-0.5 text-xs text-muted-foreground">抄送： {cc}</div>
           )}
           {bcc && (
             <div className="mt-0.5 text-xs text-muted-foreground">
-              BCC: {bcc}
+              密送： {bcc}
             </div>
           )}
         </div>
         {isConfirmed && (
           <div className="flex items-center gap-1 text-xs font-medium text-green-600">
             <CheckIcon className="size-3.5" />
-            Sent
+            已发送
           </div>
         )}
       </CardHeader>
@@ -708,7 +704,7 @@ function EmailActionResult({
       <CardContent className="p-0">
         {displaySubject && (
           <div className="flex items-center gap-2 border-b px-4 py-2.5">
-            <FieldLabel>Subject</FieldLabel>
+            <FieldLabel>主题</FieldLabel>
             <span className="truncate text-sm font-medium text-foreground">
               {getPendingEmailSubjectPrefix(actionType)}
               {displaySubject}
@@ -735,10 +731,10 @@ function EmailActionResult({
                     setIsEditing(false);
                   }}
                 >
-                  Cancel
+                  取消
                 </Button>
                 <Button size="sm" onClick={() => setIsEditing(false)}>
-                  Save changes
+                  保存更改
                 </Button>
               </div>
             </div>
@@ -761,7 +757,7 @@ function EmailActionResult({
                 onClick={() => setIsEditing(true)}
               >
                 <PencilIcon className="size-3.5" />
-                <span className="hidden sm:inline">Edit</span>
+                <span className="hidden sm:inline">编辑</span>
               </Button>
             )}
             <Button
@@ -778,7 +774,7 @@ function EmailActionResult({
                 <CopyIcon className="size-3.5" />
               )}
               <span className="hidden sm:inline">
-                {copied ? "Copied" : "Copy"}
+                {copied ? "已复制" : "复制"}
               </span>
             </Button>
             {externalUrl && (
@@ -791,7 +787,7 @@ function EmailActionResult({
                 <a href={externalUrl} target="_blank" rel="noopener noreferrer">
                   <ExternalLinkIcon className="size-3.5" />
                   <span className="hidden sm:inline">
-                    Open in {providerName}
+                    打开位置 {providerName}
                   </span>
                 </a>
               </Button>
@@ -806,18 +802,18 @@ function EmailActionResult({
               className="gap-2"
             >
               {isProcessing ? (
-                "Sending..."
+                "正在发送…"
               ) : isConfirming ? (
                 <>
                   <Loader2 className="size-4 animate-spin" />
-                  Sending...
+                  正在发送…
                 </>
               ) : !isPersistedMessage ? (
-                "Saving..."
+                "正在保存…"
               ) : (
                 <>
                   <SendIcon className="hidden size-3.5 sm:inline" />
-                  Send
+                  发送
                 </>
               )}
             </Button>
@@ -847,7 +843,7 @@ export function CreatedRuleToolCard({
       title={args.name}
       status={
         <RuleStatusBadge
-          label={isCreated ? "Created" : "Pending"}
+          label={isCreated ? "创建时间" : "待处理"}
           color={isCreated ? "green" : "yellow"}
         />
       }
@@ -859,11 +855,11 @@ export function CreatedRuleToolCard({
         ) : null
       }
     >
-      <RuleSummaryRow label="When">
+      <RuleSummaryRow label="触发条件">
         <RuleSummaryText>{conditionText}</RuleSummaryText>
       </RuleSummaryRow>
 
-      <RuleSummaryRow label="Then">
+      <RuleSummaryRow label="然后">
         <ActionBadgeList actions={args.actions} />
       </RuleSummaryRow>
     </RuleSummaryCard>
@@ -900,7 +896,7 @@ export function PendingCreateRuleToolCard({
     setIsConfirming(true);
     try {
       if (!chatId) {
-        toastError({ description: "Could not create this rule." });
+        toastError({ description: "无法创建此规则。" });
         return;
       }
 
@@ -914,14 +910,14 @@ export function PendingCreateRuleToolCard({
 
       const createdId = result?.data?.ruleId;
       if (!createdId) {
-        toastError({ description: "Could not create this rule." });
+        toastError({ description: "无法创建此规则。" });
         return;
       }
 
       setRuleIdOverride(createdId);
-      toastSuccess({ description: "Rule created and enabled." });
+      toastSuccess({ description: "规则已创建并启用。" });
     } catch {
-      toastError({ description: "Could not create this rule." });
+      toastError({ description: "无法创建此规则。" });
     } finally {
       setIsConfirming(false);
     }
@@ -1007,7 +1003,7 @@ export function PendingSaveMemoryToolCard({
     setIsConfirming(true);
     try {
       if (!chatId) {
-        toastError({ description: "Could not save this memory." });
+        toastError({ description: "无法保存此记忆。" });
         return;
       }
 
@@ -1021,7 +1017,7 @@ export function PendingSaveMemoryToolCard({
 
       const confirmationResult = result?.data?.confirmationResult;
       if (!confirmationResult?.confirmedAt) {
-        toastError({ description: "Could not save this memory." });
+        toastError({ description: "无法保存此记忆。" });
         return;
       }
 
@@ -1033,7 +1029,7 @@ export function PendingSaveMemoryToolCard({
           : "Memory saved.",
       });
     } catch {
-      toastError({ description: "Could not save this memory." });
+      toastError({ description: "无法保存此记忆。" });
     } finally {
       setIsConfirming(false);
     }
@@ -1044,18 +1040,18 @@ export function PendingSaveMemoryToolCard({
       <CardHeader className="px-4 py-3.5">
         <div className="flex items-center justify-between gap-3">
           <div>
-            <h3 className="text-sm font-medium">Save memory</h3>
+            <h3 className="text-sm font-medium">保存记忆</h3>
             <p className="mt-1 text-xs text-muted-foreground">
               {isConfirmed
                 ? deduplicated
-                  ? "Already saved in memory"
-                  : "Saved for future conversations"
-                : "Pending confirmation"}
+                  ? "已保存到记忆"
+                  : "已保存，可供后续对话使用"
+                : "等待确认"}
             </p>
           </div>
           {confirmedAt && (
             <Badge color={deduplicated ? "gray" : "green"} className="text-xs">
-              {deduplicated ? "Already saved" : "Saved"}
+              {deduplicated ? "已保存" : "已保存"}
             </Badge>
           )}
         </div>
@@ -1079,14 +1075,14 @@ export function PendingSaveMemoryToolCard({
             className="gap-2"
           >
             {isProcessing ? (
-              "Saving..."
+              "正在保存…"
             ) : isConfirming ? (
               <>
                 <Loader2 className="size-4 animate-spin" />
-                Saving...
+                正在保存…
               </>
             ) : (
-              "Confirm save"
+              "确认保存"
             )}
           </Button>
         </CardFooter>
@@ -1120,10 +1116,10 @@ function PendingCreateRuleCardContent({
     <div className="space-y-3">
       <Alert variant="default" className="border-amber-500/40 bg-amber-500/5">
         <AlertTriangleIcon className="size-4 text-amber-600" />
-        <AlertTitle>Review before enabling</AlertTitle>
+        <AlertTitle>启用前检查</AlertTitle>
         <AlertDescription className="space-y-2 text-sm">
           <p>
-            This rule can send email automatically. Review it before enabling.
+            此规则可自动发送邮件，启用前请检查。
           </p>
           {riskMessages.length === 1 ? (
             <p className="text-muted-foreground">{riskMessages[0]}</p>
@@ -1147,14 +1143,14 @@ function PendingCreateRuleCardContent({
           className="gap-2"
         >
           {isProcessing ? (
-            "Creating..."
+            "正在创建…"
           ) : isConfirming ? (
             <>
               <Loader2 className="size-4 animate-spin" />
-              Creating...
+              正在创建…
             </>
           ) : (
-            "Create & enable rule"
+            "创建并启用规则"
           )}
         </Button>
       </div>
@@ -1188,7 +1184,7 @@ export function UpdatedRuleConditions({
     <Card>
       <RuleSummaryCardHeader
         title={args.ruleName}
-        status={<RuleStatusBadge label="Updated" color="blue" />}
+        status={<RuleStatusBadge label="已更新" color="blue" />}
         actions={
           preview ? <RuleActionsPreview /> : <RuleActions ruleId={ruleId} />
         }
@@ -1196,13 +1192,13 @@ export function UpdatedRuleConditions({
 
       <CardContent className="space-y-3 px-4 py-3.5">
         <div className="flex gap-4 text-sm">
-          <FieldLabel className="pt-0.5">When</FieldLabel>
+          <FieldLabel className="pt-0.5">触发条件</FieldLabel>
           <RuleSummaryText>{conditionText}</RuleSummaryText>
         </div>
 
         {actions && actions.length > 0 && (
           <div className="flex gap-4 text-sm">
-            <FieldLabel className="pt-0.5">Then</FieldLabel>
+            <FieldLabel className="pt-0.5">然后</FieldLabel>
             <ActionBadgeList actions={actions} />
           </div>
         )}
@@ -1210,7 +1206,7 @@ export function UpdatedRuleConditions({
         {hasChanges && (
           <ViewChangesCollapsible>
             <CollapsibleDiffContent
-              title="Instructions:"
+              title="指令："
               originalText={originalConditions?.aiInstructions || undefined}
               updatedText={updatedConditions?.aiInstructions || undefined}
             />
@@ -1258,7 +1254,7 @@ export function UpdatedRuleActions({
     <Card>
       <RuleSummaryCardHeader
         title={args.ruleName}
-        status={<RuleStatusBadge label="Updated" color="blue" />}
+        status={<RuleStatusBadge label="已更新" color="blue" />}
         actions={
           preview ? <RuleActionsPreview /> : <RuleActions ruleId={ruleId} />
         }
@@ -1267,20 +1263,20 @@ export function UpdatedRuleActions({
       <CardContent className="space-y-3 px-4 py-3.5">
         {conditionText && (
           <div className="flex gap-4 text-sm">
-            <FieldLabel className="pt-0.5">When</FieldLabel>
+            <FieldLabel className="pt-0.5">触发条件</FieldLabel>
             <RuleSummaryText>{conditionText}</RuleSummaryText>
           </div>
         )}
 
         <div className="flex gap-4 text-sm">
-          <FieldLabel className="pt-0.5">Then</FieldLabel>
+          <FieldLabel className="pt-0.5">然后</FieldLabel>
           <ActionBadgeList actions={args.actions} />
         </div>
 
         {hasChanges && (
           <ViewChangesCollapsible>
             <CollapsibleDiffContent
-              title="Actions:"
+              title="操作："
               originalText={formatActionsForDiff(originalActions || [])}
               updatedText={formatActionsForDiff(updatedActions || [])}
             />
@@ -1348,28 +1344,28 @@ export function UpdatedRule({
       <CardContent className="space-y-3 px-4 py-3.5">
         {nameChanged && output.updatedName && (
           <div className="flex gap-4 text-sm">
-            <FieldLabel className="pt-0.5">Name</FieldLabel>
+            <FieldLabel className="pt-0.5">名称</FieldLabel>
             <p>{output.updatedName}</p>
           </div>
         )}
 
         {conditionText && (
           <div className="flex gap-4 text-sm">
-            <FieldLabel className="pt-0.5">When</FieldLabel>
+            <FieldLabel className="pt-0.5">触发条件</FieldLabel>
             <RuleSummaryText>{conditionText}</RuleSummaryText>
           </div>
         )}
 
         {enabledChanged && output.updatedEnabled !== undefined && (
           <div className="flex gap-4 text-sm">
-            <FieldLabel className="pt-0.5">Status</FieldLabel>
-            <p>{output.updatedEnabled ? "Enabled" : "Disabled"}</p>
+            <FieldLabel className="pt-0.5">状态</FieldLabel>
+            <p>{output.updatedEnabled ? "已启用" : "已禁用"}</p>
           </div>
         )}
 
         {actions && (
           <div className="flex gap-4 text-sm">
-            <FieldLabel className="pt-0.5">Then</FieldLabel>
+            <FieldLabel className="pt-0.5">然后</FieldLabel>
             <ActionBadgeList actions={actions} />
           </div>
         )}
@@ -1377,7 +1373,7 @@ export function UpdatedRule({
         {nameChanged && output.originalName && output.updatedName && (
           <ViewChangesCollapsible>
             <CollapsibleDiffContent
-              title="Name:"
+              title="名称："
               originalText={output.originalName}
               updatedText={output.updatedName}
             />
@@ -1398,7 +1394,7 @@ export function UpdatedLearnedPatterns({
   preview?: boolean;
 }) {
   const actions = preview ? (
-    <Tooltip content="Edit rule">
+    <Tooltip content="编辑规则">
       <Button variant="ghostMuted" size="iconSm">
         <PencilIcon className="size-4" />
       </Button>
@@ -1411,7 +1407,7 @@ export function UpdatedLearnedPatterns({
     <Card>
       <RuleSummaryCardHeader
         title={args.ruleName}
-        status={<RuleStatusBadge label="Patterns updated" color="blue" />}
+        status={<RuleStatusBadge label="规律已更新" color="blue" />}
         actions={actions}
       />
 
@@ -1425,10 +1421,10 @@ export function UpdatedLearnedPatterns({
           return (
             <ToolPanel key={i} className="space-y-2">
               {includeParts && (
-                <ToolDetailRow label="Include" value={includeParts} />
+                <ToolDetailRow label="包含" value={includeParts} />
               )}
               {excludeParts && (
-                <ToolDetailRow label="Exclude" value={excludeParts} />
+                <ToolDetailRow label="排除" value={excludeParts} />
               )}
             </ToolPanel>
           );
@@ -1469,7 +1465,7 @@ export function UpdatedRuleState({
       />
       <CardContent className="space-y-3 px-4 py-3.5">
         <div className="flex items-center gap-2 text-sm">
-          <FieldLabel>Status</FieldLabel>
+          <FieldLabel>状态</FieldLabel>
           <Badge color={enabled ? "green" : "gray"}>{label}</Badge>
         </div>
       </CardContent>
@@ -1496,7 +1492,7 @@ export function PendingDeleteRuleToolCard({
 
   const handleDelete = async () => {
     if (!ruleId) {
-      toastError({ description: "Could not delete this rule." });
+      toastError({ description: "无法删除此规则。" });
       return;
     }
 
@@ -1509,9 +1505,9 @@ export function PendingDeleteRuleToolCard({
       }
 
       setDeleted(true);
-      toastSuccess({ description: "The rule has been deleted." });
+      toastSuccess({ description: "规则已删除。" });
     } catch {
-      toastError({ description: "Failed to delete rule." });
+      toastError({ description: "删除规则失败。" });
     } finally {
       setIsDeleting(false);
     }
@@ -1524,12 +1520,12 @@ export function PendingDeleteRuleToolCard({
         <div className="min-w-0 flex-1">
           <h3 className="truncate text-base font-semibold">{ruleName}</h3>
           <p className="mt-1 text-xs text-muted-foreground">
-            {deleted ? "Deleted rule" : "Pending deletion"}
+            {deleted ? "已删除规则" : "等待删除"}
           </p>
         </div>
         {deleted && (
           <Badge color="green" className="shrink-0">
-            Deleted
+            已删除
           </Badge>
         )}
       </CardHeader>
@@ -1541,9 +1537,9 @@ export function PendingDeleteRuleToolCard({
             className="border-amber-500/40 bg-amber-500/5"
           >
             <AlertTriangleIcon className="size-4 text-amber-600" />
-            <AlertTitle>Confirm rule deletion</AlertTitle>
+            <AlertTitle>确认删除规则</AlertTitle>
             <AlertDescription className="text-sm text-muted-foreground">
-              This will permanently delete the rule and its actions.
+              将永久删除此规则及其操作。
             </AlertDescription>
           </Alert>
 
@@ -1558,10 +1554,10 @@ export function PendingDeleteRuleToolCard({
               {isDeleting ? (
                 <>
                   <Loader2 className="size-4 animate-spin" />
-                  Deleting...
+                  正在删除…
                 </>
               ) : (
-                "Delete rule"
+                "删除规则"
               )}
             </Button>
           </div>
@@ -1588,12 +1584,12 @@ export function PendingDeleteRulePreviewCard({
         <div className="min-w-0 flex-1">
           <h3 className="truncate text-base font-semibold">{ruleName}</h3>
           <p className="mt-1 text-xs text-muted-foreground">
-            {deleted ? "Deleted rule" : "Pending deletion"}
+            {deleted ? "已删除规则" : "等待删除"}
           </p>
         </div>
         {deleted && (
           <Badge color="green" className="shrink-0">
-            Deleted
+            已删除
           </Badge>
         )}
       </CardHeader>
@@ -1605,15 +1601,15 @@ export function PendingDeleteRulePreviewCard({
             className="border-amber-500/40 bg-amber-500/5"
           >
             <AlertTriangleIcon className="size-4 text-amber-600" />
-            <AlertTitle>Confirm rule deletion</AlertTitle>
+            <AlertTitle>确认删除规则</AlertTitle>
             <AlertDescription className="text-sm text-muted-foreground">
-              This will permanently delete the rule and its actions.
+              将永久删除此规则及其操作。
             </AlertDescription>
           </Alert>
 
           <div className="flex justify-end">
             <Button variant="destructive" size="sm" disabled>
-              Delete rule
+              删除规则
             </Button>
           </div>
         </CardContent>
@@ -1628,7 +1624,7 @@ export function UpdatePersonalInstructions({
   args: UpdatePersonalInstructionsTool["input"];
 }) {
   return (
-    <ExpandedToolCard title="Updated Personal Instructions">
+    <ExpandedToolCard title="个人指令已更新">
       <ToolPanel className="text-sm leading-relaxed">
         {args.personalInstructions}
       </ToolPanel>
@@ -1645,7 +1641,7 @@ export function AddToKnowledgeBase({
 
   return (
     <ExpandedToolCard
-      title="Added to Knowledge Base"
+      title="已添加到知识库"
       actions={
         <div className="self-center">
           <Button
@@ -1654,13 +1650,13 @@ export function AddToKnowledgeBase({
             className="h-8 px-2"
             onClick={() => setTab("rules")}
           >
-            View Knowledge Base
+            查看知识库
           </Button>
         </div>
       }
     >
-      <ToolDetailRow label="Title" value={args.title} />
-      <ToolSection label="Content">
+      <ToolDetailRow label="标题" value={args.title} />
+      <ToolSection label="内容">
         <ToolPanel className="text-sm leading-relaxed">
           <ExpandableText text={args.content} />
         </ToolPanel>
@@ -1681,12 +1677,12 @@ function RuleActions({
   return (
     <div className="flex items-center gap-1.5">
       <RuleEditToggleActions ruleId={ruleId} initialEnabled={initialEnabled} />
-      <Tooltip content="Delete rule">
+      <Tooltip content="删除规则">
         <Button
           variant="ghostMuted"
           size="iconSm"
           onClick={async () => {
-            const yes = confirm("Are you sure you want to delete this rule?");
+            const yes = confirm("确定删除此规则吗？");
             if (yes) {
               try {
                 const result = await deleteRuleAction(emailAccountId, {
@@ -1696,11 +1692,11 @@ function RuleActions({
                   toastError({ description: result.serverError });
                 } else {
                   toastSuccess({
-                    description: "The rule has been deleted.",
+                    description: "规则已删除。",
                   });
                 }
               } catch {
-                toastError({ description: "Failed to delete rule." });
+                toastError({ description: "删除规则失败。" });
               }
             }
           }}
@@ -1728,7 +1724,7 @@ function RuleEditToggleActions({
 
   return (
     <>
-      <Tooltip content="Edit rule">
+      <Tooltip content="编辑规则">
         <Button
           variant="ghostMuted"
           size="iconSm"
@@ -1746,13 +1742,13 @@ function RuleEditToggleActions({
             if (result?.serverError) {
               setEnabled(!checked);
               toastError({
-                description: `Failed to ${checked ? "enable" : "disable"} rule.`,
+                description: `规则操作失败。`,
               });
             }
           } catch {
             setEnabled(!checked);
             toastError({
-              description: `Failed to ${checked ? "enable" : "disable"} rule.`,
+              description: `规则操作失败。`,
             });
           }
         }}
@@ -1772,7 +1768,7 @@ function RuleActionsPreview({ enabled = true }: { enabled?: boolean }) {
   return (
     <div className="flex items-center gap-1.5">
       <RuleEditToggleActionsPreview enabled={enabled} />
-      <Tooltip content="Delete rule">
+      <Tooltip content="删除规则">
         <Button variant="ghostMuted" size="iconSm">
           <TrashIcon className="size-4" />
         </Button>
@@ -1788,7 +1784,7 @@ function RuleEditToggleActionsPreview({
 }) {
   return (
     <>
-      <Tooltip content="Edit rule">
+      <Tooltip content="编辑规则">
         <Button variant="ghostMuted" size="iconSm">
           <PencilIcon className="size-4" />
         </Button>
@@ -1803,7 +1799,7 @@ function LearnedPatternsActions({ ruleId }: { ruleId: string }) {
 
   return (
     <>
-      <Tooltip content="Edit rule">
+      <Tooltip content="编辑规则">
         <Button
           variant="ghostMuted"
           size="iconSm"
@@ -1840,14 +1836,14 @@ function getRuleUpdateStatus({
   onlyEnabledChanged: boolean;
   updatedEnabled: boolean | undefined;
 }): { label: string; color: Color } {
-  if (alreadyApplied) return { label: "Already applied", color: "gray" };
+  if (alreadyApplied) return { label: "已应用", color: "gray" };
 
   if (onlyEnabledChanged) {
     return updatedEnabled
-      ? { label: "Enabled", color: "green" }
-      : { label: "Disabled", color: "gray" };
+      ? { label: "已启用", color: "green" }
+      : { label: "已禁用", color: "gray" };
   }
-  return { label: "Updated", color: "blue" };
+  return { label: "已更新", color: "blue" };
 }
 
 function ExpandedToolCard({
@@ -1891,7 +1887,7 @@ function ViewChangesCollapsible({ children }: { children: React.ReactNode }) {
     <Collapsible>
       <CollapsibleTrigger className="flex items-center gap-1.5 text-sm text-muted-foreground">
         <ChevronRightIcon className="size-4 transition-transform [[data-state=open]>&]:rotate-90" />
-        View changes
+        查看更改
       </CollapsibleTrigger>
       <CollapsibleContent className="mt-2">{children}</CollapsibleContent>
     </Collapsible>
@@ -1977,7 +1973,7 @@ export function getManageInboxActionLabel({
     }
     return read === false ? "Marked emails as unread" : "Marked emails as read";
   }
-  return "Updated emails";
+  return "邮件已更新";
 }
 
 function ToolSection({
@@ -2121,21 +2117,21 @@ function getActionBodyText({
 }
 
 function getEmailActionLabel(actionType: PendingEmailActionType) {
-  if (actionType === "reply_email") return "Reply to";
-  if (actionType === "forward_email") return "Forward to";
+  if (actionType === "reply_email") return "回复";
+  if (actionType === "forward_email") return "转发至";
   return "";
 }
 
 function getEmailActionSentLabel(actionType: PendingEmailActionType) {
-  if (actionType === "send_email") return "Sent email to";
-  if (actionType === "reply_email") return "Replied to";
-  return "Forwarded to";
+  if (actionType === "send_email") return "已发送至";
+  if (actionType === "reply_email") return "已回复";
+  return "已转发至";
 }
 
 function getAssistantEmailSuccessMessage(actionType: PendingEmailActionType) {
-  if (actionType === "send_email") return "Email sent.";
-  if (actionType === "reply_email") return "Reply sent.";
-  return "Email forwarded.";
+  if (actionType === "send_email") return "邮件已发送。";
+  if (actionType === "reply_email") return "回复已发送。";
+  return "邮件已转发。";
 }
 
 function getExternalMessageUrl({

@@ -8,8 +8,8 @@ import { getConnectMailboxNextPath } from "@/utils/connect-mailbox";
 import prisma from "@/utils/prisma";
 
 export const metadata: Metadata = {
-  title: getBrandTitle("Connect Mailbox"),
-  description: `Connect a Google or Microsoft mailbox to continue to ${BRAND_NAME}.`,
+  title: getBrandTitle("连接邮箱"),
+  description: `连接 Google 或 Microsoft 邮箱后继续使用 ${BRAND_NAME}。`,
   alternates: { canonical: "/connect-mailbox" },
 };
 
@@ -34,17 +34,17 @@ export default async function ConnectMailboxPage(props: {
       <div className="mx-auto flex w-full max-w-md flex-col gap-6 px-4">
         <div className="text-center">
           <h1 className="font-title text-2xl text-foreground">
-            Connect your mailbox
+            连接邮箱
           </h1>
           <p className="mt-4 text-muted-foreground">
-            Connect Gmail or Outlook to start using {BRAND_NAME}.
+            连接 Gmail 或 Outlook，开始使用 {BRAND_NAME}.
           </p>
         </div>
 
-        <AddAccount helperText="You can add more mailboxes later from Accounts." />
+        <AddAccount helperText="稍后可在账户页面添加更多邮箱。" />
 
         <MutedText className="text-center">
-          Google and Microsoft are used here only to connect your inbox data.
+          此处仅使用 Google 和 Microsoft 连接邮箱数据。
         </MutedText>
       </div>
     </div>

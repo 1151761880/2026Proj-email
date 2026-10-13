@@ -10,8 +10,8 @@ export const GET = withError("unsubscribe", async (request) => {
   if (!token) {
     return createUnsubscribeResponse(request, {
       status: 400,
-      title: "Invalid unsubscribe link",
-      message: "This unsubscribe link is missing the required token.",
+      title: "退订链接无效",
+      message: "退订链接缺少必要的验证信息。",
       json: { error: "Token is required" },
     });
   }
@@ -20,9 +20,9 @@ export const GET = withError("unsubscribe", async (request) => {
   if (!emailToken) {
     return createUnsubscribeResponse(request, {
       status: 400,
-      title: "Link unavailable",
+      title: "链接不可用",
       message:
-        "This unsubscribe link is invalid or has already been used. Request a new email to try again.",
+        "退订链接无效或已使用，请从新的通知邮件中重新尝试。",
       json: {
         error:
           "Invalid unsubscribe token. You might have already unsubscribed.",
@@ -41,8 +41,8 @@ export const POST = withError("unsubscribe", async (request) => {
   if (!token) {
     return createUnsubscribeResponse(request, {
       status: 400,
-      title: "Invalid unsubscribe request",
-      message: "This unsubscribe request is missing the required token.",
+      title: "退订请求无效",
+      message: "退订请求缺少必要的验证信息。",
       json: { error: "Token is required" },
     });
   }
@@ -51,9 +51,9 @@ export const POST = withError("unsubscribe", async (request) => {
   if (!emailToken) {
     return createUnsubscribeResponse(request, {
       status: 400,
-      title: "Link unavailable",
+      title: "链接不可用",
       message:
-        "This unsubscribe link is invalid or has already been used. Request a new email to try again.",
+        "退订链接无效或已使用，请从新的通知邮件中重新尝试。",
       json: {
         error:
           "Invalid unsubscribe token. You might have already unsubscribed.",
@@ -83,9 +83,9 @@ export const POST = withError("unsubscribe", async (request) => {
 
     return createUnsubscribeResponse(request, {
       status: 500,
-      title: "Unsubscribe failed",
+      title: "退订失败",
       message:
-        "We couldn't update your email preferences right now. Visit Settings to unsubscribe manually.",
+        "暂时无法更新邮件偏好，请前往设置手动退订。",
       json: {
         success: false,
         message:
@@ -108,8 +108,8 @@ export const POST = withError("unsubscribe", async (request) => {
 
   return createUnsubscribeResponse(request, {
     status: 200,
-    title: "You're unsubscribed",
-    message: "Email updates like this have been turned off for your account.",
+    title: "已退订",
+    message: "已为你的账户关闭此类邮件通知。",
     json: { success: true },
   });
 });
@@ -179,12 +179,12 @@ function getHtmlHeaders() {
 
 function renderConfirmationPage(token: string) {
   return `<!doctype html>
-<html lang="en">
+<html lang="zh-CN">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="referrer" content="no-referrer" />
-    <title>Confirm unsubscribe</title>
+    <title>确认退订</title>
     <style>
       body {
         margin: 0;
@@ -229,11 +229,11 @@ function renderConfirmationPage(token: string) {
   </head>
   <body>
     <main>
-      <h1>Confirm unsubscribe</h1>
-      <p>Click the button below to stop email updates like this from Inbox Zero.</p>
+      <h1>确认退订</h1>
+      <p>点击下方按钮，停止接收十组邮件小助手发送的此类邮件通知。</p>
       <form method="POST" action="/api/unsubscribe">
         <input type="hidden" name="token" value="${escapeHtml(token)}" />
-        <button type="submit">Unsubscribe</button>
+        <button type="submit">退订</button>
       </form>
     </main>
   </body>
@@ -242,7 +242,7 @@ function renderConfirmationPage(token: string) {
 
 function renderStatusPage(title: string, message: string) {
   return `<!doctype html>
-<html lang="en">
+<html lang="zh-CN">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />

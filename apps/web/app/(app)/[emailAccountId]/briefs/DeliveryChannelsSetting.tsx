@@ -24,7 +24,7 @@ export function DeliveryChannelsSetting() {
     {
       onSuccess: () => {
         analytics.captureAction("meeting_briefs_email_delivery_saved");
-        toastSuccess({ description: "Settings saved" });
+        toastSuccess({ description: "设置已保存" });
         mutateBriefSettings();
       },
       onError: (error) => {
@@ -37,8 +37,8 @@ export function DeliveryChannelsSetting() {
 
   return (
     <SharedDeliveryChannelsSetting
-      title="Delivery Channels"
-      description="Choose where to receive meeting briefings"
+      title="接收渠道"
+      description="选择会前简报的接收位置"
       purpose={MessagingRoutePurpose.MEETING_BRIEFS}
       featureLabel="meeting briefs"
       email={{

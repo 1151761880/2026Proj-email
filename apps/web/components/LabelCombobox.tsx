@@ -44,7 +44,7 @@ export function LabelCombobox({
       placeholder={selectedLabel?.name || "Select a label"}
       emptyText={
         <div>
-          <div>No labels</div>
+          <div>暂无标签</div>
           {search && (
             <Button
               className="mt-2"
@@ -71,19 +71,17 @@ export function LabelCombobox({
                     return res;
                   },
                   {
-                    loading: `Creating label "${searchValue}"...`,
-                    success: `Created label "${searchValue}"`,
+                    loading: `正在创建标签“${searchValue}”…`,
+                    success: `已创建标签“${searchValue}”`,
                     error: (errorMessage: unknown) =>
-                      `Error creating label "${searchValue}": ${
-                        errorMessage instanceof Error
+                      `创建标签“${searchValue}”失败：${errorMessage instanceof Error
                           ? errorMessage.message
-                          : String(errorMessage)
-                      }`,
+                          : String(errorMessage)}`,
                   },
                 );
               }}
             >
-              {`Create "${search}" label`}
+              {`创建“${search}”标签`}
             </Button>
           )}
         </div>

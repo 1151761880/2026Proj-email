@@ -36,32 +36,32 @@ export default function DebugMemoriesPage() {
 
   return (
     <PageWrapper>
-      <PageHeading>Memories Debug</PageHeading>
+      <PageHeading>记忆调试</PageHeading>
 
       <LoadingContent loading={isLoading} error={error}>
         <div className="mt-6 space-y-6">
           <div className="grid gap-3 sm:grid-cols-3">
-            <MemoryCountCard label="Total memories" count={data?.totalCount} />
+            <MemoryCountCard label="记忆总数" count={data?.totalCount} />
             <MemoryCountCard
-              label="Chat memories"
+              label="对话记忆"
               count={data?.chatMemoryCount}
             />
             <MemoryCountCard
-              label="Drafting reply memories"
+              label="回复草稿记忆"
               count={data?.replyMemoryCount}
             />
           </div>
 
           <MemorySection
-            title="Chat memories"
-            emptyMessage="No chat memories stored yet."
+            title="对话记忆"
+            emptyMessage="暂无对话记忆。"
             items={data?.chatMemories}
             renderItem={(memory) => (
               <div key={memory.id} className="rounded-lg border p-3">
                 <div className="flex flex-wrap items-center gap-2">
-                  <Badge variant="secondary">Chat</Badge>
+                  <Badge variant="secondary">对话</Badge>
                   <span className="text-xs text-muted-foreground">
-                    {new Date(memory.createdAt).toLocaleString()}
+                    {new Date(memory.createdAt).toLocaleString("zh-CN")}
                   </span>
                 </div>
                 <p className="mt-2 text-sm">{memory.content}</p>
@@ -73,7 +73,7 @@ export default function DebugMemoriesPage() {
                     )}
                     className="mt-2 inline-block text-xs underline hover:text-foreground"
                   >
-                    View chat
+                    查看对话
                   </Link>
                 )}
               </div>
@@ -81,8 +81,8 @@ export default function DebugMemoriesPage() {
           />
 
           <MemorySection
-            title="Drafting reply memories"
-            emptyMessage="No drafting reply memories stored yet."
+            title="回复草稿记忆"
+            emptyMessage="暂无回复草稿记忆。"
             items={data?.replyMemories}
             renderItem={(memory) => (
               <div key={memory.id} className="rounded-lg border p-3">
@@ -92,7 +92,7 @@ export default function DebugMemoriesPage() {
                     {formatScope(memory.scopeType, memory.scopeValue)}
                   </Badge>
                   {memory.isLearnedStyleEvidence && (
-                    <Badge variant="outline">Learned style</Badge>
+                    <Badge variant="outline">已学习的风格</Badge>
                   )}
                   <span className="text-xs text-muted-foreground">
                     {memory._count.sources}{" "}
@@ -102,10 +102,10 @@ export default function DebugMemoriesPage() {
                 <p className="mt-2 text-sm">{memory.content}</p>
                 <div className="mt-2 flex flex-wrap gap-2 text-xs text-muted-foreground">
                   <span>
-                    Created {new Date(memory.createdAt).toLocaleString()}
+                    创建时间 {new Date(memory.createdAt).toLocaleString("zh-CN")}
                   </span>
                   <span>
-                    Updated {new Date(memory.updatedAt).toLocaleString()}
+                    已更新 {new Date(memory.updatedAt).toLocaleString("zh-CN")}
                   </span>
                 </div>
               </div>

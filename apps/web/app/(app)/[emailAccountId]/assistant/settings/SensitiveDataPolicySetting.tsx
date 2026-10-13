@@ -27,18 +27,18 @@ const POLICY_OPTIONS: Array<{
   value: SensitiveDataPolicy;
 }> = [
   {
-    description: "Send everything to AI without scanning.",
-    label: "Off",
+    description: "不扫描内容，直接发送给 AI。",
+    label: "关闭",
     value: "ALLOW",
   },
   {
-    description: "Hide credentials and card numbers, then send to AI.",
-    label: "Redact",
+    description: "隐藏凭据和银行卡号后发送给 AI。",
+    label: "隐去敏感内容",
     value: "REDACT",
   },
   {
-    description: "Skip the AI request when sensitive data is found.",
-    label: "Block",
+    description: "发现敏感数据时跳过 AI 请求。",
+    label: "阻止",
     value: "BLOCK",
   },
 ];
@@ -84,8 +84,8 @@ export function SensitiveDataPolicySetting() {
   return (
     <SettingCard
       collapseOnMobile
-      title="Sensitive data protection"
-      description="Prevent credentials and card numbers from being sent to AI."
+      title="敏感数据保护"
+      description="防止凭据和银行卡号发送给 AI。"
       right={
         <LoadingContent
           loading={isLoading}
@@ -98,7 +98,7 @@ export function SensitiveDataPolicySetting() {
             disabled={isExecuting || !data}
           >
             <SelectTrigger
-              aria-label="Sensitive data protection"
+              aria-label="敏感数据保护"
               className="w-full md:w-56"
             >
               <SelectValue>{getPolicyLabel(policy)}</SelectValue>

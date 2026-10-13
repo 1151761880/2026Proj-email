@@ -1,4 +1,4 @@
-import { spawn, type ChildProcess } from "node:child_process";
+import { spawn, spawnSync, type ChildProcess } from "node:child_process";
 import { setTimeout as delay } from "node:timers/promises";
 
 export function createProcessManager(cwd: string, env: NodeJS.ProcessEnv) {
@@ -18,6 +18,9 @@ export function createProcessManager(cwd: string, env: NodeJS.ProcessEnv) {
       env,
       stdio: "inherit",
       detached: process.platform !== "win32",
+      windowsHide: true,
+      // Windows package-manager launchers are command scripts rather than executable files.
+      shell: process.platform === "win32" && /\.(cmd|bat)$/i.test(command),
     });
     children.add(child);
     const exited = new Promise<void>((resolve, reject) => {
@@ -116,8 +119,14 @@ export function createProcessManager(cwd: string, env: NodeJS.ProcessEnv) {
 function signalChild(child: ChildProcess, signal: NodeJS.Signals) {
   if (!child.pid) return;
   try {
-    if (process.platform === "win32") child.kill(signal);
-    else process.kill(-child.pid, signal);
+    if (process.platform === "win32") {
+      if (child.exitCode !== null || child.signalCode !== null) return;
+      spawnSync("taskkill.exe", ["/pid", String(child.pid), "/t", "/f"], {
+        windowsHide: true,
+        stdio: "ignore",
+        timeout: 10_000,
+      });
+    } else process.kill(-child.pid, signal);
   } catch (error) {
     if ((error as NodeJS.ErrnoException).code !== "ESRCH") throw error;
   }

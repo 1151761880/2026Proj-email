@@ -44,7 +44,7 @@ export function RegenerateSecretButton({
       onClick={() => execute()}
     >
       <KeyIcon className="mr-2 size-4" />
-      {hasSecret ? "Regenerate secret" : "Generate secret"}
+      {hasSecret ? "重新生成密钥" : "生成密钥"}
     </Button>
   );
 }

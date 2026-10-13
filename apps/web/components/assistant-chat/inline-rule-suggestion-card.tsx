@@ -100,7 +100,7 @@ export function InlineRuleSuggestionCard({
         isRuleCreated ? (
           <Badge color="green" className="shrink-0 gap-1.5">
             <CheckIcon className="size-3.5" />
-            Rule created
+            规则已创建
           </Badge>
         ) : (
           <Button
@@ -115,19 +115,19 @@ export function InlineRuleSuggestionCard({
             ) : (
               <CheckIcon className="size-3.5" />
             )}
-            Approve
+            批准
           </Button>
         )
       }
     >
       {whenText && (
-        <RuleSummaryRow label="When">
+        <RuleSummaryRow label="触发条件">
           <RuleSummaryText>{whenText}</RuleSummaryText>
         </RuleSummaryRow>
       )}
 
       {(actionText || suggestedActions.length > 0) && (
-        <RuleSummaryRow label="Then">
+        <RuleSummaryRow label="然后">
           <div className="flex flex-wrap items-center gap-1.5">
             {suggestedActions.length > 0 && (
               <SuggestedActionBadgeList actions={suggestedActions} />

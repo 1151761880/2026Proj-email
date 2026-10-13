@@ -55,18 +55,18 @@ const digestSettingsSchema = z.object({
 type DigestSettingsFormValues = z.infer<typeof digestSettingsSchema>;
 
 const frequencies = [
-  { value: "daily", label: "Day" },
-  { value: "weekly", label: "Week" },
+  { value: "daily", label: "天" },
+  { value: "weekly", label: "周" },
 ];
 
 const daysOfWeek = [
-  { value: "0", label: "Sunday" },
-  { value: "1", label: "Monday" },
-  { value: "2", label: "Tuesday" },
-  { value: "3", label: "Wednesday" },
-  { value: "4", label: "Thursday" },
-  { value: "5", label: "Friday" },
-  { value: "6", label: "Saturday" },
+  { value: "0", label: "周日" },
+  { value: "1", label: "周一" },
+  { value: "2", label: "周二" },
+  { value: "3", label: "周三" },
+  { value: "4", label: "周四" },
+  { value: "5", label: "周五" },
+  { value: "6", label: "周六" },
 ];
 
 export function DigestSettingsForm({
@@ -182,7 +182,7 @@ function LoadedDigestSettingsForm({
     {
       onError: (error) => {
         toastError({
-          title: "Error updating digest items",
+          title: "更新摘要条目失败",
           description: getActionErrorMessage(error.error),
         });
       },
@@ -194,7 +194,7 @@ function LoadedDigestSettingsForm({
     {
       onError: (error) => {
         toastError({
-          title: "Error updating digest schedule",
+          title: "更新摘要时间失败",
           description: getActionErrorMessage(error.error),
         });
       },
@@ -285,8 +285,8 @@ function LoadedDigestSettingsForm({
         onSuccess?.();
       } catch {
         toastError({
-          title: "Error updating digest settings",
-          description: "An error occurred while saving your settings",
+          title: "更新摘要设置失败",
+          description: "保存设置失败",
         });
       }
     },
@@ -314,13 +314,13 @@ function LoadedDigestSettingsForm({
       <div className="space-y-6">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div>
-            <Label>What to include in the digest email</Label>
+            <Label>摘要邮件包含的内容</Label>
             <MutedText className="mt-1">
-              Selected rules are combined into one digest email.
+              将所选规则的邮件合并为一封摘要。
             </MutedText>
             <div className="mt-3">
               <MultiSelectFilter
-                title="Digest Items"
+                title="摘要条目"
                 options={digestOptions}
                 selectedValues={selectedDigestItems}
                 setSelectedValues={setSelectedDigestItems}
@@ -330,11 +330,11 @@ function LoadedDigestSettingsForm({
           </div>
 
           <div>
-            <Label>Send the digest email</Label>
+            <Label>发送摘要邮件</Label>
 
             <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 mt-3">
               <FormItem>
-                <Label htmlFor="frequency-select">Every</Label>
+                <Label htmlFor="frequency-select">每</Label>
                 <Select
                   value={watchedValues.schedule}
                   onValueChange={(val) => setValue("schedule", val)}
@@ -344,7 +344,7 @@ function LoadedDigestSettingsForm({
                       ? frequencies.find(
                           (f) => f.value === watchedValues.schedule,
                         )?.label
-                      : "Select..."}
+                      : "请选择…"}
                   </SelectTrigger>
                   <SelectContent>
                     {frequencies.map((f) => (
@@ -368,7 +368,7 @@ function LoadedDigestSettingsForm({
                         ? daysOfWeek.find(
                             (d) => d.value === watchedValues.dayOfWeek,
                           )?.label
-                        : "Select..."}
+                        : "请选择…"}
                     </SelectTrigger>
                     <SelectContent>
                       {daysOfWeek.map((d) => (
@@ -389,11 +389,11 @@ function LoadedDigestSettingsForm({
               />
             </div>
             <MutedText className="mt-2">
-              Usually sent within 5 minutes.
+              通常在 5 分钟内发送。
               {digestStatus.delivery.estimatedNextDeliveryAt && (
                 <>
                   {" "}
-                  Next delivery around{" "}
+                  下次预计发送时间{" "}
                   {formatDigestDeliveryTime(
                     new Date(digestStatus.delivery.estimatedNextDeliveryAt),
                     digestStatus.delivery.timezone,
@@ -405,7 +405,7 @@ function LoadedDigestSettingsForm({
           </div>
 
           <Button type="submit" loading={isSubmitting} className="mt-4">
-            Save
+            保存
           </Button>
         </form>
 
@@ -439,7 +439,7 @@ function DigestDeliveryChannels({
     updateDigestEmailDeliveryAction.bind(null, emailAccountId),
     {
       onSuccess: () => {
-        toastSuccess({ description: "Settings saved" });
+        toastSuccess({ description: "设置已保存" });
         mutate();
         mutateDigestStatus();
       },
@@ -454,7 +454,7 @@ function DigestDeliveryChannels({
   return (
     <div className="space-y-2 pt-2">
       <div className="flex items-center justify-between gap-3">
-        <Label>Send digest to email</Label>
+        <Label>通过邮件发送摘要</Label>
         <Toggle
           name="digestSendEmail"
           enabled={account?.digestSendEmail ?? true}
@@ -465,12 +465,12 @@ function DigestDeliveryChannels({
       <DigestDeliveryActivity digestStatus={digestStatus} />
       {showChannelsHint && (
         <MutedText>
-          Chat delivery:{" "}
+          聊天投递：{" "}
           <Link
             href={prefixPath(emailAccountId, "/channels")}
             className="text-foreground underline"
           >
-            Configure in Channels
+            在消息渠道中配置
           </Link>
           .
         </MutedText>
@@ -533,7 +533,7 @@ function EmailPreview({
       : null,
     async (url: string) => {
       const response = await fetch(url);
-      if (!response.ok) throw new Error("Failed to fetch preview");
+      if (!response.ok) throw new Error("获取预览失败");
       return response.text();
     },
     { keepPreviousData: true },
@@ -541,18 +541,18 @@ function EmailPreview({
 
   return (
     <div>
-      <Label>Preview</Label>
+      <Label>预览</Label>
       <div className="mt-3 border rounded-lg overflow-hidden bg-slate-50">
         {selectedDigestNames.length > 0 && htmlContent ? (
           <iframe
-            title="Digest preview"
+            title="摘要预览"
             sandbox=""
             className="w-full min-h-[700px] max-h-[700px] bg-white"
             srcDoc={htmlContent}
           />
         ) : (
           <div className="text-center text-slate-500 py-8">
-            <p>Select digest items to see a preview</p>
+            <p>选择摘要条目后查看预览</p>
           </div>
         )}
       </div>

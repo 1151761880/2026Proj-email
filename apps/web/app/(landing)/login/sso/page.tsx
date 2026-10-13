@@ -85,7 +85,7 @@ function SSOLoginForm() {
             errorCode: "sso_start_rejected",
           });
           toastError({
-            title: "SSO Sign-in Error",
+            title: "单点登录失败",
             description: responseData.error || "Failed to initiate SSO sign-in",
           });
           return;
@@ -94,7 +94,7 @@ function SSOLoginForm() {
         const res: GetSsoSignInResponse = responseData;
 
         if (res.redirectUrl) {
-          toastSuccess({ description: "Redirecting to SSO provider..." });
+          toastSuccess({ description: "正在前往单点登录服务…" });
           router.push(res.redirectUrl);
         }
       } catch {
@@ -104,8 +104,8 @@ function SSOLoginForm() {
           errorCode: "network_error",
         });
         toastError({
-          title: "SSO Sign-in Error",
-          description: "An unexpected error occurred. Please try again.",
+          title: "单点登录失败",
+          description: "发生意外错误，请重试。",
         });
       } finally {
         setIsSubmitting(false);
@@ -118,9 +118,9 @@ function SSOLoginForm() {
     <div className="flex h-screen flex-col justify-center text-foreground">
       <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
         <div className="flex flex-col text-center">
-          <h1 className="font-title text-2xl text-foreground">SSO Sign In</h1>
+          <h1 className="font-title text-2xl text-foreground">单点登录</h1>
           <p className="mt-4 text-muted-foreground">
-            Sign in to your organization account
+            登录组织账户
           </p>
         </div>
 
@@ -130,7 +130,7 @@ function SSOLoginForm() {
               <Input
                 type="email"
                 name="email"
-                label="Email"
+                label="邮件"
                 registerProps={register("email")}
                 error={errors.email}
               />
@@ -138,14 +138,14 @@ function SSOLoginForm() {
               <Input
                 type="text"
                 name="organizationSlug"
-                label="Organization Slug"
+                label="组织标识"
                 placeholder="your-org-slug"
                 registerProps={register("organizationSlug")}
                 error={errors.organizationSlug}
               />
 
               <Button type="submit" size="lg" full loading={isSubmitting}>
-                Continue with SSO
+                通过单点登录继续
               </Button>
             </form>
           </div>

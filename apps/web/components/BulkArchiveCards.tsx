@@ -231,7 +231,7 @@ export function BulkArchiveCards({
       bulkAction === "delete" &&
       selectedToProcess.length > 0 &&
       !window.confirm(
-        `Delete emails from ${selectedToProcess.length} sender${selectedToProcess.length === 1 ? "" : "s"}? This action cannot be undone.`,
+        `确定删除 ${selectedToProcess.length} 位发件人的邮件吗？此操作无法撤销。`,
       )
     ) {
       return;
@@ -261,7 +261,7 @@ export function BulkArchiveCards({
         }
       }
 
-      if (failedToQueue) throw new Error("Some sender actions were not queued");
+      if (failedToQueue) throw new Error("部分发件人操作未加入队列");
 
       if (bulkAction === "archive") {
         await queueArchiveSenders({
@@ -274,7 +274,7 @@ export function BulkArchiveCards({
       }
     } catch {
       toastError({
-        description: `Failed to ${getBulkActionVerb(bulkAction)} some senders. Please try again.`,
+        description: `部分发件人处理失败，请重试。`,
       });
     } finally {
       setLoadingCategories((prev) => ({ ...prev, [categoryName]: false }));
@@ -396,14 +396,14 @@ export function BulkArchiveCards({
                 <div className="divide-y">
                   {senders.length === 0 ? (
                     <div className="p-4 text-center text-sm text-muted-foreground">
-                      No senders in this category
+                      此分类暂无发件人
                     </div>
                   ) : (
                     <>
                       {/* Select all row */}
                       <div className="flex items-center gap-3 bg-muted/30 px-4 py-3">
                         <ButtonCheckbox
-                          label={`Select all senders in ${categoryName}`}
+                          label={`选择“${categoryName}”中的全部发件人`}
                           checked={areAllSelectedInCategory(categoryName)}
                           indeterminate={areSomeSelectedInCategory(
                             categoryName,
@@ -492,7 +492,7 @@ function SenderRow({
         tabIndex={0}
       >
         <ButtonCheckbox
-          label={`Select ${sender.name || sender.address}`}
+          label={`选择 ${sender.name || sender.address}`}
           checked={isSelected}
           onChange={() => onToggleSelection()}
         />
@@ -521,7 +521,7 @@ function SenderRow({
           }}
         >
           <PencilIcon className="size-4" />
-          <span className="sr-only">Edit category</span>
+          <span className="sr-only">编辑分类</span>
         </Button>
         <ChevronDownIcon
           className={cn(
@@ -582,7 +582,7 @@ function EditCategoryDialog({
       toastError({ description: result.serverError });
       setIsLoading(false);
     } else {
-      toastSuccess({ description: "Category updated" });
+      toastSuccess({ description: "分类已更新" });
       await onCategoryChange?.();
       setIsLoading(false);
       onOpenChange(false);
@@ -598,9 +598,9 @@ function EditCategoryDialog({
         <div className="space-y-4">
           <div className="flex items-center justify-between gap-8">
             <div className="space-y-1">
-              <p className="font-medium">Category</p>
+              <p className="font-medium">分类</p>
               <p className="text-sm text-muted-foreground">
-                Choose which category this sender belongs to
+                选择此发件人的分类
               </p>
             </div>
             <Select
@@ -608,7 +608,7 @@ function EditCategoryDialog({
               onValueChange={setSelectedCategoryId}
             >
               <SelectTrigger className="w-[180px] shrink-0">
-                <SelectValue placeholder="Select category" />
+                <SelectValue placeholder="选择分类" />
               </SelectTrigger>
               <SelectContent>
                 {categories.map((category) => (
@@ -625,10 +625,10 @@ function EditCategoryDialog({
               onClick={() => onOpenChange(false)}
               disabled={isLoading}
             >
-              Cancel
+              取消
             </Button>
             <Button onClick={handleSave} disabled={isLoading}>
-              {isLoading ? "Saving..." : "Save"}
+              {isLoading ? "正在保存…" : "保存"}
             </Button>
           </div>
         </div>
@@ -682,25 +682,25 @@ function ArchiveSenderStatus({
 }) {
   switch (status?.status) {
     case "pending":
-      return <span className="text-sm text-muted-foreground">Queued</span>;
+      return <span className="text-sm text-muted-foreground">已排队</span>;
     case "processing":
       return (
         <span className="text-sm text-blue-600">
           {status.threadsTotal
             ? `${status.threadsTotal - status.threadIds.length} / ${status.threadsTotal}`
-            : "Archiving..."}
+            : "正在归档…"}
         </span>
       );
     case "completed":
       return (
         <span className="text-sm text-green-600">
           {status.threadsTotal
-            ? `Archived ${status.threadsTotal}!`
-            : "Archived"}
+            ? `${status.threadsTotal} 已归档！`
+            : "已归档"}
         </span>
       );
     case "failed":
-      return <span className="text-sm text-red-600">Failed</span>;
+      return <span className="text-sm text-red-600">失败</span>;
     default:
       return null;
   }
@@ -716,8 +716,8 @@ function MarkReadSenderStatus({
       return (
         <span className="text-sm text-green-600">
           {status.threadsTotal
-            ? `Marked ${status.threadsTotal} read!`
-            : "Marked read"}
+            ? `${status.threadsTotal} 已标为已读！`
+            : "已标为已读"}
         </span>
       );
     case "processing":
@@ -728,9 +728,9 @@ function MarkReadSenderStatus({
         </span>
       );
     case "pending":
-      return <span className="text-sm text-muted-foreground">Pending...</span>;
+      return <span className="text-sm text-muted-foreground">等待处理…</span>;
     case "failed":
-      return <span className="text-sm text-red-600">Failed</span>;
+      return <span className="text-sm text-red-600">失败</span>;
     default:
       return null;
   }
@@ -745,7 +745,7 @@ function DeleteSenderStatus({
     case "completed":
       return (
         <span className="text-sm text-green-600">
-          {status.threadsTotal ? `Deleted ${status.threadsTotal}!` : "Deleted"}
+          {status.threadsTotal ? `${status.threadsTotal} 已删除！` : "已删除"}
         </span>
       );
     case "processing":
@@ -756,16 +756,16 @@ function DeleteSenderStatus({
         </span>
       );
     case "pending":
-      return <span className="text-sm text-muted-foreground">Pending...</span>;
+      return <span className="text-sm text-muted-foreground">等待处理…</span>;
     case "failed":
-      return <span className="text-sm text-red-600">Failed</span>;
+      return <span className="text-sm text-red-600">失败</span>;
     default:
       return null;
   }
 }
 
 function getBulkActionVerb(action: BulkActionType) {
-  if (action === "markRead") return "mark as read";
+  if (action === "markRead") return "标为已读";
   if (action === "delete") return "delete";
   return "archive";
 }
@@ -796,7 +796,7 @@ function ExpandedEmails({
   if (error) {
     return (
       <div className="border-t bg-muted/30 p-4 text-sm text-muted-foreground">
-        Error loading emails
+        加载邮件失败
       </div>
     );
   }
@@ -804,7 +804,7 @@ function ExpandedEmails({
   if (!data?.threads.length) {
     return (
       <div className="border-t bg-muted/30 p-4 text-sm text-muted-foreground">
-        No emails found
+        未找到邮件
       </div>
     );
   }

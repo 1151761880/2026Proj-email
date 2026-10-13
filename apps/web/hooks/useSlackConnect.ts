@@ -41,7 +41,7 @@ export function useSlackConnect({
         });
 
         if (!result?.serverError && !result?.validationErrors) {
-          toastSuccess({ description: "Slack connected" });
+          toastSuccess({ description: "Slack 已连接" });
           onConnected?.();
           return;
         }
@@ -56,13 +56,13 @@ export function useSlackConnect({
 
         if (linkError.includes("Could not find your Slack account")) {
           toastInfo({
-            title: "Email not found in Slack",
-            description: "Redirecting to Slack authorization...",
+            title: "Slack 中未找到邮箱",
+            description: "正在前往 Slack 授权页面…",
           });
         } else {
           toastInfo({
-            title: "Continue in Slack",
-            description: "Redirecting to Slack authorization...",
+            title: "在 Slack 中继续",
+            description: "正在前往 Slack 授权页面…",
           });
         }
         // Always fall through to OAuth so the user isn't stuck.
@@ -75,7 +75,7 @@ export function useSlackConnect({
       }
     } catch (error) {
       captureException(error, { extra: { context: "Slack connect" } });
-      toastError({ description: "Failed to connect Slack" });
+      toastError({ description: "连接 Slack 失败" });
     } finally {
       connectingRef.current = false;
       setConnecting(false);

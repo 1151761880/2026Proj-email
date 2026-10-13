@@ -278,12 +278,12 @@ export function EmailThread({
           <div className="flex justify-end pt-2">
             <Tooltip
               content={
-                allExpanded ? "Collapse all messages" : "Expand all messages"
+                allExpanded ? "收起全部邮件" : "展开全部邮件"
               }
             >
               <Button
                 aria-label={
-                  allExpanded ? "Collapse all messages" : "Expand all messages"
+                  allExpanded ? "收起全部邮件" : "展开全部邮件"
                 }
                 onClick={toggleAll}
                 size="iconXs"

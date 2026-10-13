@@ -15,16 +15,16 @@ export const Overview = ({
       </p>
 
       <TypographyH3 className="mt-8">
-        Hey, I'm your email assistant!
+        你好，我是你的邮件小助手！
       </TypographyH3>
 
       <MessageText className="mt-4 text-base">
-        Teach me how to handle your incoming emails for you
+        告诉我如何处理你的新邮件
       </MessageText>
 
       <div className="pt-8">
         <ExamplesDialog setInput={setInput}>
-          <Button>Choose from examples</Button>
+          <Button>从示例中选择</Button>
         </ExamplesDialog>
       </div>
     </div>

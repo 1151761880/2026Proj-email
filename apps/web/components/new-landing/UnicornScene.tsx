@@ -108,13 +108,13 @@ function loadUnicornStudio() {
             resolve(window.UnicornStudio);
           } else {
             script.remove();
-            reject(new Error("Unicorn Studio failed to initialize"));
+            reject(new Error("页面动画初始化失败"));
           }
         };
 
         const onError = () => {
           script.remove();
-          reject(new Error("Unicorn Studio failed to load"));
+          reject(new Error("页面动画加载失败"));
         };
 
         script.addEventListener("load", onLoad, { once: true });

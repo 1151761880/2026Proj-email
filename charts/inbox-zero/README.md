@@ -1,4 +1,4 @@
-# Inbox Zero Helm Chart
+# 十组邮件小助手 Helm Chart
 
 This chart maps the Docker Compose self-hosting stack onto Kubernetes:
 

@@ -73,7 +73,7 @@ export default function MeetingRecapEmail({
           <Container className="mx-auto w-full max-w-[600px] p-0">
             <Section className="px-8 pt-6 pb-2">
               <Text className="text-base text-gray-900 mt-0 mb-0">
-                Notes from <strong>{meetingTitle}</strong>
+                会议笔记： <strong>{meetingTitle}</strong>
               </Text>
               <Text className="text-base text-gray-900 mt-0 mb-0">
                 {formattedTime}
@@ -94,16 +94,14 @@ export default function MeetingRecapEmail({
             {followUpDraftCreated && (
               <Section className="px-8 pb-4">
                 <Text className="text-sm text-gray-700 mt-0 mb-0">
-                  A follow-up email to the other attendees is waiting in your
-                  drafts. Nothing has been sent.
+                  发给其他参会者的跟进邮件已保存在草稿箱，尚未发送。
                 </Text>
               </Section>
             )}
 
             <Section className="px-8 pb-6">
               <Text className="text-xs text-gray-400 mt-0 mb-0 italic">
-                These notes are AI-generated from an automatic transcript and
-                may be inaccurate.
+                笔记由 AI 根据自动文字记录生成，可能不准确。
               </Text>
             </Section>
 
@@ -111,15 +109,14 @@ export default function MeetingRecapEmail({
 
             <Section className="px-8 pb-8">
               <Text className="text-xs text-gray-500 mt-0 mb-2">
-                You're receiving these notes because you enabled the notetaker
-                in your Inbox Zero settings.
+                你在十组邮件小助手中启用了会议记录，因此收到此笔记。
               </Text>
               <Text className="text-xs text-gray-500 mt-0 mb-0">
                 <Link
                   href={`${baseUrl}/${emailAccountId}/meetings`}
                   className="text-gray-600 underline"
                 >
-                  View meeting
+                  查看会议
                 </Link>
               </Text>
             </Section>
@@ -145,9 +142,9 @@ MeetingRecapEmail.PreviewProps = {
       "Rollout moves to the first week of June",
     ],
     actionItems: [
-      { description: "Send the revised pricing sheet", owner: "Alice" },
-      { description: "Confirm the security review timeline", owner: "John" },
-      { description: "Share the migration checklist" },
+      { description: "发送修订后的报价单", owner: "Alice" },
+      { description: "确认安全审查时间", owner: "John" },
+      { description: "分享迁移清单" },
     ],
     openQuestions: ["Who signs off on the security review?"],
     nextSteps: ["Reconvene next Thursday with the updated pricing"],
@@ -157,5 +154,5 @@ MeetingRecapEmail.PreviewProps = {
 export function generateMeetingRecapSubject(
   props: Pick<MeetingRecapEmailProps, "meetingTitle">,
 ): string {
-  return `Notes from ${props.meetingTitle}`;
+  return `${props.meetingTitle} 会议笔记`;
 }

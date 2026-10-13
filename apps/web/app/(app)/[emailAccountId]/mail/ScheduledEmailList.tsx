@@ -63,11 +63,10 @@ export function ScheduledEmailList() {
         <LoadingContent loading={isLoading} error={error}>
           {rows.length === 0 ? (
             <div className="px-6 py-12 text-center text-muted-foreground text-sm">
-              Nothing scheduled. Emails you send later show up here until
-              they&apos;re on their way.
+              暂无定时发送邮件。安排发送后，邮件会在此显示，直到开始发送。
             </div>
           ) : (
-            <ul aria-label="Scheduled emails">
+            <ul aria-label="定时发送邮件">
               {rows.map((row) => (
                 <li
                   key={row.id}
@@ -103,7 +102,7 @@ export function ScheduledEmailList() {
                           )
                         }
                       >
-                        Cancel send
+                        取消发送
                       </InlineActionButton>
                     )}
                     {row.status === "UNCERTAIN" && (
@@ -113,7 +112,7 @@ export function ScheduledEmailList() {
                         className="text-xs underline underline-offset-4"
                         href={prefixPath(emailAccountId, "/mail?type=sent")}
                       >
-                        Check Sent
+                        查看已发送
                       </a>
                     )}
                     {["BLOCKED_AUTH", "FAILED"].includes(row.status) && (
@@ -128,7 +127,7 @@ export function ScheduledEmailList() {
                           )
                         }
                       >
-                        Retry send
+                        重试发送
                       </InlineActionButton>
                     )}
                   </div>
@@ -159,18 +158,18 @@ function statusLabel(row: ScheduledEmail) {
     case "PENDING":
       return formatTime(row.sendAt);
     case "PROCESSING":
-      return "Sending…";
+      return "正在发送…";
     case "UNCERTAIN":
-      return "Couldn't confirm delivery";
+      return "无法确认投递结果";
     case "BLOCKED_AUTH":
-      return "Reconnect your account to send this";
+      return "重新连接账户后发送";
     default:
-      return "Needs attention";
+      return "需要处理";
   }
 }
 
 function formatTime(value: string | Date) {
-  return new Date(value).toLocaleString(undefined, {
+  return new Date(value).toLocaleString("zh-CN", {
     month: "short",
     day: "numeric",
     hour: "numeric",

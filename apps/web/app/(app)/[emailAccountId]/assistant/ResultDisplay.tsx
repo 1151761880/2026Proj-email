@@ -45,7 +45,7 @@ export function ResultsDisplay({
       {sortedBatches.map(([date, batchResults], batchIndex) => (
         <div key={date}>
           {batchIndex === 1 && sortedBatches.length > 1 && (
-            <div className="my-1 text-xs text-muted-foreground">Previous:</div>
+            <div className="my-1 text-xs text-muted-foreground">上次结果：</div>
           )}
           <div
             className={
@@ -97,7 +97,7 @@ function ResultDisplay({
         {rule
           ? rule.name
           : status === ExecutedRuleStatus.SKIPPED
-            ? "No match found"
+            ? "未找到匹配"
             : capitalCase(status)}
         <EyeIcon className="ml-1.5 size-3.5 shrink-0 opacity-70" />
       </Badge>
@@ -139,7 +139,7 @@ export function ResultDisplayContent({ result }: { result: RunRulesResult }) {
               ruleDialog.onOpen({ ruleId: rule.id });
             }}
           >
-            View matching rule
+            查看匹配规则
           </Button>
         )}
       </div>
@@ -147,7 +147,7 @@ export function ResultDisplayContent({ result }: { result: RunRulesResult }) {
       <div className="mt-2">
         {result.actionItems?.length ? (
           <>
-            <div className="font-medium text-sm mb-1">Actions:</div>
+            <div className="font-medium text-sm mb-1">操作：</div>
             <RuleActions
               actions={
                 result.actionItems?.map((action) => ({
@@ -168,7 +168,7 @@ export function ResultDisplayContent({ result }: { result: RunRulesResult }) {
             />
           </>
         ) : (
-          <div className="text-muted-foreground text-sm">No actions taken</div>
+          <div className="text-muted-foreground text-sm">未执行操作</div>
         )}
       </div>
 
@@ -190,7 +190,7 @@ export function ResultDisplayContent({ result }: { result: RunRulesResult }) {
         reasonDisplay.actionFailureMessages.length > 0) && (
         <div className="mt-4 space-y-2 bg-muted p-2 rounded-md">
           <div className="font-medium text-sm">
-            Reason for choosing this rule:
+            选择此规则的原因：
           </div>
           {!!reasonDisplay.reason && (
             <MessageText className="whitespace-pre-wrap break-words">
@@ -199,7 +199,7 @@ export function ResultDisplayContent({ result }: { result: RunRulesResult }) {
           )}
           {reasonDisplay.actionFailureMessages.length > 0 && (
             <div className="space-y-1">
-              <div className="font-medium text-sm">Action issues:</div>
+              <div className="font-medium text-sm">操作问题：</div>
               <ul className="list-disc space-y-1 pl-4 text-sm text-slate-700 dark:text-foreground">
                 {reasonDisplay.actionFailureMessages.map((message) => (
                   <li key={message} className="break-words">
@@ -423,7 +423,7 @@ function getActionFailureMessage(actionType: string, errorCode: string) {
   const entry = Object.hasOwn(ACTION_FAILURE_MESSAGES, actionType)
     ? ACTION_FAILURE_MESSAGES[actionType as ActionType]
     : undefined;
-  if (!entry) return "An action could not be completed.";
+  if (!entry) return "部分操作未能完成。";
   return Object.hasOwn(entry.codes, errorCode)
     ? entry.codes[errorCode]
     : entry.fallback;

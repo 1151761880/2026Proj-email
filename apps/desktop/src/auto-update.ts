@@ -73,8 +73,8 @@ export async function checkForDesktopUpdatesManually(
   if (!isPackaged) {
     await dialog.showMessageBox({
       type: "info",
-      message: "Updates are unavailable in development builds",
-      detail: "Install a released version of Inbox Zero to receive updates.",
+      message: "开发版本不支持自动更新",
+      detail: "安装十组邮件小助手正式版本后可接收更新。",
     });
     return false;
   }
@@ -99,17 +99,17 @@ export async function checkForDesktopUpdatesManually(
       stopReportingDownloadProgress();
       await dialog.showMessageBox({
         type: "info",
-        message: "You're up to date",
-        detail: `Inbox Zero ${app.getVersion()} is the latest version.`,
+        message: "已是最新版本",
+        detail: `十组邮件小助手 ${app.getVersion()} 已是最新版本。`,
       });
       return true;
     }
 
     await dialog.showMessageBox({
       type: "info",
-      message: `Downloading Inbox Zero ${result.updateInfo.version}`,
+      message: `正在下载十组邮件小助手 ${result.updateInfo.version}`,
       detail:
-        "You can keep using Inbox Zero. Restart to Update will appear in the app menu when it's ready.",
+        "可以继续使用十组邮件小助手。下载完成后，应用菜单将显示“重启并更新”。",
     });
     return true;
   } catch (error) {
@@ -117,8 +117,8 @@ export async function checkForDesktopUpdatesManually(
     logDesktopUpdateError(error);
     await dialog.showMessageBox({
       type: "error",
-      message: "Couldn't check for updates",
-      detail: "Please try again later.",
+      message: "无法检查更新",
+      detail: "请稍后重试。",
     });
     return false;
   }
@@ -174,8 +174,8 @@ function notifyUpdateReady(version: string) {
   try {
     if (!Notification.isSupported()) return;
     new Notification({
-      title: "Update ready to install",
-      body: `Restart Inbox Zero to finish updating to ${version}.`,
+      title: "更新已准备好",
+      body: `重启十组邮件小助手以完成 ${version} 版本更新。`,
     }).show();
   } catch (error) {
     logDesktopUpdateError(error);
@@ -188,11 +188,11 @@ async function promptToInstallDownloadedUpdate(
 ) {
   const { response } = await dialog.showMessageBox({
     type: "info",
-    buttons: ["Restart to Update", "Later"],
+    buttons: ["重启并更新", "稍后"],
     defaultId: 0,
     cancelId: 1,
-    message: "An update is ready to install",
-    detail: `Inbox Zero ${downloadedVersion} has been downloaded. Restart now to finish updating.`,
+    message: "更新已准备好安装",
+    detail: `十组邮件小助手 ${downloadedVersion} 已下载，重启后完成更新。`,
   });
   if (response === 0) {
     prepareToQuit();

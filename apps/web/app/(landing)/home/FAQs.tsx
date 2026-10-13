@@ -26,66 +26,62 @@ const faqs: {
     question: "How can I request a feature?",
     answer: (
       <span>
-        Email us or post an issue on{" "}
+        通过邮件或以下平台提交问题：{" "}
         <Anchor href="/github" newTab>
           GitHub
         </Anchor>
-        . We're happy to hear how we can improve your email experience.
+        。欢迎提供改进邮件使用体验的建议。
       </span>
     ),
     answerText:
-      "Email us or post an issue on GitHub. We're happy to hear how we can improve your email experience.",
+      "通过邮件或 GitHub 提交问题，帮助改进邮件使用体验。",
   },
   {
     question: `Will ${BRAND_NAME} replace my current email client?`,
     answer: (
       <span>
-        It doesn't have to. {BRAND_NAME} works inside Gmail and Outlook, so you
-        can keep using them as normal while the assistant works in the
-        background. {BRAND_NAME} also has its own{" "}
-        <Anchor href="/email-client">email client</Anchor> for the web, desktop,
-        and iPhone if you'd like to use it.
+        可以继续使用原有邮箱。 {BRAND_NAME} 支持 Gmail 和 Outlook。助手在后台工作时，你可以继续正常使用邮箱。 {BRAND_NAME} 也提供自己的{" "}
+        <Anchor href="/email-client">邮件客户端</Anchor> ，支持网页、桌面和 iPhone。
       </span>
     ),
-    answerText: `It doesn't have to. ${BRAND_NAME} works inside Gmail and Outlook, so you can keep using them as normal while the assistant works in the background. ${BRAND_NAME} also has its own email client for the web, desktop, and iPhone if you'd like to use it.`,
+    answerText: `${BRAND_NAME} 支持 Gmail 和 Outlook，助手在后台工作时可继续使用原有邮箱。${BRAND_NAME} 也提供网页、桌面和 iPhone 邮件客户端。`,
   },
   {
     question: "Is there a mobile app?",
     answer: (
       <span>
-        Yes, we have iOS and Android apps so you can triage your inbox and
-        manage your assistant on the go. Learn more on the{" "}
-        <Anchor href="/mobile-app">mobile app</Anchor> page.
+        支持 iOS 和 Android，可随时整理收件箱和管理助手。更多信息请查看{" "}
+        <Anchor href="/mobile-app">移动应用</Anchor> page.
       </span>
     ),
     answerText:
-      "Yes, we have iOS and Android apps so you can triage your inbox and manage your assistant on the go. Learn more on the mobile app page.",
+      "支持 iOS 和 Android，可随时整理收件箱和管理助手，详情见移动应用页面。",
   },
   {
     question: "Is the code open-source?",
     answer: (
       <span>
-        Yes! You can see the entire source code for the inbox zero app in our{" "}
+        可以通过以下位置查看原始开源项目的源码：{" "}
         <Anchor href="/github" newTab>
-          GitHub repo
+          GitHub 仓库
         </Anchor>
         .
       </span>
     ),
     answerText:
-      "Yes! You can see the entire source code for the inbox zero app in our GitHub repo.",
+      "可通过 GitHub 仓库查看原始开源项目的完整源码。",
   },
   {
     question: "Do you offer refunds?",
     answer: (
       <span>
-        Yes, if you don't think we provided you with value send us an{" "}
+        如需申请退款，请发送{" "}
         <Anchor href={`mailto:${env.NEXT_PUBLIC_SUPPORT_EMAIL}`}>email</Anchor>{" "}
-        within 14 days of upgrading and we'll refund you.
+        ，并在升级后 14 天内联系服务提供方。
       </span>
     ),
     answerText:
-      "Yes, if you don't think we provided you with value send us an email within 14 days of upgrading and we'll refund you.",
+      "如需申请退款，请在升级后 14 天内通过邮件联系服务提供方。",
   },
   {
     question: `Can I try ${BRAND_NAME} for free?`,
@@ -118,7 +114,7 @@ export function FAQs() {
         // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON.stringify on controlled object is safe
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
-      <SectionHeading>Frequently asked questions</SectionHeading>
+      <SectionHeading>常见问题</SectionHeading>
       <SectionContent>
         <CardWrapper>
           <dl className="grid md:grid-cols-2 gap-6">

@@ -9,7 +9,7 @@ test("opens settings in a dialog from a url and from the nav", async ({
   const { id: emailAccountId, email } = await getEmailAccount(page);
   const dialog = page.getByRole("dialog");
   const dialogHeading = dialog.getByRole("heading", {
-    name: "Email Accounts",
+    name: "邮箱账户",
     exact: true,
   });
 
@@ -22,14 +22,14 @@ test("opens settings in a dialog from a url and from the nav", async ({
 
   await page.goto("/settings");
   await expect(
-    page.getByRole("heading", { name: "Settings", exact: true }),
+    page.getByRole("heading", { name: "设置", exact: true }),
   ).toBeVisible({ timeout: 60_000 });
   await page
     .locator('[data-sidebar="footer"]')
     .getByRole("button")
     .filter({ hasText: email })
     .click();
-  await page.getByRole("menuitem", { name: "Settings" }).click();
+  await page.getByRole("menuitem", { name: "设置" }).click();
   await expect(page).toHaveURL(/settings=open/);
   await expect(dialogHeading).toBeVisible();
 
@@ -47,8 +47,8 @@ for (const view of ["mail", "settings"]) {
     await page.goto(pathname);
     await expect(
       view === "mail"
-        ? page.getByRole("listbox", { name: "Conversations" })
-        : page.getByRole("heading", { name: "Settings", exact: true }),
+        ? page.getByRole("listbox", { name: "会话" })
+        : page.getByRole("heading", { name: "设置", exact: true }),
     ).toBeVisible({ timeout: 60_000 });
 
     const modifier = process.platform === "darwin" ? "Meta" : "Control";
@@ -60,12 +60,12 @@ for (const view of ["mail", "settings"]) {
     // name is not just the label. Match the label element instead.
     await page
       .getByRole("option")
-      .filter({ has: page.getByText("Settings", { exact: true }) })
+      .filter({ has: page.getByText("设置", { exact: true }) })
       .click();
 
     const dialog = page.getByRole("dialog");
     await expect(
-      dialog.getByRole("heading", { name: "Email Accounts", exact: true }),
+      dialog.getByRole("heading", { name: "邮箱账户", exact: true }),
     ).toBeVisible();
     await expect(search).toBeHidden();
     expect(new URL(page.url()).pathname).toBe(pathname);
@@ -87,7 +87,7 @@ test("opens mail from Command K", async ({ page }, testInfo) => {
   const { id: emailAccountId } = await getEmailAccount(page);
   await page.goto("/settings");
   await expect(
-    page.getByRole("heading", { name: "Settings", exact: true }),
+    page.getByRole("heading", { name: "设置", exact: true }),
   ).toBeVisible({ timeout: 60_000 });
 
   const modifier = process.platform === "darwin" ? "Meta" : "Control";
@@ -99,7 +99,7 @@ test("opens mail from Command K", async ({ page }, testInfo) => {
 
   await expect(page).toHaveURL(new RegExp(`/${emailAccountId}/mail$`));
   await expect(
-    page.getByRole("listbox", { name: "Conversations" }),
+    page.getByRole("listbox", { name: "会话" }),
   ).toBeVisible({ timeout: 60_000 });
   await capturePlaywrightCheckpoint(page, testInfo, "command-k-go-to-mail");
 });

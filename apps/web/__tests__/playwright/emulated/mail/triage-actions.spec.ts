@@ -28,10 +28,10 @@ test("archives a selected conversation and restores it with undo", async ({
   await expect(page.getByText("1 selected", { exact: true })).toBeVisible();
   await expect(
     page
-      .getByRole("button", { name: "Mark as read" })
-      .or(page.getByRole("button", { name: "Mark as unread" })),
+      .getByRole("button", { name: "标为已读" })
+      .or(page.getByRole("button", { name: "标为未读" })),
   ).toBeVisible();
-  await page.getByRole("button", { name: "Archive", exact: true }).click();
+  await page.getByRole("button", { name: "归档", exact: true }).click();
 
   await expect(archiveConversation).toHaveCount(0);
   await expectEngineMutation(page, emailAccountId, "archive", ARCHIVE_THREAD);
@@ -79,7 +79,7 @@ test("shows a queue_full toast when a second archive cannot be admitted", async 
   try {
     await expect(first).toBeVisible();
     await first.getByRole("checkbox").click();
-    await page.getByRole("button", { name: "Archive", exact: true }).click();
+    await page.getByRole("button", { name: "归档", exact: true }).click();
     await expect(first).toHaveCount(0);
     await expect
       .poll(() =>
@@ -94,7 +94,7 @@ test("shows a queue_full toast when a second archive cannot be admitted", async 
 
     await expect(second).toBeVisible();
     await second.getByRole("checkbox").click();
-    await page.getByRole("button", { name: "Archive", exact: true }).click();
+    await page.getByRole("button", { name: "归档", exact: true }).click();
     await expect(second).toBeVisible();
     await expect(
       page.locator("[data-sonner-toast]").filter({
@@ -144,8 +144,8 @@ test("deletes an open conversation and restores it from Trash", async ({
     page.getByRole("heading", { name: "Delete Action Message" }),
   ).toBeVisible();
 
-  await page.getByRole("button", { name: /^More actions/ }).click();
-  await page.getByRole("menuitem", { name: /^Delete/ }).click();
+  await page.getByRole("button", { name: /更多操作/ }).click();
+  await page.getByRole("menuitem", { name: /删除/ }).click();
 
   let advancedThreadId: string | null = null;
   try {
@@ -191,12 +191,12 @@ test("advances the split reader after archiving an open conversation", async ({
   const settingsResponse = await settingsResponsePromise;
   expect(settingsResponse.ok()).toBeTruthy();
   const settings = (await settingsResponse.json()) as MailSettingsResponse;
-  const emptyReader = page.getByText("Nothing selected", { exact: true });
+  const emptyReader = page.getByText("未选择邮件", { exact: true });
   if (settings.layout === "SPLIT") {
     await expect(emptyReader).toBeVisible();
   } else {
     await page
-      .getByRole("button", { name: "Switch list or split view" })
+      .getByRole("button", { name: "切换列表或分栏视图" })
       .click();
     await expect(emptyReader).toBeVisible();
   }
@@ -205,7 +205,7 @@ test("advances the split reader after archiving an open conversation", async ({
     conversations,
     "Second Unread Command Message",
   );
-  await page.getByRole("button", { name: "Unread", exact: true }).click();
+  await page.getByRole("button", { name: "未读", exact: true }).click();
   await expect(conversation).toBeVisible();
   await conversation.click();
   await expect(
@@ -259,7 +259,7 @@ test("advances the split reader after archiving an open conversation", async ({
     await expect
       .poll(() => new URL(page.url()).searchParams.get("thread-id"))
       .not.toBeNull();
-    await expect(page.getByRole("button", { name: /^Archive/ })).toBeVisible();
+    await expect(page.getByRole("button", { name: /归档/ })).toBeVisible();
     await capturePlaywrightCheckpoint(
       page,
       testInfo,
@@ -296,7 +296,7 @@ test("archives two selected conversations and restores both with undo", async ({
   await first.getByRole("checkbox").click();
   await second.getByRole("checkbox").click();
   await expect(page.getByText("2 selected", { exact: true })).toBeVisible();
-  await page.getByRole("button", { name: "Archive", exact: true }).click();
+  await page.getByRole("button", { name: "归档", exact: true }).click();
   await expect(first).toHaveCount(0);
   await expect(second).toHaveCount(0);
   await expectEngineMutation(page, emailAccountId, "archive", FIRST_THREAD);
@@ -338,7 +338,7 @@ test("selects and clears all conversations from the split tabs row", async ({
   expect(conversationCount).toBeGreaterThan(1);
 
   const selectAll = page.getByRole("checkbox", {
-    name: "Select all conversations",
+    name: "选择全部会话",
   });
   await expect(selectAll).toBeHidden();
 
@@ -437,7 +437,7 @@ async function expectEngineMutation(
 async function undoLastTriage(page: Page) {
   const undoButton = page
     .getByRole("region", { name: "Notifications alt+T" })
-    .getByRole("button", { name: /^Undo/ });
+    .getByRole("button", { name: /撤销/ });
   if (await undoButton.isVisible()) {
     await undoButton.click();
     return;
@@ -464,8 +464,8 @@ async function markThreadUnread(
     waitUntil: "domcontentloaded",
   });
   await page
-    .getByRole("group", { name: "Thread actions" })
-    .getByRole("button", { name: /Mark as unread/ })
+    .getByRole("group", { name: "会话操作" })
+    .getByRole("button", { name: /标为未读/ })
     .click();
   await expect
     .poll(

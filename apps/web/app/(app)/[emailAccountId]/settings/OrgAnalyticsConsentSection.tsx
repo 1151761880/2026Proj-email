@@ -29,7 +29,7 @@ export function OrgAnalyticsConsentSection({
     updateAnalyticsConsentAction.bind(null, emailAccountId),
     {
       onSuccess: () => {
-        toastSuccess({ description: "Settings updated!" });
+        toastSuccess({ description: "设置已更新！" });
       },
       onError: (error) => {
         mutate();
@@ -70,9 +70,9 @@ export function OrgAnalyticsConsentSection({
           <ItemSeparator />
           <Item size="sm">
             <ItemContent>
-              <ItemTitle>Organization Analytics</ItemTitle>
+              <ItemTitle>组织统计</ItemTitle>
               <ItemDescription>
-                {`Allow organization admins${data.organizationName ? ` from ${data.organizationName}` : ""} to view your usage`}
+                {`允许组织管理员${data.organizationName ? `（来自 ${data.organizationName}）` : ""}查看你的使用量`}
               </ItemDescription>
             </ItemContent>
             <ItemActions>

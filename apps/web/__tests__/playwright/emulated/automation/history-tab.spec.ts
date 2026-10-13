@@ -46,17 +46,17 @@ test("shows persisted execution history and preserves rule filters", async ({
 
   await page.goto(`/${emailAccountId}/automation?tab=history`);
   await expect(
-    page.getByRole("button", { name: "History", exact: true }),
+    page.getByRole("button", { name: "历史记录", exact: true }),
   ).toHaveAttribute("data-selected", "true");
   await expectVisibleAfterTransientFetch(
     page,
     page.getByText(HISTORY_RULE_NAME, { exact: true }),
   );
   await expect(
-    page.getByText("Applied manually", { exact: true }),
+    page.getByText("已手动应用", { exact: true }),
   ).toBeVisible();
 
-  await page.getByRole("button", { name: "All rules" }).click();
+  await page.getByRole("button", { name: "全部规则" }).click();
   await page.getByRole("menuitem", { name: HISTORY_RULE_NAME }).click();
   await expect(page).toHaveURL(
     (url) => url.searchParams.get("ruleId") === HISTORY_RULE_ID,
@@ -67,16 +67,16 @@ test("shows persisted execution history and preserves rule filters", async ({
     page.getByRole("button", { name: HISTORY_RULE_NAME }),
   );
   await expect(
-    page.getByText("Applied manually", { exact: true }),
+    page.getByText("已手动应用", { exact: true }),
   ).toBeVisible();
 
   await page.getByRole("button", { name: HISTORY_RULE_NAME }).click();
-  await page.getByRole("menuitem", { name: "No match" }).click();
-  await expect(page.getByText("No history", { exact: true })).toBeVisible({
+  await page.getByRole("menuitem", { name: "未匹配" }).click();
+  await expect(page.getByText("暂无历史记录", { exact: true })).toBeVisible({
     timeout: 60_000,
   });
   await expect(
-    page.getByText("No emails have been processed for this rule.", {
+    page.getByText("此规则尚未处理任何邮件。", {
       exact: true,
     }),
   ).toBeVisible();
@@ -156,12 +156,12 @@ test("groups conversations and lazily pages older messages without duplicating t
   );
   await expect(page.getByText("52 messages handled")).toBeVisible();
   expect(detailRequests).toHaveLength(0);
-  await page.getByRole("button", { name: "Expand conversation" }).click();
+  await page.getByRole("button", { name: "展开会话" }).click();
   await expect(page.getByText("Page 1 of 2", { exact: true })).toBeVisible();
   await expect(
-    page.getByText("Email unavailable", { exact: true }),
+    page.getByText("邮件不可用", { exact: true }),
   ).toHaveCount(50);
-  await expect(page.getByText("Applied manually", { exact: true })).toHaveCount(
+  await expect(page.getByText("已手动应用", { exact: true })).toHaveCount(
     1,
   );
   await page.screenshot({
@@ -169,18 +169,18 @@ test("groups conversations and lazily pages older messages without duplicating t
     fullPage: true,
   });
   await page
-    .getByRole("button", { name: "Next messages", exact: true })
+    .getByRole("button", { name: "下一页邮件", exact: true })
     .click();
   await expect(page.getByText("Page 2 of 2", { exact: true })).toBeVisible();
   await expect(
-    page.getByText("Email unavailable", { exact: true }),
+    page.getByText("邮件不可用", { exact: true }),
   ).toHaveCount(1);
   await expect(
-    page.getByRole("button", { name: "Next messages", exact: true }),
+    page.getByRole("button", { name: "下一页邮件", exact: true }),
   ).toBeDisabled();
-  await page.getByRole("button", { name: "Collapse conversation" }).click();
+  await page.getByRole("button", { name: "收起会话" }).click();
   await expect(
-    page.getByText("Email unavailable", { exact: true }),
+    page.getByText("邮件不可用", { exact: true }),
   ).toHaveCount(0);
   await page.screenshot({
     path: testInfo.outputPath("history-collapsed.png"),

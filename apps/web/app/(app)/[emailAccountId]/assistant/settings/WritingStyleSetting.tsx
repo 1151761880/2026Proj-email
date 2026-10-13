@@ -34,8 +34,8 @@ export function WritingStyleSetting() {
 
   return (
     <SettingCard
-      title="Writing style"
-      description="Define your tone and style."
+      title="写作风格"
+      description="设置语气和表达风格。"
       right={
         <LoadingContent
           loading={isLoading}
@@ -44,7 +44,7 @@ export function WritingStyleSetting() {
         >
           <WritingStyleDialog currentWritingStyle={data?.writingStyle || ""}>
             <Button variant="outline" size="sm">
-              {hasWritingStyle ? "Edit" : "Set"}
+              {hasWritingStyle ? "编辑" : "设置"}
             </Button>
           </WritingStyleDialog>
         </LoadingContent>
@@ -79,7 +79,7 @@ function WritingStyleDialog({
     {
       onSuccess: () => {
         toastSuccess({
-          description: "Writing style saved!",
+          description: "写作风格已保存！",
         });
         setOpen(false);
       },
@@ -99,9 +99,9 @@ function WritingStyleDialog({
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="max-w-2xl">
         <DialogHeader>
-          <DialogTitle>Writing style</DialogTitle>
+          <DialogTitle>写作风格</DialogTitle>
           <DialogDescription>
-            Used to draft replies in your voice.
+            用于起草符合你表达风格的回复。
           </DialogDescription>
         </DialogHeader>
 
@@ -119,16 +119,7 @@ function WritingStyleDialog({
                   className="prose prose-sm dark:prose-invert max-w-none [&_p.is-editor-empty:first-child::before]:pointer-events-none [&_p.is-editor-empty:first-child::before]:float-left [&_p.is-editor-empty:first-child::before]:h-0 [&_p.is-editor-empty:first-child::before]:text-muted-foreground [&_p.is-editor-empty:first-child::before]:content-[attr(data-placeholder)]"
                   autofocus={false}
                   preservePastedLineBreaks
-                  placeholder={`Typical Length: 2-3 sentences
-
-Formality: Informal but professional
-
-Common Greeting: Hey,
-
-Notable Traits:
-- Uses contractions frequently
-- Concise and direct responses
-- Minimal closings`}
+                  placeholder={"典型长度：2–3 句话；语气：自然且专业；常用称呼：你好；特点：措辞简洁，直接回应，结尾简短。"}
                 />
               </div>
             )}
@@ -139,7 +130,7 @@ Notable Traits:
             </p>
           )}
           <Button type="submit" className="mt-4" loading={isExecuting}>
-            Save
+            保存
           </Button>
         </form>
       </DialogContent>

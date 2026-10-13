@@ -30,7 +30,7 @@ export function AddAccount({
     } catch (error) {
       console.error(`Error initiating ${provider} link:`, error);
       toastError({
-        title: `Error initiating ${isGoogleProvider(provider) ? "Google" : "Microsoft"} link`,
+        title: `无法连接 ${isGoogleProvider(provider) ? "Google" : "Microsoft"} 账户`,
         description:
           error instanceof Error
             ? error.message
@@ -57,7 +57,7 @@ export function AddAccount({
             height={24}
             unoptimized
           />
-          <span className="ml-2">Add Google</span>
+          <span className="ml-2">添加 Google 邮箱</span>
         </Button>
         <Button
           variant="outline"
@@ -73,7 +73,7 @@ export function AddAccount({
             height={24}
             unoptimized
           />
-          <span className="ml-2">Add Microsoft</span>
+          <span className="ml-2">添加 Microsoft 邮箱</span>
         </Button>
       </div>
 

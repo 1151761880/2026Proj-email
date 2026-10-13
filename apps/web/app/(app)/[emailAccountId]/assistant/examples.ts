@@ -73,14 +73,14 @@ const founderPromptArray = [
 export function getPersonas(provider: string) {
   return {
     founder: {
-      label: "🚀 Founder",
+      label: "🚀 创业者",
       promptArray: processPromptsWithTerminology(founderPromptArray, provider),
       get prompt() {
         return formatPromptArray(this.promptArray);
       },
     },
     influencer: {
-      label: "📹 Influencer",
+      label: "📹 内容创作者",
       promptArray: processPromptsWithTerminology(
         [
           ...commonPrompts,
@@ -100,7 +100,7 @@ export function getPersonas(provider: string) {
       },
     },
     realtor: {
-      label: "🏠 Realtor",
+      label: "🏠 房产经纪人",
       promptArray: processPromptsWithTerminology(
         [
           ...commonPrompts,
@@ -121,7 +121,7 @@ export function getPersonas(provider: string) {
       },
     },
     investor: {
-      label: "💰 Investor",
+      label: "💰 投资者",
       promptArray: processPromptsWithTerminology(
         [
           ...commonPrompts,
@@ -147,14 +147,14 @@ export function getPersonas(provider: string) {
       },
     },
     assistant: {
-      label: "📋 Assistant",
+      label: "📋 助理",
       promptArray: processPromptsWithTerminology(founderPromptArray, provider),
       get prompt() {
         return formatPromptArray(this.promptArray);
       },
     },
     developer: {
-      label: "👨‍💻 Developer",
+      label: "👨‍💻 开发者",
       promptArray: processPromptsWithTerminology(
         [
           ...commonPrompts,
@@ -175,7 +175,7 @@ export function getPersonas(provider: string) {
       },
     },
     designer: {
-      label: "🎨 Designer",
+      label: "🎨 设计师",
       promptArray: processPromptsWithTerminology(
         [
           ...commonPrompts,
@@ -196,7 +196,7 @@ export function getPersonas(provider: string) {
       },
     },
     sales: {
-      label: "🤝 Sales",
+      label: "🤝 销售",
       promptArray: processPromptsWithTerminology(
         [
           ...commonPrompts,
@@ -220,7 +220,7 @@ export function getPersonas(provider: string) {
       },
     },
     marketer: {
-      label: "📢 Marketer",
+      label: "📢 市场营销",
       promptArray: processPromptsWithTerminology(
         [
           ...commonPrompts,
@@ -240,7 +240,7 @@ export function getPersonas(provider: string) {
       },
     },
     support: {
-      label: "🛠️ Support",
+      label: "🛠️ 客户支持",
       promptArray: processPromptsWithTerminology(
         [
           ...commonPrompts,
@@ -264,7 +264,7 @@ export function getPersonas(provider: string) {
       },
     },
     recruiter: {
-      label: "👥 Recruiter",
+      label: "👥 招聘人员",
       promptArray: processPromptsWithTerminology(
         [
           ...commonPrompts,
@@ -295,7 +295,7 @@ export function getPersonas(provider: string) {
       },
     },
     student: {
-      label: "👩‍🎓 Student",
+      label: "👩‍🎓 学生",
       promptArray: processPromptsWithTerminology(
         [
           "Label emails from professors and teaching assistants as @[School]",
@@ -314,7 +314,7 @@ export function getPersonas(provider: string) {
       },
     },
     reachout: {
-      label: "💬 Outreach",
+      label: "💬 对外联络",
       promptArray: processPromptsWithTerminology(
         [
           "If someone replies to me that they're interested, label it @[Interested] and draft a reply with my calendar link: https://cal.com/example",
@@ -326,7 +326,7 @@ export function getPersonas(provider: string) {
       },
     },
     other: {
-      label: "🤖 Other",
+      label: "🤖 其他",
       promptArray: getExamplePrompts(provider),
       get prompt() {
         return formatPromptArray(this.promptArray);

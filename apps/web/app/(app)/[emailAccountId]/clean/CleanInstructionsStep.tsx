@@ -38,7 +38,7 @@ export function CleanInstructionsStep() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="text-center">
-      <TypographyH3>Which emails should stay in your inbox?</TypographyH3>
+      <TypographyH3>哪些邮件应保留在收件箱？</TypographyH3>
 
       <div className="mt-4 grid gap-4">
         <Toggle
@@ -76,7 +76,7 @@ export function CleanInstructionsStep() {
           enabled={skipStates.skipConversation}
           onChange={(value) => setSkipStates({ skipConversation: value })}
           labelRight="Conversations"
-          tooltipText="Email threads where you sent a reply"
+          tooltipText="你已回复的邮件会话"
         />
         <Toggle
           name="custom"
@@ -94,17 +94,14 @@ export function CleanInstructionsStep() {
             rows={3}
             name="instructions"
             registerProps={register("instructions")}
-            placeholder={`Example:
-
-I work as a freelance designer. Don't archive emails from clients.
-I'm in the middle of a building project, keep those emails too.`}
+            placeholder={"例如：我是一名自由设计师，请保留客户邮件。我正在参与一个建筑项目，相关邮件也需要保留。"}
             error={errors.instructions}
           />
         </div>
       )}
 
       <div className="mt-6 flex justify-center">
-        <Button type="submit">Continue</Button>
+        <Button type="submit">继续</Button>
       </div>
     </form>
   );

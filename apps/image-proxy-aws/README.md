@@ -1,6 +1,6 @@
 # AWS Image Proxy
 
-This app provides an AWS Lambda adapter for the Inbox Zero image proxy contract.
+This app provides an AWS Lambda adapter for the 十组邮件小助手 image proxy contract.
 
 Accepted request shapes:
 

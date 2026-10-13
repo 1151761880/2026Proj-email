@@ -16,7 +16,7 @@ type TelegramUserProfilePhotos = {
 export const TELEGRAM_BOT_COMMANDS: TelegramBotCommand[] = [
   {
     command: "connect",
-    description: "Link your Inbox Zero account with /connect <code>",
+    description: "Link your 十组邮件小助手 account with /connect <code>",
   },
   {
     command: "switch",

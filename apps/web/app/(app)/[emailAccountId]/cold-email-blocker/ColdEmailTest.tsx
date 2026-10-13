@@ -10,11 +10,10 @@ export function ColdEmailTest() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Test cold email blocker</CardTitle>
+        <CardTitle>测试陌生邮件拦截</CardTitle>
 
         <CardDescription>
-          Check how your the cold email blocker performs against previous
-          emails.
+          检查拦截功能对历史邮件的识别结果。
         </CardDescription>
       </CardHeader>
       <TestRulesContent />

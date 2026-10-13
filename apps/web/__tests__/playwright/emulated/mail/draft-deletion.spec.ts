@@ -10,10 +10,10 @@ test("updates the draft indicator after deletion and retains remaining drafts", 
   await page.route("**/api/mobile/mailbox-sync", (route) => route.abort());
   const { conversations } = await openMail(page);
   if (
-    !(await page.getByText("Nothing selected", { exact: true }).isVisible())
+    !(await page.getByText("未选择邮件", { exact: true }).isVisible())
   ) {
     await page
-      .getByRole("button", { name: "Switch list or split view" })
+      .getByRole("button", { name: "切换列表或分栏视图" })
       .click();
   }
   const row = conversationWithSubject(
@@ -21,10 +21,10 @@ test("updates the draft indicator after deletion and retains remaining drafts", 
     conversations,
     "Draft deletion example",
   );
-  await expect(row.getByText("Draft", { exact: true })).toBeVisible();
+  await expect(row.getByText("草稿", { exact: true })).toBeVisible();
   await row.click();
   const discardButtons = page.getByRole("button", {
-    name: "Discard draft",
+    name: "丢弃草稿",
     exact: true,
   });
   await expect(discardButtons).toHaveCount(2);
@@ -36,17 +36,17 @@ test("updates the draft indicator after deletion and retains remaining drafts", 
   });
   await discard.click();
   await expect(
-    page.getByText("Failed to discard draft", { exact: true }),
+    page.getByText("丢弃草稿失败", { exact: true }),
   ).toBeVisible();
   await expect(discard).toBeVisible();
-  await expect(row.getByText("Draft", { exact: true })).toBeVisible();
+  await expect(row.getByText("草稿", { exact: true })).toBeVisible();
   await page.unroute("**/mail**");
   await discard.click();
   await expect(discardButtons).toHaveCount(1);
-  await expect(row.getByText("Draft", { exact: true })).toBeVisible();
+  await expect(row.getByText("草稿", { exact: true })).toBeVisible();
   await expect(discard).toBeVisible();
   await discard.click();
   await expect(discardButtons).toHaveCount(0);
-  await expect(row.getByText("Draft", { exact: true })).toHaveCount(0);
+  await expect(row.getByText("草稿", { exact: true })).toHaveCount(0);
   await capturePlaywrightCheckpoint(page, testInfo, "deleted-draft-indicator");
 });

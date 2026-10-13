@@ -76,7 +76,7 @@ export async function onRun(
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
         toastError({
-          title: "Failed to fetch emails",
+          title: "获取邮件失败",
           description:
             typeof errorData.error === "string"
               ? errorData.error
@@ -91,8 +91,8 @@ export async function onRun(
 
       if (!data.threads) {
         toastError({
-          title: "Invalid response",
-          description: "Failed to process emails. Please try again.",
+          title: "响应无效",
+          description: "处理邮件失败，请重试。",
         });
         onComplete("error", totalProcessed);
         return;
@@ -144,7 +144,7 @@ export async function onRun(
     abortController.abort();
     captureException(error);
     toastError({
-      title: "Failed to process emails",
+      title: "处理邮件失败",
       description: error instanceof Error ? error.message : "Please try again.",
     });
     onComplete("error", totalProcessed);

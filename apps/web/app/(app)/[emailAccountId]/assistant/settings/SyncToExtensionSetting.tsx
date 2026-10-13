@@ -104,7 +104,7 @@ export function SyncToExtensionSetting() {
 
   async function handleSync() {
     if (selectedTabs.length === 0) {
-      toast.info("No tabs selected");
+      toast.info("未选择标签页");
       return;
     }
 
@@ -125,18 +125,18 @@ export function SyncToExtensionSetting() {
           parts.push(`${result.summary.created} created`);
         if (result.summary.skipped > 0)
           parts.push(`${result.summary.skipped} already existed`);
-        toast.success(`Synced tabs to extension: ${parts.join(", ")}`);
+        toast.success(`已向扩展同步标签页：${parts.join(", ")}`);
       } else {
-        toast.error("Failed to sync tabs to extension");
+        toast.error("向扩展同步标签页失败");
       }
       setOpen(false);
     } catch (error) {
       if (error instanceof Error && error.message === "not_chrome") {
-        toast.error("Syncing to extension requires a Chromium browser");
+        toast.error("同步扩展需要使用 Chromium 浏览器");
       } else {
-        toast.error("Inbox Zero Tabs extension not found. Install it first.", {
+        toast.error("未找到邮箱标签页扩展，请先安装。", {
           action: {
-            label: "Install",
+            label: "安装",
             onClick: () => window.open(EXTENSION_URL, "_blank"),
           },
         });
@@ -150,26 +150,26 @@ export function SyncToExtensionSetting() {
 
   return (
     <SettingCard
-      title="Sync to browser extension"
-      description="Sync your rules to the Inbox Zero Tabs browser extension. Each label rule becomes a tab in Gmail."
+      title="同步至浏览器扩展"
+      description="将规则同步至邮箱标签页扩展，每条标签规则将成为 Gmail 中的一个标签页。"
       right={
         <Dialog open={open} onOpenChange={handleOpenChange}>
           <DialogTrigger asChild>
             <Button variant="outline" size="sm">
-              Sync
+              同步
             </Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-md">
             <DialogHeader>
-              <DialogTitle>Sync tabs to extension</DialogTitle>
+              <DialogTitle>向扩展同步标签页</DialogTitle>
               <DialogDescription>
-                Select which label rules to sync as Gmail tabs.
+                选择需要同步为 Gmail 标签页的规则。
               </DialogDescription>
             </DialogHeader>
 
             {allTabs.length === 0 ? (
               <p className="py-4 text-sm text-muted-foreground">
-                No rules with label actions found.
+                未找到包含标签操作的规则。
               </p>
             ) : (
               <div className="space-y-2 py-2">
@@ -205,7 +205,7 @@ export function SyncToExtensionSetting() {
                 loading={isSyncing}
                 disabled={selectedTabs.length === 0}
               >
-                {`Sync ${selectedTabs.length} tab${selectedTabs.length === 1 ? "" : "s"}`}
+                {`同步 ${selectedTabs.length} 个标签页`}
               </Button>
             </DialogFooter>
           </DialogContent>

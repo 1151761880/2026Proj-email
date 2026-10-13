@@ -1,9 +1,9 @@
 ---
 title: 'GCP + Cloudflare Tunnel'
-description: 'Deploy Inbox Zero on Google Cloud Compute Engine with Cloudflare Tunnel for HTTPS — no reverse proxy or SSL certificates required'
+description: 'Deploy 十组邮件小助手 on Google Cloud Compute Engine with Cloudflare Tunnel for HTTPS — no reverse proxy or SSL certificates required'
 ---
 
-This guide covers deploying Inbox Zero on a GCP Compute Engine VM using Cloudflare Tunnel for secure HTTPS access. Cloudflare Tunnel eliminates the need for a reverse proxy (Nginx/Caddy) and SSL certificate management — the tunnel connects outbound from your VM to Cloudflare's edge, so no inbound firewall ports need to be opened.
+This guide covers deploying 十组邮件小助手 on a GCP Compute Engine VM using Cloudflare Tunnel for secure HTTPS access. Cloudflare Tunnel eliminates the need for a reverse proxy (Nginx/Caddy) and SSL certificate management — the tunnel connects outbound from your VM to Cloudflare's edge, so no inbound firewall ports need to be opened.
 
 **Why Cloudflare Tunnel?**
 - HTTPS with no Nginx, Caddy, or Let's Encrypt setup
@@ -105,7 +105,7 @@ Back in the Cloudflare dashboard tunnel settings:
 
 Your app will be reachable at `https://inbox.yourdomain.com` once the tunnel is running and the app is started.
 
-## 4. Set Up Inbox Zero
+## 4. Set Up 十组邮件小助手
 
 ### Option A: CLI (recommended)
 

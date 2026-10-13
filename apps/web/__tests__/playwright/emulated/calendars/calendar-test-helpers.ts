@@ -11,7 +11,7 @@ export async function openCalendars(page: Page) {
   await navigateUntilReady(
     page,
     `/${emailAccountId}/calendars`,
-    page.getByRole("heading", { name: "Calendars", exact: true }),
+    page.getByRole("heading", { name: "日历", exact: true }),
   );
   return { emailAccountId };
 }

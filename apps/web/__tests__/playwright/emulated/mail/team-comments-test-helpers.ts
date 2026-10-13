@@ -293,7 +293,7 @@ export async function readPublisherThread(
 }
 
 export async function openTeamComments(page: Page) {
-  await page.getByRole("button", { name: /^More actions/ }).click();
+  await page.getByRole("button", { name: /更多操作/ }).click();
   await page.getByRole("menuitem", { name: /^Comment\b/ }).click();
-  await expect(page.getByLabel("Internal comment")).toBeFocused();
+  await expect(page.getByLabel("内部评论")).toBeFocused();
 }

@@ -39,13 +39,13 @@ const pricingFaqs: {
       "Do you offer discounts for students, nonprofits, or open-source projects?",
     answer: (
       <span>
-        Yes! Send us an{" "}
+        请发送{" "}
         <Anchor href={`mailto:${env.NEXT_PUBLIC_SUPPORT_EMAIL}`}>email</Anchor>{" "}
-        and we&apos;ll set up a discounted plan for you.
+        ，联系服务提供方了解优惠方案。
       </span>
     ),
     answerText:
-      "Yes! Send us an email and we'll set up a discounted plan for you.",
+      "请通过邮件联系服务提供方了解优惠方案。",
   },
   {
     question: "What happens if I cancel?",
@@ -56,27 +56,26 @@ const pricingFaqs: {
     question: "Do you offer refunds?",
     answer: (
       <span>
-        Yes, if you don&apos;t think we provided you with value send us an{" "}
+        如需申请退款，请发送{" "}
         <Anchor href={`mailto:${env.NEXT_PUBLIC_SUPPORT_EMAIL}`}>email</Anchor>{" "}
-        within 14 days of upgrading and we&apos;ll refund you.
+        ，并在升级后 14 天内联系服务提供方。
       </span>
     ),
     answerText:
-      "Yes, if you don't think we provided you with value send us an email within 14 days of upgrading and we'll refund you.",
+      "如需申请退款，请在升级后 14 天内通过邮件联系服务提供方。",
   },
   {
     question: "Need a custom plan for your enterprise?",
     answer: (
       <span>
         <Anchor href="https://www.getinboxzero.com/sales">
-          Contact our sales team
+          联系销售团队
         </Anchor>{" "}
-        for custom pricing, SSO, SCIM, on-premise deployment, and dedicated
-        support.
+        了解定制价格、单点登录、SCIM、本地部署和专属支持。
       </span>
     ),
     answerText:
-      "Contact our sales team for custom pricing, SSO, SCIM, on-premise deployment, and dedicated support.",
+      "联系销售团队了解定制价格、单点登录、SCIM、本地部署和专属支持。",
   },
 ];
 
@@ -104,7 +103,7 @@ export function PricingFAQs() {
         // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON.stringify on controlled object is safe
         dangerouslySetInnerHTML={{ __html: JSON.stringify(pricingFaqJsonLd) }}
       />
-      <SectionHeading>Pricing FAQ</SectionHeading>
+      <SectionHeading>价格常见问题</SectionHeading>
       <SectionContent>
         <CardWrapper>
           <dl className="grid md:grid-cols-2 gap-6">

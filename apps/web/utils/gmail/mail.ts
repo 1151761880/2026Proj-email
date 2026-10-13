@@ -100,7 +100,7 @@ const createRawMailMessage = async ({
       headerMessageId: replyToEmail?.headerMessageId || "",
       references: replyToEmail?.references,
     }),
-    headers: { "X-Mailer": "Inbox Zero Web" },
+    headers: { "X-Mailer": "十组邮件小助手 Web" },
   });
 };
 

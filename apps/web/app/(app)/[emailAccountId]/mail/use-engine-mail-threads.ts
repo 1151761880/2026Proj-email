@@ -176,7 +176,7 @@ function mailboxQueryError(
 ): { error: string; info: { error: string } } | undefined {
   if (!error) return;
   return {
-    error: "Couldn't load this mailbox.",
-    info: { error: "Couldn't load this mailbox." },
+    error: "无法加载此邮箱。",
+    info: { error: "无法加载此邮箱。" },
   };
 }

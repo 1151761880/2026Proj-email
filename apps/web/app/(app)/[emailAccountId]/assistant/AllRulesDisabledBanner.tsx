@@ -26,8 +26,8 @@ export function AllRulesDisabledBanner() {
       className="max-w-full mt-4"
       variant="blue"
       icon={<SettingsIcon className="h-5 w-5" />}
-      title="All rules are disabled"
-      description="Your AI Assistant isn't processing emails because all rules are disabled. Enable them to get started."
+      title="所有规则均已禁用"
+      description="所有规则均已禁用，智能助手暂未处理邮件。启用规则后即可开始。"
       action={
         <Button asChild variant="primaryBlack">
           <Link
@@ -35,7 +35,7 @@ export function AllRulesDisabledBanner() {
               force: true,
             })}
           >
-            Set up rules
+            配置规则
           </Link>
         </Button>
       }

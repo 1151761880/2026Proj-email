@@ -26,18 +26,18 @@ for (const tier of ["PLUS_MONTHLY", "PROFESSIONAL_MONTHLY"] as const) {
     });
 
     await page.goto(`/${emailAccountId}/automation`);
-    const dialog = page.getByRole("dialog", { name: "Bulk Process Emails" });
+    const dialog = page.getByRole("dialog", { name: "批量处理邮件" });
     await expect(async () => {
       if (!(await dialog.isVisible())) {
-        await page.getByRole("button", { name: "Process Past Emails" }).click();
+        await page.getByRole("button", { name: "处理历史邮件" }).click();
       }
       await expect(dialog).toBeVisible({ timeout: 2000 });
     }).toPass({ timeout: 30_000 });
     await expect(
-      dialog.getByText("Run your rules on emails already in your inbox."),
+      dialog.getByText("对收件箱中的已有邮件执行规则。"),
     ).toBeVisible();
     const generateDraftReplies = dialog.getByRole("switch", {
-      name: "Generate draft replies",
+      name: "生成回复草稿",
     });
     await expect(generateDraftReplies).not.toBeChecked();
     await generateDraftReplies.click();
@@ -46,7 +46,7 @@ for (const tier of ["PLUS_MONTHLY", "PROFESSIONAL_MONTHLY"] as const) {
     await expect(generateDraftReplies).not.toBeChecked();
 
     const includeRead = dialog.getByRole("switch", {
-      name: "Include read emails",
+      name: "包含已读邮件",
     });
 
     if (tier === "PLUS_MONTHLY") {

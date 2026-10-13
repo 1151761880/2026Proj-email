@@ -136,7 +136,7 @@ export function TagInput({
                 removeTag(tag);
               }}
               className="rounded-full p-0.5 text-muted-foreground hover:bg-secondary-foreground/10"
-              aria-label={`Remove ${tag}`}
+              aria-label={`移除 ${tag}`}
             >
               <XIcon className="size-3" />
             </button>

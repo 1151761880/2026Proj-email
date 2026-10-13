@@ -75,7 +75,7 @@ describe("Loops webhook route", () => {
         email: {
           id: "email_1",
           emailMessageId: "message_1",
-          subject: "Welcome to Inbox Zero",
+          subject: "Welcome to 十组邮件小助手",
         },
         contactIdentity: {
           id: "contact_1",
@@ -93,7 +93,7 @@ describe("Loops webhook route", () => {
         loopId: "loop_1",
         emailId: "email_1",
         emailMessageId: "message_1",
-        emailSubject: "Welcome to Inbox Zero",
+        emailSubject: "Welcome to 十组邮件小助手",
       }),
       false,
       {
@@ -173,7 +173,7 @@ describe("Loops webhook route", () => {
         email: {
           id: "email_1",
           emailMessageId: "message_1",
-          subject: "Welcome to Inbox Zero",
+          subject: "Welcome to 十组邮件小助手",
         },
         contactIdentity: { email: "user@example.com" },
       }),
@@ -198,7 +198,7 @@ describe("Loops webhook route", () => {
         loopName: "Welcome series",
         emailId: "email_1",
         emailMessageId: "message_1",
-        emailSubject: "Welcome to Inbox Zero",
+        emailSubject: "Welcome to 十组邮件小助手",
       }),
       false,
       expect.anything(),
@@ -225,7 +225,7 @@ describe("Loops webhook route", () => {
         email: {
           id: "email_1",
           emailMessageId: "message_1",
-          subject: "Welcome to Inbox Zero",
+          subject: "Welcome to 十组邮件小助手",
         },
         contactIdentity: { email: "user@example.com" },
       }),
@@ -241,7 +241,7 @@ describe("Loops webhook route", () => {
         loopName: "Welcome series",
         emailId: "email_1",
         emailMessageId: "message_1",
-        emailSubject: "Welcome to Inbox Zero",
+        emailSubject: "Welcome to 十组邮件小助手",
       }),
       false,
       expect.anything(),

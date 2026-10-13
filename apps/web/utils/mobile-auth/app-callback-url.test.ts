@@ -49,7 +49,7 @@ describe("getInboxZeroCustomSchemeCallbackUrl", () => {
     ).toBeNull();
   });
 
-  it("recognizes sanitized Inbox Zero app callback URLs", () => {
+  it("recognizes sanitized 十组邮件小助手 app callback URLs", () => {
     expect(
       isInboxZeroAppCallbackUrl(
         "inboxzero://auth-callback?state=ADUZf5bSBOBSBzj58yThh17uiqgEg1PmsNzu-s4cMMA&code=xz5IkObSXqOpdCvBARrwRnqhOrxRQNX9qPeoT9G-jws",

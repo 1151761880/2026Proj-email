@@ -58,10 +58,10 @@ test("persists the booking link and scheduling timezone", async ({ page }) => {
   await bookingLinkInput.fill("https://cal.com/playwright-test");
   await bookingLinkInput
     .locator("xpath=ancestor::form")
-    .getByRole("button", { name: "Save" })
+    .getByRole("button", { name: "保存" })
     .click();
   await expect(
-    page.getByText("Booking link updated!", { exact: true }).last(),
+    page.getByText("预约链接已更新！", { exact: true }).last(),
   ).toBeVisible({ timeout: 120_000 });
   await expect
     .poll(() => getCalendarTestState(), { timeout: 120_000 })
@@ -72,14 +72,14 @@ test("persists the booking link and scheduling timezone", async ({ page }) => {
     hasText: "GMT",
   });
   await timezonePicker.click();
-  await page.getByPlaceholder("Search...").fill("Paris");
+  await page.getByPlaceholder("搜索…").fill("Paris");
   await page.getByRole("option", { name: /^Paris \(GMT/ }).click();
   await timezonePicker
     .locator("xpath=../..")
-    .getByRole("button", { name: "Save" })
+    .getByRole("button", { name: "保存" })
     .click();
   await expect(
-    page.getByText("Timezone updated!", { exact: true }).last(),
+    page.getByText("时区已更新！", { exact: true }).last(),
   ).toBeVisible({ timeout: 120_000 });
   await expect
     .poll(() => getCalendarTestState(), { timeout: 120_000 })

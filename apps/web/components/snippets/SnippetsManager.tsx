@@ -61,16 +61,16 @@ export function SnippetsManager() {
         <DialogTrigger asChild>
           <Button size="sm">
             <Plus className="mr-2 h-4 w-4" />
-            Add
+            添加
           </Button>
         </DialogTrigger>
         <DialogContent className="max-w-lg">
           <DialogHeader>
             <DialogTitle>
-              {editingItem ? "Edit snippet" : "Add snippet"}
+              {editingItem ? "编辑快捷片段" : "添加快捷片段"}
             </DialogTitle>
             <DialogDescription className="sr-only">
-              {editingItem ? "Edit this snippet." : "Add a reusable snippet."}
+              {editingItem ? "编辑此快捷片段。" : "添加可复用的快捷片段。"}
             </DialogDescription>
           </DialogHeader>
           <SnippetForm
@@ -88,8 +88,8 @@ export function SnippetsManager() {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Shortcut</TableHead>
-                <TableHead>Content</TableHead>
+                <TableHead>快捷名称</TableHead>
+                <TableHead>内容</TableHead>
                 <TableHead />
               </TableRow>
             </TableHeader>
@@ -99,10 +99,9 @@ export function SnippetsManager() {
                   <TableCell colSpan={3}>
                     <Empty className="border-0">
                       <EmptyHeader>
-                        <EmptyTitle>No snippets yet</EmptyTitle>
+                        <EmptyTitle>暂无快捷片段</EmptyTitle>
                         <EmptyDescription>
-                          Save replies you reuse often, then type / in a draft
-                          to insert them.
+                          保存常用回复，在草稿中输入 / 插入。
                         </EmptyDescription>
                       </EmptyHeader>
                     </Empty>
@@ -151,11 +150,11 @@ function SnippetTableRow({
       <TableCell className="text-right">
         <div className="flex items-center justify-end gap-2">
           <Button onClick={onEdit} size="sm" variant="outline">
-            Edit
+            编辑
           </Button>
           <ConfirmDialog
-            confirmText="Delete"
-            description={`Delete /${item.shortcut}? This cannot be undone.`}
+            confirmText="删除"
+            description={`确定删除 /${item.shortcut} 吗？此操作无法撤销。`}
             onConfirm={async () => {
               try {
                 setIsDeleting(true);
@@ -164,21 +163,21 @@ function SnippetTableRow({
                 });
                 if (result?.serverError) {
                   toastError({
-                    title: "Error deleting snippet",
+                    title: "删除快捷片段失败",
                     description: result.serverError,
                   });
                   return;
                 }
-                toastSuccess({ description: "Snippet deleted" });
+                toastSuccess({ description: "快捷片段已删除" });
                 onDelete();
               } finally {
                 setIsDeleting(false);
               }
             }}
-            title="Delete snippet"
+            title="删除快捷片段"
             trigger={
               <Button
-                aria-label={`Delete /${item.shortcut}`}
+                aria-label={`删除 /${item.shortcut}`}
                 loading={isDeleting}
                 size="sm"
                 variant="outline"

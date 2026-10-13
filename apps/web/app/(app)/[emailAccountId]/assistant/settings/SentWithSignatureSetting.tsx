@@ -47,8 +47,8 @@ export function SentWithSignatureSetting() {
 
   return (
     <SettingCard
-      title={`Include 'Sent with ${BRAND_NAME}'`}
-      description={`Add 'Sent with ${BRAND_NAME}' with your referral link after your signature on emails you send from the mail client. Earn a month of credit for each person who signs up with your link.`}
+      title={`包含“由 ${BRAND_NAME} 发送”`}
+      description={`在邮件签名后添加“由 ${BRAND_NAME} 发送”和推荐链接。每成功推荐一位用户可获得一个月额度。`}
       right={
         <LoadingContent
           loading={isLoading}

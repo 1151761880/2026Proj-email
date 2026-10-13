@@ -36,13 +36,13 @@ export function RequestAccessDialog({
 
   const handleCopyEmail = async () => {
     await navigator.clipboard.writeText(SUPPORT_EMAIL);
-    toastSuccess({ description: "Email copied to clipboard" });
+    toastSuccess({ description: "邮箱地址已复制" });
   };
 
   const handleCopyMessage = async () => {
     const message = `Subject: ${subject}\n\n${messageBody}`;
     await navigator.clipboard.writeText(message);
-    toastSuccess({ description: "Message copied to clipboard" });
+    toastSuccess({ description: "消息已复制" });
   };
 
   return (
@@ -50,7 +50,7 @@ export function RequestAccessDialog({
       <DialogTrigger asChild>
         {trigger || (
           <Button size="sm" variant="outline">
-            Request Access
+            申请访问
           </Button>
         )}
       </DialogTrigger>
@@ -59,13 +59,13 @@ export function RequestAccessDialog({
           <DialogTitle>{title}</DialogTitle>
           <DialogDescription>
             {isGenericRequest
-              ? "Send us an email to request a new integration."
-              : "Send us an email to request access to this integration."}
+              ? "通过邮件申请新的集成。"
+              : "通过邮件申请此集成的访问权限。"}
           </DialogDescription>
         </DialogHeader>
         <div className="space-y-4">
           <div>
-            <div className="text-sm font-medium">Email</div>
+            <div className="text-sm font-medium">邮件</div>
             <div className="flex items-center gap-2 mt-1">
               <code className="flex-1 rounded bg-muted px-3 py-2 text-sm">
                 {SUPPORT_EMAIL}
@@ -76,10 +76,10 @@ export function RequestAccessDialog({
             </div>
           </div>
           <div>
-            <div className="text-sm font-medium">Message</div>
+            <div className="text-sm font-medium">消息</div>
             <div className="flex flex-col gap-2 mt-1">
               <div className="rounded bg-muted px-3 py-2 text-sm">
-                <div className="font-medium mb-2">Subject: {subject}</div>
+                <div className="font-medium mb-2">主题： {subject}</div>
                 <div className="whitespace-pre-wrap text-muted-foreground">
                   {messageBody}
                 </div>
@@ -91,7 +91,7 @@ export function RequestAccessDialog({
                 className="self-end"
               >
                 <Copy className="h-4 w-4 mr-2" />
-                Copy Message
+                复制消息
               </Button>
             </div>
           </div>

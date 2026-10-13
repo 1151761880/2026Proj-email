@@ -4,10 +4,10 @@ export function EmailDetails({ message }: { message: ThreadMessage }) {
   const headers = message.headers;
 
   const details = [
-    { label: "From", value: headers?.from },
-    { label: "To", value: headers?.to },
-    { label: "Cc", value: headers?.cc },
-    { label: "Bcc", value: headers?.bcc },
+    { label: "发件人", value: headers?.from },
+    { label: "收件人", value: headers?.to },
+    { label: "抄送", value: headers?.cc },
+    { label: "密送", value: headers?.bcc },
   ];
 
   return (
@@ -27,7 +27,7 @@ export function EmailDetails({ message }: { message: ThreadMessage }) {
         )}
       </div>
       <div className="mt-1 text-muted-foreground">
-        {new Date(headers?.date ?? message.date).toLocaleString(undefined, {
+        {new Date(headers?.date ?? message.date).toLocaleString("zh-CN", {
           dateStyle: "full",
           timeStyle: "short",
         })}

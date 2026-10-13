@@ -109,7 +109,7 @@ export function ConnectedAppsSection({
     linkSlackWorkspaceAction.bind(null, emailAccountId),
     {
       onSuccess: () => {
-        toastSuccess({ description: "Slack connected" });
+        toastSuccess({ description: "Slack 已连接" });
         setExistingWorkspace(null);
         setAuthUrl(null);
         mutateChannels();
@@ -118,8 +118,8 @@ export function ConnectedAppsSection({
         const msg = getActionErrorMessage(error.error);
         if (msg?.includes("Could not find your Slack account") && authUrl) {
           toastInfo({
-            title: "Email not found in Slack",
-            description: "Redirecting to Slack authorization...",
+            title: "Slack 中未找到邮箱",
+            description: "正在前往 Slack 授权页面…",
           });
           redirectToSafeUrl(authUrl, { allowExternal: true });
         } else {
@@ -166,7 +166,7 @@ export function ConnectedAppsSection({
         emailAccountId,
       });
       if (!res.ok) {
-        throw new Error("Failed to get Slack auth URL");
+        throw new Error("获取 Slack 授权地址失败");
       }
       const data: GetSlackAuthUrlResponse = await res.json();
 
@@ -180,13 +180,13 @@ export function ConnectedAppsSection({
       if (data.url) {
         redirectToSafeUrl(data.url, { allowExternal: true });
       } else {
-        throw new Error("No auth URL returned");
+        throw new Error("未返回授权地址");
       }
     } catch (error) {
       captureException(error, {
         extra: { context: "Slack OAuth initiation" },
       });
-      toastError({ description: "Failed to connect Slack" });
+      toastError({ description: "连接 Slack 失败" });
       setConnectingSlack(false);
     }
   };
@@ -205,7 +205,7 @@ export function ConnectedAppsSection({
       <ItemSeparator />
       <Item size="sm">
         <ItemContent>
-          <ItemTitle>Connected Apps</ItemTitle>
+          <ItemTitle>已连接应用</ItemTitle>
         </ItemContent>
         <ItemActions>
           <div className="flex items-center gap-2">
@@ -221,8 +221,8 @@ export function ConnectedAppsSection({
                   >
                     <MessagesSquareIcon className="mr-2 h-4 w-4" />
                     {linkStatus === "executing"
-                      ? "Linking..."
-                      : `Link to ${existingWorkspace.teamName}`}
+                      ? "正在关联…"
+                      : `关联至 ${existingWorkspace.teamName}`}
                   </Button>
                   <button
                     type="button"
@@ -233,7 +233,7 @@ export function ConnectedAppsSection({
                       }
                     }}
                   >
-                    Install manually
+                    手动安装
                   </button>
                 </div>
               ) : (
@@ -244,7 +244,7 @@ export function ConnectedAppsSection({
                   onClick={handleConnectSlack}
                 >
                   <MessagesSquareIcon className="mr-2 h-4 w-4" />
-                  {connectingSlack ? "Connecting..." : "Connect Slack"}
+                  {connectingSlack ? "正在连接…" : "连接 Slack"}
                 </Button>
               ))}
 
@@ -256,7 +256,7 @@ export function ConnectedAppsSection({
                 onClick={() => handleCreateLinkCode("TEAMS")}
               >
                 <MessageCircleIcon className="mr-2 h-4 w-4" />
-                Connect Teams
+                连接 Teams
               </Button>
             )}
 
@@ -268,7 +268,7 @@ export function ConnectedAppsSection({
                 onClick={() => handleCreateLinkCode("TELEGRAM")}
               >
                 <SendIcon className="mr-2 h-4 w-4" />
-                Connect Telegram
+                连接 Telegram
               </Button>
             )}
           </div>
@@ -331,7 +331,7 @@ function ConnectedChannelRow({
     {
       onSuccess: () => {
         toastSuccess({
-          description: `${config?.name ?? channel.provider} disconnected`,
+          description: `${config?.name ?? channel.provider} 已断开连接`,
         });
         onUpdate();
       },
@@ -385,7 +385,7 @@ function ConnectedChannelRow({
               <XIcon className="h-4 w-4" />
             </Button>
           </TooltipTrigger>
-          <TooltipContent>Disconnect</TooltipContent>
+          <TooltipContent>断开连接</TooltipContent>
         </Tooltip>
       </TooltipProvider>
     </div>
@@ -414,21 +414,21 @@ function MessagingConnectCodeDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Connect {providerName}</DialogTitle>
+          <DialogTitle>连接 {providerName}</DialogTitle>
           <DialogDescription>
-            Send this command in a direct message with the Inbox Zero bot on{" "}
-            {providerName}. The code is one-time use and expires in 10 minutes.
+            将此命令私信发送给十组邮件小助手机器人，平台：{" "}
+            {providerName}。验证码仅可使用一次，10 分钟后失效。
           </DialogDescription>
         </DialogHeader>
         <div className="space-y-2">
-          <div className="text-xs text-muted-foreground">Command</div>
+          <div className="text-xs text-muted-foreground">命令</div>
           <CopyInput value={command} />
         </div>
         {provider === "TELEGRAM" && botUrl && (
           <div className="pt-1">
             <Button asChild size="sm">
               <a href={botUrl} target="_blank" rel="noopener noreferrer">
-                Open Telegram bot
+                打开 Telegram 机器人
               </a>
             </Button>
           </div>
@@ -472,15 +472,15 @@ export function useSlackNotifications({
     if (message === "slack_connected") {
       onSlackConnected?.(searchParams.get("slack_email_account_id"));
       toastSuccess({
-        title: "Slack connected",
-        description: "Next, open Channels to choose where Slack messages go.",
+        title: "Slack 已连接",
+        description: "打开“消息渠道”选择 Slack 消息的接收位置。",
       });
     }
     if (message === "processing") {
       toastInfo({
-        title: "Slack connection in progress",
+        title: "正在连接 Slack",
         description:
-          "Slack is still finalizing your connection. Please refresh in a moment.",
+          "Slack 正在完成连接，请稍后刷新。",
       });
     }
 
@@ -492,7 +492,7 @@ export function useSlackNotifications({
       });
 
       toastError({
-        title: "Slack connection failed",
+        title: "Slack 连接失败",
         description,
       });
     }
@@ -518,11 +518,11 @@ function getSlackConnectionFailedDescription(
   resolvedReason: string | null,
 ): string {
   if (resolvedReason === "oauth_invalid_team_for_non_distributed_app") {
-    return "This Slack app is not distributed to every workspace yet. Use the currently supported workspace or contact support.";
+    return "此 Slack 应用尚未向全部工作区开放，请使用受支持的工作区或联系支持。";
   }
 
   if (resolvedReason === "oauth_invalid_code") {
-    return "Slack returned an invalid or expired code. Please try connecting again.";
+    return "Slack 返回的验证码无效或已过期，请重新连接。";
   }
 
   if (
@@ -531,10 +531,10 @@ function getSlackConnectionFailedDescription(
     resolvedReason === "invalid_state" ||
     resolvedReason === "invalid_state_format"
   ) {
-    return "Slack session validation failed. Please try connecting again.";
+    return "Slack 会话验证失败，请重新连接。";
   }
 
-  return "We couldn't complete the Slack connection. Please try again.";
+  return "无法完成 Slack 连接，请重试。";
 }
 
 function appendSlackConnectionFailureDetails({
@@ -552,7 +552,7 @@ function appendSlackConnectionFailureDetails({
     return description;
   }
 
-  return `${description} Details: ${details}`;
+  return `${description} 详情：${details}`;
 }
 
 function formatSlackConnectionFailureDetails(

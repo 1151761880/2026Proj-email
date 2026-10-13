@@ -3,7 +3,7 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 
 export const DESKTOP_PROTOCOL = "inboxzero";
 export const DESKTOP_AUTH_CALLBACK_PATH = "/auth-callback";
-export const DEFAULT_APP_URL = "https://www.getinboxzero.com";
+export const DEFAULT_APP_URL = "http://localhost:3000";
 export const DESKTOP_AUTH_PROVIDERS = ["apple", "google", "microsoft"] as const;
 
 export type DesktopAuthProvider = (typeof DESKTOP_AUTH_PROVIDERS)[number];
@@ -63,18 +63,18 @@ export function parseDesktopAuthCallback(url: string): DesktopAuthCallback {
   try {
     parsed = new URL(url);
   } catch {
-    return { ok: false, error: "Invalid authentication callback" };
+    return { ok: false, error: "身份验证回调无效" };
   }
 
   if (parsed.protocol !== `${DESKTOP_PROTOCOL}:`) {
-    return { ok: false, error: "Invalid authentication callback" };
+    return { ok: false, error: "身份验证回调无效" };
   }
 
   const path = `${parsed.hostname}${parsed.pathname}`
     .replace(/^\/+/u, "")
     .replace(/\/+$/u, "");
   if (path !== "auth-callback") {
-    return { ok: false, error: "Invalid authentication callback" };
+    return { ok: false, error: "身份验证回调无效" };
   }
 
   const error = parsed.searchParams.get("error");
@@ -88,7 +88,7 @@ export function parseDesktopAuthCallback(url: string): DesktopAuthCallback {
   const code = parsed.searchParams.get("code")?.trim() ?? "";
   const state = parsed.searchParams.get("state")?.trim() ?? "";
   if (!code || !state) {
-    return { ok: false, error: "Authentication did not finish" };
+    return { ok: false, error: "身份验证未完成" };
   }
 
   return { ok: true, code, state };

@@ -51,17 +51,17 @@ test("opens a complete conversation and updates its read state", async ({
   );
   await expect(page).toHaveURL(/thread-id=thr_playwright_reader/);
 
-  const threadActions = page.getByRole("group", { name: "Thread actions" });
+  const threadActions = page.getByRole("group", { name: "会话操作" });
   const markUnread = threadActions.getByRole("button", {
-    name: /Mark as unread/,
+    name: /标为未读/,
   });
   await expect(markUnread).toBeVisible();
 
-  await page.getByRole("button", { name: /^More actions/ }).click();
-  const move = page.getByRole("menuitem", { name: "Move" });
+  await page.getByRole("button", { name: /更多操作/ }).click();
+  const move = page.getByRole("menuitem", { name: "移动" });
   await expect(move).toBeVisible();
   await expect(move).toContainText("V");
-  const markSpam = page.getByRole("menuitem", { name: "Mark as spam" });
+  const markSpam = page.getByRole("menuitem", { name: "标为垃圾邮件" });
   await expect(markSpam).toContainText("!");
   const openExternal = page.getByRole("menuitem", {
     name: openExternalLabel,
@@ -70,7 +70,7 @@ test("opens a complete conversation and updates its read state", async ({
   await page.keyboard.press("Escape");
   await expect(move).toBeHidden();
   await page.keyboard.press("KeyV");
-  const moveDialog = page.getByRole("dialog", { name: "Move conversations" });
+  const moveDialog = page.getByRole("dialog", { name: "移动会话" });
   await expect(moveDialog).toBeVisible();
   await page.keyboard.press("Escape");
   await expect(moveDialog).toBeHidden();
@@ -160,7 +160,7 @@ test("waits for a direct reader snapshot before marking it read", async ({
   // Deep-link auto mark-read is skipped when the snapshot is already read, so
   // assert the settled reader rather than an inspect command that may not exist.
   await expect(
-    page.getByRole("button", { name: /Mark as unread/ }),
+    page.getByRole("button", { name: /标为未读/ }),
   ).toBeVisible();
 });
 
@@ -169,7 +169,7 @@ test("filters the mail list by state, category, and label", async ({
 }) => {
   const { conversations } = await openMail(page);
 
-  await page.getByRole("button", { name: "Unread", exact: true }).click();
+  await page.getByRole("button", { name: "未读", exact: true }).click();
   await expect(
     conversationWithSubject(page, conversations, "Keyboard Navigation Message"),
   ).toBeVisible();
@@ -177,9 +177,9 @@ test("filters the mail list by state, category, and label", async ({
     conversationWithSubject(page, conversations, "Read Command Message"),
   ).toHaveCount(0);
 
-  const promotions = page.getByRole("link", { name: /^Promotions/ });
+  const promotions = page.getByRole("link", { name: /推广邮件/ });
   if (!(await promotions.isVisible())) {
-    await page.getByRole("button", { name: "Categories" }).click();
+    await page.getByRole("button", { name: "分类" }).click();
   }
   await promotions.click();
   await expect(
@@ -222,7 +222,7 @@ test("separates Outlook Focused and Other inbox conversations", async ({
   await expect(conversations.getByRole("option")).toHaveCount(1);
   await expect(page).toHaveURL(/type=focused/);
 
-  await page.getByRole("link", { name: "Other", exact: true }).click();
+  await page.getByRole("link", { name: "其他", exact: true }).click();
   await expect(other).toBeVisible();
   await expect(focused).toHaveCount(0);
   await expect(conversations.getByRole("option")).toHaveCount(1);
@@ -239,7 +239,7 @@ test("navigates drafts and sent mail from the sidebar", async ({ page }) => {
     "Seeded Draft Message",
   );
   await expect(draft).toBeVisible();
-  await expect(draft.getByText("Draft", { exact: true })).toBeVisible();
+  await expect(draft.getByText("草稿", { exact: true })).toBeVisible();
   await expect(draft.getByText("Jordan Example")).toBeVisible();
 
   await openMailboxFromSidebar(page, "Sent");
@@ -261,7 +261,7 @@ test("creates and edits a label and shows every keyboard workflow", async ({
   await page
     .getByRole("textbox", { name: `New ${labelType} name` })
     .fill(labelName);
-  await page.getByRole("button", { name: "Add", exact: true }).click();
+  await page.getByRole("button", { name: "添加", exact: true }).click();
   await expect(
     page.getByRole("link", { name: labelName, exact: true }),
   ).toBeVisible();
@@ -269,7 +269,7 @@ test("creates and edits a label and shows every keyboard workflow", async ({
   await page
     .getByRole("link", { name: labelName, exact: true })
     .click({ button: "right" });
-  const editMenuItem = page.getByRole("menuitem", { name: "Edit" });
+  const editMenuItem = page.getByRole("menuitem", { name: "编辑" });
   await expect(editMenuItem).toBeVisible();
   await capturePlaywrightCheckpoint(
     page,
@@ -281,13 +281,13 @@ test("creates and edits a label and shows every keyboard workflow", async ({
   if (playwrightMailProvider === "microsoft") {
     await expect(editDialog.getByRole("textbox")).toHaveCount(0);
     await editDialog.getByRole("radio", { name: "Dark blue" }).click();
-    await editDialog.getByRole("button", { name: "Save" }).click();
+    await editDialog.getByRole("button", { name: "保存" }).click();
     await expect(editDialog).toBeHidden();
     await page.reload();
     await page
       .getByRole("link", { name: labelName, exact: true })
       .click({ button: "right" });
-    await page.getByRole("menuitem", { name: "Edit", exact: true }).click();
+    await page.getByRole("menuitem", { name: "编辑", exact: true }).click();
     await expect(
       editDialog.getByRole("radio", { name: "Dark blue" }),
     ).toHaveAttribute("aria-checked", "true");
@@ -296,7 +296,7 @@ test("creates and edits a label and shows every keyboard workflow", async ({
       testInfo,
       "outlook-category-editor",
     );
-    await editDialog.getByRole("button", { name: "Cancel" }).click();
+    await editDialog.getByRole("button", { name: "取消" }).click();
   } else {
     const updatedLabelName = `${labelName} edited`;
     await editDialog
@@ -304,7 +304,7 @@ test("creates and edits a label and shows every keyboard workflow", async ({
       .fill(updatedLabelName);
     await editDialog.getByRole("radio", { name: "Dark blue" }).click();
     await capturePlaywrightCheckpoint(page, testInfo, "gmail-label-editor");
-    await editDialog.getByRole("button", { name: "Save" }).click();
+    await editDialog.getByRole("button", { name: "保存" }).click();
     await expect(
       page.getByRole("link", { name: updatedLabelName, exact: true }),
     ).toBeVisible();
@@ -312,7 +312,7 @@ test("creates and edits a label and shows every keyboard workflow", async ({
     const createLabel = async (name: string) => {
       await page.getByRole("button", { name: "Create label" }).click();
       await page.getByRole("textbox", { name: "New label name" }).fill(name);
-      await page.getByRole("button", { name: "Add", exact: true }).click();
+      await page.getByRole("button", { name: "添加", exact: true }).click();
     };
 
     // A branch starts closed, so each nested label stays out of sight until its
@@ -372,10 +372,10 @@ test("creates and edits a label and shows every keyboard workflow", async ({
     await expect(grandchild).toBeVisible();
     await expect(grandchild).toHaveAttribute("aria-current", "page");
     await grandchild.click({ button: "right" });
-    await page.getByRole("menuitem", { name: "Edit", exact: true }).click();
+    await page.getByRole("menuitem", { name: "编辑", exact: true }).click();
     await expect(
       editDialog.getByRole("textbox", { name: "label name" }),
     ).toHaveValue(`${updatedLabelName}/Clients/Acme`);
-    await editDialog.getByRole("button", { name: "Cancel" }).click();
+    await editDialog.getByRole("button", { name: "取消" }).click();
   }
 });

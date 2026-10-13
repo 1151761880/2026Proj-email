@@ -38,7 +38,7 @@ export function AllAccountsSelectionDialog({
   const { execute, isExecuting } = useAction(updateAllAccountsSelectionAction, {
     onSuccess: async () => {
       await onSaved();
-      toastSuccess({ description: "All Accounts updated" });
+      toastSuccess({ description: "全部账户设置已更新" });
       onClose();
     },
     onError: (error) => {
@@ -54,9 +54,9 @@ export function AllAccountsSelectionDialog({
     <Dialog open onOpenChange={(open) => !open && onClose()}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Choose accounts</DialogTitle>
+          <DialogTitle>选择账户</DialogTitle>
           <DialogDescription>
-            Choose which accounts appear in All Accounts.
+            选择“全部账户”中显示的邮箱。
           </DialogDescription>
         </DialogHeader>
 
@@ -109,7 +109,7 @@ export function AllAccountsSelectionDialog({
 
         <DialogFooter>
           <Button variant="outline" onClick={onClose} disabled={isExecuting}>
-            Cancel
+            取消
           </Button>
           <Button
             loading={isExecuting}
@@ -117,7 +117,7 @@ export function AllAccountsSelectionDialog({
               execute({ emailAccountIds: [...selectedAccountIds] })
             }
           >
-            Save
+            保存
           </Button>
         </DialogFooter>
       </DialogContent>

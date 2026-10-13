@@ -46,7 +46,7 @@ describe("determineConversationStatus", () => {
   it("ignores a trailing filing assistant message", async () => {
     const filingNotification = getMockMessage({
       id: "filing-1",
-      from: `Inbox Zero Assistant <${emailAccount.email}>`,
+      from: `十组邮件小助手 Assistant <${emailAccount.email}>`,
       to: emailAccount.email,
       subject: "✓ Filed Receipt.pdf",
     });

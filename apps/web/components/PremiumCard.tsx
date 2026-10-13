@@ -45,8 +45,8 @@ export function PremiumExpiredCardContent({
 
   const getSubscriptionMessage = () => {
     const UPGRADE_MESSAGE = {
-      title: "Upgrade to Premium",
-      description: "Upgrade to Premium to enable your AI email assistant.",
+      title: "升级高级版",
+      description: "升级高级版后启用智能邮件助手。",
     };
 
     if (!premium) {
@@ -65,50 +65,50 @@ export function PremiumExpiredCardContent({
 
     if (!premium || hasNoSubscription) {
       return {
-        title: "Upgrade to Premium",
-        description: "Upgrade to Premium to enable your AI email assistant.",
+        title: "升级高级版",
+        description: "升级高级版后启用智能邮件助手。",
       };
     }
 
     if (status === "past_due") {
       return {
-        title: "Payment Past Due",
-        description: "Update your payment method to continue service",
+        title: "付款逾期",
+        description: "更新付款方式以继续使用",
       };
     }
 
     if (status === "canceled" || status === "cancelled") {
       return {
-        title: "Subscription Cancelled",
-        description: "Reactivate to resume AI email management",
+        title: "订阅已取消",
+        description: "重新启用订阅以恢复智能邮件管理",
       };
     }
 
     if (status === "incomplete" || status === "incomplete_expired") {
       return {
-        title: "Payment Incomplete",
-        description: "Complete your payment to activate service",
+        title: "付款未完成",
+        description: "完成付款以启用服务",
       };
     }
 
     if (status === "unpaid") {
       return {
-        title: "Payment Required",
-        description: "Update payment to continue AI features",
+        title: "需要付款",
+        description: "更新付款信息以继续使用 AI 功能",
       };
     }
 
     if (hasLemonSqueezyExpired || status === "expired") {
       return {
-        title: "Subscription Expired",
-        description: "Renew your subscription to continue",
+        title: "订阅已过期",
+        description: "续订后可继续使用",
       };
     }
 
     // Default fallback
     return {
-      title: "Subscription Issue",
-      description: "Please check your subscription status",
+      title: "订阅问题",
+      description: "请检查订阅状态",
     };
   };
 
@@ -184,7 +184,7 @@ export function PremiumExpiredCardContent({
               type="button"
               className="flex-shrink-0 rounded p-1 text-orange-600 hover:bg-orange-100 focus:outline-none focus:ring-2 focus:ring-orange-300 transition-colors dark:text-orange-400 dark:hover:bg-orange-900/20 dark:focus:ring-orange-700"
               onClick={onDismiss}
-              aria-label="Dismiss banner"
+              aria-label="关闭提示"
             >
               <XIcon className="h-3 w-3" />
             </button>

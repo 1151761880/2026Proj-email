@@ -66,7 +66,7 @@ export function CleanupDraftsSection({
 
       setCleanupDaysInput(null);
       mutate({ draftCleanupDays: res.data.cleanupDays }, false);
-      toastSuccess({ description: "Draft cleanup settings updated." });
+      toastSuccess({ description: "草稿清理设置已更新。" });
     },
     onError: (error) => {
       setCleanupDaysInput(null);
@@ -83,15 +83,15 @@ export function CleanupDraftsSection({
         if (res.data) {
           setResult(res.data);
           if (res.data.deleted === 0 && res.data.skippedModified === 0) {
-            toastSuccess({ description: "No stale drafts found." });
+            toastSuccess({ description: "未找到过期草稿。" });
           } else if (res.data.deleted === 0) {
             toastSuccess({
               description:
-                "All stale drafts were edited by you, so none were removed.",
+                "所有过期草稿均已由你编辑，本次未删除任何草稿。",
             });
           } else {
             toastSuccess({
-              description: `Cleaned up ${res.data.deleted} draft${res.data.deleted === 1 ? "" : "s"}.`,
+              description: `已清理 ${res.data.deleted} 份草稿。`,
             });
           }
         }
@@ -124,16 +124,16 @@ export function CleanupDraftsSection({
           <ItemSeparator />
           <Item size="sm">
             <ItemContent>
-              <ItemTitle>Auto-delete AI Drafts</ItemTitle>
+              <ItemTitle>自动删除 AI 草稿</ItemTitle>
               <ItemDescription>
-                {`Only removes drafts created by ${BRAND_NAME} that have not been edited by you.`}
+                {`仅删除由 ${BRAND_NAME} 创建且未经你编辑的草稿。`}
               </ItemDescription>
             </ItemContent>
             <ItemActions className="flex-wrap justify-end">
               {automaticCleanupEnabled ? (
                 <>
                   <Input
-                    aria-label="Draft cleanup age in days"
+                    aria-label="草稿保留天数"
                     className="h-8 w-24"
                     disabled={isUpdatingCleanupSettings}
                     max={MAX_AI_DRAFT_CLEANUP_DAYS}
@@ -157,12 +157,12 @@ export function CleanupDraftsSection({
                     loading={isUpdatingCleanupSettings}
                     onClick={handleSaveCleanupDays}
                   >
-                    Save
+                    保存
                   </Button>
                 </>
               ) : null}
               <Switch
-                aria-label="Toggle automatic AI draft cleanup"
+                aria-label="启用或关闭 AI 草稿自动清理"
                 checked={automaticCleanupEnabled}
                 disabled={isUpdatingCleanupSettings}
                 onCheckedChange={handleToggleAutomaticCleanup}
@@ -172,9 +172,9 @@ export function CleanupDraftsSection({
           <ItemSeparator />
           <Item size="sm">
             <ItemContent>
-              <ItemTitle>Delete Old AI Drafts</ItemTitle>
+              <ItemTitle>删除旧 AI 草稿</ItemTitle>
               <ItemDescription>
-                {`Remove unedited drafts created by ${BRAND_NAME} that are older than ${savedCleanupDays} days.`}
+                {`删除由 ${BRAND_NAME} 创建、超过 ${savedCleanupDays} 天且未经编辑的草稿。`}
               </ItemDescription>
             </ItemContent>
             <ItemActions>
@@ -184,7 +184,7 @@ export function CleanupDraftsSection({
                 loading={isExecuting}
                 onClick={() => execute()}
               >
-                Delete old drafts
+                删除旧草稿
               </Button>
             </ItemActions>
           </Item>
@@ -192,8 +192,7 @@ export function CleanupDraftsSection({
             <div className="px-4 pb-2">
               <p className="text-xs text-muted-foreground">
                 {result.skippedModified} draft
-                {result.skippedModified === 1 ? " was" : "s were"} kept because
-                you edited {result.skippedModified === 1 ? "it" : "them"}
+                {result.skippedModified === 1 ? " was" : "份"} 因已编辑而保留 {result.skippedModified === 1 ? "it" : "them"}
               </p>
             </div>
           )}

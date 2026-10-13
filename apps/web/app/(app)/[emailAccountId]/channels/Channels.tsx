@@ -103,23 +103,23 @@ const CHANNEL_FEATURES: Array<{
 }> = [
   {
     purpose: MessagingRoutePurpose.MEETING_BRIEFS,
-    name: "Meeting briefs",
-    description: "Get a summary before your meetings.",
+    name: "会前简报",
+    description: "在会议前获取简报。",
   },
   {
     purpose: MessagingRoutePurpose.FOLLOW_UPS,
-    name: "Follow-up reminders",
-    description: "Get nudged about emails that need a follow-up.",
+    name: "跟进提醒",
+    description: "接收需要跟进的邮件提醒。",
   },
   {
     purpose: MessagingRoutePurpose.DIGESTS,
-    name: "Digests",
-    description: "Receive your scheduled digest in chat.",
+    name: "邮件摘要",
+    description: "在聊天应用中接收定时摘要。",
   },
   {
     purpose: MessagingRoutePurpose.DOCUMENT_FILINGS,
-    name: "Document filing alerts",
-    description: "Notifications when documents are auto-filed.",
+    name: "文档整理提醒",
+    description: "文档自动整理后发送通知。",
   },
 ];
 
@@ -188,12 +188,12 @@ export function Channels() {
   return (
     <div className="mx-auto max-w-2xl space-y-10">
       <PageHeader
-        title="Channels"
-        description="Manage what gets delivered to your chat apps."
+        title="消息渠道"
+        description="管理发送到聊天应用的内容。"
         video={{
-          title: "Getting started with Slack and Telegram",
+          title: "Slack 和 Telegram 入门",
           description:
-            "Learn how to get important emails in Slack or Telegram and send drafted replies from there.",
+            "了解如何在 Slack 或 Telegram 接收重要邮件和发送回复草稿。",
           muxPlaybackId: "QbtTl00g2Gjx3JhM016Xkei0202zW4qpsF302rp01sRQHaf028",
         }}
       />
@@ -242,7 +242,7 @@ export function Channels() {
           {connectedChannels.length === 0 &&
             unconnectedProviders.length === 0 && (
               <ItemCard className="py-8 text-center">
-                <MutedText>No channels available.</MutedText>
+                <MutedText>暂无可用渠道。</MutedText>
               </ItemCard>
             )}
         </div>
@@ -255,10 +255,10 @@ const INTRO_FEATURES: Array<{
   icon: React.ElementType;
   label: string;
 }> = [
-  { icon: MailIcon, label: "Important emails" },
-  { icon: MessageCircleReplyIcon, label: "Drafted replies" },
-  { icon: CalendarClockIcon, label: "Meeting briefs" },
-  { icon: SunIcon, label: "Daily summary" },
+  { icon: MailIcon, label: "重要邮件" },
+  { icon: MessageCircleReplyIcon, label: "回复草稿" },
+  { icon: CalendarClockIcon, label: "会前简报" },
+  { icon: SunIcon, label: "每日摘要" },
 ];
 
 function ChannelsIntro({
@@ -272,12 +272,11 @@ function ChannelsIntro({
     <section className="rounded-xl border border-blue-100 bg-blue-50/40 p-6 dark:border-blue-950 dark:bg-blue-950/20">
       <h2 className="flex items-start gap-2 text-lg font-semibold tracking-tight">
         <BellIcon className="mt-1 size-5 shrink-0 text-blue-600 dark:text-blue-400" />
-        <span>Inbox Zero where you work.</span>
+        <span>随时随地使用十组邮件小助手。</span>
       </h2>
       <MutedText className="mt-2 text-sm">
-        Important emails, pre-drafted replies, meeting briefs, and a daily inbox
-        summary
-        {providerList ? `, delivered to ${providerList}` : ""}.
+        重要邮件、回复草稿、会前简报和每日收件箱摘要
+        {providerList ? `，发送到 ${providerList}` : ""}.
       </MutedText>
       <div className="mt-5 flex flex-wrap gap-2">
         {INTRO_FEATURES.map(({ icon: Icon, label }) => (
@@ -347,7 +346,7 @@ function ConnectedChannelSection({
         analytics.captureAction("channel_disconnected", {
           provider: channel.provider,
         });
-        toastSuccess({ description: `${config.name} disconnected` });
+        toastSuccess({ description: `${config.name} 已断开连接` });
         onUpdate();
       },
       onError: (error) => {
@@ -388,7 +387,7 @@ function ConnectedChannelSection({
       title={config.name}
       badge={
         <div className="flex items-center gap-1">
-          <Badge color="green">Connected</Badge>
+          <Badge color="green">已连接</Badge>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
@@ -405,7 +404,7 @@ function ConnectedChannelSection({
                 className="text-destructive focus:text-destructive"
               >
                 <LogOutIcon className="mr-2 h-4 w-4" />
-                Disconnect {config.name}
+                断开连接 {config.name}
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -415,9 +414,9 @@ function ConnectedChannelSection({
       <ItemCard>
         <Item size="sm">
           <ItemContent>
-            <ItemTitle>Rule notifications</ItemTitle>
+            <ItemTitle>规则通知</ItemTitle>
             <ItemDescription>
-              Choose which rules send notifications and where they go.
+              选择发送通知的规则和接收位置。
             </ItemDescription>
           </ItemContent>
           {isSlack && (
@@ -451,7 +450,7 @@ function ConnectedChannelSection({
           ) : (
             <Item size="sm">
               <ItemContent>
-                <MutedText className="text-sm">No rules</MutedText>
+                <MutedText className="text-sm">暂无规则</MutedText>
               </ItemContent>
             </Item>
           )}
@@ -498,7 +497,7 @@ function ConnectedChannelSection({
                 disabled={disabled}
                 upgradeTooltip={
                   digestLocked
-                    ? "Upgrade to the Plus plan to deliver digests to chat."
+                    ? "升级进阶版后可将摘要发送到聊天应用。"
                     : undefined
                 }
               />
@@ -582,9 +581,9 @@ function UnconnectedProviderSection({
         <ItemCard>
           <Item size="sm">
             <ItemContent>
-              <ItemTitle>Connect {config.name}</ItemTitle>
+              <ItemTitle>连接 {config.name}</ItemTitle>
               <ItemDescription>
-                Receive notifications via {config.name}.
+                通知接收方式 {config.name}.
               </ItemDescription>
             </ItemContent>
             <ItemActions>
@@ -594,7 +593,7 @@ function UnconnectedProviderSection({
                 disabled={isLoading}
                 onClick={handleConnect}
               >
-                Connect
+                连接
               </Button>
             </ItemActions>
           </Item>
@@ -630,14 +629,14 @@ function LinkCodeDialog({
     <Dialog open onOpenChange={(open) => !open && onClose()}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Connect {providerName}</DialogTitle>
+          <DialogTitle>连接 {providerName}</DialogTitle>
           <DialogDescription>
-            Send this command in a direct message with the Inbox Zero bot on{" "}
-            {providerName}. The code is one-time use and expires in 10 minutes.
+            将此命令私信发送给十组邮件小助手机器人，平台：{" "}
+            {providerName}。验证码仅可使用一次，10 分钟后失效。
           </DialogDescription>
         </DialogHeader>
         <div className="space-y-2">
-          <div className="text-xs text-muted-foreground">Command</div>
+          <div className="text-xs text-muted-foreground">命令</div>
           <CopyInput value={command} />
         </div>
         {dialog.botUrl && (
@@ -683,7 +682,7 @@ function RuleToggle({
     toggleRuleChannelAction.bind(null, emailAccountId),
     {
       onSuccess: () => {
-        toastSuccess({ description: "Settings saved" });
+        toastSuccess({ description: "设置已保存" });
         onUpdate();
       },
       onError: (error) => {
@@ -715,7 +714,7 @@ function RuleToggle({
       <ItemContent>
         <div className="flex items-center gap-2">
           <ItemTitle>{rule.name}</ItemTitle>
-          {isDraft && <Badge color="green">Draft reply</Badge>}
+          {isDraft && <Badge color="green">起草回复</Badge>}
         </div>
       </ItemContent>
       <ItemActions>
@@ -734,7 +733,7 @@ function RuleToggle({
                   <CheckIcon
                     className={`mr-2 h-4 w-4 ${isDraft ? "invisible" : ""}`}
                   />
-                  Notify only
+                  仅通知
                 </DropdownMenuItem>
                 <DropdownMenuItem
                   onClick={() => switchMode("DRAFT_MESSAGING_CHANNEL")}
@@ -742,7 +741,7 @@ function RuleToggle({
                   <CheckIcon
                     className={`mr-2 h-4 w-4 ${!isDraft ? "invisible" : ""}`}
                   />
-                  Draft reply in chat
+                  在聊天中起草回复
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -800,7 +799,7 @@ function FeatureRouteToggle({
     updateMessagingFeatureRouteAction.bind(null, emailAccountId),
     {
       onSuccess: () => {
-        toastSuccess({ description: "Settings saved" });
+        toastSuccess({ description: "设置已保存" });
         onUpdate();
       },
       onError: (error) => {
@@ -879,7 +878,7 @@ function FeatureRouteAction({
         : prefixPath(emailAccountId, "/drive");
 
     return (
-      <Tooltip content="Open settings">
+      <Tooltip content="打开设置">
         <Button asChild variant="ghost" size="iconSm">
           <Link href={href}>
             <ChevronRightIcon className="h-4 w-4" />
@@ -891,7 +890,7 @@ function FeatureRouteAction({
 
   return (
     <>
-      <Tooltip content="Configure">
+      <Tooltip content="配置">
         <Button variant="ghost" size="iconSm" onClick={() => setOpen(true)}>
           <Settings2Icon className="h-4 w-4" />
         </Button>

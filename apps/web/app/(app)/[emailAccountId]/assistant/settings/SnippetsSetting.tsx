@@ -15,26 +15,26 @@ import {
 export function SnippetsSetting() {
   return (
     <SettingCard
-      description="Reuse saved replies in drafts by typing / followed by a shortcut."
+      description="输入 / 和快捷名称，在草稿中插入已保存的回复。"
       right={
         <Dialog>
           <DialogTrigger asChild>
             <Button size="sm" variant="outline">
-              Manage
+              管理
             </Button>
           </DialogTrigger>
           <DialogContent className="max-h-[80vh] max-w-4xl overflow-y-auto">
             <DialogHeader>
-              <DialogTitle>Snippets</DialogTitle>
+              <DialogTitle>快捷片段</DialogTitle>
               <DialogDescription>
-                Saved replies you can insert from compose with /.
+                写邮件时输入 / 即可插入已保存的回复。
               </DialogDescription>
             </DialogHeader>
             <SnippetsManager />
           </DialogContent>
         </Dialog>
       }
-      title="Snippets"
+      title="快捷片段"
     />
   );
 }

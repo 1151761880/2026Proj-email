@@ -11,18 +11,18 @@ import { ConnectDrive } from "./ConnectDrive";
 const steps = [
   {
     number: 1,
-    title: "Tell us how you organize",
-    description: '"Receipts go to Expenses by month. Contracts go to Legal."',
+    title: "说明整理方式",
+    description: "“收据按月份放入费用文件夹，合同放入法务文件夹。”",
   },
   {
     number: 2,
-    title: "Attachments get filed",
-    description: "AI reads each document and files it to the right folder",
+    title: "自动整理附件",
+    description: "AI 读取文档并整理到对应文件夹",
   },
   {
     number: 3,
-    title: "You stay in control",
-    description: "Get an email when files are sorted—reply to correct",
+    title: "处理方式由你决定",
+    description: "文件整理后收到邮件，可回复进行修正",
   },
 ];
 
@@ -30,7 +30,7 @@ export function DriveOnboarding() {
   return (
     <div className="mx-auto max-w-xl py-8">
       <TypographyH3 className="text-center">
-        Attachments filed automatically while you work
+        工作时自动整理附件
       </TypographyH3>
 
       <div className="mt-10 space-y-6">
@@ -51,7 +51,7 @@ export function DriveOnboarding() {
 
       <Card className="mt-10 p-6">
         <TypographyH4 className="text-center">
-          Where should we file your attachments?
+          附件应整理到哪里？
         </TypographyH4>
         <div className="mt-4 flex justify-center">
           <ConnectDrive />

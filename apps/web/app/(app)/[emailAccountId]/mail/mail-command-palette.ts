@@ -47,7 +47,7 @@ export function buildMailCommandPalette({
   isAutoArchiveDisabled = false,
   isUnsubscribeDisabled = false,
   unsubscribeLabel = "Unsubscribe from sender",
-  openExternalLabel = "Open in email provider",
+  openExternalLabel = "在邮箱服务中打开",
   targetCount,
 }: {
   actions: MailCommandActions;
@@ -95,7 +95,7 @@ export function buildMailCommandPalette({
   if (targetCount === 1 && actions.forward) {
     commands.push({
       id: "mail-forward",
-      label: "Forward",
+      label: "转发",
       icon: ForwardIcon,
       shortcut: getShortcutHint("forward"),
       section: "actions",
@@ -108,7 +108,7 @@ export function buildMailCommandPalette({
   if (actions.label) {
     commands.push({
       id: "mail-label",
-      label: "Label",
+      label: "标签",
       icon: TagIcon,
       shortcut: getShortcutHint("label"),
       section: "actions",
@@ -121,7 +121,7 @@ export function buildMailCommandPalette({
   if (actions.move) {
     commands.push({
       id: "mail-move",
-      label: "Move",
+      label: "移动",
       icon: FolderInputIcon,
       shortcut: getShortcutHint("move"),
       section: "actions",
@@ -175,7 +175,7 @@ export function buildMailCommandPalette({
   if (targetCount === 1 && actions.translate) {
     commands.push({
       id: "mail-translate",
-      label: "Translate",
+      label: "翻译",
       icon: LanguagesIcon,
       shortcut: getShortcutHint("translate"),
       section: "actions",
@@ -188,7 +188,7 @@ export function buildMailCommandPalette({
   if (targetCount === 1 && actions.comment) {
     commands.push({
       id: "mail-comment",
-      label: "Comment",
+      label: "评论",
       icon: MessageSquareIcon,
       shortcut: getShortcutHint("openTeamComments"),
       section: "actions",
@@ -217,7 +217,7 @@ export function buildMailCommandPalette({
   if (actions.markSpam) {
     commands.push({
       id: "mail-mark-spam",
-      label: "Mark as spam",
+      label: "标为垃圾邮件",
       icon: ShieldAlertIcon,
       shortcut: getShortcutHint("markSpam"),
       section: "actions",

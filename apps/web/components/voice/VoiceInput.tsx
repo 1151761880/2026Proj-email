@@ -89,9 +89,9 @@ export function VoiceInput({
     <>
       <div className={cn("flex items-center gap-1", className)}>
         {canDictate ? (
-          <Tooltip content="Dictate">
+          <Tooltip content="语音输入">
             <Button
-              aria-label="Dictate"
+              aria-label="语音输入"
               className="size-9 rounded-full"
               data-testid="voice-dictate-button"
               onClick={() => {
@@ -108,9 +108,9 @@ export function VoiceInput({
           </Tooltip>
         ) : null}
         {canLive ? (
-          <Tooltip content="Live conversation">
+          <Tooltip content="实时语音对话">
             <Button
-              aria-label="Start live conversation"
+              aria-label="开始语音对话"
               className="size-9 rounded-full"
               data-testid="voice-live-button"
               onClick={() => {

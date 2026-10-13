@@ -44,8 +44,8 @@ export default function IntegrationsPage() {
       <PageWrapper>
         <div className="flex items-center justify-between gap-2">
           <PageHeader
-            title="Integrations"
-            description="Connect the tools you already use."
+            title="集成"
+            description="连接你正在使用的工具。"
           />
         </div>
 
@@ -53,11 +53,11 @@ export default function IntegrationsPage() {
           <ActionCard
             variant="blue"
             icon={<ZapIcon className="h-5 w-5" />}
-            title="Integrations are not enabled"
-            description="This feature is in limited rollout. Join early access to enable integrations for your account."
+            title="集成功能未启用"
+            description="此功能正在逐步开放，加入抢先体验后可为账户启用。"
             action={
               <Button asChild variant="outline">
-                <Link href="/early-access">Join Early Access</Link>
+                <Link href="/early-access">加入抢先体验</Link>
               </Button>
             }
           />
@@ -70,15 +70,15 @@ export default function IntegrationsPage() {
     <PageWrapper>
       <div className="flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:justify-between">
         <PageHeader
-          title="Integrations"
-          description="Connect the tools you already use."
+          title="集成"
+          description="连接你正在使用的工具。"
         />
         {hasAccess && (
           <div className="flex flex-wrap items-center gap-2 sm:shrink-0 sm:flex-nowrap">
             <AddCustomMcpServerDialog />
             <RequestAccessDialog
               trigger={
-                <Button variant="outline">Request an Integration</Button>
+                <Button variant="outline">申请集成</Button>
               }
             />
           </div>
@@ -106,9 +106,9 @@ function Capabilities() {
           </FeatureIcon>
         </ItemMedia>
         <ItemContent>
-          <ItemTitle>Better drafts</ItemTitle>
+          <ItemTitle>更准确的草稿</ItemTitle>
           <ItemDescription>
-            Replies arrive knowing the sender's plan, tickets, and history.
+            回复可参考发件人的套餐、工单和历史记录。
           </ItemDescription>
         </ItemContent>
       </Item>
@@ -120,9 +120,9 @@ function Capabilities() {
             </FeatureIcon>
           </ItemMedia>
           <ItemContent>
-            <ItemTitle>Rule actions</ItemTitle>
+            <ItemTitle>规则操作</ItemTitle>
             <ItemDescription>
-              Rules can write back, like adding a Todoist task.
+              规则可以执行写入操作，例如添加 Todoist 任务。
             </ItemDescription>
           </ItemContent>
         </Item>

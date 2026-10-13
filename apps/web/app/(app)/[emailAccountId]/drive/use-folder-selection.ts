@@ -119,7 +119,7 @@ export function useFolderSelection({
         );
         toastError({
           title: isChecked ? "Error adding folder" : "Error removing folder",
-          description: "Please try again.",
+          description: "请重试。",
         });
         mutateFolders();
       }

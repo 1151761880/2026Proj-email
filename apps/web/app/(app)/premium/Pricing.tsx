@@ -82,14 +82,14 @@ export default function Pricing(props: PricingProps) {
     <div className="mb-12">
       <div className="mx-auto max-w-2xl text-center lg:max-w-4xl">
         <h2 className="font-title text-base leading-7 text-blue-600">
-          Pricing
+          价格方案
         </h2>
         <p className="mt-2 font-title text-4xl text-gray-900 sm:text-5xl">
-          Try for free, affordable paid plans
+          免费试用，灵活付费
         </p>
       </div>
       <p className="mx-auto mt-6 max-w-2xl text-center text-lg leading-8 text-gray-600">
-        No hidden fees. Cancel anytime.
+        无隐藏费用，可随时取消。
       </p>
     </div>
   );
@@ -130,8 +130,8 @@ export default function Pricing(props: PricingProps) {
       <div className="mx-auto max-w-2xl px-6 py-12">
         <AlertBasic
           variant="blue"
-          title="Billing access restricted"
-          description="Only organization owners and admins can manage billing."
+          title="无账单管理权限"
+          description="仅组织所有者和管理员可管理账单。"
         />
       </div>
     );
@@ -156,7 +156,7 @@ export default function Pricing(props: PricingProps) {
               <Button className="ml-2" asChild>
                 <Link href="/setup">
                   <SparklesIcon className="mr-2 h-4 w-4" />
-                  Go to app
+                  进入应用
                 </Link>
               </Button>
             )}
@@ -165,8 +165,8 @@ export default function Pricing(props: PricingProps) {
               <div className="mx-auto mt-4 max-w-2xl text-left">
                 <AlertBasic
                   variant="blue"
-                  title="Managed in the App Store"
-                  description="This subscription is billed by Apple. To change or cancel it, use your iPhone or iPad subscription settings."
+                  title="通过 App Store 管理"
+                  description="此订阅由 Apple 计费。请在 iPhone 或 iPad 的订阅设置中修改或取消。"
                 />
               </div>
             )}
@@ -175,8 +175,8 @@ export default function Pricing(props: PricingProps) {
               <div className="mx-auto mt-4 max-w-2xl text-left">
                 <AlertBasic
                   variant="blue"
-                  title="Grandfathered pricing"
-                  description={`You're on a legacy ${getPremiumTierName(premium?.tier)} Stripe plan. The prices below are the current rates for new subscriptions and may be higher than your actual billing.`}
+                  title="原有套餐价格"
+                  description={`你正在使用原有的 ${getPremiumTierName(premium?.tier)} Stripe 套餐。下方为新订阅价格，可能高于你的实际账单金额。`}
                 />
               </div>
             )}
@@ -196,7 +196,7 @@ export default function Pricing(props: PricingProps) {
           }}
         >
           <div className="ml-1">
-            <DiscountBadge>Save up to 20%</DiscountBadge>
+            <DiscountBadge>最高节省 20%</DiscountBadge>
           </div>
         </PricingFrequencyToggle>
 
@@ -273,8 +273,8 @@ function PriceTier({
     ["active", "trialing"].includes(stripeSubscriptionStatus);
 
   function getCTAText() {
-    if (isCurrentPlan) return "Current plan";
-    if (userPremiumTier && !tier.ctaLink) return "Switch to this plan";
+    if (isCurrentPlan) return "当前套餐";
+    if (userPremiumTier && !tier.ctaLink) return "切换至此套餐";
     return tier.cta;
   }
 
@@ -291,7 +291,7 @@ function PriceTier({
           >
             {tier.name}
           </h3>
-          {tier.mostPopular ? <DiscountBadge>Popular</DiscountBadge> : null}
+          {tier.mostPopular ? <DiscountBadge>热门</DiscountBadge> : null}
         </div>
         <p className="mt-4 text-sm leading-6 text-gray-600">
           {tier.description}
@@ -299,7 +299,7 @@ function PriceTier({
         <p className="mt-6 flex items-baseline gap-x-1">
           {tier.price[frequency.value] === 0 ? (
             <span className="text-4xl font-bold tracking-tight text-gray-900">
-              Let's talk
+              联系我们
             </span>
           ) : (
             <>
@@ -315,7 +315,7 @@ function PriceTier({
           {!!tier.discount?.[frequency.value] && (
             <DiscountBadge>
               <span className="tracking-wide">
-                SAVE {tier.discount[frequency.value].toFixed(0)}%
+                节省 {tier.discount[frequency.value].toFixed(0)}%
               </span>
             </DiscountBadge>
           )}
@@ -378,13 +378,13 @@ function PriceTier({
 
           async function load() {
             if (tier.tiers[frequency.value] === userPremiumTier) {
-              toast.info("You are already on this plan");
+              toast.info("你已使用此套餐");
               return;
             }
 
             if (hasActiveAppleManagedSubscription) {
               toast.info(
-                "This subscription is managed through the App Store. To change or cancel it, use your iPhone or iPad subscription settings.",
+                "此订阅通过 App Store 管理。请在 iPhone 或 iPad 的订阅设置中修改或取消。",
               );
               return;
             }
@@ -408,7 +408,7 @@ function PriceTier({
                 : result?.serverError ||
                   `Error creating checkout session. Please contact support at ${env.NEXT_PUBLIC_SUPPORT_EMAIL}`;
 
-              captureException(new Error("Error opening Stripe billing flow"), {
+              captureException(new Error("打开 Stripe 账单页面失败"), {
                 extra: {
                   tier: upgradeToTier,
                   frequency: frequency.value,

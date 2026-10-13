@@ -19,7 +19,7 @@ test(`${playwrightMailProvider} emulator signs in and creates an app account`, a
   await page.goto("/login?next=%2Fwelcome-redirect%3Fforce%3Dtrue", {
     waitUntil: "domcontentloaded",
   });
-  await expect(page.getByRole("heading", { name: "Sign In" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "登录" })).toBeVisible();
 
   const signInPayload = await page.evaluate(async (provider) => {
     const response = await fetch("/api/auth/sign-in/social", {

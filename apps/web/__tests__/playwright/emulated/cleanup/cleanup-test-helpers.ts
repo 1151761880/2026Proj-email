@@ -307,13 +307,13 @@ async function seedEmailStats(client: Client, emailAccountId: string) {
 function getCleanupFeatureReadyLocator(page: Page, expectedPath: string) {
   switch (expectedPath) {
     case "stats":
-      return page.getByRole("heading", { name: "Analytics" });
+      return page.getByRole("heading", { name: "统计分析" });
     case "bulk-archive":
-      return page.getByRole("heading", { name: "Bulk Archive" });
+      return page.getByRole("heading", { name: "批量归档" });
     case "bulk-unsubscribe":
-      return page.getByRole("heading", { name: "Bulk Unsubscriber" });
+      return page.getByRole("heading", { name: "批量退订" });
     case "mail":
-      return page.getByRole("listbox", { name: "Conversations" });
+      return page.getByRole("listbox", { name: "会话" });
     default:
       throw new Error(`Unsupported cleanup path: ${expectedPath}`);
   }

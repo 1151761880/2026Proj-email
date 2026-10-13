@@ -19,7 +19,7 @@ export const BrandScroller = ({
   className,
 }: BrandScrollerProps) => (
   <HeroReveal className={cn("mt-12", className)} delay={0.125 * 10}>
-    <Paragraph>Join {userCount} professionals, including people at:</Paragraph>
+    <Paragraph>加入 {userCount} 位专业用户，来自：</Paragraph>
     <div className="group flex max-w-full flex-row overflow-x-hidden py-10 [gap:var(--gap))] [--gap:2rem] [mask-image:linear-gradient(to_right,_rgba(0,_0,_0,_0),rgba(0,_0,_0,_1)_10%,rgba(0,_0,_0,_1)_90%,rgba(0,_0,_0,_0))] md:[--gap:3rem]">
       {new Array(4).fill(0).map((_, i) => (
         <div

@@ -37,15 +37,15 @@ describe("desktop application menu", () => {
     expect(Menu.setApplicationMenu).toHaveBeenCalledWith(template);
     const help = template.find((item) => item.role === "help");
     const submenu = help?.submenu as MenuItemConstructorOptions[];
-    const update = submenu.find((item) => item.label === "Check for Updates…");
+    const update = submenu.find((item) => item.label === "检查更新…");
     expect(update?.click).toBe(checkForUpdates);
 
-    const about = submenu.find((item) => item.label === "About Inbox Zero");
+    const about = submenu.find((item) => item.label === "关于 十组邮件小助手");
     expect(about?.click).toEqual(expect.any(Function));
     about?.click?.({} as never, {} as never, {} as never);
 
     expect(app.setAboutPanelOptions).toHaveBeenCalledWith({
-      applicationName: "Inbox Zero",
+      applicationName: "十组邮件小助手",
       applicationVersion: "0.2.0",
     });
     expect(app.showAboutPanel).toHaveBeenCalledOnce();
@@ -62,9 +62,9 @@ describe("desktop application menu", () => {
 
     const template: MenuItemConstructorOptions[] =
       Menu.buildFromTemplate.mock.results[0].value;
-    const file = template.find((item) => item.label === "File");
+    const file = template.find((item) => item.label === "文件");
     const submenu = file?.submenu as MenuItemConstructorOptions[];
-    const newWindow = submenu.find((item) => item.label === "New Window");
+    const newWindow = submenu.find((item) => item.label === "新建窗口");
     expect(newWindow?.accelerator).toBe("CommandOrControl+N");
     newWindow?.click?.({} as never, {} as never, {} as never);
     expect(createWindow).toHaveBeenCalledOnce();
@@ -82,9 +82,9 @@ describe("desktop application menu", () => {
 
     const template: MenuItemConstructorOptions[] =
       Menu.buildFromTemplate.mock.results[0].value;
-    const appMenu = template.find((item) => item.label === "Inbox Zero");
+    const appMenu = template.find((item) => item.label === "十组邮件小助手");
     const submenu = appMenu?.submenu as MenuItemConstructorOptions[];
-    const update = submenu.find((item) => item.label === "Restart to Update");
+    const update = submenu.find((item) => item.label === "重启并更新");
     expect(update?.click).toBe(checkForUpdates);
   });
 
@@ -99,11 +99,11 @@ describe("desktop application menu", () => {
 
     const template: MenuItemConstructorOptions[] =
       Menu.buildFromTemplate.mock.results[0].value;
-    const appMenu = template.find((item) => item.label === "Inbox Zero");
+    const appMenu = template.find((item) => item.label === "十组邮件小助手");
     const submenu = appMenu?.submenu as MenuItemConstructorOptions[];
-    expect(
-      submenu.some((item) => item.label === "Downloading update… 42%"),
-    ).toBe(true);
+    expect(submenu.some((item) => item.label === "正在下载更新… 42%")).toBe(
+      true,
+    );
   });
 
   it.each([
@@ -122,7 +122,7 @@ describe("desktop application menu", () => {
       Menu.buildFromTemplate.mock.results[0].value;
     const help = template.find((item) => item.role === "help");
     const submenu = help?.submenu as MenuItemConstructorOptions[];
-    const record = submenu.find((item) => item.label === "Record Diagnostics…");
+    const record = submenu.find((item) => item.label === "记录诊断信息…");
     expect(record?.click).toBe(recordDiagnostics);
   });
 });

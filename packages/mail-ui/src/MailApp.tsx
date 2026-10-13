@@ -96,14 +96,14 @@ export function MailApp({
 
   const sidebar = (
     <aside style={styles.sidebar}>
-      <div style={styles.brand}>Inbox Zero</div>
+      <div style={styles.brand}>十组邮件小助手</div>
       {host.compose ? (
         <button
           style={styles.primaryButton}
           type="button"
           onClick={() => host.compose?.()}
         >
-          Compose
+          写邮件
         </button>
       ) : null}
       <button
@@ -111,9 +111,9 @@ export function MailApp({
         type="button"
         onClick={() => setSearch("")}
       >
-        Inbox
+        收件箱
       </button>
-      <div style={styles.sidebarHeading}>Accounts</div>
+      <div style={styles.sidebarHeading}>账户</div>
       {accountList.map((account) => (
         <button
           key={account.id}
@@ -142,7 +142,7 @@ export function MailApp({
         type="button"
         onClick={() => host.openSettings()}
       >
-        Settings
+        设置
       </button>
     </aside>
   );
@@ -156,12 +156,12 @@ export function MailApp({
       bodyStyle={styles.body}
       sidebar={sidebar}
     >
-      <section aria-label="Mailbox" style={styles.listPane}>
+      <section aria-label="邮箱" style={styles.listPane}>
         <header style={styles.toolbar}>
           <label style={styles.searchLabel}>
-            Search
+            搜索
             <input
-              aria-label="Search"
+              aria-label="搜索"
               style={styles.searchInput}
               value={search}
               onChange={(event) => setSearch(event.target.value)}
@@ -175,13 +175,13 @@ export function MailApp({
               client.requestSync(query.accountIds).catch(() => undefined)
             }
           >
-            Sync
+            同步
           </button>
         </header>
         <StatusLine mailbox={mailbox} />
         <MailboxThreadList
           className="mail-thread-list"
-          emptyMessage="No emails in this view"
+          emptyMessage="此视图暂无邮件"
           focusedIndex={Math.max(
             0,
             conversations.findIndex(
@@ -246,7 +246,7 @@ export function MailApp({
         empty="Select an email to read it."
         error={
           conversation.error
-            ? "This conversation could not be loaded."
+            ? "无法加载此会话。"
             : undefined
         }
         loading={conversation.status === "loading"}
@@ -317,7 +317,7 @@ function ConversationListRow({
               onArchive();
             }}
           >
-            Archive
+            归档
           </button>
           <button
             type="button"
@@ -326,7 +326,7 @@ function ConversationListRow({
               onMarkRead();
             }}
           >
-            Mark as read
+            标为已读
           </button>
         </div>
       }
@@ -366,21 +366,21 @@ function StatusLine({
   if (mailbox.data?.connection === "blocked_auth") {
     return (
       <p role="status" style={styles.status}>
-        Reconnect this account to continue syncing.
+        重新连接此账户以继续同步。
       </p>
     );
   }
   if (mailbox.data?.connection === "offline") {
     return (
       <p role="status" style={styles.status}>
-        Waiting to sync. Catch-up will retry automatically.
+        等待同步，将自动重试。
       </p>
     );
   }
   return (
     <p style={styles.status}>
       {mailbox.status === "ready"
-        ? `${mailbox.data?.counts.matchingConversations ?? 0} conversations`
+        ? `${mailbox.data?.counts.matchingConversations ?? 0} 个会话`
         : mailbox.status}
     </p>
   );
@@ -402,11 +402,11 @@ function ConversationReader({
   onMarkRead: (read: boolean) => void;
 }) {
   if (conversation.status === "loading")
-    return <div style={styles.emptyReader}>Loading…</div>;
+    return <div style={styles.emptyReader}>正在加载…</div>;
   if (conversation.error)
     return (
       <div style={styles.emptyReader}>
-        This conversation could not be loaded.
+        无法加载此会话。
       </div>
     );
 
@@ -426,13 +426,13 @@ function ConversationReader({
       }}
       renderLoadMoreButton={({ disabled, onClick }) => (
         <button disabled={disabled} onClick={onClick} type="button">
-          Next messages
+          下一页邮件
         </button>
       )}
     >
       {onPreviousPage ? (
         <button onClick={onPreviousPage} type="button">
-          Previous messages
+          上一页邮件
         </button>
       ) : null}
       <MailReaderToolbar
@@ -512,15 +512,15 @@ function keyString(key: ConversationKey) {
 function groupLabel(ms: number) {
   const date = new Date(ms);
   const now = new Date();
-  if (date.toDateString() === now.toDateString()) return "Today";
+  if (date.toDateString() === now.toDateString()) return "今天";
   const yesterday = new Date(now);
   yesterday.setDate(now.getDate() - 1);
-  if (date.toDateString() === yesterday.toDateString()) return "Yesterday";
-  return date.toLocaleDateString([], { month: "short", day: "numeric" });
+  if (date.toDateString() === yesterday.toDateString()) return "昨天";
+  return date.toLocaleDateString("zh-CN", { month: "short", day: "numeric" });
 }
 
 function formatDate(ms: number) {
-  return new Date(ms).toLocaleDateString([], {
+  return new Date(ms).toLocaleDateString("zh-CN", {
     month: "short",
     day: "numeric",
   });

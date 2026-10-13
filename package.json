@@ -1,5 +1,6 @@
 {
-  "name": "inbox-zero",
+  "name": "shizu-mail-assistant",
+  "description": "十组邮件小助手：智能邮件分类、回复与整理",
   "private": true,
   "scripts": {
     "build": "turbo build --filter=./apps/web",

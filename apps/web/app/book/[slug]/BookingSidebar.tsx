@@ -109,10 +109,10 @@ export function BookingSidebar({
         rel="noopener noreferrer"
         className="mt-auto flex items-center gap-1.5 border-t pt-4 text-xs text-muted-foreground transition-colors hover:text-foreground"
       >
-        Powered by
+        技术支持
         <Image
           src={BRAND_ICON_URL}
-          alt={`${BRAND_NAME} icon`}
+          alt={`${BRAND_NAME} 图标`}
           width={14}
           height={14}
           className="rounded-sm"
@@ -177,9 +177,9 @@ function TimezonePicker({
         align="start"
       >
         <Command>
-          <CommandInput placeholder="Search timezone..." />
+          <CommandInput placeholder="搜索时区…" />
           <CommandList>
-            <CommandEmpty>No timezone found.</CommandEmpty>
+            <CommandEmpty>未找到时区。</CommandEmpty>
             <CommandGroup>
               {timezones.map(({ zone, offsetLabel }) => (
                 <CommandItem
@@ -247,10 +247,10 @@ function locationLabel(link: BookingLink): string {
     case BookingLinkLocationType.MICROSOFT_TEAMS:
       return "Microsoft Teams";
     case BookingLinkLocationType.PHONE:
-      return "Phone call";
+      return "电话会议";
     case BookingLinkLocationType.IN_PERSON:
-      return "In person";
+      return "线下会面";
     default:
-      return "Custom";
+      return "自定义";
   }
 }

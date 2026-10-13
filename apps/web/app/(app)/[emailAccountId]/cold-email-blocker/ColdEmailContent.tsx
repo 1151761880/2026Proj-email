@@ -17,10 +17,10 @@ export function ColdEmailContent({ searchParam }: { searchParam?: string }) {
   return (
     <Tabs defaultValue="cold-emails" searchParam={searchParam}>
       <TabsList>
-        <TabsTrigger value="cold-emails">Cold Emails</TabsTrigger>
-        <TabsTrigger value="rejected">Marked Not Cold</TabsTrigger>
-        <TabsTrigger value="test">Test</TabsTrigger>
-        <TabsTrigger value="settings">Settings</TabsTrigger>
+        <TabsTrigger value="cold-emails">陌生推广邮件</TabsTrigger>
+        <TabsTrigger value="rejected">已标为正常邮件</TabsTrigger>
+        <TabsTrigger value="test">测试</TabsTrigger>
+        <TabsTrigger value="settings">设置</TabsTrigger>
       </TabsList>
 
       <TabsContent value="test" className="mb-10">
@@ -40,12 +40,11 @@ export function ColdEmailContent({ searchParam }: { searchParam?: string }) {
 
       <TabsContent value="settings" className="mb-10">
         <MessageText className="my-4">
-          To manage cold email settings, go to the Assistant Rules tab and click
-          Edit on the Cold Email rule.
+          前往助手的“规则”页，编辑陌生邮件规则即可管理相关设置。
         </MessageText>
         <Button asChild variant="outline">
           <Link href={prefixPath(emailAccountId, "/automation?tab=rules")}>
-            Go to Assistant Rules
+            前往助手规则
           </Link>
         </Button>
       </TabsContent>

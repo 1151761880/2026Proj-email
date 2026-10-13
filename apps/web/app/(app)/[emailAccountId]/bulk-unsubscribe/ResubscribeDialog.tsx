@@ -73,9 +73,9 @@ export function ResubscribeDialog({
     <Dialog open={open} onOpenChange={handleDialogClose}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Resubscribe to "{senderName}"</DialogTitle>
+          <DialogTitle>重新订阅：{senderName}"</DialogTitle>
           <DialogDescription className="pt-2">
-            Follow the steps below to receive emails from this sender again.
+            按以下步骤恢复接收此发件人的邮件。
           </DialogDescription>
         </DialogHeader>
 
@@ -91,15 +91,14 @@ export function ResubscribeDialog({
             </div>
             <div className="flex flex-1 items-center justify-between gap-4">
               <div>
-                <div className="font-medium">Unblock Sender</div>
+                <div className="font-medium">解除拦截</div>
                 <p className="text-sm text-muted-foreground">
-                  We're currently auto-archiving this sender. Click "Unblock" to
-                  allow emails from them.
+                  当前自动归档此发件人的邮件。点击“解除拦截”恢复接收。
                 </p>
               </div>
               {unblockComplete ? (
                 <p className="shrink-0 text-sm font-medium text-green-600">
-                  Unblocked
+                  已解除拦截
                 </p>
               ) : (
                 <Button
@@ -110,7 +109,7 @@ export function ResubscribeDialog({
                   disabled={unblockLoading}
                 >
                   {unblockLoading && <ButtonLoader />}
-                  Unblock
+                  解除拦截
                 </Button>
               )}
             </div>
@@ -129,9 +128,9 @@ export function ResubscribeDialog({
               )}
             </div>
             <div>
-              <div className="font-medium">Manually Resubscribe</div>
+              <div className="font-medium">手动重新订阅</div>
               <p className="text-sm text-muted-foreground">
-                Visit the sender's website and manually resubscribe.
+                前往发件人网站手动重新订阅。
               </p>
             </div>
           </div>
@@ -143,14 +142,14 @@ export function ResubscribeDialog({
             onClick={() => handleDialogClose(false)}
             disabled={doneLoading}
           >
-            Cancel
+            取消
           </Button>
           <Button
             onClick={handleDone}
             disabled={!unblockComplete || doneLoading}
           >
             {doneLoading && <ButtonLoader />}
-            Done
+            完成
           </Button>
         </DialogFooter>
       </DialogContent>

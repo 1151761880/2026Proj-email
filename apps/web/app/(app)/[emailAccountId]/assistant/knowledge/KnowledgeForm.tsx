@@ -65,7 +65,7 @@ export function KnowledgeForm({
           content: editingItem.content,
         }
       : {
-          title: "How to draft replies",
+          title: "如何起草回复",
           content: "",
         },
   });
@@ -89,14 +89,14 @@ export function KnowledgeForm({
 
     if (result?.serverError) {
       toastError({
-        title: `Error ${editingItem ? "updating" : "creating"} knowledge base entry`,
+        title: `知识库条目操作失败`,
         description: result.serverError || "",
       });
       return;
     }
 
     toastSuccess({
-      description: `Knowledge base entry ${editingItem ? "updated" : "created"} successfully`,
+      description: `知识库条目已保存`,
     });
 
     refetch();
@@ -109,14 +109,14 @@ export function KnowledgeForm({
         !hasFullAccess &&
         knowledgeItemsCount >= KNOWLEDGE_BASIC_MAX_ITEMS && (
           <AlertWithButton
-            title="Upgrade to add more knowledge base entries"
+            title="升级后添加更多知识库条目"
             description={
-              <>Switch to the Plus plan to add more knowledge base entries.</>
+              <>升级进阶版后可添加更多知识库条目。</>
             }
             icon={<CrownIcon className="h-4 w-4" />}
             button={
               <Button asChild>
-                <Link href="/premium">Upgrade</Link>
+                <Link href="/premium">升级</Link>
               </Button>
             }
             variant="blue"
@@ -126,7 +126,7 @@ export function KnowledgeForm({
       <Input
         type="text"
         name="title"
-        label="Title"
+        label="标题"
         registerProps={register("title")}
         error={errors.title}
       />
@@ -135,7 +135,7 @@ export function KnowledgeForm({
           htmlFor="content"
           className={cn(errors.content && "text-destructive")}
         >
-          Content (supports markdown)
+          内容（支持 Markdown）
         </Label>
         <Controller
           name="content"
@@ -159,7 +159,7 @@ export function KnowledgeForm({
         )}
       </div>
       <Button type="submit" loading={isSubmitting}>
-        {editingItem ? "Update" : "Create"}
+        {editingItem ? "更新" : "创建"}
       </Button>
     </form>
   );

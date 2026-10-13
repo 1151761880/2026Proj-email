@@ -20,7 +20,7 @@ test("chooses which accounts appear in All Accounts", async ({
       .last()
       .click();
     const chooseAccountsMenuItem = page.getByRole("menuitem", {
-      name: "Choose accounts",
+      name: "选择账户",
     });
     await expect(chooseAccountsMenuItem).toBeVisible();
 
@@ -68,10 +68,10 @@ test("chooses which accounts appear in All Accounts", async ({
 
     await chooseAccountsMenuItem.click();
 
-    const dialog = page.getByRole("dialog", { name: "Choose accounts" });
+    const dialog = page.getByRole("dialog", { name: "选择账户" });
     await expect(dialog).toBeVisible();
     await expect(
-      page.getByRole("menuitem", { name: "Choose accounts" }),
+      page.getByRole("menuitem", { name: "选择账户" }),
     ).toBeHidden();
     await expect(
       dialog.getByRole("checkbox", { name: new RegExp(secondAccount.name) }),
@@ -82,9 +82,9 @@ test("chooses which accounts appear in All Accounts", async ({
     await dialog
       .getByRole("checkbox", { name: new RegExp(secondAccount.name) })
       .uncheck();
-    await dialog.getByRole("button", { name: "Save" }).click();
+    await dialog.getByRole("button", { name: "保存" }).click();
     await expect(
-      page.getByText("All Accounts updated", { exact: true }),
+      page.getByText("全部账户设置已更新", { exact: true }),
     ).toBeVisible();
 
     await expect

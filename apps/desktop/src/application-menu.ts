@@ -1,6 +1,6 @@
 import { app, Menu, type MenuItemConstructorOptions } from "electron";
 
-const PRODUCT_NAME = "Inbox Zero";
+const PRODUCT_NAME = "十组邮件小助手";
 
 export function configureDesktopApplicationMenu({
   checkForUpdates,
@@ -27,7 +27,7 @@ export function configureDesktopApplicationMenu({
     click: checkForUpdates,
   };
   const recordDiagnosticsItem: MenuItemConstructorOptions = {
-    label: "Record Diagnostics…",
+    label: "记录诊断信息…",
     click: recordDiagnostics,
   };
   const helpSubmenu: MenuItemConstructorOptions[] =
@@ -38,7 +38,7 @@ export function configureDesktopApplicationMenu({
           recordDiagnosticsItem,
           { type: "separator" },
           {
-            label: `About ${PRODUCT_NAME}`,
+            label: `关于 ${PRODUCT_NAME}`,
             click: () => app.showAboutPanel(),
           },
         ];
@@ -48,26 +48,26 @@ export function configureDesktopApplicationMenu({
           {
             label: PRODUCT_NAME,
             submenu: [
-              { label: `About ${PRODUCT_NAME}`, role: "about" },
+              { label: `关于 ${PRODUCT_NAME}`, role: "about" },
               { type: "separator" },
               checkForUpdatesItem,
               { type: "separator" },
               { role: "services" },
               { type: "separator" },
-              { label: `Hide ${PRODUCT_NAME}`, role: "hide" },
+              { label: `隐藏 ${PRODUCT_NAME}`, role: "hide" },
               { role: "hideOthers" },
               { role: "unhide" },
               { type: "separator" },
-              { label: `Quit ${PRODUCT_NAME}`, role: "quit" },
+              { label: `退出 ${PRODUCT_NAME}`, role: "quit" },
             ],
           } satisfies MenuItemConstructorOptions,
         ]
       : []),
     {
-      label: "File",
+      label: "文件",
       submenu: [
         {
-          label: "New Window",
+          label: "新建窗口",
           accelerator: "CommandOrControl+N",
           click: createWindow,
         },
@@ -87,7 +87,7 @@ export function configureDesktopApplicationMenu({
 }
 
 function updateMenuLabel(updateReady: boolean, downloadPercent: number | null) {
-  if (updateReady) return "Restart to Update";
-  if (downloadPercent === null) return "Check for Updates…";
-  return `Downloading update… ${downloadPercent}%`;
+  if (updateReady) return "重启并更新";
+  if (downloadPercent === null) return "检查更新…";
+  return `正在下载更新… ${downloadPercent}%`;
 }

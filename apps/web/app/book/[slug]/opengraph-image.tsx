@@ -9,7 +9,7 @@ import { getClientIp } from "@/utils/rate-limit";
 
 const logger = createScopedLogger("public/booking-link-og-image");
 
-export const alt = "Booking link";
+export const alt = "预约链接";
 
 export const size = {
   width: 1200,

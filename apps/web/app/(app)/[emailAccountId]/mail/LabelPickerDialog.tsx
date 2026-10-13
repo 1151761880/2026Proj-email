@@ -87,7 +87,7 @@ export function LabelPickerDialog({
           mutate().catch(() => {});
         }
       }
-      if (!client) throw new Error("Mail engine is unavailable");
+      if (!client) throw new Error("邮件服务暂时不可用");
       const { succeededThreadIds, failedThreadIds, error } =
         await applyEngineLabels({
           client,
@@ -111,8 +111,8 @@ export function LabelPickerDialog({
         error instanceof Error
           ? error.message
           : isMove
-            ? "Couldn't move conversations. Please try again."
-            : "Couldn't apply label. Please try again.",
+            ? "移动会话失败，请重试。"
+            : "添加标签失败，请重试。",
       );
     } finally {
       pending.current = false;
@@ -134,20 +134,20 @@ export function LabelPickerDialog({
         onEscapeKeyDown={(event) => event.stopPropagation()}
       >
         <DialogTitle className="sr-only">
-          {isMove ? "Move conversations" : "Label conversations"}
+          {isMove ? "移动会话" : "为会话添加标签"}
         </DialogTitle>
         <Command className="[&_[cmdk-input-wrapper]>svg]:hidden">
           <CommandInput
-            aria-label="Search labels"
+            aria-label="搜索标签"
             className="pr-8"
-            placeholder={isMove ? "Move to…" : "Label as…"}
+            placeholder={isMove ? "移至…" : "添加标签…"}
             value={search}
             onValueChange={setSearch}
             disabled={isPending}
           />
           <LoadingContent loading={isLoading} error={error}>
             <CommandList aria-busy={isPending}>
-              <CommandEmpty>No matching labels.</CommandEmpty>
+              <CommandEmpty>未找到匹配标签。</CommandEmpty>
               <CommandGroup>
                 {labels.map((label) => (
                   <CommandItem
@@ -166,7 +166,7 @@ export function LabelPickerDialog({
                     onSelect={() => apply()}
                     disabled={isPending}
                   >
-                    <span className="break-all">Create “{name}”</span>
+                    <span className="break-all">创建“{name}”</span>
                   </CommandItem>
                 )}
               </CommandGroup>
@@ -180,7 +180,7 @@ export function LabelPickerDialog({
           >
             <Loader2Icon aria-hidden className="size-4 animate-spin" />
             <span className="sr-only">
-              {isMove ? "Moving…" : "Applying label…"}
+              {isMove ? "正在移动…" : "正在添加标签…"}
             </span>
           </div>
         )}
@@ -200,7 +200,7 @@ function getSuccessMessage(mode: "label" | "move", count: number) {
 function getPartialFailureMessage(mode: "label" | "move", count: number) {
   const action = mode === "move" ? "move" : "label";
   const plural = count === 1 ? "" : "s";
-  return `Couldn't ${action} ${count} conversation${plural}. Select a label to retry.`;
+  return `${count} 个会话处理失败，请选择标签后重试。`;
 }
 
 function getLabelDisplayName(id: string, name: string) {

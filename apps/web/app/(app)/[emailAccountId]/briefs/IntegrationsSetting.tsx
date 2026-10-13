@@ -31,16 +31,16 @@ export function IntegrationsSetting() {
 
   return (
     <SettingCard
-      title="Integrations"
+      title="集成"
       description={
         hasConnectedIntegrations
-          ? `Connected to ${connectedIntegrations.map((i) => i.shortName || i.displayName).join(", ")} with ${enabledToolsCount} tool${enabledToolsCount === 1 ? "" : "s"} enabled`
-          : "Connect to CRM, databases, and other tools to enrich briefings with more context"
+          ? `已连接 ${connectedIntegrations.map((i) => i.shortName || i.displayName).join(", ")}，启用 ${enabledToolsCount} 个工具`
+          : "连接 CRM、数据库等工具，为简报提供更多相关信息"
       }
       right={
         <Button variant="outline" asChild>
           <Link href={`/${emailAccountId}/integrations`}>
-            {hasConnectedIntegrations ? "Manage" : "Connect"}
+            {hasConnectedIntegrations ? "管理" : "连接"}
           </Link>
         </Button>
       }

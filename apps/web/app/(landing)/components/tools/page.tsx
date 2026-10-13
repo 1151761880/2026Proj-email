@@ -56,7 +56,7 @@ export default function ToolsPage() {
               },
               actions: [
                 ruleAction(ActionType.FORWARD, { to: "jim@company.com" }),
-                ruleAction(ActionType.LABEL, { label: "Recruiting" }),
+                ruleAction(ActionType.LABEL, { label: "招聘" }),
               ],
             }}
           />
@@ -76,7 +76,7 @@ export default function ToolsPage() {
               },
               actions: [
                 ruleAction(ActionType.ARCHIVE),
-                ruleAction(ActionType.LABEL, { label: "Newsletter" }),
+                ruleAction(ActionType.LABEL, { label: "订阅邮件" }),
                 ruleAction(ActionType.MARK_READ),
               ],
             }}
@@ -96,7 +96,7 @@ export default function ToolsPage() {
                 conditionalOperator: null,
               },
               actions: [
-                ruleAction(ActionType.LABEL, { label: "Billing" }),
+                ruleAction(ActionType.LABEL, { label: "账单" }),
                 ruleAction(ActionType.FORWARD, {
                   to: "finance@company.com",
                 }),
@@ -144,7 +144,7 @@ export default function ToolsPage() {
             }}
             actions={[
               ruleAction(ActionType.FORWARD, { to: "jim@company.com" }),
-              ruleAction(ActionType.LABEL, { label: "Recruiting" }),
+              ruleAction(ActionType.LABEL, { label: "招聘" }),
             ]}
           />
 
@@ -163,7 +163,7 @@ export default function ToolsPage() {
             }}
             actions={[
               ruleAction(ActionType.ARCHIVE),
-              ruleAction(ActionType.LABEL, { label: "Newsletter" }),
+              ruleAction(ActionType.LABEL, { label: "订阅邮件" }),
               ruleAction(ActionType.MARK_READ),
             ]}
             originalConditions={{
@@ -185,7 +185,7 @@ export default function ToolsPage() {
               ruleName: "Newsletter Archive",
               actions: [
                 ruleAction(ActionType.ARCHIVE),
-                ruleAction(ActionType.LABEL, { label: "Newsletter" }),
+                ruleAction(ActionType.LABEL, { label: "订阅邮件" }),
                 ruleAction(ActionType.MARK_READ),
               ],
             }}
@@ -204,7 +204,7 @@ export default function ToolsPage() {
               ruleName: "Hiring",
               actions: [
                 ruleAction(ActionType.FORWARD, { to: "jim@company.com" }),
-                ruleAction(ActionType.LABEL, { label: "Recruiting" }),
+                ruleAction(ActionType.LABEL, { label: "招聘" }),
               ],
             }}
             condition={{
@@ -214,7 +214,7 @@ export default function ToolsPage() {
             originalActions={[
               {
                 type: ActionType.LABEL,
-                fields: buildRuleActionFields({ label: "Recruiting" }),
+                fields: buildRuleActionFields({ label: "招聘" }),
               },
             ]}
             updatedActions={[
@@ -225,7 +225,7 @@ export default function ToolsPage() {
               },
               {
                 type: ActionType.LABEL,
-                fields: buildRuleActionFields({ label: "Recruiting" }),
+                fields: buildRuleActionFields({ label: "招聘" }),
                 delayInMinutes: null,
               },
             ]}
@@ -311,7 +311,7 @@ export default function ToolsPage() {
 
         {/* Email Actions */}
         <section className="space-y-4">
-          <SectionHeader>Email Actions</SectionHeader>
+          <SectionHeader>邮件操作</SectionHeader>
           <Suspense
             fallback={<BasicToolInfo text="Loading email action states..." />}
           >
@@ -374,7 +374,7 @@ export default function ToolsPage() {
             <ToolErrorCardPreview error="Failed to read email" />
             <ToolErrorCardPreview error="Failed to update rule conditions" />
             <ToolErrorCardPreview error="Failed to update rule state" />
-            <ToolErrorCardPreview error="Missing rule ID in response" />
+            <ToolErrorCardPreview error="响应中缺少规则 ID" />
             <ToolErrorCardPreview error="Failed to load rule execution for message" />
           </div>
         </section>
@@ -400,7 +400,7 @@ export default function ToolsPage() {
             input={{
               action: "archive_threads",
               threadIds: ["thread-1", "thread-2", "thread-3"],
-              label: "Newsletter",
+              label: "订阅邮件",
             }}
             output={{
               action: "archive_threads",
@@ -479,7 +479,7 @@ export default function ToolsPage() {
             output={{
               success: true,
               action: "archive_category",
-              category: { id: "cat-1", name: "Newsletters" },
+              category: { id: "cat-1", name: "订阅邮件" },
               sendersCount: 4,
               senders: [
                 "updates@example.com",
@@ -498,7 +498,7 @@ export default function ToolsPage() {
             output={{
               success: true,
               action: "archive_category",
-              category: { id: "cat-2", name: "Promotions" },
+              category: { id: "cat-2", name: "推广邮件" },
               sendersCount: 60,
               senders: buildFakeSenderList(60, "promo"),
               message: 'Archived mail from 60 senders in "Promotions".',
@@ -512,7 +512,7 @@ export default function ToolsPage() {
             output={{
               success: true,
               action: "archive_category",
-              category: { id: "cat-4", name: "Marketing" },
+              category: { id: "cat-4", name: "营销" },
               sendersCount: 237,
               senders: buildFakeSenderList(100, "marketing"),
               message: 'Archived mail from 237 senders in "Marketing".',
@@ -524,7 +524,7 @@ export default function ToolsPage() {
             output={{
               success: true,
               action: "archive_category",
-              category: { id: null, name: "Uncategorized" },
+              category: { id: null, name: "未分类" },
               sendersCount: 8,
               senders: [
                 "random@example.com",
@@ -545,7 +545,7 @@ export default function ToolsPage() {
             output={{
               success: true,
               action: "archive_category",
-              category: { id: "cat-3", name: "Receipts" },
+              category: { id: "cat-3", name: "收据" },
               sendersCount: 0,
               senders: [],
               message: 'No senders are currently assigned to "Receipts".',
@@ -579,11 +579,11 @@ export default function ToolsPage() {
           <SectionHeader>Basic Tool Info States</SectionHeader>
           <MutedText>Input states (loading indicators):</MutedText>
           <div className="grid gap-2 md:grid-cols-2">
-            <BasicToolInfo text="Loading account overview..." />
-            <BasicToolInfo text="Loading assistant capabilities..." />
-            <BasicToolInfo text="Updating settings..." />
-            <BasicToolInfo text="Searching inbox..." />
-            <BasicToolInfo text="Reading email..." />
+            <BasicToolInfo text="正在加载账户概况…" />
+            <BasicToolInfo text="正在加载助手功能…" />
+            <BasicToolInfo text="正在更新设置…" />
+            <BasicToolInfo text="正在搜索收件箱…" />
+            <BasicToolInfo text="正在读取邮件…" />
             <BasicToolInfo text="Archiving emails..." />
             <BasicToolInfo text="Archiving and labeling emails..." />
             <BasicToolInfo text="Marking emails as read..." />
@@ -591,11 +591,11 @@ export default function ToolsPage() {
             <BasicToolInfo text="Bulk archiving by sender..." />
             <BasicToolInfo text="Unsubscribing senders..." />
             <BasicToolInfo text="Updating inbox features..." />
-            <BasicToolInfo text="Preparing email..." />
-            <BasicToolInfo text="Preparing reply..." />
-            <BasicToolInfo text="Preparing forward..." />
-            <BasicToolInfo text="Reading rules and settings..." />
-            <BasicToolInfo text="Reading learned patterns..." />
+            <BasicToolInfo text="正在准备邮件…" />
+            <BasicToolInfo text="正在准备回复…" />
+            <BasicToolInfo text="正在准备转发…" />
+            <BasicToolInfo text="正在读取规则和设置…" />
+            <BasicToolInfo text="正在读取学习规律…" />
             <BasicToolInfo text='Creating rule "Newsletters"...' />
             <BasicToolInfo text='Updating rule "Newsletters" conditions...' />
             <BasicToolInfo text='Updating rule "Newsletters" actions...' />
@@ -604,31 +604,31 @@ export default function ToolsPage() {
             <BasicToolInfo text='Preparing to delete rule "Newsletters"...' />
             <BasicToolInfo text='Updating learned patterns for rule "Newsletters"...' />
             <BasicToolInfo text="Updating about..." />
-            <BasicToolInfo text="Adding to knowledge base..." />
-            <BasicToolInfo text="Saving memory..." />
-            <BasicToolInfo text="Searching memories..." />
-            <BasicToolInfo text="Checking sender categories..." />
-            <BasicToolInfo text="Starting sender categorization..." />
-            <BasicToolInfo text="Checking categorization progress..." />
+            <BasicToolInfo text="正在添加到知识库…" />
+            <BasicToolInfo text="正在保存记忆…" />
+            <BasicToolInfo text="正在搜索记忆…" />
+            <BasicToolInfo text="正在检查发件人分类…" />
+            <BasicToolInfo text="正在开始发件人分类…" />
+            <BasicToolInfo text="正在检查分类进度…" />
             <BasicToolInfo text='Archiving "Newsletters" category...' />
           </div>
 
           <MutedText>Output states (completion messages):</MutedText>
           <div className="grid gap-2 md:grid-cols-2">
-            <BasicToolInfo text="Loaded account overview" />
-            <BasicToolInfo text="Loaded assistant capabilities" />
+            <BasicToolInfo text="账户概况已加载" />
+            <BasicToolInfo text="助手功能已加载" />
             <BasicToolInfo text="Updated settings (2 changes)" />
             <BasicToolInfo text="Updated inbox features" />
-            <BasicToolInfo text="Read rules and settings" />
-            <BasicToolInfo text="Read learned patterns" />
-            <BasicToolInfo text="Memory saved" />
+            <BasicToolInfo text="规则和设置已读取" />
+            <BasicToolInfo text="学习规律已读取" />
+            <BasicToolInfo text="记忆已保存" />
             <BasicToolInfo text="Found 2 memories" />
             <BasicToolInfo text="Found 5 categories, 12 uncategorized senders" />
             <BasicToolInfo text="Categorizing 43 senders" />
-            <BasicToolInfo text="Sender categorization already in progress" />
+            <BasicToolInfo text="发件人分类正在进行" />
             <BasicToolInfo text="Categorizing senders (12 of 43)" />
-            <BasicToolInfo text="Categorization complete" />
-            <BasicToolInfo text="Categorization hasn't started" />
+            <BasicToolInfo text="分类完成" />
+            <BasicToolInfo text="分类尚未开始" />
           </div>
         </section>
       </div>
@@ -867,7 +867,7 @@ function getThreadDetailFallbackKey(threadId: string) {
 }
 
 function ToolErrorCardPreview({ error }: { error: string }) {
-  return <div className="text-xs text-muted-foreground">Error: {error}</div>;
+  return <div className="text-xs text-muted-foreground">错误： {error}</div>;
 }
 
 function getAssistantSendEmailOutput(state: EmailActionState) {
@@ -882,7 +882,7 @@ function getAssistantSendEmailOutput(state: EmailActionState) {
       bcc: null,
       subject: "Weekly update",
       messageHtml: "<p>Hi team,<br/>Here is this week's update.</p>",
-      from: "Inbox Zero <assistant@example.com>",
+      from: "十组邮件小助手 <assistant@example.com>",
     },
     ...(state === "confirmed"
       ? {

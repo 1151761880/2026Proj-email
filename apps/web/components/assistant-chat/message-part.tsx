@@ -101,7 +101,7 @@ function isLegacyUpdateRuleStatePart(
 }
 
 function ErrorToolCard({ error }: { error: string }) {
-  return <div className="text-xs text-muted-foreground">Error: {error}</div>;
+  return <div className="text-xs text-muted-foreground">错误： {error}</div>;
 }
 
 function renderToolError(toolCallId: string, output: unknown) {
@@ -203,9 +203,9 @@ export function MessagePart({
   if (part.type === "tool-getAccountOverview") {
     return renderToolStatus({
       part,
-      loadingText: "Loading account overview...",
+      loadingText: "正在加载账户概况…",
       renderSuccess: ({ toolCallId }) => (
-        <BasicToolInfo key={toolCallId} text="Loaded account overview" />
+        <BasicToolInfo key={toolCallId} text="账户概况已加载" />
       ),
     });
   }
@@ -213,9 +213,9 @@ export function MessagePart({
   if (part.type === "tool-getAssistantCapabilities") {
     return renderToolStatus({
       part,
-      loadingText: "Loading assistant capabilities...",
+      loadingText: "正在加载助手功能…",
       renderSuccess: ({ toolCallId }) => (
-        <BasicToolInfo key={toolCallId} text="Loaded assistant capabilities" />
+        <BasicToolInfo key={toolCallId} text="助手功能已加载" />
       ),
     });
   }
@@ -223,7 +223,7 @@ export function MessagePart({
   if (part.type === "tool-updateAssistantSettings") {
     return renderToolStatus({
       part,
-      loadingText: "Updating settings...",
+      loadingText: "正在更新设置…",
       renderSuccess: ({ toolCallId, output }) => {
         const appliedChanges = getOutputField<Array<unknown>>(
           output,
@@ -235,11 +235,9 @@ export function MessagePart({
         return (
           <BasicToolInfo
             key={toolCallId}
-            text={`Updated settings${
+            text={`设置已更新${
               appliedChangesCount !== null
-                ? ` (${appliedChangesCount} change${
-                    appliedChangesCount === 1 ? "" : "s"
-                  })`
+                ? `（${appliedChangesCount} 项更改）`
                 : ""
             }`}
           />
@@ -251,7 +249,7 @@ export function MessagePart({
   if (part.type === "tool-searchInbox") {
     const { toolCallId, state } = part;
     if (state === "input-available") {
-      return <BasicToolInfo key={toolCallId} text="Searching inbox..." />;
+      return <BasicToolInfo key={toolCallId} text="正在搜索收件箱…" />;
     }
     if (state === "output-available") {
       return <SearchInboxResult key={toolCallId} output={part.output} />;
@@ -261,7 +259,7 @@ export function MessagePart({
   if (part.type === "tool-readEmail") {
     const { toolCallId, state } = part;
     if (state === "input-available") {
-      return <BasicToolInfo key={toolCallId} text="Reading email..." />;
+      return <BasicToolInfo key={toolCallId} text="正在读取邮件…" />;
     }
     if (state === "output-available") {
       const { output } = part;
@@ -278,7 +276,7 @@ export function MessagePart({
 
     if (state === "input-available") {
       if (!input) {
-        return <BasicToolInfo key={toolCallId} text="Updating inbox..." />;
+        return <BasicToolInfo key={toolCallId} text="正在更新收件箱…" />;
       }
 
       if (
@@ -336,7 +334,7 @@ export function MessagePart({
       disableConfirm,
       isPersistedMessage,
       messageId,
-      preparingText: "Preparing email...",
+      preparingText: "正在准备邮件…",
       ResultComponent: SendEmailResult,
     });
   }
@@ -347,7 +345,7 @@ export function MessagePart({
       disableConfirm,
       isPersistedMessage,
       messageId,
-      preparingText: "Preparing reply...",
+      preparingText: "正在准备回复…",
       ResultComponent: ReplyEmailResult,
     });
   }
@@ -358,7 +356,7 @@ export function MessagePart({
       disableConfirm,
       isPersistedMessage,
       messageId,
-      preparingText: "Preparing forward...",
+      preparingText: "正在准备转发…",
       ResultComponent: ForwardEmailResult,
     });
   }
@@ -366,9 +364,9 @@ export function MessagePart({
   if (part.type === "tool-getUserRulesAndSettings") {
     return renderToolStatus({
       part,
-      loadingText: "Reading rules and settings...",
+      loadingText: "正在读取规则和设置…",
       renderSuccess: ({ toolCallId }) => (
-        <BasicToolInfo key={toolCallId} text="Read rules and settings" />
+        <BasicToolInfo key={toolCallId} text="规则和设置已读取" />
       ),
     });
   }
@@ -376,9 +374,9 @@ export function MessagePart({
   if (part.type === "tool-getRuleExecutionForMessage") {
     return renderToolStatus({
       part,
-      loadingText: "Reading rule execution details...",
+      loadingText: "正在读取规则执行详情…",
       renderSuccess: ({ toolCallId }) => (
-        <BasicToolInfo key={toolCallId} text="Read rule execution details" />
+        <BasicToolInfo key={toolCallId} text="规则执行详情已读取" />
       ),
     });
   }
@@ -386,9 +384,9 @@ export function MessagePart({
   if (part.type === "tool-getLearnedPatterns") {
     return renderToolStatus({
       part,
-      loadingText: "Reading learned patterns...",
+      loadingText: "正在读取学习规律…",
       renderSuccess: ({ toolCallId }) => (
-        <BasicToolInfo key={toolCallId} text="Read learned patterns" />
+        <BasicToolInfo key={toolCallId} text="学习规律已读取" />
       ),
     });
   }
@@ -399,7 +397,7 @@ export function MessagePart({
       return (
         <BasicToolInfo
           key={toolCallId}
-          text={`Creating rule "${part.input.name}"...`}
+          text={`正在创建规则“${part.input.name}”…`}
         />
       );
     }
@@ -450,7 +448,7 @@ export function MessagePart({
       return (
         <BasicToolInfo
           key={toolCallId}
-          text={`Updating rule "${legacyRulePart.input.ruleName}" conditions...`}
+          text={`正在更新规则“${legacyRulePart.input.ruleName}”的条件…`}
         />
       );
     }
@@ -460,15 +458,11 @@ export function MessagePart({
         return renderToolError(toolCallId, output);
       }
       if (!isLegacyUpdateRuleStateOutput(output)) {
-        return (
-          <ErrorToolCard key={toolCallId} error="Missing rule update details" />
-        );
+        return <ErrorToolCard key={toolCallId} error="缺少规则更新详情" />;
       }
       const ruleId = getOutputField<string>(output, "ruleId");
       if (!ruleId)
-        return (
-          <ErrorToolCard key={toolCallId} error="Missing rule ID in response" />
-        );
+        return <ErrorToolCard key={toolCallId} error="响应中缺少规则 ID" />;
       return (
         <UpdatedRuleConditions
           key={toolCallId}
@@ -487,7 +481,7 @@ export function MessagePart({
       return (
         <BasicToolInfo
           key={toolCallId}
-          text={`Updating rule "${legacyRulePart.input.ruleName}" actions...`}
+          text={`正在更新规则“${legacyRulePart.input.ruleName}”的操作…`}
         />
       );
     }
@@ -498,9 +492,7 @@ export function MessagePart({
       }
       const ruleId = getOutputField<string>(output, "ruleId");
       if (!ruleId)
-        return (
-          <ErrorToolCard key={toolCallId} error="Missing rule ID in response" />
-        );
+        return <ErrorToolCard key={toolCallId} error="响应中缺少规则 ID" />;
       return (
         <UpdatedRuleActions
           key={toolCallId}
@@ -519,7 +511,7 @@ export function MessagePart({
       return (
         <BasicToolInfo
           key={toolCallId}
-          text={`Updating rule "${part.input.ruleName}"...`}
+          text={`正在更新规则“${part.input.ruleName}”…`}
         />
       );
     }
@@ -538,7 +530,7 @@ export function MessagePart({
       return (
         <BasicToolInfo
           key={toolCallId}
-          text={`Preparing to delete rule "${part.input.ruleName}"...`}
+          text={`准备删除规则“${part.input.ruleName}”…`}
         />
       );
     }
@@ -549,9 +541,7 @@ export function MessagePart({
       }
       const ruleId = getOutputField<string>(output, "ruleId");
       if (!ruleId)
-        return (
-          <ErrorToolCard key={toolCallId} error="Missing rule ID in response" />
-        );
+        return <ErrorToolCard key={toolCallId} error="响应中缺少规则 ID" />;
 
       const requiresDeleteConfirmation =
         getOutputField<boolean>(output, "requiresConfirmation") === true &&
@@ -559,10 +549,7 @@ export function MessagePart({
       if (requiresDeleteConfirmation) {
         if (!isDeleteRuleOutput(output)) {
           return (
-            <ErrorToolCard
-              key={toolCallId}
-              error="Missing delete rule confirmation details"
-            />
+            <ErrorToolCard key={toolCallId} error="缺少删除规则确认详情" />
           );
         }
 
@@ -580,7 +567,7 @@ export function MessagePart({
       return (
         <BasicToolInfo
           key={toolCallId}
-          text={`Deleted rule "${ruleName || part.input.ruleName}"`}
+          text={`已删除规则“${ruleName || part.input.ruleName}”`}
         />
       );
     }
@@ -599,7 +586,7 @@ export function MessagePart({
       return (
         <BasicToolInfo
           key={toolCallId}
-          text={`${verb} rule "${legacyPart.input.ruleName}"...`}
+          text={`正在处理规则“${legacyPart.input.ruleName}”…`}
         />
       );
     }
@@ -609,15 +596,11 @@ export function MessagePart({
         return renderToolError(toolCallId, output);
       }
       if (!isLegacyUpdateRuleStateOutput(output)) {
-        return (
-          <ErrorToolCard key={toolCallId} error="Missing rule update details" />
-        );
+        return <ErrorToolCard key={toolCallId} error="缺少规则更新详情" />;
       }
       const ruleId = getOutputField<string>(output, "ruleId");
       if (!ruleId)
-        return (
-          <ErrorToolCard key={toolCallId} error="Missing rule ID in response" />
-        );
+        return <ErrorToolCard key={toolCallId} error="响应中缺少规则 ID" />;
 
       const requiresDeleteConfirmation =
         getOutputField<boolean>(output, "requiresConfirmation") === true &&
@@ -625,10 +608,7 @@ export function MessagePart({
       if (requiresDeleteConfirmation) {
         if (!isDeleteRuleOutput(output)) {
           return (
-            <ErrorToolCard
-              key={toolCallId}
-              error="Missing delete rule confirmation details"
-            />
+            <ErrorToolCard key={toolCallId} error="缺少删除规则确认详情" />
           );
         }
 
@@ -658,7 +638,7 @@ export function MessagePart({
       return (
         <BasicToolInfo
           key={toolCallId}
-          text={`Updating learned patterns for rule "${part.input.ruleName}"...`}
+          text={`正在更新规则“${part.input.ruleName}”的学习规律…`}
         />
       );
     }
@@ -669,9 +649,7 @@ export function MessagePart({
       }
       const ruleId = getOutputField<string>(output, "ruleId");
       if (!ruleId)
-        return (
-          <ErrorToolCard key={toolCallId} error="Missing rule ID in response" />
-        );
+        return <ErrorToolCard key={toolCallId} error="响应中缺少规则 ID" />;
       return (
         <UpdatedLearnedPatterns
           key={toolCallId}
@@ -685,7 +663,7 @@ export function MessagePart({
   if (part.type === "tool-updatePersonalInstructions") {
     return renderToolStatus({
       part,
-      loadingText: "Updating personal instructions...",
+      loadingText: "正在更新个人指令…",
       renderSuccess: ({ toolCallId, output }) => {
         const updated = getOutputField<string>(output, "updated");
         return (
@@ -707,9 +685,7 @@ export function MessagePart({
   if (part.type === "tool-addToKnowledgeBase") {
     const { toolCallId, state } = part;
     if (state === "input-available") {
-      return (
-        <BasicToolInfo key={toolCallId} text="Adding to knowledge base..." />
-      );
+      return <BasicToolInfo key={toolCallId} text="正在添加到知识库…" />;
     }
     if (state === "output-available") {
       const { output } = part;
@@ -724,7 +700,7 @@ export function MessagePart({
     const { toolCallId, state } = part;
 
     if (state === "input-available") {
-      return <BasicToolInfo key={toolCallId} text="Saving memory..." />;
+      return <BasicToolInfo key={toolCallId} text="正在保存记忆…" />;
     }
 
     if (state === "output-available") {
@@ -749,14 +725,14 @@ export function MessagePart({
         );
       }
 
-      return <BasicToolInfo key={toolCallId} text="Memory saved" />;
+      return <BasicToolInfo key={toolCallId} text="记忆已保存" />;
     }
   }
 
   if (part.type === "tool-searchMemories") {
     return renderToolStatus({
       part,
-      loadingText: "Searching memories...",
+      loadingText: "正在搜索记忆…",
       renderSuccess: ({ toolCallId, output }) => {
         const memories = getOutputField<Array<unknown>>(output, "memories");
         const memoriesCount = Array.isArray(memories) ? memories.length : null;
@@ -766,7 +742,7 @@ export function MessagePart({
         return (
           <BasicToolInfo
             key={toolCallId}
-            text={`Found ${memoriesCount ?? "matching"} memories`}
+            text={`找到 ${memoriesCount ?? "matching"} 条记忆`}
           />
         );
       },
@@ -776,7 +752,7 @@ export function MessagePart({
   if (part.type === "tool-getSenderCategoryOverview") {
     return renderToolStatus({
       part,
-      loadingText: "Checking sender categories...",
+      loadingText: "正在检查发件人分类…",
       renderSuccess: ({ toolCallId, output }) => (
         <BasicToolInfo
           key={toolCallId}
@@ -789,7 +765,7 @@ export function MessagePart({
   if (part.type === "tool-startSenderCategorization") {
     return renderToolStatus({
       part,
-      loadingText: "Starting sender categorization...",
+      loadingText: "正在开始发件人分类…",
       renderSuccess: ({ toolCallId, output }) => (
         <BasicToolInfo
           key={toolCallId}
@@ -802,7 +778,7 @@ export function MessagePart({
   if (part.type === "tool-getSenderCategorizationStatus") {
     return renderToolStatus({
       part,
-      loadingText: "Checking categorization progress...",
+      loadingText: "正在检查分类进度…",
       renderSuccess: ({ toolCallId, output }) => (
         <BasicToolInfo
           key={toolCallId}
@@ -820,9 +796,7 @@ export function MessagePart({
         <BasicToolInfo
           key={toolCallId}
           text={
-            categoryName
-              ? `Archiving "${categoryName}" category...`
-              : "Archiving category..."
+            categoryName ? `正在归档“${categoryName}”分类…` : "正在归档分类…"
           }
         />
       );
@@ -849,7 +823,7 @@ export function MessagePart({
     const toolLabel = formatToolLabel(toolPart.type);
     return renderToolStatus({
       part: toolPart,
-      loadingText: `Running ${toolLabel}...`,
+      loadingText: `正在执行 ${toolLabel}…`,
       renderSuccess: ({ toolCallId, output }) => (
         <BasicToolInfo
           key={toolCallId}
@@ -1003,7 +977,7 @@ function getSenderCategoryOverviewSuccessText(output: unknown): string {
     getOutputField<number>(output, "uncategorizedSenderCount") ?? 0;
 
   if (categoryCount === 0 && uncategorized === 0) {
-    return "No sender categories yet";
+    return "暂无发件人分类";
   }
 
   const parts: string[] = [];
@@ -1017,7 +991,7 @@ function getSenderCategoryOverviewSuccessText(output: unknown): string {
       `${uncategorized} uncategorized ${pluralize(uncategorized, "sender", "senders")}`,
     );
   }
-  return `Found ${parts.join(", ")}`;
+  return `找到 ${parts.join(", ")}`;
 }
 
 function getStartSenderCategorizationSuccessText(output: unknown): string {
@@ -1025,12 +999,12 @@ function getStartSenderCategorizationSuccessText(output: unknown): string {
   const totalQueued = getOutputField<number>(output, "totalQueuedSenders") ?? 0;
 
   if (alreadyRunning) {
-    return "Sender categorization already in progress";
+    return "发件人分类正在进行";
   }
   if (totalQueued > 0) {
-    return `Categorizing ${totalQueued} ${pluralize(totalQueued, "sender", "senders")}`;
+    return `正在分类：${totalQueued} ${pluralize(totalQueued, "sender", "senders")}`;
   }
-  return "No senders to categorize";
+  return "暂无待分类发件人";
 }
 
 function getSenderCategorizationStatusSuccessText(output: unknown): string {
@@ -1039,12 +1013,12 @@ function getSenderCategorizationStatusSuccessText(output: unknown): string {
   const completed = getOutputField<number>(output, "completedItems") ?? 0;
 
   if (status === "completed") {
-    return "Categorization complete";
+    return "分类完成";
   }
   if (status === "running") {
-    return `Categorizing senders (${completed} of ${total})`;
+    return `正在分类发件人（${completed} / ${total}）`;
   }
-  return "Categorization hasn't started";
+  return "分类尚未开始";
 }
 
 function toMessageString(value: unknown): string | null {

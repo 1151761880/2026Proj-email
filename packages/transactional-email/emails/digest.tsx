@@ -189,7 +189,7 @@ export default function DigestEmail(props: DigestEmailProps) {
                         {item.subject}
                       </Text>
                       <Text className="text-[14px] text-gray-700 mt-[2px] mb-0">
-                        From:{" "}
+                        发件人：{" "}
                         <span className="font-medium text-gray-800">
                           {item.from}
                         </span>
@@ -248,22 +248,22 @@ export default function DigestEmail(props: DigestEmailProps) {
                   src={"https://www.getinboxzero.com/icon.png"}
                   width="40"
                   height="40"
-                  alt="Inbox Zero"
+                  alt="十组邮件小助手"
                   className="mx-auto my-0"
                 />
               </Link>
 
               <Text className="mx-0 mb-8 mt-4 p-0 text-center text-2xl font-normal">
                 <span className="font-semibold tracking-tighter">
-                  Inbox Zero
+                  十组邮件小助手
                 </span>
               </Text>
 
               <Heading className="my-4 text-4xl font-medium leading-tight">
-                Your Digest
+                邮件摘要
               </Heading>
               <Text className="mb-8 text-lg leading-8">
-                Here's a summary of what's happened in your inbox.
+                以下是收件箱动态摘要。
               </Text>
             </Section>
 
@@ -286,10 +286,10 @@ export default function DigestEmail(props: DigestEmailProps) {
             ) : (
               <Section className="mb-8 text-center">
                 <Text className="text-gray-500 text-lg">
-                  No emails to summarize in this digest.
+                  本次暂无需要汇总的邮件。
                 </Text>
                 <Text className="text-gray-400 text-sm mt-2">
-                  We'll send you a summary when there are emails to report.
+                  有需要汇总的邮件时会发送摘要。
                 </Text>
               </Section>
             )}
@@ -583,21 +583,20 @@ function Footer({
   return (
     <Section className="mt-8 text-center text-sm text-gray-500">
       <Text className="m-0">
-        You're receiving this email because you enabled digest emails in your
-        Inbox Zero settings.
+        你在十组邮件小助手设置中启用了邮件摘要，因此收到此邮件。
       </Text>
       <div className="mt-[8px]">
         <Link
           href={`${baseUrl}/api/unsubscribe?token=${unsubscribeToken}`}
           className="text-gray-500 underline mr-[16px]"
         >
-          Unsubscribe
+          退订
         </Link>
         <Link
           href={`${baseUrl}/${emailAccountId}/automation?tab=settings`}
           className="text-gray-500 underline"
         >
-          Customize what you receive
+          自定义接收内容
         </Link>
       </div>
     </Section>
@@ -625,21 +624,21 @@ export const generateDigestSubject = (props: DigestEmailProps): string => {
     .slice(0, 3);
 
   if (topCategories.length === 0) {
-    return "Your email digest";
+    return "邮件摘要";
   }
 
   if (topCategories.length === 1) {
     const { name, count } = topCategories[0];
-    return `Summary of ${count} ${name} email${count === 1 ? "" : "s"}`;
+    return `摘要：${count} 封${name}邮件`;
   }
 
   if (topCategories.length === 2) {
     const [first, second] = topCategories;
-    return `Summary of ${first.count} ${first.name} and ${second.count} ${second.name} emails`;
+    return `摘要：${first.count} 封${first.name}邮件和 ${second.count} 封${second.name}邮件`;
   }
 
   const [first, second, third] = topCategories;
-  return `Summary of ${first.count} ${first.name}, ${second.count} ${second.name} and ${third.count} ${third.name} emails`;
+  return `摘要：${first.count} 封${first.name}、${second.count} 封${second.name}和 ${third.count} 封${third.name}邮件`;
 };
 
 const normalizeCategoryData = (

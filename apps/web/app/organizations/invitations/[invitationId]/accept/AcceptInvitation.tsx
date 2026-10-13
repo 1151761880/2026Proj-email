@@ -45,14 +45,14 @@ export function AcceptInvitation({ invitationId }: { invitationId: string }) {
           }
         >
           <CardHeader>
-            <CardTitle>Welcome!</CardTitle>
+            <CardTitle>欢迎！</CardTitle>
             <CardDescription>
-              You're now part of the organization.
+              你已加入组织。
             </CardDescription>
           </CardHeader>
           <CardContent>
             <Button asChild className="w-full">
-              <Link href={WELCOME_PATH}>Continue</Link>
+              <Link href={WELCOME_PATH}>继续</Link>
             </Button>
           </CardContent>
         </LoadingContent>

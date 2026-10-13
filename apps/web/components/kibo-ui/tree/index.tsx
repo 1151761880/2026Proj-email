@@ -34,7 +34,7 @@ const TreeContext = createContext<TreeContextType | undefined>(undefined);
 export const useTree = () => {
   const context = useContext(TreeContext);
   if (!context) {
-    throw new Error("Tree components must be used within a TreeProvider");
+    throw new Error("树形组件需要在对应容器内使用");
   }
   return context;
 };
@@ -53,7 +53,7 @@ const TreeNodeContext = createContext<TreeNodeContextType | undefined>(
 const useTreeNode = () => {
   const context = useContext(TreeNodeContext);
   if (!context) {
-    throw new Error("TreeNode components must be used within a TreeNode");
+    throw new Error("树节点组件需要在对应节点内使用");
   }
   return context;
 };
@@ -409,7 +409,7 @@ export const TreeExpander = ({
       }}
       role="button"
       tabIndex={0}
-      aria-label={isExpanded ? "Collapse" : "Expand"}
+      aria-label={isExpanded ? "收起" : "展开"}
       transition={{ duration: 0.2, ease: "easeInOut" }}
       {...props}
     >

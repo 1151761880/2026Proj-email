@@ -1,4 +1,4 @@
-# Default values for the Inbox Zero Helm chart.
+# Default values for the 十组邮件小助手 Helm chart.
 #
 # This chart can run a self-contained stack for evaluation, or connect the app
 # to managed Postgres and Redis services for production.

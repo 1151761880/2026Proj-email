@@ -19,7 +19,7 @@ function ContentWrapper({ children }: { children: React.ReactNode }) {
   const { state } = useSidebar();
   const pathname = usePathname();
   const isAssistantRoute = pathname?.includes("/assistant");
-  const isMailRoute = pathname?.includes("/mail");
+  const isMailRoute = pathname?.split("/").filter(Boolean)[1] === "mail";
   const isRightSidebarOpen =
     !isAssistantRoute && state.includes("chat-sidebar");
 
@@ -70,7 +70,7 @@ export function SideNavWithTopNav({
 
   const isAssistantRoute = pathname.includes("/assistant");
   // The mail screen ships its own sidebar, so this one would be a second copy.
-  const isMailRoute = pathname.includes("/mail");
+  const isMailRoute = pathname.split("/").filter(Boolean)[1] === "mail";
 
   // Ugly code. May change the onboarding path later so we don't need to do this.
   // Only return children for the onboarding or onboarding-brief pages: /[emailAccountId]/onboarding or /[emailAccountId]/onboarding-brief

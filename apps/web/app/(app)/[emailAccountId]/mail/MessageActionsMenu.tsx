@@ -37,7 +37,7 @@ export function MessageActionsMenu({
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
-          aria-label="More message actions"
+          aria-label="更多邮件操作"
           size="iconXs"
           variant="ghostMuted"
           onClick={(event) => event.stopPropagation()}
@@ -54,7 +54,7 @@ export function MessageActionsMenu({
         <DropdownMenuSub>
           <DropdownMenuSubTrigger>
             <SparklesIcon className="mr-2 size-4" />
-            Matched reason
+            匹配原因
           </DropdownMenuSubTrigger>
           <DropdownMenuPortal>
             <DropdownMenuSubContent
@@ -73,7 +73,7 @@ export function MessageActionsMenu({
                 ))
               ) : (
                 <p className="p-3 text-muted-foreground text-xs">
-                  No matched rules for this message.
+                  此邮件未匹配任何规则。
                 </p>
               )}
             </DropdownMenuSubContent>
@@ -102,8 +102,8 @@ function RuleAttribution({
       <div className="min-w-0 text-xs">
         <span className="text-muted-foreground">
           {plan.status === ExecutedRuleStatus.APPLIED
-            ? "Applied rule:"
-            : "Matched rule:"}{" "}
+            ? "已应用规则："
+            : "匹配规则："}{" "}
         </span>
         <span className="font-medium text-foreground break-words [overflow-wrap:anywhere]">
           {plan.rule?.name ?? "a deleted rule"}
@@ -120,8 +120,8 @@ function RuleAttribution({
         <div className="mt-2 rounded-md bg-destructive/10 px-2 py-1.5 text-destructive text-xs">
           <div className="font-medium">
             {reasonDisplay.actionFailureMessages.length === 1
-              ? "Action issue"
-              : "Action issues"}
+              ? "操作问题"
+              : "操作问题"}
           </div>
           <ul className="mt-0.5 list-disc space-y-0.5 pl-4">
             {reasonDisplay.actionFailureMessages.map(
@@ -143,8 +143,8 @@ function RuleAttribution({
           <div className="font-medium text-xs">
             {plan.status === ExecutedRuleStatus.APPLIED &&
             reasonDisplay.actionFailureMessages.length === 0
-              ? "Actions applied"
-              : "Rule actions"}
+              ? "已应用操作"
+              : "规则操作"}
           </div>
           <RuleActions
             actions={plan.actionItems}

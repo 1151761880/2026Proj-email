@@ -30,7 +30,7 @@ test("blocks a selected sender and surfaces it in Auto-archived", async ({
   if (!fixture) throw new Error("Cleanup fixture was not initialized");
   await openCleanupFeature(page, fixture, "bulk-unsubscribe");
   await expect(
-    page.getByRole("heading", { name: "Bulk Unsubscriber" }),
+    page.getByRole("heading", { name: "批量退订" }),
   ).toBeVisible();
 
   await selectNewsletterFilter(page, "To review", "All senders");
@@ -40,16 +40,16 @@ test("blocks a selected sender and surfaces it in Auto-archived", async ({
     .filter({ hasText: "cleanup-block@example.com" });
   await expect(senderRow).toContainText("Cleanup Weekly", { timeout: 60_000 });
 
-  await senderRow.getByRole("link", { name: "Block" }).click();
+  await senderRow.getByRole("link", { name: "阻止" }).click();
   await expect(
-    page.getByText("Sender blocked. Future emails will be archived."),
+    page.getByText("已拦截发件人，后续邮件将自动归档。"),
   ).toBeVisible({ timeout: 120_000 });
 
   await selectNewsletterFilter(page, "All senders", "Auto-archived");
   await expect(senderRow).toBeVisible({ timeout: 120_000 });
-  await expect(senderRow).toContainText("Auto-archived", { timeout: 60_000 });
+  await expect(senderRow).toContainText("已自动归档", { timeout: 60_000 });
   await expect(
-    senderRow.getByRole("button", { name: "Move to review" }),
+    senderRow.getByRole("button", { name: "移至待审核" }),
   ).toBeVisible();
 });
 

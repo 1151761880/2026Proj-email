@@ -75,14 +75,14 @@ function InboxZeroBookingLinkPanel() {
       (bookingLink) => bookingLink.id === configureLinkId,
     ) ?? null;
   const defaultName = emailAccount?.name?.trim() || null;
-  const defaultTitle = "Booking link";
+  const defaultTitle = "预约链接";
   const defaultSlug = getBookingLinkSlugSuggestion(defaultName);
 
   const { executeAsync: createLink, isExecuting: isCreating } = useAction(
     createBookingLinkAction.bind(null, emailAccountId),
     {
       onSuccess: () => {
-        toastSuccess({ description: "Booking link created" });
+        toastSuccess({ description: "预约链接已创建" });
       },
       onError: (actionError) => {
         toastError({
@@ -187,7 +187,7 @@ function CalendarBookingLinkCard({
         analytics.captureAction("calendar_booking_link_saved", {
           had_existing_booking_link: Boolean(calendarBookingLink),
         });
-        toastSuccess({ description: "Booking link updated!" });
+        toastSuccess({ description: "预约链接已更新！" });
         mutate();
       },
     },
@@ -206,8 +206,8 @@ function CalendarBookingLinkCard({
 
   return (
     <SettingCard
-      title="Calendar Booking Link"
-      description="Your booking link for the AI to share when scheduling meetings"
+      title="日历预约链接"
+      description="AI 安排会议时分享的预约链接"
       collapseOnMobile
       right={
         <LoadingContent
@@ -217,7 +217,7 @@ function CalendarBookingLinkCard({
         >
           {disabledByInboxZeroLink ? (
             <span className="text-sm text-muted-foreground">
-              Using Inbox Zero booking link
+              使用十组邮件小助手预约链接
             </span>
           ) : data ? (
             <CalendarBookingLinkForm
@@ -271,7 +271,7 @@ function CalendarBookingLinkForm({
         size="sm"
         className="w-full sm:w-auto"
       >
-        Save
+        保存
       </Button>
     </form>
   );
@@ -281,16 +281,16 @@ function EmptyLinkCard({ onCreate }: { onCreate: () => void }) {
   return (
     <CardBasic className="px-4 py-4">
       <div className="mb-1 flex items-center gap-2">
-        <h3 className="font-medium">Booking link</h3>
+        <h3 className="font-medium">预约链接</h3>
         <Badge variant="info" size="xs">
-          New
+          新增
         </Badge>
       </div>
       <p className="mb-4 text-sm text-muted-foreground">
-        Create a link people can use to book time on your calendar.
+        创建链接，让他人预约你日历中的时间。
       </p>
       <Button onClick={onCreate} Icon={Zap}>
-        Create booking link
+        创建预约链接
       </Button>
     </CardBasic>
   );
@@ -317,9 +317,9 @@ function ActiveLinkCard({
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(publicUrl);
-      toastSuccess({ description: "Booking link copied" });
+      toastSuccess({ description: "预约链接已复制" });
     } catch {
-      toastError({ description: "Failed to copy booking link" });
+      toastError({ description: "复制预约链接失败" });
     }
   };
 
@@ -328,16 +328,16 @@ function ActiveLinkCard({
       <div className="mb-3 flex items-center justify-between gap-3">
         <div>
           <div className="flex items-center gap-2">
-            <h3 className="font-medium">Booking link</h3>
+            <h3 className="font-medium">预约链接</h3>
             {!isActive ? (
               <Badge variant="muted" size="sm">
                 <span className="size-1.5 rounded-full bg-muted-foreground/60" />
-                Inactive
+                未启用
               </Badge>
             ) : null}
           </div>
           <p className="text-sm text-muted-foreground">
-            Used by our AI to schedule appointments over email.
+            供 AI 通过邮件安排预约使用。
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -345,7 +345,7 @@ function ActiveLinkCard({
             checked={isActive}
             disabled={isToggling}
             onCheckedChange={onToggle}
-            aria-label="Toggle booking link"
+            aria-label="启用或关闭预约链接"
           />
           <Button
             variant="outline"
@@ -353,7 +353,7 @@ function ActiveLinkCard({
             Icon={Settings2}
             onClick={onConfigure}
           >
-            Configure
+            配置
           </Button>
         </div>
       </div>
@@ -379,8 +379,8 @@ function ActiveLinkCard({
               type="button"
               onClick={handleCopy}
               className="rounded-md p-1.5 text-muted-foreground transition-colors hover:bg-background hover:text-foreground"
-              aria-label="Copy booking link"
-              title="Copy booking link"
+              aria-label="复制预约链接"
+              title="复制预约链接"
             >
               <Copy className="size-4" />
             </button>
@@ -389,14 +389,14 @@ function ActiveLinkCard({
               target="_blank"
               rel="noreferrer"
               className="rounded-md p-1.5 text-muted-foreground transition-colors hover:bg-background hover:text-foreground"
-              aria-label="Open booking link"
-              title="Open booking link"
+              aria-label="打开预约链接"
+              title="打开预约链接"
             >
               <ExternalLink className="size-4" />
             </a>
           </>
         ) : (
-          <span className="text-[11px] text-muted-foreground">not live</span>
+          <span className="text-[11px] text-muted-foreground">未发布</span>
         )}
       </div>
     </CardBasic>

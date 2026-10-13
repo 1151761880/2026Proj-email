@@ -62,7 +62,7 @@ export function MailSidebarResizeHandle({
       ref={measure}
       role="separator"
       aria-orientation="vertical"
-      aria-label="Resize sidebar"
+      aria-label="调整侧栏宽度"
       aria-valuenow={width}
       aria-valuemin={MAIL_SIDEBAR_MIN_WIDTH}
       aria-valuemax={MAIL_SIDEBAR_MAX_WIDTH}

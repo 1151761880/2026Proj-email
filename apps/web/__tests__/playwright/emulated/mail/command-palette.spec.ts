@@ -77,7 +77,7 @@ test("Command K archives the open side-panel conversation through the durable ou
   // name is not just the label. Match the label element instead.
   const archiveCommand = page
     .getByRole("option")
-    .filter({ has: page.getByText("Archive", { exact: true }) });
+    .filter({ has: page.getByText("归档", { exact: true }) });
   await expect(archiveCommand).toBeVisible();
   await archiveCommand.click();
 
@@ -105,7 +105,7 @@ test("Command K acts on highlighted and selected conversations", async ({
   await restoreActiveSnoozes(page.request, emailAccountId);
 
   await page.goto(`/${emailAccountId}/mail`);
-  const conversations = page.getByRole("listbox", { name: "Conversations" });
+  const conversations = page.getByRole("listbox", { name: "会话" });
   const options = conversations.getByRole("option");
   let initialConversationCount = 0;
   await expect
@@ -138,7 +138,7 @@ test("Command K acts on highlighted and selected conversations", async ({
     palette.getByRole("option", { name: "Forward F" }),
   ).toBeVisible();
   await expect(
-    palette.getByRole("option", { name: "Mark as read" }),
+    palette.getByRole("option", { name: "标为已读" }),
   ).toBeVisible();
   await expect(palette.getByRole("option", { name: "Snooze H" })).toBeVisible();
   await expect(palette.getByRole("option", { name: "Label L" })).toBeVisible();
@@ -161,9 +161,9 @@ test("Command K acts on highlighted and selected conversations", async ({
     palette.getByPlaceholder("When should it return? Try Friday at 3pm"),
   ).toBeFocused();
   await expect(
-    palette.getByRole("option", { name: /^Tomorrow/ }),
+    palette.getByRole("option", { name: /明天/ }),
   ).toBeVisible();
-  await expect(palette.getByText("Back to commands")).toHaveCount(0);
+  await expect(palette.getByText("返回命令")).toHaveCount(0);
   await expect(palette.getByText("Archive conversation")).toHaveCount(0);
   await attachScreenshotForChangedTest(
     testInfo,
@@ -181,7 +181,7 @@ test("Command K acts on highlighted and selected conversations", async ({
   await expect(naturalLanguageOption).toHaveCount(1);
   await expect(naturalLanguageOption).toBeVisible();
   await expect(naturalLanguageOption).toHaveAttribute("aria-selected", "true");
-  await expect(palette.getByRole("option", { name: /^Tomorrow/ })).toHaveCount(
+  await expect(palette.getByRole("option", { name: /明天/ })).toHaveCount(
     0,
   );
   await attachScreenshotForChangedTest(
@@ -254,7 +254,7 @@ test("Command K acts on highlighted and selected conversations", async ({
     palette.getByRole("option", { name: "Snooze 2 conversations" }),
   ).toBeVisible();
   await palette.getByRole("option", { name: "Snooze 2 conversations" }).click();
-  await palette.getByRole("option", { name: /^Tomorrow/ }).click();
+  await palette.getByRole("option", { name: /明天/ }).click();
   await expect(options).toHaveCount(initialConversationCount - 2);
 });
 
@@ -271,7 +271,7 @@ test("Command K opens a searchable account list and switches the mailbox", async
     const palette = page.getByRole("dialog");
     await palette.getByRole("combobox").fill("switch accounts");
     await expect(
-      palette.getByRole("option", { name: "Switch accounts", exact: true }),
+      palette.getByRole("option", { name: "切换账户", exact: true }),
     ).toBeVisible();
     await page.keyboard.press("Enter");
     const search = palette.getByPlaceholder("Search accounts...");
@@ -280,7 +280,7 @@ test("Command K opens a searchable account list and switches the mailbox", async
       palette.getByRole("option", { name: secondAccount.email, exact: true }),
     ).toBeVisible();
     await expect(
-      palette.getByRole("option", { name: "Add or manage accounts" }),
+      palette.getByRole("option", { name: "添加或管理账户" }),
     ).toBeVisible();
     await attachScreenshotForChangedTest(
       testInfo,
@@ -296,7 +296,7 @@ test("Command K opens a searchable account list and switches the mailbox", async
     await palette.getByRole("combobox").fill("switch accounts");
     await page.keyboard.press("Enter");
     await search.fill("no-matching-account");
-    await expect(palette.getByText("No accounts found.")).toBeVisible();
+    await expect(palette.getByText("未找到账户。")).toBeVisible();
     await page.keyboard.press("Escape");
     await expect(palette).toBeVisible();
     await expect(palette.getByRole("combobox")).toHaveValue("");
@@ -377,7 +377,7 @@ test("sender actions are available for a selected list row and match the reader"
   await page.keyboard.press("Escape");
   await row.getByRole("checkbox").click();
   await row.click();
-  await page.getByRole("button", { name: /^More actions/ }).click();
+  await page.getByRole("button", { name: /更多操作/ }).click();
   const menu = page.getByRole("menu");
   await expect(
     menu.getByRole("menuitem", { name: "Block sender ⇧U" }),
@@ -431,26 +431,26 @@ test("the open reader exposes its actions in Command K and forwards with F", asy
   await page.keyboard.press("Escape");
   await expect(palette).toBeHidden();
   await page.keyboard.press("KeyF");
-  await expect(page.getByRole("combobox", { name: "To" })).toBeVisible();
+  await expect(page.getByRole("combobox", { name: "收件人" })).toBeVisible();
 });
 
 test("Command K opens the keyboard shortcuts dialog", async ({ page }) => {
   await openMail(page);
-  await page.getByRole("listbox", { name: "Conversations" }).click();
+  await page.getByRole("listbox", { name: "会话" }).click();
 
   await page.keyboard.press(`${commandModifier}+KeyK`);
   const palette = page.getByRole("dialog");
   await palette
     .getByPlaceholder("Type a command or search...")
     .fill("shortcuts");
-  await palette.getByRole("option", { name: /Keyboard shortcuts/ }).click();
+  await palette.getByRole("option", { name: /键盘快捷键/ }).click();
 
-  const dialog = page.getByRole("dialog", { name: "Keyboard shortcuts" });
+  const dialog = page.getByRole("dialog", { name: "键盘快捷键" });
   await expect(dialog).toBeVisible();
   await expect(dialog.getByText("Next message", { exact: true })).toBeVisible();
-  await expect(dialog.getByText("Archive", { exact: true })).toBeVisible();
+  await expect(dialog.getByText("归档", { exact: true })).toBeVisible();
   await expect(dialog.getByText("New message", { exact: true })).toBeVisible();
-  await expect(dialog.getByText("Send", { exact: true })).toBeVisible();
+  await expect(dialog.getByText("发送", { exact: true })).toBeVisible();
   await page.keyboard.press("Escape");
   await expect(dialog).toBeHidden();
 
@@ -475,10 +475,10 @@ async function ensureReadState(
   await page.keyboard.press(`${commandModifier}+KeyK`);
   const palette = page.getByRole("dialog");
   const desiredAction = palette.getByRole("option", {
-    name: read ? "Mark as read" : "Mark as unread",
+    name: read ? "标为已读" : "标为未读",
   });
   const oppositeAction = palette.getByRole("option", {
-    name: read ? "Mark as unread" : "Mark as read",
+    name: read ? "标为未读" : "标为已读",
   });
   await expect(desiredAction.or(oppositeAction)).toBeVisible();
 

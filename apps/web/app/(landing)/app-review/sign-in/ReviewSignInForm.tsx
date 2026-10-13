@@ -36,11 +36,11 @@ export function ReviewSignInForm() {
   return (
     <form className="flex flex-col gap-4" onSubmit={handleSubmit(handleSignIn)}>
       {error ? (
-        <AlertError title="Could not sign in" description={error} />
+        <AlertError title="无法登录" description={error} />
       ) : null}
 
       <div className="grid gap-2">
-        <Label htmlFor="review-email">Email</Label>
+        <Label htmlFor="review-email">邮件</Label>
         <Input
           id="review-email"
           autoComplete="username"
@@ -55,7 +55,7 @@ export function ReviewSignInForm() {
       </div>
 
       <div className="grid gap-2">
-        <Label htmlFor="review-password">Password</Label>
+        <Label htmlFor="review-password">密码</Label>
         <Input
           id="review-password"
           autoComplete="current-password"
@@ -73,7 +73,7 @@ export function ReviewSignInForm() {
         loading={isSubmitting}
         type="submit"
       >
-        Sign in
+        登录
       </Button>
     </form>
   );
@@ -105,10 +105,10 @@ async function getErrorMessage(response: Response) {
   if (isErrorResponse(body)) return body.error;
 
   if (response.status === 401) {
-    return "Check the email and password, then try again.";
+    return "请检查邮箱和密码后重试。";
   }
 
-  return "Review access is unavailable. Please contact support.";
+  return "审核访问不可用，请联系支持。";
 }
 
 function isErrorResponse(body: unknown): body is { error: string } {

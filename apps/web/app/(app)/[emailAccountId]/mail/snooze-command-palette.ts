@@ -1,5 +1,6 @@
 import { format } from "date-fns";
 import * as chrono from "chrono-node";
+import { zhCN } from "date-fns/locale/zh-CN";
 import type { Command } from "@/lib/commands/types";
 
 export function buildSnoozeCommandPalette({
@@ -18,7 +19,7 @@ export function buildSnoozeCommandPalette({
     return [
       {
         id: "mail-snooze-natural-language",
-        label: `Snooze until ${formatSnoozeTime(naturalLanguageDate)}`,
+        label: `稍后处理，时间：${formatSnoozeTime(naturalLanguageDate)}`,
         section: "actions",
         priority: 0,
         keywords: [query],
@@ -38,10 +39,12 @@ export function buildSnoozeCommandPalette({
   }));
 }
 
+/** 将中英文时间描述解析为未来日期；未指定时间时使用上午九点，无效输入返回 null。 */
 export function parseSnoozeDate(input: string, now = new Date()) {
-  const result = chrono.casual.parse(input.trim(), now, {
-    forwardDate: true,
-  })[0];
+  const options = { forwardDate: true };
+  const result =
+    chrono.zh.casual.parse(input.trim(), now, options)[0] ??
+    chrono.casual.parse(input.trim(), now, options)[0];
   if (!result) return null;
 
   const date = result.start.date();
@@ -60,22 +63,22 @@ export function getSnoozePresets(now: Date) {
   const candidates = [
     {
       id: "tomorrow",
-      label: "Tomorrow",
+      label: "明天",
       until: atHour(now, 1, MORNING_HOUR),
     },
     {
       id: "end-of-week",
-      label: "End of week",
+      label: "本周五",
       until: laterThisWeek(now, FRIDAY),
     },
     {
       id: "this-weekend",
-      label: "This weekend",
+      label: "本周末",
       until: now.getDay() === SUNDAY ? null : laterThisWeek(now, SATURDAY),
     },
     {
       id: "next-week",
-      label: "Next week",
+      label: "下周",
       until: atHour(now, daysUntilNextMonday(now), MORNING_HOUR),
     },
   ];
@@ -91,7 +94,7 @@ export function getSnoozePresets(now: Date) {
 }
 
 function formatSnoozeTime(date: Date) {
-  return format(date, "EEE, MMM d 'at' p");
+  return format(date, "M月d日 EEE HH:mm", { locale: zhCN });
 }
 
 function atHour(now: Date, daysFromNow: number, hour: number) {

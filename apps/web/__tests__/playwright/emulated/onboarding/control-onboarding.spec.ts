@@ -20,56 +20,56 @@ test("completes account setup and persists onboarding choices", async ({
 }, testInfo) => {
   await openControlOnboarding(page);
 
-  await page.getByRole("button", { name: "Founder", exact: true }).click();
-  await page.getByRole("button", { name: "Continue", exact: true }).click();
+  await page.getByRole("button", { name: "创业者", exact: true }).click();
+  await page.getByRole("button", { name: "继续", exact: true }).click();
   await expect(
-    page.getByRole("heading", { name: "What's the size of your company?" }),
+    page.getByRole("heading", { name: "公司有多少人？" }),
   ).toBeVisible({ timeout: 60_000 });
 
   await page
-    .getByRole("button", { name: "11-100 people", exact: true })
+    .getByRole("button", { name: "11–100 人", exact: true })
     .click();
   await expect(
     page.getByRole("heading", {
-      name: "How did you hear about Inbox Zero?",
+      name: "How did you hear about 十组邮件小助手?",
     }),
   ).toBeVisible({ timeout: 60_000 });
 
   await page.getByRole("button", { name: "GitHub", exact: true }).click();
   await expect(
     page.getByRole("heading", {
-      name: "How do you want your inbox organized?",
+      name: "希望如何整理收件箱？",
     }),
   ).toBeVisible({ timeout: 60_000 });
 
-  await page.getByRole("button", { name: "Continue", exact: true }).click();
+  await page.getByRole("button", { name: "继续", exact: true }).click();
   await expect(
     page.getByRole("heading", {
-      name: "Should we draft replies for you?",
+      name: "是否自动起草回复？",
     }),
   ).toBeVisible({ timeout: 60_000 });
 
-  await page.getByRole("button", { name: "Yes, please", exact: true }).click();
+  await page.getByRole("button", { name: "启用", exact: true }).click();
   await expect(
-    page.getByRole("heading", { name: "Custom rules", exact: true }),
+    page.getByRole("heading", { name: "自定义规则", exact: true }),
   ).toBeVisible({ timeout: 60_000 });
 
-  await page.getByRole("button", { name: "Continue", exact: true }).click();
+  await page.getByRole("button", { name: "继续", exact: true }).click();
   await expect(
-    page.getByRole("heading", { name: "Invite your team", exact: true }),
+    page.getByRole("heading", { name: "邀请团队", exact: true }),
   ).toBeVisible({ timeout: 60_000 });
-  await page.getByRole("button", { name: "Skip", exact: true }).click();
+  await page.getByRole("button", { name: "跳过", exact: true }).click();
 
   await expect(
     page.getByRole("heading", { name: "Labels are ready", exact: true }),
   ).toBeVisible({ timeout: 60_000 });
-  await page.getByRole("button", { name: "Continue", exact: true }).click();
+  await page.getByRole("button", { name: "继续", exact: true }).click();
 
   await expect(page).toHaveURL(/\/welcome-upgrade(?:\?.*)?$/, {
     timeout: 60_000,
   });
   await expect(
-    page.getByRole("heading", { name: "Start your 7-day FREE trial" }),
+    page.getByRole("heading", { name: "开始 7 天免费试用" }),
   ).toBeVisible();
 
   // A fresh upgrade-page load must resolve the signed-in user without app providers.
@@ -81,7 +81,7 @@ test("completes account setup and persists onboarding choices", async ({
   expect((await (await userResponse).json()).id).toBeTruthy();
   await expect(
     page
-      .getByRole("button", { name: "Try free for 7 days", exact: true })
+      .getByRole("button", { name: "免费试用 7 天", exact: true })
       .first(),
   ).toBeVisible();
   await page.screenshot({

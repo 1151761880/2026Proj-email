@@ -48,7 +48,7 @@ export const DeliveryOptions = forwardRef<
   return (
     <>
       <DeliveryTimePicker
-        label="Send later"
+        label="定时发送"
         value={sendAt}
         onChange={onSendAtChange}
         disabled={disabled}
@@ -58,7 +58,7 @@ export const DeliveryOptions = forwardRef<
         shortcutOwnerId={shortcutOwnerId}
       />
       <DeliveryTimePicker
-        label="Remind me"
+        label="提醒我"
         value={remindAt}
         onChange={onRemindAtChange}
         disabled={disabled}
@@ -127,7 +127,7 @@ function DeliveryTimePicker({
             aria-label={label}
           >
             {value
-              ? new Date(value).toLocaleString(undefined, {
+              ? new Date(value).toLocaleString("zh-CN", {
                   month: "short",
                   day: "numeric",
                   hour: "numeric",
@@ -154,12 +154,12 @@ function DeliveryTimePicker({
               onClick={() => setShowCustom(false)}
             >
               <ChevronLeftIcon className="size-3.5" />
-              Back
+              返回
             </Button>
             <label className="block text-xs text-muted-foreground">
-              Choose a date and time
+              选择日期和时间
               <input
-                aria-label={`${label} date and time`}
+                aria-label={`${label}日期和时间`}
                 type="datetime-local"
                 value={custom}
                 onChange={(event) => setCustom(event.target.value)}
@@ -173,14 +173,14 @@ function DeliveryTimePicker({
               disabled={!custom || new Date(custom).getTime() <= earliest}
               onClick={() => choose(new Date(custom))}
             >
-              Set time
+              设置时间
             </Button>
           </div>
         ) : (
           <>
             {isReminder && (
               <p className="px-2 py-2 text-xs font-medium text-muted-foreground">
-                Remind me if no reply
+                未收到回复时提醒
               </p>
             )}
             {[1, 2, 7].map((days) => {
@@ -197,13 +197,13 @@ function DeliveryTimePicker({
                 >
                   <span>
                     {after
-                      ? `${days} ${days === 1 ? "day" : "days"} after sending`
+                      ? `发送后 ${days} ${days === 1 ? "day" : "days"}`
                       : days === 1
-                        ? "Tomorrow morning"
-                        : `In ${days} days`}
+                        ? "明天上午"
+                        : `${days} 天后`}
                   </span>
                   <span className="shrink-0 text-muted-foreground">
-                    {date.toLocaleDateString(undefined, {
+                    {date.toLocaleDateString("zh-CN", {
                       month: "short",
                       day: "numeric",
                     })}{" "}
@@ -220,7 +220,7 @@ function DeliveryTimePicker({
               onClick={() => setShowCustom(true)}
             >
               <CalendarDaysIcon className="size-3.5 text-muted-foreground" />
-              Choose date and time
+              选择日期和时间
               <ChevronRightIcon className="ml-auto size-3.5 text-muted-foreground" />
             </Button>
             {value && (
@@ -234,7 +234,7 @@ function DeliveryTimePicker({
                 }}
               >
                 <XIcon className="size-3.5" />
-                Clear time
+                清除时间
               </Button>
             )}
           </>

@@ -59,18 +59,18 @@ test("keeps arrow navigation inside the thread and expands from its toolbar", as
   await page.keyboard.press("ArrowDown");
   await expect(messages.last()).toHaveAttribute("aria-current", "true");
   await expect(page).toHaveURL(threadUrl);
-  const toolbar = page.getByRole("group", { name: "Thread actions" });
+  const toolbar = page.getByRole("group", { name: "会话操作" });
   const expand = toolbar.getByRole("button", {
-    name: "Expand all messages",
+    name: "展开全部邮件",
     exact: true,
   });
   await expect(
-    page.getByRole("button", { name: "Expand all messages", exact: true }),
+    page.getByRole("button", { name: "展开全部邮件", exact: true }),
   ).toHaveCount(1);
   await expand.click();
   await expectThreadReaderBody(page, "First collapsed history message.");
   await toolbar
-    .getByRole("button", { name: "Collapse all messages", exact: true })
+    .getByRole("button", { name: "收起全部邮件", exact: true })
     .click();
   await expect(
     messages.first().locator('[role="button"][aria-expanded]'),
@@ -86,16 +86,16 @@ test("keeps arrow navigation inside the thread and expands from its toolbar", as
   await messages.last().focus();
   await page.keyboard.press("Enter");
 
-  const editor = page.getByRole("textbox", { name: "Email message" });
+  const editor = page.getByRole("textbox", { name: "邮件内容" });
   await expect(editor).toBeFocused();
   await expect(editor.locator(":scope > div")).toHaveText("");
   await page.getByLabel(/^Show (signature and )?quoted message$/).click();
   await expect(
-    page.getByRole("toolbar", { name: "Selection formatting" }),
+    page.getByRole("toolbar", { name: "选中文字格式" }),
   ).toBeHidden();
   await page.getByLabel(/^Hide (signature and )?quoted message$/).click();
   await expect(
-    page.getByRole("toolbar", { name: "Selection formatting" }),
+    page.getByRole("toolbar", { name: "选中文字格式" }),
   ).toBeHidden();
   await editor.fill(
     "A reply on the first line.\nAnother line for cursor navigation.",
@@ -136,7 +136,7 @@ test("navigates messages from inside a rich email body", async ({ page }) => {
   await emailBody.click();
   await page.keyboard.press("Enter");
   await expect(
-    page.getByRole("textbox", { name: "Email message" }),
+    page.getByRole("textbox", { name: "邮件内容" }),
   ).toBeVisible();
 });
 
@@ -153,7 +153,7 @@ test("expands a collapsed message before Enter opens a reply", async ({
 
   const message = page.locator("li[data-thread-message-id]").first();
   const header = message.locator('[role="button"][aria-expanded]');
-  const editor = message.getByRole("textbox", { name: "Email message" });
+  const editor = message.getByRole("textbox", { name: "邮件内容" });
   await expect(header).toHaveAttribute("aria-expanded", "false");
 
   await message.focus();
@@ -172,6 +172,6 @@ test("expands a collapsed message before Enter opens a reply", async ({
   await page.keyboard.press("Enter");
   await expect(editor).toBeFocused();
   await expect(
-    page.getByRole("textbox", { name: "Email message" }),
+    page.getByRole("textbox", { name: "邮件内容" }),
   ).toHaveCount(1);
 });

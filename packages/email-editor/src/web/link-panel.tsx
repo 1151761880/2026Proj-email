@@ -29,7 +29,7 @@ export function LinkPanel({
 
   return (
     <div
-      aria-label={initialHref ? "Edit link" : "Add link"}
+      aria-label={initialHref ? "编辑链接" : "添加链接"}
       className={styles.linkPanel}
       data-email-editor-link-dialog=""
       onKeyDown={(event) => {
@@ -40,7 +40,7 @@ export function LinkPanel({
       }}
       role="dialog"
     >
-      <label htmlFor={inputId}>Link address</label>
+      <label htmlFor={inputId}>链接地址</label>
       <input
         aria-describedby={error ? errorId : undefined}
         aria-invalid={Boolean(error)}
@@ -72,7 +72,7 @@ export function LinkPanel({
             onClick={() => openSafeLink(initialHref)}
             type="button"
           >
-            Open
+            打开
           </button>
         )}
         {initialHref && (
@@ -81,18 +81,18 @@ export function LinkPanel({
             onClick={onRemove}
             type="button"
           >
-            Remove
+            移除
           </button>
         )}
         <button className={styles.linkButton} onClick={onCancel} type="button">
-          Cancel
+          取消
         </button>
         <button
           className={`${styles.linkButton} ${styles.linkButtonPrimary}`}
           onClick={apply}
           type="button"
         >
-          {initialHref ? "Update" : "Add"}
+          {initialHref ? "更新" : "添加"}
         </button>
       </div>
     </div>

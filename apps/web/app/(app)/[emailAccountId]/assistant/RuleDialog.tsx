@@ -77,13 +77,13 @@ export function RuleDialog({
         aria-describedby={undefined}
       >
         <DialogHeader className={ruleId ? "sr-only" : ""}>
-          <DialogTitle>{ruleId ? "Edit Rule" : "Create Rule"}</DialogTitle>
+          <DialogTitle>{ruleId ? "编辑规则" : "创建规则"}</DialogTitle>
         </DialogHeader>
         <ErrorBoundary
           key={dialogContentKey}
           extra={{ component: "RuleDialog", ruleId }}
           fallback={<RuleDialogErrorState onClose={onClose} />}
-          logMessage="Rule dialog crashed"
+          logMessage="规则弹窗加载失败"
           logScope="rule-dialog-error-boundary"
         >
           <div className="min-w-0">
@@ -137,15 +137,15 @@ function RuleDialogErrorState({ onClose }: { onClose: () => void }) {
   return (
     <div className="space-y-4 py-4">
       <p className="text-sm text-muted-foreground">
-        An error occurred while opening this rule. Please contact support at{" "}
+        打开规则失败，请联系支持：{" "}
         <a href={`mailto:${SUPPORT_EMAIL}`} className="underline">
           {SUPPORT_EMAIL}
         </a>{" "}
-        if the problem persists.
+        （若问题持续）。
       </p>
       <div className="flex justify-end">
         <Button type="button" onClick={onClose}>
-          Close
+          关闭
         </Button>
       </div>
     </div>
@@ -184,7 +184,7 @@ function transformRuleForDuplication(
   }
 
   return {
-    name: `${rule.name} (Copy)`,
+    name: `${rule.name}（副本）`,
     instructions: rule.instructions || undefined,
     groupId: rule.groupId || undefined,
     runOnThreads: rule.runOnThreads,

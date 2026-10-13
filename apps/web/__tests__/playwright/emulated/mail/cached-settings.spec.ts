@@ -43,7 +43,7 @@ test("opens mail with settings cached before the split condition upgrade", async
       conversationWithSubject(page, conversations, "Archive Action Message"),
     ).toBeVisible();
     await expect(
-      page.getByText("Something went wrong", { exact: true }),
+      page.getByText("发生错误", { exact: true }),
     ).toBeHidden();
     await capturePlaywrightCheckpoint(
       page,

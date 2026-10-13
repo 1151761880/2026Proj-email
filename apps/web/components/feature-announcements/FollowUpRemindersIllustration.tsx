@@ -71,18 +71,18 @@ export function FollowUpRemindersIllustration() {
                           transition={{ duration: 0.375, ease: "easeOut" }}
                           className="rounded bg-amber-100 px-1.5 py-0.5 text-[9px] font-semibold text-amber-700 dark:bg-amber-800/50 dark:text-amber-300"
                         >
-                          Follow up
+                          跟进
                         </motion.span>
                       )}
                     </AnimatePresence>
                   </div>
                   <div className="text-[11px] font-medium text-gray-700 dark:text-gray-300">
-                    Meeting follow-up
+                    会议跟进
                   </div>
                 </div>
               </div>
               <div className="mt-2 text-[10px] leading-relaxed text-gray-500 dark:text-gray-400">
-                Thanks for your time today. I wanted to follow up on...
+                感谢参加今天的会议，想进一步跟进…
               </div>
               <motion.div
                 initial={{ height: 0, opacity: 0 }}
@@ -95,7 +95,7 @@ export function FollowUpRemindersIllustration() {
               >
                 <div className="mt-2.5 flex items-center gap-1.5 border-t border-gray-100 pt-2 dark:border-gray-700">
                   <span className="text-[10px] text-gray-400 dark:text-gray-500">
-                    ↩ You replied
+                    ↩ 你已回复
                     {stage >= 3 && (
                       <motion.span
                         key={daysText}

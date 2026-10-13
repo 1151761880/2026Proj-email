@@ -12,12 +12,12 @@ export default function OnboardingComponentsPage() {
     <Container>
       <div className="space-y-10 py-8">
         <div>
-          <PageHeading>Onboarding Components</PageHeading>
+          <PageHeading>入门组件</PageHeading>
           <MutedText className="mt-2">
-            Storybook page for onboarding-specific UI.
+            入门界面的组件预览。
           </MutedText>
           <div className="mt-4">
-            <TextLink href="/components">← Back to all components</TextLink>
+            <TextLink href="/components">← 返回全部组件</TextLink>
           </div>
         </div>
 

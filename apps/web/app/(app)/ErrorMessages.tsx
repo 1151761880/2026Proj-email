@@ -31,7 +31,7 @@ export function ErrorMessages() {
 
   return (
     <AppAlertBanner
-      title="Action Required"
+      title="需要处理"
       description={
         <ul className="list-none space-y-1">
           {errors.map((error) => (
@@ -61,7 +61,7 @@ export function ErrorMessages() {
             loading={isExecuting}
             onClick={() => clearErrorMessages()}
           >
-            I've fixed them
+            我已处理
           </Button>
         </div>
       }

@@ -28,9 +28,9 @@ export const emailOtpPlugin = emailOTP({
         const result = await deliverTransactionalEmail({
           from: env.RESEND_FROM_EMAIL,
           to: email,
-          subject: "Your Inbox Zero sign-in code",
-          html: `<p>Your Inbox Zero sign-in code is <strong>${otp}</strong>.</p><p>It expires in 5 minutes and gives access to your entire Inbox Zero account, including all connected mailboxes and calendars.</p><p>If you did not request this code, you can ignore this email.</p>`,
-          text: `Your Inbox Zero sign-in code is ${otp}.\n\nThis code expires in 5 minutes and can be used once. It gives access to your entire Inbox Zero account, including all connected mailboxes and calendars.\n\nIf you did not request this code, you can ignore this email.`,
+          subject: "十组邮件小助手登录验证码",
+          html: `<p>十组邮件小助手登录验证码：<strong>${otp}</strong>。</p><p>验证码 5 分钟内有效，仅可使用一次。登录后可访问整个账户，包括所有已连接的邮箱和日历。</p><p>若非本人请求，请忽略此邮件。</p>`,
+          text: `十组邮件小助手登录验证码：${otp}。\n\n验证码 5 分钟内有效，仅可使用一次。登录后可访问整个账户，包括所有已连接的邮箱和日历。\n\n若非本人请求，请忽略此邮件。`,
         });
         if (!result) {
           logger.error("Failed to deliver sign-in code");

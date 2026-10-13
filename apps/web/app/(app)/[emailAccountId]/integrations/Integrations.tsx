@@ -32,8 +32,8 @@ export function Integrations() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Name</TableHead>
-              <TableHead>Connection</TableHead>
+              <TableHead>名称</TableHead>
+              <TableHead>连接</TableHead>
               <TableHead />
             </TableRow>
           </TableHeader>
@@ -49,7 +49,7 @@ export function Integrations() {
             ) : (
               <TableRow>
                 <TableCell colSpan={3}>
-                  <TypographyP>No integrations found</TypographyP>
+                  <TypographyP>暂无集成</TypographyP>
                 </TableCell>
               </TableRow>
             )}
@@ -80,36 +80,36 @@ function useIntegrationNotifications(
         { title: string; description: string }
       > = {
         cancelled: {
-          title: "Connection cancelled",
+          title: "连接已取消",
           description:
-            "You cancelled the authorization. Connect again whenever you're ready.",
+            "你已取消授权，可随时重新连接。",
         },
         oauth_error: {
-          title: "Connection failed",
+          title: "连接失败",
           description:
-            "The service returned an authorization error. Please try again.",
+            "服务返回授权错误，请重试。",
         },
         connection_failed: {
-          title: "Connection failed",
+          title: "连接失败",
           description:
-            "We couldn't complete the connection. Please try again or contact support.",
+            "无法完成连接，请重试或联系支持。",
         },
         tool_sync_failed: {
-          title: "Connected, but tools unavailable",
+          title: "已连接，但工具不可用",
           description:
-            "We couldn't load this integration's tools. Reconnect to try again.",
+            "无法加载此集成的工具，请重新连接后重试。",
         },
         forbidden: {
-          title: "Connection failed",
+          title: "连接失败",
           description:
-            "This account isn't authorized to complete the connection. Please try again.",
+            "此账户无权完成连接，请重试。",
         },
       };
 
       const errorMessage = errorMessages[errorParam] || {
-        title: "Connection failed",
+        title: "连接失败",
         description:
-          "We couldn't complete the connection. Please try again or contact support.",
+          "无法完成连接，请重试或联系支持。",
       };
 
       toastError(errorMessage);
@@ -122,8 +122,8 @@ function useIntegrationNotifications(
     } else if (connectedParam) {
       const displayName = getDisplayName(connectedParam, integrations);
       toastSuccess({
-        title: "Integration connected",
-        description: `Connected to ${displayName}`,
+        title: "集成已连接",
+        description: `已连接 ${displayName}`,
       });
       analytics.captureAction("integration_connected", {
         integration: connectedParam,
@@ -131,8 +131,8 @@ function useIntegrationNotifications(
     } else if (pendingParam) {
       const displayName = getDisplayName(pendingParam, integrations);
       toastInfo({
-        title: "Connection is still finishing",
-        description: `We're still connecting to ${displayName}. Refresh in a moment to see the latest status.`,
+        title: "正在完成连接",
+        description: `正在连接 ${displayName}，请稍后刷新查看状态。`,
       });
       analytics.captureAction("integration_connection_pending", {
         integration: pendingParam,

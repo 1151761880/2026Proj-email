@@ -121,7 +121,7 @@ export const MailAccountSwitcher = memo(function MailAccountSwitcher({
                   onSelect={onSelectAll}
                 >
                   <AllAccountsIcon />
-                  <span className="font-medium">All accounts</span>
+                  <span className="font-medium">全部账户</span>
                   {isDesktopApp && (
                     <Kbd className="ml-auto shrink-0">
                       {getShortcutHint("switchAllAccounts")}
@@ -131,14 +131,14 @@ export const MailAccountSwitcher = memo(function MailAccountSwitcher({
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <DropdownMenuItem
-                      aria-label="Choose accounts"
+                      aria-label="选择账户"
                       className="w-10 justify-center rounded-xl p-0 text-muted-foreground"
                       onSelect={() => setIsSelectionOpen(true)}
                     >
                       <SlidersHorizontalIcon />
                     </DropdownMenuItem>
                   </TooltipTrigger>
-                  <TooltipContent side="right">Choose accounts</TooltipContent>
+                  <TooltipContent side="right">选择账户</TooltipContent>
                 </Tooltip>
               </div>
               <DropdownMenuSeparator />
@@ -161,13 +161,13 @@ export const MailAccountSwitcher = memo(function MailAccountSwitcher({
           <DropdownMenuItem asChild className="gap-3 rounded-xl px-3 py-2">
             <Link href="/shared">
               <MessagesSquareIcon className="size-4 text-muted-foreground" />
-              Shared with me
+              与我共享
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild className="gap-3 rounded-xl px-3 py-2">
             <Link href="/shared/activity">
               <BellIcon className="size-4 text-muted-foreground" />
-              Activity
+              动态
             </Link>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
@@ -177,7 +177,7 @@ export const MailAccountSwitcher = memo(function MailAccountSwitcher({
                 <PlusIcon className="size-4" />
               </span>
               <span className="font-medium text-muted-foreground">
-                Add or manage accounts
+                添加或管理账户
               </span>
             </Link>
           </DropdownMenuItem>

@@ -92,8 +92,7 @@ export function PublisherDiscussion({
             hint={
               <>
                 <span>
-                  Comments are never sent as email. @mention a teammate to share
-                  this conversation.
+                  评论不会作为邮件发送。使用 @ 提及成员可共享此会话。
                 </span>
                 <span className="flex shrink-0 items-center">
                   <ShareConversationDialog
@@ -106,7 +105,7 @@ export function PublisherDiscussion({
                   <Button
                     size="icon2xs"
                     variant="ghost"
-                    aria-label="Close comments"
+                    aria-label="关闭评论"
                     onClick={() => setOpen(false)}
                   >
                     <XIcon className="size-3.5" />

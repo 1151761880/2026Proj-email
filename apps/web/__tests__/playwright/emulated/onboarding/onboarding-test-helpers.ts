@@ -111,7 +111,7 @@ export async function openControlOnboarding(page: Page) {
   const emailAccountId = await getEmailAccountId(page);
   await page.goto(`/${emailAccountId}/onboarding?step=who`);
   await expect(
-    page.getByRole("heading", { name: "What do you do?" }),
+    page.getByRole("heading", { name: "你的职业是什么？" }),
   ).toBeVisible({ timeout: 60_000 });
 }
 

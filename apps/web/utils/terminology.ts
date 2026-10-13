@@ -12,7 +12,7 @@ interface EmailTerminology {
 
 /**
  * Get email terminology based on the provider
- * Gmail uses "labels" while Outlook uses "categories"
+ * Gmail uses "标签" while Outlook uses "分类"
  */
 export function getEmailTerminology(provider: string): EmailTerminology {
   const isOutlook = isMicrosoftProvider(provider);
@@ -20,11 +20,11 @@ export function getEmailTerminology(provider: string): EmailTerminology {
   if (isOutlook) {
     return {
       label: {
-        singular: "category",
-        plural: "categories",
-        singularCapitalized: "Category",
-        pluralCapitalized: "Categories",
-        action: "Categorize",
+        singular: "分类",
+        plural: "分类",
+        singularCapitalized: "分类",
+        pluralCapitalized: "分类",
+        action: "分类",
       },
     };
   }
@@ -32,11 +32,11 @@ export function getEmailTerminology(provider: string): EmailTerminology {
   // Default to Gmail terminology
   return {
     label: {
-      singular: "label",
-      plural: "labels",
-      singularCapitalized: "Label",
-      pluralCapitalized: "Labels",
-      action: "Label",
+      singular: "标签",
+      plural: "标签",
+      singularCapitalized: "标签",
+      pluralCapitalized: "标签",
+      action: "标签",
     },
   };
 }

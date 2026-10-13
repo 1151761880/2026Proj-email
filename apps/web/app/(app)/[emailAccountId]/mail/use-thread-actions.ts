@@ -176,8 +176,8 @@ export function useThreadActions({
       if (failedCount) {
         toast.error(
           failedCount === batch.snapshots.length
-            ? "Couldn't restore"
-            : `Couldn't restore ${failedCount} of ${batch.snapshots.length}`,
+            ? "恢复失败"
+            : `${batch.snapshots.length} 项中有 ${failedCount} 项恢复失败`,
         );
       }
       if (!restoredKeys.length) {
@@ -246,16 +246,16 @@ export function useThreadActions({
       if (snapshots.length && notifySuccess) {
         toast.success(
           snapshots.length === 1
-            ? `Marked as ${read ? "read" : "unread"}`
-            : `Marked ${snapshots.length} conversations as ${read ? "read" : "unread"}`,
+            ? `已标为${read ? "read" : "unread"}`
+            : `已将 ${snapshots.length} 个会话标为${read ? "read" : "unread"}`,
         );
       }
       if (failedCount) {
         toast.error(
           enqueueFailureCopy(
             failedCount === threadKeys.length
-              ? `Couldn't queue marking as ${read ? "read" : "unread"}`
-              : `Couldn't queue ${failedCount} of ${threadKeys.length} as ${read ? "read" : "unread"}`,
+              ? `无法将“标为${read ? "read" : "unread"}”操作加入队列`
+              : `${threadKeys.length} 项中有 ${failedCount} 项无法加入“标为${read ? "read" : "unread"}”队列`,
             rejectionCodes,
           ),
         );
@@ -298,8 +298,8 @@ export function useThreadActions({
       if (snapshots.length) {
         toast.success(
           snapshots.length === 1
-            ? `Snoozed until ${format(snoozedUntil, "EEE, MMM d 'at' p")}`
-            : `Snoozed ${snapshots.length} conversations`,
+            ? `已设置稍后处理：${format(snoozedUntil, "EEE, MMM d 'at' p")}`
+            : `已为 ${snapshots.length} 个会话设置稍后处理`,
         );
       }
       if (failedCount) {
@@ -307,9 +307,9 @@ export function useThreadActions({
           enqueueFailureCopy(
             failedCount === threadKeys.length
               ? threadKeys.length === 1
-                ? "Couldn't queue snoozing"
-                : "Couldn't queue snoozing conversations"
-              : `Couldn't queue ${failedCount} of ${threadKeys.length} for snoozing`,
+                ? "无法将稍后处理操作加入队列"
+                : "无法将会话稍后处理操作加入队列"
+              : `${threadKeys.length} 项中有 ${failedCount} 项无法加入稍后处理队列`,
             rejectionCodes,
           ),
         );
@@ -329,16 +329,16 @@ export function useThreadActions({
       if (snapshots.length) {
         toast.success(
           snapshots.length === 1
-            ? "Marked as spam"
-            : `Marked ${snapshots.length} conversations as spam`,
+            ? "已标为垃圾邮件"
+            : `已将 ${snapshots.length} 个会话标为垃圾邮件`,
         );
       }
       if (failedCount) {
         toast.error(
           enqueueFailureCopy(
             failedCount === threadKeys.length
-              ? "Couldn't queue marking as spam"
-              : `Couldn't queue ${failedCount} of ${threadKeys.length} as spam`,
+              ? "无法将垃圾邮件标记操作加入队列"
+              : `${threadKeys.length} 项中有 ${failedCount} 项无法加入垃圾邮件标记队列`,
             rejectionCodes,
           ),
         );

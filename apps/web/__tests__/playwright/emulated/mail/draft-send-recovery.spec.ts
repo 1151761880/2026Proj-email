@@ -21,7 +21,7 @@ test("sends an autosaved reply using its stable mailbox draft reference", async 
     conversations,
     "Draft deletion example",
   ).click();
-  const editor = page.getByRole("textbox", { name: "Email message" }).first();
+  const editor = page.getByRole("textbox", { name: "邮件内容" }).first();
   await expect(editor).toBeVisible({ timeout: 60_000 });
   const saved = page.waitForResponse(async (response) => {
     const request = response.request();
@@ -34,7 +34,7 @@ test("sends an autosaved reply using its stable mailbox draft reference", async 
   await editor.fill("Edited saved reply");
   expect((await saved).ok()).toBe(true);
   const handoff = await watchReplyHandoff(page, "Edited saved reply");
-  await page.getByRole("button", { name: "Send", exact: true }).first().click();
+  await page.getByRole("button", { name: "发送", exact: true }).first().click();
   await expect
     .poll(
       async () => {
@@ -77,10 +77,10 @@ test("sends an autosaved reply using its stable mailbox draft reference", async 
     page.locator(`[data-thread-message-id="${sent[0].id}"]`),
   ).toBeVisible();
   await expect(
-    page.getByRole("textbox", { name: "Email message" }),
+    page.getByRole("textbox", { name: "邮件内容" }),
   ).toBeVisible();
   await expect(
-    page.getByText("Reply could not be sent", { exact: true }),
+    page.getByText("回复发送失败", { exact: true }),
   ).toHaveCount(0);
   await capturePlaywrightCheckpoint(page, testInfo, "autosaved-reply-sent");
 });

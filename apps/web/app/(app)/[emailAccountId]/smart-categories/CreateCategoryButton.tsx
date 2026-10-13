@@ -30,58 +30,58 @@ type ExampleCategory = {
 
 const EXAMPLE_CATEGORIES: ExampleCategory[] = [
   {
-    name: "Team",
+    name: "团队",
     description:
-      "Internal team members with @company.com email addresses, including employees and colleagues within our organization",
+      "使用 @company.com 邮箱的内部成员，包括员工和同事",
   },
   {
-    name: "Customer",
+    name: "客户",
     description:
-      "Email addresses belonging to customers, including those reaching out for support or engaging with customer success",
+      "客户邮箱，包括寻求支持或与客户服务团队联系的人员",
   },
   {
-    name: "Candidate",
+    name: "候选人",
     description:
-      "Job applicants, potential hires, and candidates in your interview pipeline",
+      "求职者、潜在雇员及面试候选人",
   },
   {
-    name: "Job Application",
+    name: "求职申请",
     description:
-      "Companies, hiring platforms, and recruiters you've applied to or are interviewing with for positions",
+      "已申请或正在面试的公司、招聘平台及招聘人员",
   },
   {
-    name: "Investor",
+    name: "投资者",
     description:
-      "Current and potential investors, investment firms, and venture capital contacts",
+      "当前及潜在投资者、投资机构和风投联系人",
   },
   {
-    name: "Founder",
+    name: "创业者",
     description:
-      "Startup founders, entrepreneurs, and potential portfolio companies seeking investment or partnerships",
+      "寻求投资或合作的创业者及潜在被投公司",
   },
   {
-    name: "Vendor",
+    name: "供应商",
     description:
-      "Service providers, suppliers, and business partners who provide products or services to your company",
+      "为公司提供产品或服务的供应商和合作伙伴",
   },
   {
-    name: "Server Error",
-    description: "Automated monitoring services and error reporting systems",
+    name: "服务器错误",
+    description: "自动监控服务和错误报告系统",
   },
   {
-    name: "Press",
+    name: "媒体",
     description:
-      "Journalists, media outlets, PR agencies, and industry publications seeking interviews or coverage",
+      "寻求采访或报道的记者、媒体、公关机构和行业刊物",
   },
   {
-    name: "Conference",
+    name: "会议活动",
     description:
-      "Event organizers, conference coordinators, and speaking opportunity contacts for industry events",
+      "活动主办方、会议协调人员及行业演讲联系人",
   },
   {
-    name: "Nonprofit",
+    name: "公益组织",
     description:
-      "Charitable organizations, NGOs, social impact organizations, and philanthropic foundations",
+      "慈善机构、非政府组织、公益组织和基金会",
   },
 ];
 
@@ -98,7 +98,7 @@ export function CreateCategoryButton({
         {buttonProps?.children ?? (
           <>
             <PlusIcon className="mr-2 size-4" />
-            Add
+            添加
           </>
         )}
       </Button>
@@ -127,7 +127,7 @@ export function CreateCategoryDialog({
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Create Category</DialogTitle>
+          <DialogTitle>创建分类</DialogTitle>
         </DialogHeader>
 
         <CreateCategoryForm category={category} closeModal={closeModal} />
@@ -173,10 +173,10 @@ function CreateCategoryForm({
 
       if (result?.serverError) {
         toastError({
-          description: `There was an error creating the category. ${result.serverError || ""}`,
+          description: `创建分类失败。${result.serverError || ""}`,
         });
       } else {
-        toastSuccess({ description: "Category created!" });
+        toastSuccess({ description: "分类已创建！" });
         closeModal();
       }
     },
@@ -188,7 +188,7 @@ function CreateCategoryForm({
       <Input
         type="text"
         name="name"
-        label="Name"
+        label="名称"
         registerProps={register("name", { required: true })}
         error={errors.name}
       />
@@ -197,14 +197,14 @@ function CreateCategoryForm({
         autosizeTextarea
         rows={2}
         name="description"
-        label="Description (Optional)"
-        explainText="Additional information used by the AI to categorize senders"
+        label="说明（可选）"
+        explainText="AI 分类发件人时参考的补充信息"
         registerProps={register("description")}
         error={errors.description}
       />
 
       <div className="rounded border border-border bg-muted/50 p-3">
-        <div className="text-xs font-medium">Examples</div>
+        <div className="text-xs font-medium">示例</div>
         <div className="mt-1 flex flex-wrap gap-2">
           {EXAMPLE_CATEGORIES.map((category) => (
             <Button
@@ -223,14 +223,12 @@ function CreateCategoryForm({
 
       {category && (
         <MessageText>
-          Note: editing a category name/description only impacts future
-          categorization. Existing email addresses in this category will not be
-          affected.
+          修改分类名称或说明仅影响后续分类，已有邮件地址的分类不变。
         </MessageText>
       )}
 
       <Button type="submit" loading={isSubmitting}>
-        {category ? "Update" : "Create"}
+        {category ? "更新" : "创建"}
       </Button>
     </form>
   );

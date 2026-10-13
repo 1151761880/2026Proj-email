@@ -42,14 +42,14 @@ function MeetingsPageContent() {
   if (!meetingRecorderEnabled) {
     return (
       <PageWrapper>
-        <PageHeader title="Meetings" />
+        <PageHeader title="会议" />
 
         <div className="mt-8 max-w-3xl">
           <ActionCard
             variant="blue"
             icon={<MicIcon className="h-5 w-5" />}
-            title="Meeting notetaker is disabled"
-            description="The meeting notetaker is turned off on this server. Set NEXT_PUBLIC_MEETING_RECORDER_ENABLED=true and see the self-hosting docs to configure it."
+            title="会议记录功能已禁用"
+            description="服务器未启用会议记录功能。请设置 NEXT_PUBLIC_MEETING_RECORDER_ENABLED=true，并参考部署文档完成配置。"
           />
         </div>
       </PageWrapper>
@@ -142,14 +142,14 @@ function MeetingRecorderPageContent() {
   return (
     <PageWrapper>
       <div className="flex items-start justify-between gap-4">
-        <PageHeader title="Meetings" />
+        <PageHeader title="会议" />
 
         <Button
           variant="outline"
           Icon={SettingsIcon}
           onClick={() => setIsSettingsOpen(true)}
         >
-          Settings
+          设置
         </Button>
       </div>
 
@@ -160,12 +160,11 @@ function MeetingRecorderPageContent() {
           <ActionCard
             variant="blue"
             icon={<CalendarIcon className="h-5 w-5" />}
-            title="Reconnect your calendar"
+            title="重新连接日历"
             description={
               <div className="space-y-4">
                 <p>
-                  Your meeting notetaker is still enabled. Connect a calendar so
-                  it can find upcoming meetings.
+                  会议记录功能仍已启用，连接日历后即可查找即将开始的会议。
                 </p>
                 <ConnectCalendar
                   analyticsPage="meetings"

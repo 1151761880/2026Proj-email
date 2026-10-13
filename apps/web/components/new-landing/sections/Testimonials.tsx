@@ -64,7 +64,7 @@ const yoniTestimonial: Testimonial = {
 };
 
 const slimTestimonial: Testimonial = {
-  body: "I came across Inbox Zero while actively looking to hire a VA to manage my emails but after trying the tool, it turned out to be a complete game changer.",
+  body: "I came across 十组邮件小助手 while actively looking to hire a VA to manage my emails but after trying the tool, it turned out to be a complete game changer.",
   author: {
     name: "Slim Labassi",
     handle: "Boomgen",
@@ -82,7 +82,7 @@ const willTestimonial: Testimonial = {
 };
 
 const valentineTestimonial: Testimonial = {
-  body: "I'm an executive who was drowning in hundreds of daily emails and heavily dependent on my EA for email management. What I love most about Inbox Zero is how it seamlessly replaced that entire function—the smart automation, prioritization, and organization features work like having a dedicated email assistant built right into my workflow.",
+  body: "I'm an executive who was drowning in hundreds of daily emails and heavily dependent on my EA for email management. What I love most about 十组邮件小助手 is how it seamlessly replaced that entire function—the smart automation, prioritization, and organization features work like having a dedicated email assistant built right into my workflow.",
   author: {
     name: "Valentine Nwachukwu",
     handle: "Zaden Technologies",
@@ -162,10 +162,10 @@ export function Testimonials() {
   return (
     <Section>
       <SectionHeading wrap>
-        Join {userCount} others who spend less time on emails
+        加入 {userCount} 其他节省邮件处理时间的用户
       </SectionHeading>
       <SectionSubtitle>
-        {`Our customers love saving time with ${BRAND_NAME}.`}
+        {`使用 ${BRAND_NAME} 节省邮件处理时间。`}
       </SectionSubtitle>
       <SectionContent>
         {/* Mobile */}

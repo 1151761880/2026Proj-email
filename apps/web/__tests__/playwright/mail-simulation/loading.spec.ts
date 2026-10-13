@@ -82,7 +82,7 @@ test(`measures current client under ${profile}`, async ({
         detailRequests: detailRequests - before,
       });
       const back = page.getByRole("button", {
-        name: "Back to inbox",
+        name: "返回收件箱",
         exact: true,
       });
       if (!(await back.isVisible())) {
@@ -121,20 +121,20 @@ test(`measures current client under ${profile}`, async ({
       detailRequests: detailRequests - navigationRequests,
     });
     await page
-      .getByRole("button", { name: "Back to inbox", exact: true })
+      .getByRole("button", { name: "返回收件箱", exact: true })
       .click();
     const switchStart = performance.now();
     const switchRequests = detailRequests;
     for (let index = 0; index < 12; index++) {
       const split = page.getByRole("button", {
-        name: index % 2 === 0 ? "Unread" : "All",
+        name: index % 2 === 0 ? "未读" : "全部",
         exact: true,
       });
       await split.click();
       await expect(split).toHaveAttribute("aria-current", "true");
     }
     await expect(
-      page.getByRole("button", { name: "All", exact: true }),
+      page.getByRole("button", { name: "全部", exact: true }),
     ).toHaveAttribute("aria-current", "true");
     samples.push({
       scenario: "12-rapid-split-switches",
@@ -151,7 +151,7 @@ test(`measures current client under ${profile}`, async ({
       waitUntil: "domcontentloaded",
     });
     await expect(
-      other.getByRole("listbox", { name: "Conversations" }),
+      other.getByRole("listbox", { name: "会话" }),
     ).toBeVisible();
     await other.close();
     if (profile === "constrained") {

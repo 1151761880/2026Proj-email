@@ -29,12 +29,12 @@ test("composes, sends, and reads a new message from Sent", async ({
   const { conversations, emailAccountId } = await openMail(page);
   const subject = `Playwright Composed Message ${testInfo.retry}`;
 
-  await page.getByRole("button", { name: /^Compose/ }).click();
-  const dialog = page.getByRole("dialog", { name: "New Message" });
+  await page.getByRole("button", { name: /写邮件/ }).click();
+  const dialog = page.getByRole("dialog", { name: "新邮件" });
   await dialog
-    .getByRole("combobox", { name: "To" })
+    .getByRole("combobox", { name: "收件人" })
     .fill("recipient@example.com");
-  await dialog.getByPlaceholder("Subject").fill(subject);
+  await dialog.getByPlaceholder("主题").fill(subject);
   const composeEditor = dialog.locator("[contenteditable='true']");
   await composeEditor.pressSequentially("A composed message body.");
   await expect(composeEditor).toContainText("A composed message body.");
@@ -42,13 +42,13 @@ test("composes, sends, and reads a new message from Sent", async ({
   await expect(
     composeEditor
       .locator("[data-smartmail]")
-      .getByRole("link", { name: "Inbox Zero" }),
+      .getByRole("link", { name: "十组邮件小助手" }),
   ).toBeVisible();
   await capturePlaywrightCheckpoint(page, testInfo, "composer-with-footer");
-  await dialog.getByRole("button", { exact: true, name: "Send" }).click();
+  await dialog.getByRole("button", { exact: true, name: "发送" }).click();
 
   await expect(dialog).toBeHidden();
-  await expect(page.getByText("Email sent!", { exact: true })).toBeVisible();
+  await expect(page.getByText("邮件已发送！", { exact: true })).toBeVisible();
 
   await openMailboxFromSidebar(page, "Sent");
   await waitForComposeOutboxSend(page, emailAccountId);
@@ -62,7 +62,7 @@ test("composes, sends, and reads a new message from Sent", async ({
   await expect(page.getByRole("heading", { name: subject })).toBeVisible();
   await expect(page.getByText("recipient@example.com").first()).toBeVisible();
   await expectThreadReaderBody(page, "A composed message body.");
-  await expectThreadReaderBody(page, "Sent with Inbox Zero");
+  await expectThreadReaderBody(page, "Sent with 十组邮件小助手");
   await capturePlaywrightCheckpoint(page, testInfo, "composed-message-in-sent");
 });
 
@@ -72,23 +72,23 @@ test("undoes a composed message before it is delivered", async ({
   const { conversations, emailAccountId } = await openMail(page);
   const subject = `Playwright Undo Send ${Date.now()}`;
 
-  await page.getByRole("button", { name: /^Compose/ }).click();
-  const dialog = page.getByRole("dialog", { name: "New Message" });
+  await page.getByRole("button", { name: /写邮件/ }).click();
+  const dialog = page.getByRole("dialog", { name: "新邮件" });
   await dialog
-    .getByRole("combobox", { name: "To" })
+    .getByRole("combobox", { name: "收件人" })
     .fill("recipient@example.com");
-  await dialog.getByPlaceholder("Subject").fill(subject);
+  await dialog.getByPlaceholder("主题").fill(subject);
   await dialog
     .locator("[contenteditable='true']")
     .pressSequentially("This should not be delivered.");
-  await dialog.getByRole("button", { exact: true, name: "Send" }).click();
+  await dialog.getByRole("button", { exact: true, name: "发送" }).click();
 
   await expect(dialog).toBeHidden();
   const notifications = page.getByRole("region", {
     name: "Notifications alt+T",
   });
   await expect(
-    notifications.getByText("Email sent!", { exact: true }),
+    notifications.getByText("邮件已发送！", { exact: true }),
   ).toBeVisible();
   await expect
     .poll(() =>
@@ -99,12 +99,12 @@ test("undoes a composed message before it is delivered", async ({
       }),
     )
     .toMatchObject({ status: "reconciling" });
-  await notifications.getByRole("button", { name: /^Undo/ }).click();
+  await notifications.getByRole("button", { name: /撤销/ }).click();
 
   await expect(dialog).toBeVisible();
-  await expect(dialog.getByPlaceholder("Subject")).toHaveValue(subject);
+  await expect(dialog.getByPlaceholder("主题")).toHaveValue(subject);
   await expect(
-    dialog.getByRole("textbox", { name: "Email message" }),
+    dialog.getByRole("textbox", { name: "邮件内容" }),
   ).toContainText("This should not be delivered.");
   await expect
     .poll(() =>
@@ -134,10 +134,10 @@ test("selects the sender when composing from all accounts", async ({
 
   try {
     await page.goto(`/${emailAccountId}/mail?accountScope=all`);
-    await page.getByRole("button", { name: /^Compose/ }).click();
+    await page.getByRole("button", { name: /写邮件/ }).click();
 
-    const dialog = page.getByRole("dialog", { name: "New Message" });
-    const from = dialog.getByRole("combobox", { name: "From" });
+    const dialog = page.getByRole("dialog", { name: "新邮件" });
+    const from = dialog.getByRole("combobox", { name: "发件人" });
     await expect(from).toBeVisible();
     await from.click();
     await expect(page.getByRole("option")).toHaveCount(2);
@@ -152,7 +152,7 @@ test("selects the sender when composing from all accounts", async ({
     await dialog.getByRole("button", { name: "Show signature" }).click();
     await expect(
       dialog
-        .getByRole("textbox", { name: "Email message" })
+        .getByRole("textbox", { name: "邮件内容" })
         .locator("[data-smartmail]")
         .getByText(signature),
     ).toBeVisible();
@@ -173,8 +173,8 @@ test("leaves the draft before returning to the list with Escape", async ({
   const message = page.locator(
     '[data-thread-message-id="msg_playwright_reply"]',
   );
-  await message.getByRole("button", { name: "Reply", exact: true }).click();
-  const editor = message.getByRole("textbox", { name: "Email message" });
+  await message.getByRole("button", { name: "回复", exact: true }).click();
+  const editor = message.getByRole("textbox", { name: "邮件内容" });
   await editor.fill("A draft preserved when leaving the input.");
   // The reply tooltip owns Escape until its exit animation finishes.
   await expect(page.getByRole("tooltip")).toHaveCount(0);
@@ -209,17 +209,17 @@ test("focuses the To field when forwarding with F", async ({ page }) => {
   );
   await expect(message).toBeVisible();
   await expect(
-    message.getByRole("button", { name: "Forward", exact: true }),
+    message.getByRole("button", { name: "转发", exact: true }),
   ).toBeVisible();
 
   // Restored drafts focus their editor; this shortcut belongs to the reader.
   await message.press("KeyF");
 
-  const toField = message.getByRole("combobox", { name: "To" });
+  const toField = message.getByRole("combobox", { name: "收件人" });
   await expect(toField).toBeVisible();
   await expect(toField).toBeFocused();
   await expect(
-    message.getByRole("textbox", { name: "Email message" }),
+    message.getByRole("textbox", { name: "邮件内容" }),
   ).not.toBeFocused();
 });
 
@@ -265,22 +265,22 @@ test("opens and sends a reply from the reader with Enter", async ({
   await replyEditor.pressSequentially(replyBody);
   await expect(replyEditor).toContainText(replyBody);
   await capturePlaywrightCheckpoint(page, testInfo, "inline-reply-divider");
-  const sendButton = page.getByRole("button", { name: "Send", exact: true });
-  await expect(sendButton).toHaveText("Send");
+  const sendButton = page.getByRole("button", { name: "发送", exact: true });
+  await expect(sendButton).toHaveText("发送");
 
   await replyEditor.press("ControlOrMeta+Shift+l");
-  await expect(page.getByRole("dialog", { name: "Send later" })).toBeVisible();
+  await expect(page.getByRole("dialog", { name: "定时发送" })).toBeVisible();
   await capturePlaywrightCheckpoint(page, testInfo, "send-later-shortcut");
 
-  await page.getByRole("button", { name: "Choose date and time" }).click();
+  await page.getByRole("button", { name: "选择日期和时间" }).click();
   await page
     .getByLabel("Send later date and time")
     .press("ControlOrMeta+Shift+h");
-  await expect(page.getByRole("dialog", { name: "Remind me" })).toBeVisible();
+  await expect(page.getByRole("dialog", { name: "提醒我" })).toBeVisible();
   await page.keyboard.press("Escape");
 
   await replyEditor.press("ControlOrMeta+Shift+l");
-  await expect(page.getByRole("dialog", { name: "Send later" })).toBeVisible();
+  await expect(page.getByRole("dialog", { name: "定时发送" })).toBeVisible();
   await expect(page.getByLabel("Send later date and time")).toBeHidden();
   await page.keyboard.press("Escape");
 
@@ -301,20 +301,20 @@ test("opens and sends a reply from the reader with Enter", async ({
     name: "Notifications alt+T",
   });
   await expect(
-    notifications.getByText("Email sent!", { exact: true }),
+    notifications.getByText("邮件已发送！", { exact: true }),
   ).toBeVisible();
   await expect(
-    notifications.getByRole("button", { name: /^Undo/ }),
+    notifications.getByRole("button", { name: /撤销/ }),
   ).toBeVisible();
   await expect(replyEditor).toHaveCount(0);
   await expectThreadReaderBody(page, replyBody);
-  const delivery = page.getByRole("region", { name: "Reply delivery status" });
-  await expect(delivery.getByText("Sending…", { exact: true })).toHaveCount(0);
-  await expect(delivery.getByText("Reply sent", { exact: true })).toHaveCount(
+  const delivery = page.getByRole("region", { name: "回复投递状态" });
+  await expect(delivery.getByText("正在发送…", { exact: true })).toHaveCount(0);
+  await expect(delivery.getByText("回复已发送", { exact: true })).toHaveCount(
     0,
   );
   await expect(
-    delivery.getByRole("button", { name: "Edit reply" }),
+    delivery.getByRole("button", { name: "编辑回复" }),
   ).toHaveCount(0);
   await expect
     .poll(
@@ -341,7 +341,7 @@ test("pops a reply out of the thread into its own window", async ({
     '[data-thread-message-id="msg_playwright_reply"]',
   );
   await expect(message).toBeVisible({ timeout: 60_000 });
-  await message.getByRole("button", { name: "Reply", exact: true }).click();
+  await message.getByRole("button", { name: "回复", exact: true }).click();
 
   const inlineEditor = page.locator(
     "[data-thread-message-id] [contenteditable='true']",
@@ -351,7 +351,7 @@ test("pops a reply out of the thread into its own window", async ({
   await inlineEditor.pressSequentially(replyBody);
   await expect(inlineEditor).toContainText(replyBody);
   await expect(
-    page.getByRole("button", { name: "Pop out draft" }),
+    page.getByRole("button", { name: "在独立窗口打开草稿" }),
   ).toBeVisible();
 
   await inlineEditor.press("ControlOrMeta+Shift+p");
@@ -364,7 +364,7 @@ test("pops a reply out of the thread into its own window", async ({
   await expect(inlineEditor).toHaveCount(0);
   await capturePlaywrightCheckpoint(page, testInfo, "popped-out-reply");
 
-  await dialog.getByRole("button", { name: "Discard draft" }).click();
+  await dialog.getByRole("button", { name: "丢弃草稿" }).click();
   await expect(dialog).toBeHidden();
   await expect(inlineEditor).toHaveCount(0);
 });
@@ -379,16 +379,16 @@ test("moves a sent reply from its composer into the thread without a gap", async
   );
   await expect(sourceMessage).toBeVisible({ timeout: 60_000 });
   await sourceMessage
-    .getByRole("button", { name: "Reply", exact: true })
+    .getByRole("button", { name: "回复", exact: true })
     .click();
-  const editor = sourceMessage.getByRole("textbox", { name: "Email message" });
+  const editor = sourceMessage.getByRole("textbox", { name: "邮件内容" });
   const replyBody = `A reply that moves straight into the thread. ${testInfo.retry}`;
   await editor.pressSequentially(replyBody);
   await expect(editor).toContainText(replyBody);
 
   const handoff = await watchReplyHandoff(page, replyBody);
   await sourceMessage
-    .getByRole("button", { name: "Send", exact: true })
+    .getByRole("button", { name: "发送", exact: true })
     .click();
 
   // The undo window is still open, so the provider has not sent it yet, but
@@ -407,16 +407,16 @@ test("moves a sent reply from its composer into the thread without a gap", async
     sourceMessage.locator("[aria-expanded]").first(),
   ).toHaveAttribute("aria-expanded", "true");
   await expect(sentRow.locator("time")).toBeVisible();
-  await expect(sentRow.getByText("Sending…")).toHaveCount(0);
+  await expect(sentRow.getByText("正在发送…")).toHaveCount(0);
   await expect(
     page.locator("li[data-thread-message-id]").getByRole("button", {
-      name: /^Undo/,
+      name: /撤销/,
     }),
   ).toHaveCount(0);
   await expect(
     page
       .getByRole("region", { name: "Notifications alt+T" })
-      .getByRole("button", { name: /^Undo/ }),
+      .getByRole("button", { name: /撤销/ }),
   ).toBeVisible();
   await expectThreadReaderBody(page, replyBody, 3000);
   await capturePlaywrightCheckpoint(page, testInfo, "reply-sent-with-undo");
@@ -435,7 +435,7 @@ test("moves a sent reply from its composer into the thread without a gap", async
   await expect(
     page
       .getByRole("region", { name: "Notifications alt+T" })
-      .getByRole("button", { name: /^Undo/ }),
+      .getByRole("button", { name: /撤销/ }),
   ).toHaveCount(0);
   await expectThreadReaderBody(page, replyBody);
   expectSeamlessReplyHandoff(await handoff.stop(), handoff.rowsBefore);
@@ -451,18 +451,18 @@ test("undoes a sent reply and restores its text", async ({
   );
   await expect(sourceMessage).toBeVisible({ timeout: 60_000 });
   await sourceMessage
-    .getByRole("button", { name: "Reply", exact: true })
+    .getByRole("button", { name: "回复", exact: true })
     .click();
-  const editor = sourceMessage.getByRole("textbox", { name: "Email message" });
+  const editor = sourceMessage.getByRole("textbox", { name: "邮件内容" });
   const replyBody = `A reply taken back from the thread. ${testInfo.retry}`;
   await editor.pressSequentially(replyBody);
   await sourceMessage
-    .getByRole("button", { name: "Send", exact: true })
+    .getByRole("button", { name: "发送", exact: true })
     .click();
 
   const undo = page
     .getByRole("region", { name: "Notifications alt+T" })
-    .getByRole("button", { name: /^Undo/ });
+    .getByRole("button", { name: /撤销/ });
   await expect(undo).toBeVisible();
   await expect
     .poll(() =>
@@ -476,7 +476,7 @@ test("undoes a sent reply and restores its text", async ({
   await undo.click();
 
   const restored = sourceMessage.getByRole("textbox", {
-    name: "Email message",
+    name: "邮件内容",
   });
   await expect(restored).toContainText(replyBody);
   await expect(undo).toHaveCount(0);
@@ -503,28 +503,28 @@ test("undoes a sent reply with a file and lists the file again", async ({
   );
   await expect(sourceMessage).toBeVisible({ timeout: 60_000 });
   await sourceMessage
-    .getByRole("button", { name: "Reply", exact: true })
+    .getByRole("button", { name: "回复", exact: true })
     .click();
   await sourceMessage
-    .getByRole("textbox", { name: "Email message" })
+    .getByRole("textbox", { name: "邮件内容" })
     .pressSequentially(`A reply with notes, taken back. ${testInfo.retry}`);
   await sourceMessage.getByTestId("compose-attachments-input").setInputFiles({
     name: "notes.txt",
     mimeType: "text/plain",
     buffer: Buffer.from("Example notes"),
   });
-  const attachments = sourceMessage.getByRole("list", { name: "Attachments" });
+  const attachments = sourceMessage.getByRole("list", { name: "附件" });
   await expect(attachments.locator("li[aria-busy]")).toHaveCount(0, {
     timeout: 90_000,
   });
   await expect(attachments).toContainText("notes.txt");
   await sourceMessage
-    .getByRole("button", { name: "Send", exact: true })
+    .getByRole("button", { name: "发送", exact: true })
     .click();
 
   const undo = page
     .getByRole("region", { name: "Notifications alt+T" })
-    .getByRole("button", { name: /^Undo/ });
+    .getByRole("button", { name: /撤销/ });
   await expect(undo).toBeVisible();
   await expect
     .poll(() =>
@@ -539,16 +539,16 @@ test("undoes a sent reply with a file and lists the file again", async ({
 
   // The file stayed on the mailbox draft, so the restored reply lists it.
   await expect(
-    sourceMessage.getByRole("list", { name: "Attachments" }),
+    sourceMessage.getByRole("list", { name: "附件" }),
   ).toContainText("notes.txt", { timeout: 30_000 });
   await capturePlaywrightCheckpoint(
     page,
     testInfo,
     "reply-with-file-undone-from-thread",
   );
-  await sourceMessage.getByRole("button", { name: "Discard draft" }).click();
+  await sourceMessage.getByRole("button", { name: "丢弃草稿" }).click();
   await expect(
-    sourceMessage.getByRole("textbox", { name: "Email message" }),
+    sourceMessage.getByRole("textbox", { name: "邮件内容" }),
   ).toHaveCount(0);
 });
 
@@ -563,14 +563,14 @@ test("sends a reply after its tab closes during the undo window", async ({
   );
   await expect(sourceMessage).toBeVisible({ timeout: 60_000 });
   await sourceMessage
-    .getByRole("button", { name: "Reply", exact: true })
+    .getByRole("button", { name: "回复", exact: true })
     .click();
   const replyBody = `A reply that outlives its tab. ${testInfo.retry}`;
   await sourceMessage
-    .getByRole("textbox", { name: "Email message" })
+    .getByRole("textbox", { name: "邮件内容" })
     .pressSequentially(replyBody);
   await sourceMessage
-    .getByRole("button", { name: "Send", exact: true })
+    .getByRole("button", { name: "发送", exact: true })
     .click();
   await expect
     .poll(() => readHeldReply(emailAccountId, replyBody), { timeout: 20_000 })
@@ -619,12 +619,12 @@ test("focuses the To field when forwarding", async ({ page }) => {
   );
   await expect(message).toBeVisible({ timeout: 60_000 });
 
-  await message.getByRole("button", { name: "Forward", exact: true }).click();
-  const toField = message.getByRole("combobox", { name: "To" });
+  await message.getByRole("button", { name: "转发", exact: true }).click();
+  const toField = message.getByRole("combobox", { name: "收件人" });
   await expect(toField).toBeVisible();
   await expect(toField).toBeFocused();
   await expect(
-    message.getByRole("textbox", { name: "Email message" }),
+    message.getByRole("textbox", { name: "邮件内容" }),
   ).not.toBeFocused();
 });
 
@@ -639,16 +639,16 @@ test("keeps a sent forward in the thread it came from", async ({
   await expect(sourceMessage).toBeVisible({ timeout: 60_000 });
   const recipient = `forward-${testInfo.retry}@example.com`;
   await sourceMessage
-    .getByRole("button", { name: "Forward", exact: true })
+    .getByRole("button", { name: "转发", exact: true })
     .click();
-  await sourceMessage.getByRole("combobox", { name: "To" }).fill(recipient);
+  await sourceMessage.getByRole("combobox", { name: "收件人" }).fill(recipient);
   const editor = sourceMessage.getByRole("textbox", {
-    name: "Email message",
+    name: "邮件内容",
   });
   const forwardBody = `A forwarded message sent through the mail reader. ${testInfo.retry}`;
   await editor.pressSequentially(forwardBody);
   await sourceMessage
-    .getByRole("button", { name: "Send", exact: true })
+    .getByRole("button", { name: "发送", exact: true })
     .click();
 
   await expect
@@ -674,8 +674,8 @@ test("keeps a sent forward in the thread it came from", async ({
   ).toHaveCount(1);
   await expect(
     page
-      .getByRole("region", { name: "Reply delivery status" })
-      .getByText("Reply sent", { exact: true }),
+      .getByRole("region", { name: "回复投递状态" })
+      .getByText("回复已发送", { exact: true }),
   ).toHaveCount(0);
   await capturePlaywrightCheckpoint(page, testInfo, "forward-sent-in-thread");
 });
@@ -694,14 +694,14 @@ test("shows the files a forward carries", async ({ page }, testInfo) => {
   await expect(sourceMessage).toBeVisible({ timeout: 60_000 });
 
   await sourceMessage
-    .getByRole("button", { name: "Forward", exact: true })
+    .getByRole("button", { name: "转发", exact: true })
     .click();
 
   // The provider holds the bytes until the send, so the composer lists them
   // without ever downloading them.
   await expect(
     page
-      .getByRole("list", { name: "Attachments" })
+      .getByRole("list", { name: "附件" })
       .getByText("reader-preview.png"),
   ).toBeVisible();
   await capturePlaywrightCheckpoint(page, testInfo, "forward-attachments");
@@ -717,28 +717,28 @@ test("keeps reply and forward drafts in separate composer sessions", async ({
   );
   await expect(message).toBeVisible();
 
-  await message.getByRole("button", { name: "Reply", exact: true }).click();
-  const editor = page.getByRole("textbox", { name: "Email message" });
+  await message.getByRole("button", { name: "回复", exact: true }).click();
+  const editor = page.getByRole("textbox", { name: "邮件内容" });
   await editor.fill("Reply-only draft text");
 
-  await message.getByRole("button", { name: "Forward", exact: true }).click();
+  await message.getByRole("button", { name: "转发", exact: true }).click();
   await expect(editor).not.toContainText("Reply-only draft text");
-  await expect(message.getByRole("combobox", { name: "To" })).toHaveValue("");
+  await expect(message.getByRole("combobox", { name: "收件人" })).toHaveValue("");
   await expect(message.getByRole("button", { name: /^Remove / })).toHaveCount(
     0,
   );
   await editor.fill("Forward-only draft text");
 
-  await message.getByRole("button", { name: "Reply", exact: true }).click();
+  await message.getByRole("button", { name: "回复", exact: true }).click();
   await expect(editor).toContainText("Reply-only draft text");
   await page.getByRole("button", { name: /^Draft to Leslie/ }).click();
   await expect(
     message.getByRole("button", { name: /^Remove .*leslie@example\.com/i }),
   ).toBeVisible();
 
-  await message.getByRole("button", { name: "Forward", exact: true }).click();
+  await message.getByRole("button", { name: "转发", exact: true }).click();
   await expect(editor).toContainText("Forward-only draft text");
-  await expect(message.getByRole("combobox", { name: "To" })).toHaveValue("");
+  await expect(message.getByRole("combobox", { name: "收件人" })).toHaveValue("");
   await expect(message.getByRole("button", { name: /^Remove / })).toHaveCount(
     0,
   );

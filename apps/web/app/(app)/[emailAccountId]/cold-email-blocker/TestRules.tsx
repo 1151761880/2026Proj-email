@@ -86,7 +86,7 @@ const TestRulesForm = () => {
   } = useForm<TestRulesInputs>({
     defaultValues: {
       message:
-        "Hey, I run a development agency. I was wondering if you need extra hands on your team?",
+        "你好，我经营一家开发公司，请问你们是否需要额外的开发支持？",
     },
   });
 
@@ -114,14 +114,14 @@ const TestRulesForm = () => {
           autosizeTextarea
           rows={3}
           name="message"
-          label="Email to test against"
-          placeholder="Hey, I run a marketing agency, and would love to chat."
+          label="待测试的邮件"
+          placeholder="你好，我经营一家营销公司，希望有机会与你交流。"
           registerProps={register("message", { required: true })}
           error={errors.message}
         />
         <Button type="submit" loading={isSubmitting}>
           <SparklesIcon className="mr-2 h-4 w-4" />
-          Test
+          测试
         </Button>
       </form>
       {response && (
@@ -179,7 +179,7 @@ function TestRulesContentRow({
               }}
             >
               <SparklesIcon className="mr-2 h-4 w-4" />
-              Test
+              测试
             </Button>
           </div>
         </div>
@@ -200,7 +200,7 @@ function Result(props: { coldEmailResponse: ColdEmailBlockerResponse | null }) {
     return (
       <AlertBasic
         variant="destructive"
-        title="Email is a cold email!"
+        title="此邮件属于陌生推广邮件！"
         description={coldEmailResponse.aiReason}
       />
     );
@@ -235,7 +235,7 @@ function useColdEmailTest() {
       const result = await testColdEmailAction(emailAccountId, data);
       if (result?.serverError) {
         toastError({
-          title: "Error checking whether it's a cold email.",
+          title: "识别陌生邮件失败。",
           description: result.serverError,
         });
       } else if (result?.data) {

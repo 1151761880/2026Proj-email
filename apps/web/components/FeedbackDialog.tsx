@@ -30,14 +30,14 @@ export function FeedbackSidebarButton() {
 
   return (
     <SidebarMenuButton
-      tooltip="Feedback"
+      tooltip="反馈"
       sidebarName="left-sidebar"
       className="h-9 font-semibold"
       aria-haspopup="dialog"
       onClick={() => setOpen(true)}
     >
       <MessageSquarePlusIcon />
-      <span>Feedback</span>
+      <span>反馈</span>
     </SidebarMenuButton>
   );
 }
@@ -57,7 +57,7 @@ export function FeedbackDialog() {
 
   const { execute, isExecuting } = useAction(submitFeedbackAction, {
     onSuccess: () => {
-      toastSuccess({ description: "Thanks for your feedback!" });
+      toastSuccess({ description: "感谢反馈！" });
       reset();
       setOpen(false);
     },
@@ -83,10 +83,9 @@ export function FeedbackDialog() {
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Send feedback</DialogTitle>
+          <DialogTitle>提交反馈</DialogTitle>
           <DialogDescription>
-            Tell us what you like, what is confusing, or what you want us to
-            build next.
+            告诉我们你喜欢的功能、遇到的问题或希望增加的功能。
           </DialogDescription>
         </DialogHeader>
         <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
@@ -95,7 +94,7 @@ export function FeedbackDialog() {
             name="feedback"
             autosizeTextarea
             rows={5}
-            placeholder="What's on your mind?"
+            placeholder="请输入反馈内容"
             registerProps={register("feedback")}
             error={errors.feedback}
           />
@@ -106,10 +105,10 @@ export function FeedbackDialog() {
               onClick={() => handleOpenChange(false)}
               disabled={isExecuting}
             >
-              Cancel
+              取消
             </Button>
             <Button type="submit" loading={isExecuting}>
-              Submit
+              提交
             </Button>
           </DialogFooter>
         </form>

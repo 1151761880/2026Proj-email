@@ -15,17 +15,16 @@ export function ProviderRateLimitBanner() {
   const retryAtDate = new Date(retryAt);
   const retryAtLabel = Number.isNaN(retryAtDate.getTime())
     ? retryAt
-    : retryAtDate.toLocaleString();
+    : retryAtDate.toLocaleString("zh-CN");
 
   return (
     <AppAlertBanner
-      title={`${providerLabel} Is Rate Limiting This Account`}
+      title={`${providerLabel} 正在限制此账户的请求频率`}
       description={
         <p>
-          Inbox Zero actions are temporarily paused until around{" "}
-          <strong>{retryAtLabel}</strong>. This limit is enforced by{" "}
-          {providerLabel}, and other apps connected to this mailbox can
-          contribute to the same shared limit.
+          十组邮件小助手的操作暂时暂停，预计恢复时间：{" "}
+          <strong>{retryAtLabel}</strong>。此限制来自{" "}
+          {providerLabel}，连接到此邮箱的其他应用也会消耗相同的请求额度。
         </p>
       }
     />

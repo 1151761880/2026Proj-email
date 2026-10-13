@@ -54,7 +54,7 @@ export function BulkUnsubscribeDesktop({
             <TableHead className="w-10 pr-0">
               <ButtonCheckbox
                 label={
-                  isAllSelected ? "Deselect all senders" : "Select all senders"
+                  isAllSelected ? "取消选择全部发件人" : "选择全部发件人"
                 }
                 checked={isAllSelected}
                 indeterminate={isSomeSelected && !isAllSelected}
@@ -62,7 +62,7 @@ export function BulkUnsubscribeDesktop({
               />
             </TableHead>
             <TableHead className="pl-4">
-              <span className="text-sm font-medium">From</span>
+              <span className="text-sm font-medium">发件人</span>
             </TableHead>
             <TableHead className="w-[90px] whitespace-nowrap">
               <HeaderButton
@@ -72,7 +72,7 @@ export function BulkUnsubscribeDesktop({
                 }
                 onClick={() => onSort("emails")}
               >
-                Emails
+                邮件
               </HeaderButton>
             </TableHead>
             <TableHead className="w-[150px] whitespace-nowrap">
@@ -83,7 +83,7 @@ export function BulkUnsubscribeDesktop({
                 }
                 onClick={() => onSort("unread")}
               >
-                Read
+                已读
               </HeaderButton>
             </TableHead>
             <TableHead className="w-[300px]" />
@@ -137,7 +137,7 @@ export function BulkUnsubscribeRowDesktop({
     >
       <TableCell className="w-10 pr-0" data-cell="checkbox">
         <ButtonCheckbox
-          label={`Select ${item.fromName || item.name}`}
+          label={`选择 ${item.fromName || item.name}`}
           checked={checked}
           onChange={(shiftKey) => onToggleSelect?.(item.name, shiftKey)}
         />

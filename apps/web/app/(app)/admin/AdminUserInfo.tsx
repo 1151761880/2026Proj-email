@@ -19,7 +19,7 @@ export function AdminUserInfo() {
   const { execute, isExecuting, result } = useAction(adminGetUserInfoAction, {
     onError: (error) => {
       toastError({
-        title: "Error looking up user",
+        title: "查找用户失败",
         description: getActionErrorMessage(error.error),
       });
     },
@@ -45,45 +45,45 @@ export function AdminUserInfo() {
   return (
     <Card className="max-w-xl">
       <CardHeader>
-        <CardTitle>User Info</CardTitle>
+        <CardTitle>用户信息</CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
         <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
           <Input
             type="email"
             name="email"
-            label="Email"
+            label="邮件"
             placeholder="user@example.com"
             registerProps={register("email")}
             error={errors.email}
           />
           <Button type="submit" loading={isExecuting}>
-            Look Up
+            查询
           </Button>
         </form>
 
         {data && (
           <div className="space-y-3 text-sm">
-            <InfoRow label="User ID" value={data.id} />
-            <InfoRow label="Created" value={formatDate(data.createdAt)} />
+            <InfoRow label="用户 ID" value={data.id} />
+            <InfoRow label="创建时间" value={formatDate(data.createdAt)} />
             <InfoRow
-              label="Last Login"
+              label="最后登录"
               value={data.lastLogin ? formatDate(data.lastLogin) : "Never"}
             />
             <InfoRow
-              label="Email Accounts"
+              label="邮箱账户"
               value={String(data.emailAccountCount)}
             />
             <InfoRow
-              label="Premium Tier"
+              label="高级版等级"
               value={data.premium?.tier || "None"}
             />
             <InfoRow
-              label="Admin Grant Tier"
+              label="管理员授权等级"
               value={data.premium?.adminGrantTier || "None"}
             />
             <InfoRow
-              label="Admin Grant Expires"
+              label="管理员授权到期时间"
               value={
                 data.premium?.adminGrantExpiresAt
                   ? formatDate(data.premium.adminGrantExpiresAt)
@@ -91,11 +91,11 @@ export function AdminUserInfo() {
               }
             />
             <InfoRow
-              label="Subscription Status"
+              label="订阅状态"
               value={data.premium?.subscriptionStatus || "N/A"}
             />
             <InfoRow
-              label="Renews At"
+              label="续订时间"
               value={
                 data.premium?.renewsAt
                   ? formatDate(data.premium.renewsAt)
@@ -106,14 +106,14 @@ export function AdminUserInfo() {
             {data.emailAccounts.map((ea) => (
               <div key={ea.email} className="space-y-1 rounded-md border p-3">
                 <p className="font-medium">{ea.email}</p>
-                <InfoRow label="Provider" value={ea.provider} />
+                <InfoRow label="服务提供商" value={ea.provider} />
                 <InfoRow
-                  label="Disconnected"
+                  label="未连接"
                   value={ea.disconnected ? "Yes" : "No"}
                 />
-                <InfoRow label="Rules" value={String(ea.ruleCount)} />
+                <InfoRow label="规则" value={String(ea.ruleCount)} />
                 <InfoRow
-                  label="Last Rule Executed"
+                  label="最后规则执行时间"
                   value={
                     ea.lastExecutedRuleAt
                       ? formatDate(ea.lastExecutedRuleAt)
@@ -121,7 +121,7 @@ export function AdminUserInfo() {
                   }
                 />
                 <InfoRow
-                  label="Watch Expires"
+                  label="监听到期时间"
                   value={
                     ea.watchExpirationDate
                       ? formatDate(ea.watchExpirationDate)
@@ -147,7 +147,7 @@ function InfoRow({ label, value }: { label: string; value: string }) {
 }
 
 function formatDate(date: Date | string) {
-  return new Date(date).toLocaleDateString("en-US", {
+  return new Date(date).toLocaleDateString("zh-CN", {
     year: "numeric",
     month: "short",
     day: "numeric",

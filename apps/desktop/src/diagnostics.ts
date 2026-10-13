@@ -62,8 +62,8 @@ export async function recordDesktopDiagnostics(input: {
   if (recording) {
     await showMessage({
       type: "info",
-      message: "Diagnostics are already recording",
-      detail: "Wait for the current recording to finish.",
+      message: "诊断记录已在进行",
+      detail: "请等待当前记录完成。",
     });
     return;
   }
@@ -82,7 +82,7 @@ export async function recordDesktopDiagnostics(input: {
 }
 
 export function diagnosticsFolderName(date: Date) {
-  return `Inbox-Zero-Diagnostics-${date.toISOString().slice(0, 19).replaceAll(":", "-")}`;
+  return `十组邮件小助手-诊断-${date.toISOString().slice(0, 19).replaceAll(":", "-")}`;
 }
 
 /**
@@ -177,12 +177,12 @@ async function recordDiagnostics({
 }) {
   const { response } = await showMessage({
     type: "info",
-    buttons: ["Start", "Cancel"],
+    buttons: ["开始", "取消"],
     defaultId: 0,
     cancelId: 1,
-    message: "Record Diagnostics",
+    message: "记录诊断信息",
     detail:
-      "Inbox Zero will record 30 seconds of performance data while you reproduce the problem. It includes timings and app state, not email content.",
+      "复现问题时，十组邮件小助手会记录 30 秒性能数据，包含耗时和应用状态，不包含邮件内容。",
   });
   if (response !== 0) return;
 
@@ -248,19 +248,19 @@ async function recordDiagnostics({
   if (!isDesktopSentryEnabled()) {
     await showMessage({
       type: "info",
-      message: "Diagnostics saved",
-      detail: `Saved to ${folder}. Send these files to Inbox Zero support.`,
+      message: "诊断信息已保存",
+      detail: `已保存至 ${folder}，可将文件提供给管理员排查。`,
     });
     return;
   }
 
   const send = await showMessage({
     type: "info",
-    buttons: ["Send to Inbox Zero", "Done"],
+    buttons: ["发送诊断信息", "完成"],
     defaultId: 0,
     cancelId: 1,
-    message: "Diagnostics saved",
-    detail: `Saved to ${folder}. Send them to Inbox Zero so we can look into the problem.`,
+    message: "诊断信息已保存",
+    detail: `已保存至 ${folder}，可发送诊断信息协助排查问题。`,
   });
   if (send.response !== 0) return;
 
@@ -271,18 +271,18 @@ async function recordDiagnostics({
   if (!eventId) {
     await showMessage({
       type: "warning",
-      message: "Could not send diagnostics",
-      detail: `Send the files in ${folder} to Inbox Zero support instead.`,
+      message: "无法发送诊断信息",
+      detail: `请将 ${folder} 中的文件提供给管理员。`,
     });
     return;
   }
   const sent = await showMessage({
     type: "info",
-    buttons: ["Copy ID", "Done"],
+    buttons: ["复制 ID", "完成"],
     defaultId: 0,
     cancelId: 1,
-    message: "Diagnostics sent",
-    detail: `Quote this ID when contacting support: ${eventId}`,
+    message: "诊断信息已发送",
+    detail: `联系支持时请提供此 ID：${eventId}`,
   });
   if (sent.response === 0) clipboard.writeText(eventId);
 }
@@ -293,8 +293,8 @@ function waitForRecording() {
   return new Promise<void>((resolve) => {
     const notification = Notification.isSupported()
       ? new Notification({
-          title: "Recording diagnostics",
-          body: "Reproduce the problem now. Recording stops after 30 seconds, or click to stop now.",
+          title: "正在记录诊断信息",
+          body: "现在可复现问题。30 秒后自动停止记录，也可点击立即停止。",
         })
       : null;
     const timer = setTimeout(finish, RECORDING_MS);

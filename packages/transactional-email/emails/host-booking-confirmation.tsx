@@ -74,11 +74,11 @@ export default function HostBookingConfirmationEmail({
 
         <Section className="px-6 py-3">
           <Text className="m-0 mb-1 text-[13px] text-gray-700">
-            Guest: <strong>{guestName}</strong> ({guestEmail})
+            访客： <strong>{guestName}</strong> ({guestEmail})
           </Text>
           {location ? (
             <Text className="m-0 text-[13px] text-gray-700">
-              Location: <strong>{location}</strong>
+              地点： <strong>{location}</strong>
             </Text>
           ) : null}
         </Section>
@@ -87,7 +87,7 @@ export default function HostBookingConfirmationEmail({
       {guestNote ? (
         <Section className="mb-6 rounded-r-lg border-l-[3px] border-blue-600 bg-[#FAFBFD] px-4 py-3">
           <Text className="m-0 text-[11px] font-semibold uppercase tracking-wider text-gray-500">
-            Their note
+            访客备注
           </Text>
           <Text className="m-0 mt-1 text-[13px] italic text-gray-900">
             "{guestNote}"
@@ -96,14 +96,14 @@ export default function HostBookingConfirmationEmail({
       ) : null}
 
       <Text className="m-0 text-[13px] text-gray-600">
-        The calendar provider will send the invite to attendees.
+        日历服务将向参会者发送邀请。
       </Text>
     </BookingEmailLayout>
   );
 }
 
 HostBookingConfirmationEmail.PreviewProps = {
-  eventTitle: "15 min intro",
+  eventTitle: "15 分钟交流",
   formattedTime: "Thu, Nov 12, 2026 · 10:00 AM",
   guestEmail: "sarah@acme.co",
   guestName: "Sarah Chen",

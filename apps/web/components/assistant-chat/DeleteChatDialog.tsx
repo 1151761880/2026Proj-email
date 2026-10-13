@@ -34,7 +34,7 @@ export function DeleteChatDialog({
     deleteChatAction.bind(null, emailAccountId),
     {
       onSuccess: () => {
-        toastSuccess({ description: "Chat deleted." });
+        toastSuccess({ description: "对话已删除。" });
         onDeleted();
         onOpenChange(false);
       },
@@ -52,14 +52,13 @@ export function DeleteChatDialog({
     <AlertDialog open={open} onOpenChange={onOpenChange}>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Delete chat?</AlertDialogTitle>
+          <AlertDialogTitle>删除对话？</AlertDialogTitle>
           <AlertDialogDescription>
-            &ldquo;{label}&rdquo; will be removed from your chat history and its
-            messages will be redacted. This action cannot be undone.
+            &ldquo;{label}”将从对话历史中移除，消息内容会被清除。此操作无法撤销。
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel disabled={isExecuting}>Cancel</AlertDialogCancel>
+          <AlertDialogCancel disabled={isExecuting}>取消</AlertDialogCancel>
           <AlertDialogAction
             onClick={(e) => {
               e.preventDefault();
@@ -68,7 +67,7 @@ export function DeleteChatDialog({
             disabled={isExecuting}
             className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
           >
-            {isExecuting ? "Deleting..." : "Delete"}
+            {isExecuting ? "正在删除…" : "删除"}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

@@ -373,7 +373,7 @@ function createAppWindow(options?: {
     ...(bounds ? { x: bounds.x, y: bounds.y } : {}),
     minWidth: MIN_DESKTOP_WINDOW_WIDTH,
     minHeight: MIN_DESKTOP_WINDOW_HEIGHT,
-    title: "Inbox Zero",
+    title: "十组邮件小助手",
     ...getDesktopWindowChrome(),
     webPreferences: {
       preload: path.join(import.meta.dirname, "preload.cjs"),
@@ -787,7 +787,7 @@ function createDesktopMailProcess() {
       utilityProcess.fork(
         path.join(import.meta.dirname, "mail-engine-child.js"),
         [],
-        { serviceName: "Inbox Zero Mail Engine" },
+        { serviceName: "十组邮件小助手 Mail Engine" },
       ),
     cookieHeader: async (url) => {
       const cookies = await ses.cookies.get({ url });
@@ -867,7 +867,7 @@ async function waitForLocalMailReady(window: BrowserWindow) {
         .executeJavaScript('document.body ? document.body.innerText : ""')
         .catch(() => ""),
     );
-    if (text.includes("Inbox Zero")) return true;
+    if (text.includes("十组邮件小助手")) return true;
     await new Promise((resolve) => setTimeout(resolve, 250));
   }
   return false;

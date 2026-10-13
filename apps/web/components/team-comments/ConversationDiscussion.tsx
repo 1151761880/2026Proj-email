@@ -118,7 +118,7 @@ export function ConversationDiscussionView({
   )
     return (
       <div className="rounded-lg border p-4" role="alert">
-        Your access to this conversation has ended.
+        你对此会话的访问权限已结束。
       </div>
     );
   const runAndRefresh = async (
@@ -142,7 +142,7 @@ export function ConversationDiscussionView({
       (person) => !participantIds.includes(person.memberId),
     ) ?? [];
   return (
-    <section className="space-y-4 pt-4 pb-6" aria-label="Internal discussion">
+    <section className="space-y-4 pt-4 pb-6" aria-label="内部讨论">
       <LoadingContent
         loading={summary.isLoading || comments.isLoading}
         error={summary.error ?? comments.error}
@@ -168,7 +168,7 @@ export function ConversationDiscussionView({
                     : undefined
                 }
               />
-              <span className="flex-1">Sharing started</span>
+              <span className="flex-1">已开始共享</span>
               <time dateTime={new Date(data.sharedAt).toISOString()}>
                 {formatShortDate(new Date(data.sharedAt), { lowercase: true })}
               </time>
@@ -177,7 +177,7 @@ export function ConversationDiscussionView({
                   <Button
                     size="icon2xs"
                     variant="ghost"
-                    aria-label="Discussion options"
+                    aria-label="讨论选项"
                   >
                     <MoreHorizontalIcon className="size-4" />
                   </Button>
@@ -189,7 +189,7 @@ export function ConversationDiscussionView({
                         href={`/shared/${conversationId}?memberId=${encodeURIComponent(memberId)}`}
                       >
                         <ExternalLinkIcon />
-                        Open shared view
+                        打开共享视图
                       </Link>
                     </DropdownMenuItem>
                   )}
@@ -197,7 +197,7 @@ export function ConversationDiscussionView({
                     <DropdownMenuSub>
                       <DropdownMenuSubTrigger>
                         <UserPlusIcon />
-                        Add teammate
+                        添加团队成员
                       </DropdownMenuSubTrigger>
                       <DropdownMenuSubContent>
                         {addableTeammates.map((person) => (
@@ -229,7 +229,7 @@ export function ConversationDiscussionView({
                     }
                   >
                     {data.muted ? <BellIcon /> : <BellOffIcon />}
-                    {data.muted ? "Unmute" : "Mute"}
+                    {data.muted ? "恢复通知" : "静音"}
                   </DropdownMenuItem>
                   {data.capabilities.manage && (
                     <>
@@ -246,7 +246,7 @@ export function ConversationDiscussionView({
                         }}
                       >
                         <UserXIcon />
-                        Stop sharing
+                        停止共享
                       </DropdownMenuItem>
                     </>
                   )}
@@ -256,7 +256,7 @@ export function ConversationDiscussionView({
             <div className="space-y-4" aria-live="polite">
               {comments.data.nextCursor && (
                 <Button size="xs-2" variant="ghost" onClick={loadMoreComments}>
-                  Load older comments
+                  加载更早的评论
                 </Button>
               )}
               {comments.data.comments.map((comment) => (
@@ -269,7 +269,7 @@ export function ConversationDiscussionView({
                     <time
                       className="text-muted-foreground text-xs"
                       dateTime={new Date(comment.createdAt).toISOString()}
-                      title={new Date(comment.createdAt).toLocaleString()}
+                      title={new Date(comment.createdAt).toLocaleString("zh-CN")}
                     >
                       {formatShortDate(new Date(comment.createdAt), {
                         lowercase: true,
@@ -280,7 +280,7 @@ export function ConversationDiscussionView({
                         <Button
                           size="icon2xs"
                           variant="ghost"
-                          aria-label="Delete comment"
+                          aria-label="删除评论"
                           className="ml-auto text-muted-foreground opacity-0 focus-visible:opacity-100 group-hover:opacity-100"
                           onClick={() =>
                             runAndRefresh(
@@ -298,7 +298,7 @@ export function ConversationDiscussionView({
                   </div>
                   {comment.deleted ? (
                     <p className="pl-7 text-muted-foreground text-sm italic">
-                      Comment deleted
+                      评论已删除
                     </p>
                   ) : (
                     <p className="ml-7 w-fit max-w-full whitespace-pre-wrap break-words rounded-md border border-l-2 border-l-primary/50 bg-muted/40 px-3 py-1.5 text-sm">

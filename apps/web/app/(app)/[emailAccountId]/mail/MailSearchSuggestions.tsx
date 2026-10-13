@@ -98,7 +98,7 @@ export function MailSearchSuggestionList({
 }) {
   return (
     <div
-      aria-label="Search suggestions"
+      aria-label="搜索建议"
       className="absolute top-full right-0 left-0 z-20 mt-1 overflow-hidden rounded-lg border border-border bg-popover py-1 text-popover-foreground text-sm shadow-md"
       id={id}
       role="listbox"

@@ -32,7 +32,7 @@ export function parseDeliveryTimes(
   ) {
     return {
       valid: false,
-      error: "Choose a valid send time, or clear Send later to send now.",
+      error: "请选择有效发送时间，或清除定时发送以立即发送。",
     };
   }
   if (
@@ -41,7 +41,7 @@ export function parseDeliveryTimes(
   ) {
     return {
       valid: false,
-      error: "Choose a valid reminder time, or clear the reminder.",
+      error: "请选择有效提醒时间，或清除提醒。",
     };
   }
   return {

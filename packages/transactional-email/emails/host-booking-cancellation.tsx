@@ -22,14 +22,13 @@ export default function HostBookingCancellationEmail({
       subline={formattedTime}
     >
       <Text className="m-0 mb-4 text-[14px] text-gray-700">
-        <strong>{eventTitle}</strong> with {guestName} ({guestEmail}) was
-        canceled and removed from your calendar.
+        <strong>{eventTitle}</strong> with {guestName} ({guestEmail}）已取消，并从日历中移除。
       </Text>
 
       {reason ? (
         <Section className="rounded-r-lg border-l-[3px] border-gray-300 bg-[#FAFBFD] px-4 py-3">
           <Text className="m-0 text-[11px] font-semibold uppercase tracking-wider text-gray-500">
-            Reason
+            原因
           </Text>
           <Text className="m-0 mt-1 text-[13px] text-gray-900">{reason}</Text>
         </Section>
@@ -39,7 +38,7 @@ export default function HostBookingCancellationEmail({
 }
 
 HostBookingCancellationEmail.PreviewProps = {
-  eventTitle: "15 min intro",
+  eventTitle: "15 分钟交流",
   formattedTime: "Thu, Nov 12, 2026 · 10:00 AM",
   guestEmail: "sarah@acme.co",
   guestName: "Sarah Chen",

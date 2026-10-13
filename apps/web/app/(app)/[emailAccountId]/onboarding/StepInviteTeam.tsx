@@ -69,7 +69,7 @@ export function StepInviteTeam({
       });
 
       if (result?.serverError || result?.validationErrors) {
-        toastError({ description: "Failed to send invitations" });
+        toastError({ description: "发送邀请失败" });
         return;
       }
 
@@ -85,7 +85,7 @@ export function StepInviteTeam({
 
       if (result?.serverError || result?.validationErrors) {
         toastError({
-          description: "Failed to create organization and send invitations",
+          description: "创建组织并发送邀请失败",
         });
         return;
       }
@@ -98,12 +98,12 @@ export function StepInviteTeam({
 
     if (successCount > 0) {
       toastSuccess({
-        description: `${successCount} invitation${successCount > 1 ? "s" : ""} sent successfully!`,
+        description: `成功发送 ${successCount} 个邀请！`,
       });
     }
     if (errorCount > 0) {
       toastError({
-        description: `Failed to send ${errorCount} invitation${errorCount > 1 ? "s" : ""}`,
+        description: `${errorCount} 个邀请发送失败`,
       });
     }
 
@@ -127,9 +127,9 @@ export function StepInviteTeam({
       </IconCircle>
 
       <div className="text-center mt-4">
-        <PageHeading>Invite your team</PageHeading>
+        <PageHeading>邀请团队</PageHeading>
         <TypographyP className="mt-2 max-w-lg mx-auto">
-          Add more anytime from settings.
+          可随时在设置中添加更多成员。
         </TypographyP>
 
         <form onSubmit={onSubmit}>
@@ -156,7 +156,7 @@ export function StepInviteTeam({
               loading={isSubmitting}
               disabled={filledEmailCount === 0}
             >
-              Send invites
+              发送邀请
               <ArrowRightIcon className="size-4 ml-2" />
             </Button>
             <Button
@@ -173,7 +173,7 @@ export function StepInviteTeam({
               }}
               disabled={isSubmitting}
             >
-              Skip
+              跳过
             </Button>
           </div>
         </form>

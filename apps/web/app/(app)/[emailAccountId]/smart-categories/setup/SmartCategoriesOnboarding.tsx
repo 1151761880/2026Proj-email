@@ -19,30 +19,29 @@ export function SmartCategoriesOnboarding() {
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Welcome to Sender Categories</DialogTitle>
+          <DialogTitle>发件人分类</DialogTitle>
           <DialogDescription>
-            Automatically categorize who emails you for better inbox management
-            and smarter automation.
+            自动为发件人分类，方便管理收件箱和执行自动化。
           </DialogDescription>
         </DialogHeader>
 
         <div className="grid gap-2 sm:gap-4">
           <CardBasic className="flex items-center">
             <TagsIcon className="mr-3 h-5 w-5" />
-            Auto-categorize who emails you
+            自动分类发件人
           </CardBasic>
           <CardBasic className="flex items-center">
             <ArchiveIcon className="mr-3 h-5 w-5" />
-            Bulk archive by category
+            按分类批量归档
           </CardBasic>
           <CardBasic className="flex items-center">
             <ZapIcon className="mr-3 h-5 w-5" />
-            Use categories to optimize the AI assistant
+            使用分类优化智能助手
           </CardBasic>
         </div>
         <div>
           <Button className="w-full" onClick={onClose}>
-            Get Started
+            开始使用
           </Button>
         </div>
       </DialogContent>

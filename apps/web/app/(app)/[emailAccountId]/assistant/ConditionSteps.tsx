@@ -32,10 +32,10 @@ import { TooltipExplanation } from "@/components/TooltipExplanation";
 type UIConditionType = "from" | "to" | "subject" | "prompt";
 
 const CONDITION_TYPE_OPTIONS: { label: string; value: UIConditionType }[] = [
-  { label: "AI Prompt", value: "prompt" },
-  { label: "From", value: "from" },
-  { label: "To", value: "to" },
-  { label: "Subject", value: "subject" },
+  { label: "AI 提示", value: "prompt" },
+  { label: "发件人", value: "from" },
+  { label: "收件人", value: "to" },
+  { label: "主题", value: "subject" },
 ];
 const MAX_CONDITIONS = CONDITION_TYPE_OPTIONS.length;
 
@@ -121,7 +121,7 @@ function getConditionFromUIType(
     };
   }
   // This should never happen, but TypeScript needs it
-  throw new Error(`Unknown UI condition type: ${uiType}`);
+  throw new Error(`未知条件类型：${uiType}`);
 }
 
 export function ConditionSteps({
@@ -178,13 +178,13 @@ export function ConditionSteps({
         const newCondition = getConditionFromUIType(undefined);
         appendCondition(newCondition);
       }}
-      addButtonLabel="Add Condition"
+      addButtonLabel="添加条件"
       addButtonDisabled={!canAddMoreConditions}
       addButtonTooltip={
         maxConditionsReached
-          ? "Maximum number of conditions reached."
+          ? "已达到条件数量上限。"
           : !canAddMoreConditions
-            ? "You can only set one condition for this rule."
+            ? "此规则只能设置一个条件。"
             : undefined
       }
     >
@@ -230,7 +230,7 @@ export function ConditionSteps({
                 if (uniqueUITypes.size !== configuredTypes.length) {
                   toastError({
                     description:
-                      "You can only have one condition of each type.",
+                      "每种类型只能添加一个条件。",
                   });
                   return;
                 }
@@ -301,7 +301,7 @@ export function ConditionSteps({
                     {uiType ? (
                       conditionTypeLabel
                     ) : (
-                      <SelectValue placeholder="Choose" />
+                      <SelectValue placeholder="选择" />
                     )}
                   </SelectTrigger>
                 </FormControl>
@@ -337,7 +337,7 @@ export function ConditionSteps({
           >
             <RuleStep
               onRemove={() => removeCondition(index)}
-              removeAriaLabel="Remove condition"
+              removeAriaLabel="移除条件"
               leftContent={leftContent}
               rightContent={(() => {
                 const currentCondition = watch(`conditions.${index}`);
@@ -350,7 +350,7 @@ export function ConditionSteps({
                         <div className="mb-2">
                           <Label
                             name={`conditions.${index}.instructions`}
-                            label="That matches:"
+                            label="匹配条件："
                           />
                         </div>
                       )}
@@ -359,7 +359,7 @@ export function ConditionSteps({
                           minRows={3}
                           rows={3}
                           {...register(`conditions.${index}.instructions`)}
-                          placeholder="e.g. Newsletters, regular content from publications, blogs, or services I've subscribed to"
+                          placeholder="例如：来自已订阅的刊物、博客或服务的定期邮件"
                         />
                       </div>
                       {(
@@ -448,7 +448,7 @@ export function ConditionSteps({
                         type="text"
                         name={`conditions.${index}.subject`}
                         registerProps={register(`conditions.${index}.subject`)}
-                        placeholder="Receipt for your purchase"
+                        placeholder="购买收据"
                         className="pr-8"
                         error={
                           (
@@ -460,7 +460,7 @@ export function ConditionSteps({
                       />
                       <div className="absolute right-2 top-1/2 -translate-y-1/2">
                         <TooltipExplanation
-                          text="Only apply this rule to emails with this subject. e.g. Receipt for your purchase"
+                          text="仅对包含此主题的邮件应用规则，例如：购买收据"
                           side="right"
                           size="sm"
                           className="text-gray-400"
@@ -486,14 +486,14 @@ const getFilterTooltipText = (filterType: "from" | "to") =>
 function getConditionTypeLabel(uiType: UIConditionType | undefined): string {
   switch (uiType) {
     case "prompt":
-      return "AI Prompt";
+      return "AI 提示";
     case "from":
-      return "From";
+      return "发件人";
     case "to":
-      return "To";
+      return "收件人";
     case "subject":
-      return "Subject";
+      return "主题";
     default:
-      return "Select";
+      return "选择";
   }
 }

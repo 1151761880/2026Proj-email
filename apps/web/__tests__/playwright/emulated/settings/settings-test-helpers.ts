@@ -135,13 +135,13 @@ export async function getSettingsDatabaseState(fixture: SettingsFixture) {
 export async function openSettings(page: Page) {
   await page.goto("/settings");
   await expect(
-    page.getByRole("heading", { name: "Settings", exact: true }),
+    page.getByRole("heading", { name: "设置", exact: true }),
   ).toBeVisible({ timeout: 60_000 });
 }
 
 export function getEmailAccountSettingsCard(page: Page, email: string) {
   const emailAccountsSection = page.locator("section").filter({
-    has: page.getByRole("heading", { name: "Email Accounts", exact: true }),
+    has: page.getByRole("heading", { name: "邮箱账户", exact: true }),
   });
   const toggle = emailAccountsSection
     .getByRole("button")

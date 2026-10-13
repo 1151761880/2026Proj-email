@@ -240,7 +240,7 @@ export function RuleForm({
           if (mutate) mutate();
         } else if (!res?.data?.rule) {
           toastError({
-            description: "There was an error updating the rule.",
+            description: "更新规则失败。",
           });
           if (mutate) mutate();
         } else {
@@ -249,9 +249,9 @@ export function RuleForm({
             ruleId: res.data.rule.id,
             attachmentSources,
             shouldSave: hasDraftAction,
-            successMessage: "Saved!",
+            successMessage: "已保存！",
             partialErrorMessage:
-              "Rule saved, but draft attachment sources could not be updated.",
+              "规则已保存，但未能更新草稿附件来源。",
           });
 
           // Revalidate to get the real data from server
@@ -279,7 +279,7 @@ export function RuleForm({
           toastError({ description: res.serverError });
         } else if (!res?.data?.rule) {
           toastError({
-            description: "There was an error creating the rule.",
+            description: "创建规则失败。",
           });
         } else {
           await handleRuleAttachmentSourceSave({
@@ -287,9 +287,9 @@ export function RuleForm({
             ruleId: res.data.rule.id,
             attachmentSources,
             shouldSave: hasDraftAction,
-            successMessage: "Created!",
+            successMessage: "已创建！",
             partialErrorMessage:
-              "Rule created, but draft attachment sources could not be saved.",
+              "规则已创建，但未能保存草稿附件来源。",
           });
 
           posthog.capture("User created AI rule", {
@@ -397,7 +397,7 @@ export function RuleForm({
         {isSubmitted && formErrors.length > 0 && (
           <div className="mt-4">
             <AlertError
-              title="Error"
+              title="错误"
               description={
                 <ul className="list-disc">
                   {formErrors.map((message) => (
@@ -414,10 +414,10 @@ export function RuleForm({
             <Input
               type="text"
               name="name"
-              label="Rule name"
+              label="规则名称"
               registerProps={register("name")}
               error={errors.name}
-              placeholder="e.g. Label receipts"
+              placeholder="例如：为收据添加标签"
             />
           ) : (
             <TypographyH3
@@ -433,12 +433,12 @@ export function RuleForm({
         <RuleSectionCard
           icon={InboxIcon}
           color="blue"
-          title="When I get an email"
+          title="收到邮件时"
           className="!mt-6"
           errors={
             errors.conditions?.root?.message ? (
               <AlertError
-                title="Error"
+                title="错误"
                 description={errors.conditions.root.message}
               />
             ) : undefined
@@ -461,11 +461,11 @@ export function RuleForm({
         <RuleSectionCard
           icon={ZapIcon}
           color="green"
-          title="Then"
+          title="然后"
           errors={
             actionErrors.length > 0 ? (
               <AlertError
-                title="Error"
+                title="错误"
                 description={
                   <ul className="list-inside list-disc">
                     {actionErrors.map((error, index) => (
@@ -504,16 +504,16 @@ export function RuleForm({
         </RuleSectionCard>
 
         <Collapsible open={isAdvancedOpen} onOpenChange={setIsAdvancedOpen}>
-          <CollapsibleHeading>Advanced options</CollapsibleHeading>
+          <CollapsibleHeading>高级选项</CollapsibleHeading>
           <CollapsibleContent>
             {isAdvancedOpen ? (
               <div className="rounded-md border divide-y">
                 <AdvancedRow
-                  title="Apply to threads"
-                  description="Run on every reply in a conversation, not just the first message."
+                  title="应用于整个会话"
+                  description="对会话中的每封回复执行此规则。"
                 >
                   <Tooltip
-                    content="This can't be changed for this rule type."
+                    content="此类型规则不支持修改该选项。"
                     hide={allowMultipleConditions(rule.systemType)}
                   >
                     <span>
@@ -531,11 +531,11 @@ export function RuleForm({
 
                 {env.NEXT_PUBLIC_DIGEST_ENABLED && (
                   <AdvancedRow
-                    title="Include in digest"
+                    title="纳入摘要"
                     description={
                       !hasDigestAccess && watch("digest")
-                        ? "Digests are available on the Plus plan. Turn this off to update this rule on your current plan."
-                        : "Show matched emails in your digest summary."
+                        ? "进阶版支持邮件摘要。当前套餐需关闭此选项后才能更新规则。"
+                        : "在邮件摘要中显示匹配的邮件。"
                     }
                   >
                     {isLoadingPremium ? null : hasDigestAccess ||
@@ -548,7 +548,7 @@ export function RuleForm({
                         }}
                       />
                     ) : (
-                      <UpgradeToPlusButton tooltip="Upgrade to the Plus plan to include emails in your digest." />
+                      <UpgradeToPlusButton tooltip="升级进阶版后可将邮件纳入摘要。" />
                     )}
                   </AdvancedRow>
                 )}
@@ -571,11 +571,11 @@ export function RuleForm({
 
                 {!!rule.id && (
                   <AdvancedRow
-                    title="Learned patterns"
-                    description="Patterns inferred from your corrections."
+                    title="已学习的规律"
+                    description="根据你的修正学习的规律。"
                   >
                     <Tooltip
-                      content="Learned patterns aren't available for this rule type."
+                      content="此类型规则不支持学习规律。"
                       hide={!isConversationStatusType(rule.systemType)}
                     >
                       <span>
@@ -583,7 +583,7 @@ export function RuleForm({
                           ruleId={rule.id}
                           groupId={rule.groupId || null}
                           disabled={isConversationStatusType(rule.systemType)}
-                          label="View"
+                          label="查看"
                         />
                       </span>
                     </Tooltip>
@@ -592,8 +592,8 @@ export function RuleForm({
 
                 {rule.id && !rule.systemType && (
                   <AdvancedRow
-                    title="Delete rule"
-                    description="Permanently remove this rule."
+                    title="删除规则"
+                    description="永久删除此规则。"
                   >
                     <Button
                       size="sm"
@@ -603,7 +603,7 @@ export function RuleForm({
                       disabled={isSubmitting}
                       onClick={async () => {
                         const yes = confirm(
-                          "Are you sure you want to delete this rule?",
+                          "确定删除此规则吗？",
                         );
                         if (yes) {
                           try {
@@ -620,7 +620,7 @@ export function RuleForm({
                               });
                             } else {
                               toastSuccess({
-                                description: "The rule has been deleted.",
+                                description: "规则已删除。",
                               });
 
                               if (isDialog && onSuccess) {
@@ -636,7 +636,7 @@ export function RuleForm({
                             }
                           } catch {
                             toastError({
-                              description: "Failed to delete rule.",
+                              description: "删除规则失败。",
                             });
                           } finally {
                             setIsDeleting(false);
@@ -644,7 +644,7 @@ export function RuleForm({
                         }
                       }}
                     >
-                      Delete
+                      删除
                     </Button>
                   </AdvancedRow>
                 )}
@@ -656,7 +656,7 @@ export function RuleForm({
         <div className="flex justify-end space-x-2 !mt-6">
           {onCancel && (
             <Button variant="outline" size="sm" onClick={onCancel}>
-              Cancel
+              取消
             </Button>
           )}
 
@@ -667,11 +667,11 @@ export function RuleForm({
               loading={isSubmitting}
               disabled={isDeleting}
             >
-              Save
+              保存
             </Button>
           ) : (
             <Button type="submit" size="sm" loading={isSubmitting}>
-              Create
+              创建
             </Button>
           )}
         </div>
@@ -715,12 +715,12 @@ function NotifyChannelRow({
   if (!hasChannels) {
     return (
       <AdvancedRow
-        title="Notify in chat"
-        description="Send a message when this rule matches."
+        title="发送聊天通知"
+        description="规则匹配时发送消息。"
         note={draftsNote}
       >
         <Button asChild variant="outline" size="sm">
-          <Link href={channelsPath}>Connect</Link>
+          <Link href={channelsPath}>连接</Link>
         </Button>
       </AdvancedRow>
     );
@@ -739,8 +739,8 @@ function NotifyChannelRow({
 
   return (
     <AdvancedRow
-      title="Notify in chat"
-      description="Send a message when this rule matches."
+      title="发送聊天通知"
+      description="规则匹配时发送消息。"
       note={draftsNote}
     >
       <Select
@@ -757,7 +757,7 @@ function NotifyChannelRow({
           <SelectValue />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="off">Off</SelectItem>
+          <SelectItem value="off">关闭</SelectItem>
           {showGroups
             ? Array.from(channelsByProvider.entries()).map(
                 ([provider, providerChannels]) => (
@@ -782,7 +782,7 @@ function NotifyChannelRow({
             <>
               <SelectSeparator />
               <SelectItem value={CONNECT_SENTINEL}>
-                + Connect new channel
+                + 连接新渠道
               </SelectItem>
             </>
           ) : null}

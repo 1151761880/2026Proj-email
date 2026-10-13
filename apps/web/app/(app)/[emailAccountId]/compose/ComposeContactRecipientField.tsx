@@ -165,7 +165,7 @@ export function ComposeContactRecipientField({
         {selectedEmailAddresses.map((emailAddress) => (
           <Badge className="rounded-md" key={emailAddress} variant="secondary">
             <button
-              aria-label={`Edit ${emailAddress}`}
+              aria-label={`编辑 ${emailAddress}`}
               className="cursor-pointer"
               onClick={() => {
                 removeSelectedEmail(emailAddress);
@@ -176,7 +176,7 @@ export function ComposeContactRecipientField({
               {extractNameFromEmail(emailAddress)}
             </button>
             <button
-              aria-label={`Remove ${emailAddress}`}
+              aria-label={`移除 ${emailAddress}`}
               onClick={() => removeSelectedEmail(emailAddress)}
               type="button"
             >
@@ -215,7 +215,7 @@ export function ComposeContactRecipientField({
               role="status"
             >
               <span className="flex-1">
-                Reconnect this account to enable contact suggestions.
+                重新连接此账户后可启用联系人建议。
               </span>
               <Button
                 className="h-auto p-0"
@@ -225,7 +225,7 @@ export function ComposeContactRecipientField({
                 type="button"
                 variant="link"
               >
-                Reconnect
+                重新连接
               </Button>
             </div>
           )}

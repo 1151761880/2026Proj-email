@@ -18,7 +18,7 @@ export function Usage(props: { usage: RedisUsage | null }) {
       <StatsCards
         stats={[
           {
-            name: "Unsubscribe Credits",
+            name: "退订额度",
             value: isPremiumRecord(premium)
               ? "Unlimited"
               : formatStat(
@@ -29,13 +29,13 @@ export function Usage(props: { usage: RedisUsage | null }) {
             icon: <CoinsIcon className="h-4 w-4" />,
           },
           {
-            name: "LLM API Calls",
+            name: "大模型 API 调用次数",
             value: formatStat(props.usage?.calls),
             subvalue: "calls",
             icon: <BotIcon className="h-4 w-4" />,
           },
           {
-            name: "LLM Tokens Used",
+            name: "大模型 Token 用量",
             value: formatStat(props.usage?.tokensUsed),
             subvalue: "tokens",
             icon: <CpuIcon className="h-4 w-4" />,

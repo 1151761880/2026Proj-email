@@ -25,7 +25,7 @@ test("downloads opened attachment previews over the network", async ({
   await page
     .getByText("reader-preview.png", { exact: true })
     .locator("..")
-    .getByRole("button", { name: "Download" })
+    .getByRole("button", { name: "下载" })
     .click();
   const savedFile = await download;
   expect(savedFile.suggestedFilename()).toBe("reader-preview.png");
@@ -66,7 +66,7 @@ test("opens an attachment preview from its card", async ({
     dialog.getByRole("img", { name: "reader-preview.png" }),
   ).toBeVisible();
   const download = page.waitForEvent("download");
-  await dialog.getByRole("button", { name: "Download" }).click();
+  await dialog.getByRole("button", { name: "下载" }).click();
   expect((await download).suggestedFilename()).toBe("reader-preview.png");
   await capturePlaywrightCheckpoint(
     page,

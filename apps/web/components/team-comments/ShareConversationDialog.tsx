@@ -51,20 +51,19 @@ export function ShareConversationDialog({
     >
       <DialogTrigger asChild>
         <Button variant="ghost" size="xs" className="shrink-0">
-          Share
+          分享
         </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Share conversation</DialogTitle>
+          <DialogTitle>共享会话</DialogTitle>
           <DialogDescription>
-            Teammates can read this conversation, including future replies, and
-            leave internal comments. They can't send email from your account.
+            团队成员可阅读此会话及后续回复，并发表内部评论，无法使用你的账户发送邮件。
           </DialogDescription>
         </DialogHeader>
         <div
           className="max-h-64 space-y-3 overflow-auto"
-          aria-label="Select teammates"
+          aria-label="选择团队成员"
           role="group"
         >
           {teammates.map((teammate) => (
@@ -96,7 +95,7 @@ export function ShareConversationDialog({
         )}
         <DialogFooter>
           <Button variant="ghost" onClick={close} disabled={isExecuting}>
-            Cancel
+            取消
           </Button>
           <Button
             disabled={!selected.length || isExecuting}
@@ -113,7 +112,7 @@ export function ShareConversationDialog({
               } else setError(getActionErrorMessage(result ?? {}));
             }}
           >
-            {isExecuting ? "Sharing…" : "Share conversation"}
+            {isExecuting ? "正在共享…" : "共享会话"}
           </Button>
         </DialogFooter>
       </DialogContent>

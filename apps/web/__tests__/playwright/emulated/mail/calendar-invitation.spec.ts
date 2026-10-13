@@ -41,16 +41,16 @@ test("shows inline calendar responses with the current RSVP", async ({
   await expect(
     page.locator('li[data-thread-message-id="msg_playwright_calendar"]'),
   ).toBeVisible({ timeout: 60_000 });
-  const card = page.getByLabel("Calendar invitation", { exact: true });
+  const card = page.getByLabel("日历邀请", { exact: true });
   await expect(card).toBeVisible({ timeout: 60_000 });
   await expect(
-    card.getByRole("button", { name: "Yes", exact: true }),
+    card.getByRole("button", { name: "是", exact: true }),
   ).toHaveAttribute("aria-pressed", "true");
   await expect(
-    card.getByRole("button", { name: "No", exact: true }),
+    card.getByRole("button", { name: "否", exact: true }),
   ).toBeEnabled();
   await expect(
-    card.getByRole("button", { name: "Maybe", exact: true }),
+    card.getByRole("button", { name: "待定", exact: true }),
   ).toBeEnabled();
   await expect(
     card.getByText("Thursday, October 1, 2026 · 10:00 AM – 10:30 AM"),

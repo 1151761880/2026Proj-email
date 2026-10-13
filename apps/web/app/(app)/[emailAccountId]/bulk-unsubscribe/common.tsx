@@ -227,7 +227,7 @@ function UnsubscribeButton<T extends Row>({
         onClick={() => setResubscribeDialogOpen(true)}
       >
         {unsubscribeLoading && <ButtonLoader />}
-        Resubscribe
+        重新订阅
       </Button>
     ) : hasAutomaticUnsubscribe ? (
       // Unsubscribing happens here, so opening the sender's page would only
@@ -257,7 +257,7 @@ function UnsubscribeButton<T extends Row>({
   return (
     <>
       {isBlock && hasUnsubscribeAccess ? (
-        <Tooltip content="No unsubscribe link: future emails will be archived automatically">
+        <Tooltip content="无退订链接：后续邮件将自动归档">
           {button}
         </Tooltip>
       ) : (
@@ -300,7 +300,7 @@ function ApproveButton<T extends Row>({
   });
 
   return (
-    <Tooltip content="Keep getting these emails">
+    <Tooltip content="继续接收这些邮件">
       <Button
         size="sm"
         variant="ghost"
@@ -309,7 +309,7 @@ function ApproveButton<T extends Row>({
         disabled={!hasUnsubscribeAccess}
       >
         <ThumbsUpIcon className="mr-1.5 size-4" />
-        Keep
+        保留
       </Button>
     </Tooltip>
   );
@@ -334,11 +334,11 @@ function MoveToReviewButton<T extends Row>({
         status: null,
       });
       assertActionSucceeded(result);
-      toastSuccess({ description: `Moved ${item.name} to review` });
+      toastSuccess({ description: `已将 ${item.name} 移至待审核` });
       await mutate();
     } catch (error) {
       captureException(error);
-      toastError({ description: "Failed to update sender status" });
+      toastError({ description: "更新发件人状态失败" });
     } finally {
       setLoading(false);
     }
@@ -353,7 +353,7 @@ function MoveToReviewButton<T extends Row>({
       disabled={loading}
     >
       {loading && <ButtonLoader />}
-      Move to review
+      移至待审核
     </Button>
   );
 }
@@ -415,13 +415,13 @@ export function MoreDropdown<T extends Row>({
       });
       if (res?.serverError) {
         toastError({
-          title: "Error",
-          description: `Failed to stop labeling ${item.name} as ${label.name}. ${res.serverError || ""}`,
+          title: "错误",
+          description: `取消为 ${item.name} 添加 ${label.name} 标签失败。${res.serverError || ""}`,
         });
       } else {
         toastSuccess({
-          title: "Success!",
-          description: `Stopped labeling ${item.name} as ${label.name}`,
+          title: "成功！",
+          description: `已停止为 ${item.name} 添加 ${label.name} 标签`,
         });
         await mutate();
       }
@@ -434,13 +434,13 @@ export function MoreDropdown<T extends Row>({
     });
     if (res?.serverError) {
       toastError({
-        title: "Error",
-        description: `Failed to add ${item.name} to ${label.name}. ${res.serverError || ""}`,
+        title: "错误",
+        description: `将 ${item.name} 添加到 ${label.name} 失败。${res.serverError || ""}`,
       });
     } else {
       toastSuccess({
-        title: "Success!",
-        description: `Added ${item.name} to ${label.name}`,
+        title: "成功！",
+        description: `已将 ${item.name} 添加到 ${label.name}`,
       });
       await mutate();
     }
@@ -454,7 +454,7 @@ export function MoreDropdown<T extends Row>({
         <DropdownMenuTrigger asChild>
           <Button aria-haspopup="true" size="icon" variant="ghost">
             <MoreHorizontalIcon className="size-4" />
-            <span className="sr-only">Toggle menu</span>
+            <span className="sr-only">展开或收起菜单</span>
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
@@ -462,7 +462,7 @@ export function MoreDropdown<T extends Row>({
           {!!onOpenNewsletter && (
             <DropdownMenuItem onClick={() => onOpenNewsletter(item)}>
               <EyeIcon className="mr-2 size-4" />
-              <span>Preview emails</span>
+              <span>预览邮件</span>
             </DropdownMenuItem>
           )}
           {isGoogleProvider(provider) && (
@@ -472,7 +472,7 @@ export function MoreDropdown<T extends Row>({
                 target="_blank"
               >
                 <ExternalLinkIcon className="mr-2 size-4" />
-                <span>View in Gmail</span>
+                <span>在 Gmail 中查看</span>
               </Link>
             </DropdownMenuItem>
           )}
@@ -480,7 +480,7 @@ export function MoreDropdown<T extends Row>({
             <DropdownMenuItem asChild>
               <Link href={getGmailFilterSettingsUrl(userEmail)} target="_blank">
                 <ExternalLinkIcon className="mr-2 size-4" />
-                <span>View auto-archive filter</span>
+                <span>查看自动归档筛选器</span>
               </Link>
             </DropdownMenuItem>
           )}
@@ -526,7 +526,7 @@ export function MoreDropdown<T extends Row>({
               }}
             >
               <ArchiveRestoreIcon className="mr-2 size-4" />
-              <span>Auto-archive future emails</span>
+              <span>自动归档后续邮件</span>
             </DropdownMenuItem>
           )}
           <DropdownMenuItem onClick={() => onBulkArchive([item])}>
@@ -535,7 +535,7 @@ export function MoreDropdown<T extends Row>({
             ) : (
               <ArchiveIcon className="mr-2 size-4" />
             )}
-            <span>Archive existing emails</span>
+            <span>归档现有邮件</span>
           </DropdownMenuItem>
 
           <DropdownMenuSeparator />
@@ -544,7 +544,7 @@ export function MoreDropdown<T extends Row>({
             className="text-destructive focus:text-destructive"
             onClick={() => {
               const yes = confirm(
-                `Are you sure you want to delete all emails from ${item.name}?`,
+                `确定删除来自 ${item.name} 的全部邮件吗？`,
               );
               if (!yes) return;
 
@@ -556,7 +556,7 @@ export function MoreDropdown<T extends Row>({
             ) : (
               <TrashIcon className="mr-2 size-4" />
             )}
-            <span>Delete all emails</span>
+            <span>删除全部邮件</span>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
@@ -588,7 +588,7 @@ export function MoreDropdown<T extends Row>({
               })
             ) : (
               <p className="px-3 py-2 text-sm text-muted-foreground">
-                You don't have any {terminology.label.plural} yet.
+                暂无 {terminology.label.plural} yet.
               </p>
             )}
           </div>
@@ -635,11 +635,11 @@ const senderStatusBadges: Record<
   { label: string; variant: "success" | "info" | "muted" }
 > = {
   [NewsletterStatus.UNSUBSCRIBED]: {
-    label: "Unsubscribed",
+    label: "已退订",
     variant: "success",
   },
-  [NewsletterStatus.AUTO_ARCHIVED]: { label: "Auto-archived", variant: "info" },
-  [NewsletterStatus.APPROVED]: { label: "Kept", variant: "muted" },
+  [NewsletterStatus.AUTO_ARCHIVED]: { label: "已自动归档", variant: "info" },
+  [NewsletterStatus.APPROVED]: { label: "已保留", variant: "muted" },
 };
 
 async function noopRefetchPremium() {

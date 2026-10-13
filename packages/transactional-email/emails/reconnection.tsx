@@ -43,36 +43,32 @@ const ReconnectionEmail: ReconnectionEmailComponent = ({
                   src={"https://www.getinboxzero.com/icon.png"}
                   width="40"
                   height="40"
-                  alt="Inbox Zero"
+                  alt="十组邮件小助手"
                   className="mx-auto my-0"
                 />
               </Link>
 
               <Text className="mx-0 mb-8 mt-4 p-0 text-center text-2xl font-normal">
                 <span className="font-semibold tracking-tighter">
-                  Inbox Zero
+                  十组邮件小助手
                 </span>
               </Text>
 
               <Text className="mx-0 mb-8 mt-0 p-0 text-center text-2xl font-normal text-gray-900">
-                Action Required: Your email account was disconnected
+                需要处理：邮箱账户已断开连接
               </Text>
             </Section>
 
             {/* Main Content */}
             <Section className="px-4 pb-4">
-              <Text className="text-[16px] text-gray-700 mb-6 mt-0">Hi,</Text>
+              <Text className="text-[16px] text-gray-700 mb-6 mt-0">你好，</Text>
 
               <Text className="text-[16px] text-gray-700 mb-6 mt-0">
-                The connection for <strong>{email}</strong> to Inbox Zero was
-                disconnected. This usually happens after a password change, if
-                access was revoked, or if your 6-month approval period has
-                expired.
+                连接账户： <strong>{email}</strong> 与十组邮件小助手的连接已断开。可能由于密码更改、权限撤销或六个月授权期已结束。
               </Text>
 
               <Text className="text-[16px] text-gray-700 mb-8 mt-0">
-                Please reconnect your account to resume your automated email
-                rules and AI assistant features.
+                请重新连接账户以恢复邮件自动化规则和智能助手功能。
               </Text>
 
               {/* CTA Button */}
@@ -81,14 +77,12 @@ const ReconnectionEmail: ReconnectionEmailComponent = ({
                   href={reconnectUrl}
                   className="bg-blue-600 text-white px-8 py-4 rounded-[8px] text-[16px] font-semibold no-underline box-border inline-block"
                 >
-                  Reconnect Now
+                  立即重新连接
                 </Button>
               </Section>
 
               <Text className="text-[14px] text-gray-500 mb-8 mt-0">
-                If you didn't expect this, it's likely a security measure from
-                your email provider. Reconnecting is safe and only takes a few
-                seconds.
+                这可能是邮箱服务的安全措施，请通过授权页面重新连接。
               </Text>
             </Section>
 
@@ -114,24 +108,23 @@ function Footer({
   return (
     <Section className="mt-8 text-center text-sm text-gray-500">
       <Text className="m-0">
-        You're receiving this email because your email account is connected to
-        Inbox Zero.
+        由于邮箱已连接十组邮件小助手，你收到此邮件。
       </Text>
       <div className="mt-2">
         <Link
           href={`${baseUrl}/api/unsubscribe?token=${encodeURIComponent(unsubscribeToken)}`}
           className="text-gray-500 underline mr-4"
         >
-          Unsubscribe
+          退订
         </Link>
         <Link
           href={`${baseUrl}/support`}
           className="text-gray-500 underline mr-4"
         >
-          Support
+          支持
         </Link>
         <Link href={`${baseUrl}/privacy`} className="text-gray-500 underline">
-          Privacy Policy
+          隐私政策
         </Link>
       </div>
     </Section>

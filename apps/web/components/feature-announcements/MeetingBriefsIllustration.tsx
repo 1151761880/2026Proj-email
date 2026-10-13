@@ -51,13 +51,13 @@ export function MeetingBriefsIllustration() {
               {/* Email header */}
               <div className="border-b border-gray-100 px-3 py-2 dark:border-gray-700">
                 <div className="text-[11px] font-semibold text-gray-900 dark:text-gray-100">
-                  Briefing for{" "}
+                  会议简报{" "}
                   <span className="text-blue-600 dark:text-blue-400">
-                    Product Review
+                    产品评审
                   </span>
                 </div>
                 <div className="text-[10px] text-gray-500 dark:text-gray-400">
-                  Starting at{" "}
+                  开始时间{" "}
                   <span className="font-medium text-gray-700 dark:text-gray-300">
                     2:00 PM
                   </span>
@@ -92,16 +92,13 @@ export function MeetingBriefsIllustration() {
                   transition={{ duration: 0.31, ease: "easeOut" }}
                 >
                   <div className="text-[9px] text-gray-600 dark:text-gray-400">
-                    <span className="text-gray-400">-</span> CEO of Acme Corp,
-                    joined 2019
+                    <span className="text-gray-400">-</span> Acme 公司负责人，2019 年加入
                   </div>
                   <div className="text-[9px] text-gray-600 dark:text-gray-400">
-                    <span className="text-gray-400">-</span> Last met 3 weeks
-                    ago
+                    <span className="text-gray-400">-</span> 上次会面于三周前
                   </div>
                   <div className="pb-2 text-[9px] text-gray-600 dark:text-gray-400">
-                    <span className="text-gray-400">-</span> Discussed
-                    enterprise pricing
+                    <span className="text-gray-400">-</span> 曾讨论企业套餐价格
                   </div>
                 </motion.div>
               </div>

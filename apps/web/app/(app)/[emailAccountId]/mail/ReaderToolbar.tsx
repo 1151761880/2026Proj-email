@@ -123,13 +123,13 @@ function renderActionTooltip(
     return <Tooltip shortcuts={["archive"]}>{children}</Tooltip>;
   }
   if (button.action === "move_to_inbox") {
-    return <Tooltip content="Move to inbox">{children}</Tooltip>;
+    return <Tooltip content="移至收件箱">{children}</Tooltip>;
   }
   if (button.action === "mark_unread") {
     return <Tooltip shortcuts={["markUnread"]}>{children}</Tooltip>;
   }
   if (button.action === "mark_read") {
-    return <Tooltip content="Mark as read">{children}</Tooltip>;
+    return <Tooltip content="标为已读">{children}</Tooltip>;
   }
   return children;
 }

@@ -99,18 +99,18 @@ export function EmailMessageCell({
                 href={emailActions.openUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Open in email"
+                aria-label="在邮箱中打开"
               >
                 <ExternalLinkIcon className="h-4 w-4" />
               </Link>
             )}
             {emailActions.showViewEmailButton && (
-              <Tooltip content="View email">
+              <Tooltip content="查看邮件">
                 <button
                   type="button"
                   className="hover:text-foreground"
                   onClick={() => showEmail({ threadId, messageId })}
-                  aria-label="View email"
+                  aria-label="查看邮件"
                 >
                   <MailIcon className="h-4 w-4" />
                 </button>

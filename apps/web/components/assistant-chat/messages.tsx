@@ -83,7 +83,7 @@ export function Messages({
                   <MessageContent variant="flat">
                     <div className="flex items-center gap-2 text-muted-foreground">
                       <Loader />
-                      <span>Thinking...</span>
+                      <span>正在思考…</span>
                     </div>
                   </MessageContent>
                 </Message>

@@ -29,16 +29,16 @@ export const usersRolesInfo: Record<
     icon: RocketIcon,
     suggestedLabels: [
       {
-        label: "Customer Feedback",
-        description: "Feedback and suggestions we receive from our customers",
+        label: "客户反馈",
+        description: "来自客户的反馈和建议",
       },
       {
-        label: "Investor",
-        description: "Communications from investors and VCs",
+        label: "投资者",
+        description: "来自投资者和风投机构的邮件",
       },
       {
-        label: "Urgent",
-        description: "Time-sensitive emails requiring immediate attention",
+        label: "紧急",
+        description: "需要立即处理的时效性邮件",
       },
     ],
   },
@@ -46,13 +46,13 @@ export const usersRolesInfo: Record<
     icon: BriefcaseIcon,
     suggestedLabels: [
       {
-        label: "Board",
-        description: "Board meetings, materials, and director communications",
+        label: "董事会",
+        description: "董事会会议、资料和董事往来邮件",
       },
       {
-        label: "Key Stakeholder",
+        label: "重要联系人",
         description:
-          "Important partners, major clients, and VIP communications",
+          "重要合作伙伴、客户及贵宾往来邮件",
       },
     ],
   },
@@ -60,12 +60,12 @@ export const usersRolesInfo: Record<
     icon: StoreIcon,
     suggestedLabels: [
       {
-        label: "Customer Feedback",
-        description: "Feedback and suggestions we receive from our customers",
+        label: "客户反馈",
+        description: "来自客户的反馈和建议",
       },
       {
-        label: "Urgent",
-        description: "Time-sensitive emails requiring immediate attention",
+        label: "紧急",
+        description: "需要立即处理的时效性邮件",
       },
     ],
   },
@@ -73,20 +73,20 @@ export const usersRolesInfo: Record<
     icon: CodeIcon,
     suggestedLabels: [
       {
-        label: "Alert",
-        description: "Server errors and deployment notifications",
+        label: "告警",
+        description: "服务器错误和部署通知",
       },
       {
         label: "GitHub",
-        description: "Pull requests and code reviews",
+        description: "合并请求和代码审查",
       },
       {
-        label: "Bug",
-        description: "Bug reports and issue tracking",
+        label: "缺陷",
+        description: "缺陷报告和问题跟踪",
       },
       {
-        label: "Security",
-        description: "Security vulnerabilities and updates",
+        label: "安全",
+        description: "安全漏洞和更新",
       },
     ],
   },
@@ -94,12 +94,12 @@ export const usersRolesInfo: Record<
     icon: CalendarDaysIcon,
     suggestedLabels: [
       {
-        label: "Schedule Meeting",
-        description: "Emails that need a meeting to be scheduled",
+        label: "安排会议",
+        description: "需要安排会议的邮件",
       },
       {
-        label: "Travel",
-        description: "Travel arrangements and itineraries",
+        label: "出行",
+        description: "出行安排和行程",
       },
     ],
   },
@@ -107,20 +107,20 @@ export const usersRolesInfo: Record<
     icon: TrendingUpIcon,
     suggestedLabels: [
       {
-        label: "Company Update",
-        description: "Portfolio company progress reports",
+        label: "公司动态",
+        description: "被投公司进展报告",
       },
       {
-        label: "Pitch Deck",
-        description: "Startup presentations and investment opportunities",
+        label: "项目推介",
+        description: "创业项目介绍和投资机会",
       },
       {
         label: "LP",
-        description: "Limited Partner communications",
+        description: "有限合伙人往来邮件",
       },
       {
-        label: "Due Diligence",
-        description: "Investment research and analysis",
+        label: "尽职调查",
+        description: "投资研究与分析",
       },
     ],
   },
@@ -128,20 +128,20 @@ export const usersRolesInfo: Record<
     icon: PhoneIcon,
     suggestedLabels: [
       {
-        label: "Prospect",
-        description: "Potential customers and leads",
+        label: "潜在客户",
+        description: "潜在客户和销售线索",
       },
       {
-        label: "Customer",
-        description: "Existing customer communications",
+        label: "客户",
+        description: "现有客户往来邮件",
       },
       {
-        label: "Deal Discussion",
-        description: "Active negotiations and proposals",
+        label: "交易洽谈",
+        description: "正在进行的谈判和提案",
       },
       {
-        label: "Churn Risk",
-        description: "Customers showing signs of cancellation",
+        label: "流失风险",
+        description: "可能取消服务的客户",
       },
     ],
   },
@@ -149,20 +149,20 @@ export const usersRolesInfo: Record<
     icon: MegaphoneIcon,
     suggestedLabels: [
       {
-        label: "Campaign",
-        description: "Marketing campaigns and promotional activities",
+        label: "营销活动",
+        description: "营销和推广活动",
       },
       {
-        label: "Content Review",
-        description: "Content drafts requiring approval or feedback",
+        label: "内容审核",
+        description: "需要审批或反馈的内容草稿",
       },
       {
-        label: "Analytics Report",
-        description: "Performance metrics and marketing analytics",
+        label: "分析报告",
+        description: "绩效指标和营销分析",
       },
       {
-        label: "Partner/Agency",
-        description: "Communications with marketing agencies and partners",
+        label: "合作伙伴 / 代理机构",
+        description: "营销机构和合作伙伴往来邮件",
       },
     ],
   },
@@ -170,16 +170,16 @@ export const usersRolesInfo: Record<
     icon: HeadphonesIcon,
     suggestedLabels: [
       {
-        label: "Support Ticket",
-        description: "Customer requests for help with our product or service",
+        label: "支持工单",
+        description: "客户对产品或服务的求助",
       },
       {
-        label: "Bug",
-        description: "Bug reports from customers",
+        label: "缺陷",
+        description: "客户提交的缺陷报告",
       },
       {
-        label: "Feature Request",
-        description: "Customer suggestions for new features",
+        label: "功能建议",
+        description: "客户提出的新功能建议",
       },
     ],
   },
@@ -187,20 +187,20 @@ export const usersRolesInfo: Record<
     icon: HomeIcon,
     suggestedLabels: [
       {
-        label: "Buyer Lead",
-        description: "Potential home buyers inquiring about properties",
+        label: "买方线索",
+        description: "咨询房产的潜在买家",
       },
       {
-        label: "Seller Lead",
-        description: "Property owners looking to sell",
+        label: "卖方线索",
+        description: "计划出售房产的业主",
       },
       {
-        label: "Showing Request",
-        description: "Requests to view properties",
+        label: "看房预约",
+        description: "看房请求",
       },
       {
-        label: "Closing",
-        description: "Documents and communications for property closings",
+        label: "房产交割",
+        description: "房产交割文档和往来邮件",
       },
     ],
   },
@@ -208,20 +208,20 @@ export const usersRolesInfo: Record<
     icon: VideoIcon,
     suggestedLabels: [
       {
-        label: "Sponsorship",
-        description: "Brand sponsorship inquiries and deals",
+        label: "赞助",
+        description: "品牌赞助咨询和合作",
       },
       {
-        label: "Collab",
-        description: "Collaboration requests from other creators",
+        label: "协作",
+        description: "其他创作者的合作请求",
       },
       {
-        label: "Brand Deal",
-        description: "Partnership opportunities with brands",
+        label: "品牌合作",
+        description: "品牌合作机会",
       },
       {
-        label: "Press",
-        description: "Media inquiries and interview requests",
+        label: "媒体",
+        description: "媒体咨询和采访请求",
       },
     ],
   },
@@ -229,16 +229,16 @@ export const usersRolesInfo: Record<
     icon: UsersIcon,
     suggestedLabels: [
       {
-        label: "Client Project",
-        description: "Active client engagements and project updates",
+        label: "客户项目",
+        description: "客户项目和进展",
       },
       {
-        label: "Proposal",
-        description: "New business proposals and RFP responses",
+        label: "提案",
+        description: "业务提案和招标回复",
       },
       {
-        label: "Professional Network",
-        description: "Industry contacts and referral opportunities",
+        label: "专业人脉",
+        description: "行业联系和推荐机会",
       },
     ],
   },
@@ -247,20 +247,20 @@ export const usersRolesInfo: Record<
     icon: GraduationCapIcon,
     suggestedLabels: [
       {
-        label: "School",
-        description: "Emails from professors and teaching staff",
+        label: "学校",
+        description: "教师和教职员工邮件",
       },
       {
-        label: "Assignment",
-        description: "Homework and project deadlines",
+        label: "作业",
+        description: "作业和项目截止时间",
       },
       {
-        label: "Internship",
-        description: "Internship opportunities and applications",
+        label: "实习",
+        description: "实习机会和申请",
       },
       {
-        label: "Study Materials",
-        description: "Class notes and learning resources",
+        label: "学习资料",
+        description: "课堂笔记和学习资源",
       },
     ],
   },

@@ -117,7 +117,7 @@ export const MailShellSidebar = memo(function MailShellSidebar({
       // unrelated revalidation happens to run.
       await mutateLabels();
       toast.success(
-        `${terminology.label.singularCapitalized} "${name}" created`,
+        `已创建${terminology.label.singularCapitalized}“${name}”`,
       );
     },
     [emailAccountId, mutateLabels, terminology.label.singularCapitalized],
@@ -137,7 +137,7 @@ export const MailShellSidebar = memo(function MailShellSidebar({
         mutateCounts(),
       ]);
       toast.success(
-        `${edit.kind === "folder" ? "Folder" : terminology.label.singularCapitalized} updated`,
+        `${edit.kind === "folder" ? "文件夹" : terminology.label.singularCapitalized}已更新`,
       );
       return true;
     },
@@ -167,7 +167,7 @@ export const MailShellSidebar = memo(function MailShellSidebar({
         mutateCounts(),
       ]);
       toast.success(
-        `${item.kind === "folder" ? "Folder" : terminology.label.singularCapitalized} deleted`,
+        `${item.kind === "folder" ? "文件夹" : terminology.label.singularCapitalized}已删除`,
       );
       return true;
     },
@@ -208,7 +208,7 @@ export const MailShellSidebar = memo(function MailShellSidebar({
               ? NO_CATEGORIES
               : getMailCategories({ isGoogle, isOutlook })
           }
-          categoryHeading={isOutlook ? "Inbox" : "Categories"}
+          categoryHeading={isOutlook ? "收件箱" : "分类"}
           collapsibleCategories={!isOutlook}
           labelsHeading={terminology.label.pluralCapitalized}
           labelSingular={terminology.label.singular}

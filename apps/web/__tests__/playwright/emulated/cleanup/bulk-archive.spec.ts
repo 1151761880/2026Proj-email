@@ -88,7 +88,7 @@ test("rehydrates an interrupted sender archive and completes after reconnect", a
 
     await page.reload({ waitUntil: "domcontentloaded" });
     await expect(
-      page.getByRole("heading", { name: "Bulk Archive" }),
+      page.getByRole("heading", { name: "批量归档" }),
     ).toBeVisible({ timeout: 60_000 });
     await expect
       .poll(() =>
@@ -212,13 +212,13 @@ async function selectOnlyArchiveSender(page: Page) {
 }
 
 async function chooseBulkAction(page: Page, action: "Delete" | "Mark as read") {
-  await page.getByRole("button", { name: "Settings" }).click();
+  await page.getByRole("button", { name: "设置" }).click();
   const settings = page.getByRole("dialog", {
-    name: "Bulk Archive Settings",
+    name: "批量归档设置",
   });
   await settings.getByRole("combobox").click();
   await page.getByRole("option", { name: action }).click();
-  await settings.getByRole("button", { name: "Close" }).click();
+  await settings.getByRole("button", { name: "关闭" }).click();
 }
 
 async function assertOnlySelectedSenderWasRemovedFromInbox(
@@ -226,7 +226,7 @@ async function assertOnlySelectedSenderWasRemovedFromInbox(
   cleanupFixture: CleanupFixture,
 ) {
   await openCleanupFeature(page, cleanupFixture, "mail");
-  const conversations = page.getByRole("listbox", { name: "Conversations" });
+  const conversations = page.getByRole("listbox", { name: "会话" });
   await expect(conversations).toBeVisible({ timeout: 120_000 });
   await expect(
     conversationWithSubject(page, conversations, ARCHIVE_SUBJECT),
@@ -238,7 +238,7 @@ async function assertOnlySelectedSenderWasRemovedFromInbox(
 
 async function restoreUnreadState(page: Page, cleanupFixture: CleanupFixture) {
   await openCleanupFeature(page, cleanupFixture, "mail");
-  const conversations = page.getByRole("listbox", { name: "Conversations" });
+  const conversations = page.getByRole("listbox", { name: "会话" });
   const conversation = conversationWithSubject(
     page,
     conversations,
@@ -246,12 +246,12 @@ async function restoreUnreadState(page: Page, cleanupFixture: CleanupFixture) {
   );
   await expect(conversation).toBeVisible();
   await conversation.click();
-  const threadActions = page.getByRole("group", { name: "Thread actions" });
+  const threadActions = page.getByRole("group", { name: "会话操作" });
   const markUnread = threadActions.getByRole("button", {
-    name: /Mark as unread/,
+    name: /标为未读/,
   });
   const markRead = threadActions.getByRole("button", {
-    name: /Mark as read/,
+    name: /标为已读/,
   });
   await expect(markUnread.or(markRead)).toBeVisible();
   if (await markUnread.isVisible()) {
@@ -292,7 +292,7 @@ async function getThreadLabelIds(
 function newsletterCard(page: Page) {
   return page
     .locator('[role="button"]')
-    .filter({ has: page.getByRole("heading", { name: "Newsletter" }) });
+    .filter({ has: page.getByRole("heading", { name: "订阅邮件" }) });
 }
 
 async function restoreFixtureThreads(page: Page, emailAccountId: string) {

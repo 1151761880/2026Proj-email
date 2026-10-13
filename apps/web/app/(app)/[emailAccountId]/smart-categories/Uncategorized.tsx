@@ -64,7 +64,7 @@ export function Uncategorized({
               disabled={!hasAiAccess}
               onClick={async () => {
                 if (!senderAddresses?.length) {
-                  toastError({ description: "No senders to categorize" });
+                  toastError({ description: "暂无待分类发件人" });
                   return;
                 }
 
@@ -75,7 +75,7 @@ export function Uncategorized({
               }}
             >
               <SparklesIcon className="mr-2 size-4" />
-              Categorize all with AI
+              使用 AI 为全部分类
             </Button>
           </PremiumTooltip>
 
@@ -87,7 +87,7 @@ export function Uncategorized({
               }}
             >
               <StopCircleIcon className="mr-2 size-4" />
-              Stop
+              停止
             </Button>
           )}
         </div>
@@ -96,7 +96,7 @@ export function Uncategorized({
           <div className="mr-1.5">
             <TooltipExplanation
               size="sm"
-              text="Automatically categorize new senders when they email you"
+              text="收到新发件人邮件时自动分类"
             />
           </div>
           <AutoCategorizeToggle
@@ -120,14 +120,14 @@ export function Uncategorized({
                 ) : (
                   <ChevronsDownIcon className="mr-2 size-4" />
                 )}
-                Load More
+                加载更多
               </Button>
             )}
           </>
         ) : (
           !isLoading && (
             <SectionDescription className="p-4">
-              No senders left to categorize!
+              所有发件人均已分类！
             </SectionDescription>
           )
         )}
@@ -147,7 +147,7 @@ function AutoCategorizeToggle({
   return (
     <Toggle
       name="autoCategorizeSenders"
-      label="Auto categorize"
+      label="自动分类"
       enabled={autoCategorizeSenders}
       onChange={async (enabled) => {
         await setAutoCategorizeAction(emailAccountId, {

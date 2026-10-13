@@ -163,7 +163,7 @@ export function ProcessRulesContent({ testMode }: { testMode: boolean }) {
           serverError: true,
         });
         toastError({
-          title: "There was an error processing the email",
+          title: "处理邮件失败",
           description: result.serverError,
         });
       } else if (result?.data) {
@@ -226,8 +226,8 @@ export function ProcessRulesContent({ testMode }: { testMode: boolean }) {
           } catch (error) {
             console.error(`Failed to process message ${message.id}:`, error);
             toastError({
-              title: "Failed to process email",
-              description: `Error processing email from ${message.headers.from}: ${error instanceof Error ? error.message : "Unknown error"}`,
+              title: "处理邮件失败",
+              description: `处理来自 ${message.headers.from} 的邮件失败：${error instanceof Error ? error.message : "Unknown error"}`,
             });
           }
         });
@@ -258,9 +258,9 @@ export function ProcessRulesContent({ testMode }: { testMode: boolean }) {
 
   let loadMoreLabel = "No More Messages";
   if (isValidating) {
-    loadMoreLabel = "Loading...";
+    loadMoreLabel = "正在加载…";
   } else if (hasMore) {
-    loadMoreLabel = "Load More";
+    loadMoreLabel = "加载更多";
   }
 
   return (
@@ -270,12 +270,12 @@ export function ProcessRulesContent({ testMode }: { testMode: boolean }) {
           {isRunningAll ? (
             <Button onClick={handleStop} variant="outline" size="sm">
               <PauseIcon className="mr-2 size-4" />
-              Stop
+              停止
             </Button>
           ) : (
             <Button onClick={handleRunAll} size="sm">
               <BookOpenCheckIcon className="mr-2 size-4" />
-              {testMode ? "Test All" : "Run on All"}
+              {testMode ? "测试全部" : "对全部执行"}
             </Button>
           )}
         </div>
@@ -288,7 +288,7 @@ export function ProcessRulesContent({ testMode }: { testMode: boolean }) {
               size="sm"
             >
               <PenSquareIcon className="mr-2 size-4" />
-              Custom
+              自定义
             </Button>
           )}
           <SearchForm
@@ -303,8 +303,7 @@ export function ProcessRulesContent({ testMode }: { testMode: boolean }) {
           {!hasAiRules && (
             <Alert variant="destructive">
               <AlertDescription>
-                You don't have any AI rules set up. The test won't match
-                anything. Please create AI rules first.
+                尚未配置 AI 规则。请先创建规则再进行测试。
               </AlertDescription>
             </Alert>
           )}
@@ -318,7 +317,7 @@ export function ProcessRulesContent({ testMode }: { testMode: boolean }) {
         loadingComponent={<ProcessRulesLoading />}
       >
         {messages.length === 0 ? (
-          <MutedText className="p-4 text-center">No emails found</MutedText>
+          <MutedText className="p-4 text-center">未找到邮件</MutedText>
         ) : (
           <Card>
             <Table className="table-fixed sm:table-auto">
@@ -463,7 +462,7 @@ function ProcessRulesRow({
                 onClick={() => onRun()}
               >
                 {!isRunning && <SparklesIcon className="mr-2 size-4" />}
-                <span>{testMode ? "Test" : "Run"}</span>
+                <span>{testMode ? "测试" : "执行"}</span>
               </Button>
             )}
           </div>
@@ -494,7 +493,7 @@ function RerunButton({
       <RefreshCcwIcon
         className={cn("mr-2 size-4", isRunning && "animate-spin")}
       />
-      <span>{testMode ? "Retest" : "Rerun"}</span>
+      <span>{testMode ? "重新测试" : "重新执行"}</span>
     </Button>
   );
 

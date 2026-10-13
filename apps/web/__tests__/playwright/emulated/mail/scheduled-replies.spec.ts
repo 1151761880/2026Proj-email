@@ -18,47 +18,47 @@ test("schedules a reply with a reminder, persists it and cancels both", async ({
   page,
 }, testInfo) => {
   const emailAccountId = await openReply(page);
-  const delivery = page.getByRole("region", { name: "Reply delivery status" });
+  const delivery = page.getByRole("region", { name: "回复投递状态" });
   try {
-    await page.getByRole("button", { name: "Send later", exact: true }).click();
-    const sendDialog = page.getByRole("dialog", { name: "Send later" });
+    await page.getByRole("button", { name: "定时发送", exact: true }).click();
+    const sendDialog = page.getByRole("dialog", { name: "定时发送" });
     await expect(sendDialog).toBeVisible();
     await capturePlaywrightCheckpoint(page, testInfo, "16-send-later-menu");
     await sendDialog
-      .getByRole("button", { name: "Choose date and time" })
+      .getByRole("button", { name: "选择日期和时间" })
       .click();
     await expect(
       sendDialog.getByLabel("Send later date and time"),
     ).toBeVisible();
-    await sendDialog.getByRole("button", { name: "Back", exact: true }).click();
+    await sendDialog.getByRole("button", { name: "返回", exact: true }).click();
     await expect(sendDialog.getByLabel("Send later date and time")).toHaveCount(
       0,
     );
-    await sendDialog.getByRole("button", { name: /Tomorrow morning/ }).click();
-    await page.getByRole("button", { name: "Remind me", exact: true }).click();
-    const reminderDialog = page.getByRole("dialog", { name: "Remind me" });
+    await sendDialog.getByRole("button", { name: /明天上午/ }).click();
+    await page.getByRole("button", { name: "提醒我", exact: true }).click();
+    const reminderDialog = page.getByRole("dialog", { name: "提醒我" });
     await expect(reminderDialog).toContainText("if no reply");
     await capturePlaywrightCheckpoint(page, testInfo, "17-reminder-menu");
     await reminderDialog
       .getByRole("button", { name: /2 days after sending/ })
       .click();
-    await page.getByRole("button", { name: "Send", exact: true }).click();
+    await page.getByRole("button", { name: "发送", exact: true }).click();
     await expect(delivery.getByText(/^Scheduled for/)).toBeVisible();
-    await expect(delivery.getByText(/^Reminder if no reply by/)).toBeVisible();
+    await expect(delivery.getByText(/未收到回复时提醒，截止时间/)).toBeVisible();
     await page.reload();
     await expect(delivery.getByText(/^Scheduled for/)).toBeVisible();
-    await expect(delivery.getByText(/^Reminder if no reply by/)).toBeVisible();
+    await expect(delivery.getByText(/未收到回复时提醒，截止时间/)).toBeVisible();
     await capturePlaywrightCheckpoint(
       page,
       testInfo,
       "18-scheduled-after-reload",
     );
-    await delivery.getByRole("button", { name: "Cancel reminder" }).click();
+    await delivery.getByRole("button", { name: "取消提醒" }).click();
     await expect(
-      delivery.getByRole("button", { name: "Cancel reminder" }),
+      delivery.getByRole("button", { name: "取消提醒" }),
     ).toHaveCount(0);
     await expect(delivery.getByText(/^Scheduled for/)).toBeVisible();
-    await delivery.getByRole("button", { name: "Cancel send" }).click();
+    await delivery.getByRole("button", { name: "取消发送" }).click();
     await expect(delivery.getByText(/^Scheduled for/)).toHaveCount(0);
     await page.reload();
     await expect(
@@ -80,14 +80,14 @@ test("offers recovery for a failed scheduled reply and guards uncertain delivery
   page,
 }, testInfo) => {
   const emailAccountId = await openReply(page);
-  const delivery = page.getByRole("region", { name: "Reply delivery status" });
+  const delivery = page.getByRole("region", { name: "回复投递状态" });
   try {
-    await page.getByRole("button", { name: "Send later", exact: true }).click();
+    await page.getByRole("button", { name: "定时发送", exact: true }).click();
     await page
-      .getByRole("dialog", { name: "Send later" })
-      .getByRole("button", { name: /Tomorrow morning/ })
+      .getByRole("dialog", { name: "定时发送" })
+      .getByRole("button", { name: /明天上午/ })
       .click();
-    await page.getByRole("button", { name: "Send", exact: true }).click();
+    await page.getByRole("button", { name: "发送", exact: true }).click();
     await expect(delivery.getByText(/^Scheduled for/)).toBeVisible();
     await setScheduledStatus(
       emailAccountId,
@@ -96,17 +96,17 @@ test("offers recovery for a failed scheduled reply and guards uncertain delivery
     );
     await page.reload();
     await expect(
-      delivery.getByText("Reply could not be sent", { exact: true }),
+      delivery.getByText("回复发送失败", { exact: true }),
     ).toBeVisible();
     await expect(
-      delivery.getByRole("button", { name: "Retry send" }),
+      delivery.getByRole("button", { name: "重试发送" }),
     ).toBeVisible();
     await capturePlaywrightCheckpoint(
       page,
       testInfo,
       "20-failed-reply-recovery",
     );
-    await delivery.getByRole("button", { name: "Retry send" }).click();
+    await delivery.getByRole("button", { name: "重试发送" }).click();
     await expect(delivery.getByText(/^Scheduled for/)).toBeVisible();
     await setScheduledStatus(
       emailAccountId,
@@ -115,16 +115,16 @@ test("offers recovery for a failed scheduled reply and guards uncertain delivery
     );
     await page.reload();
     await expect(
-      delivery.getByText("Couldn't confirm delivery", { exact: true }),
+      delivery.getByText("无法确认投递结果", { exact: true }),
     ).toBeVisible();
     await expect(
-      delivery.getByRole("link", { name: "Check Sent" }),
+      delivery.getByRole("link", { name: "查看已发送" }),
     ).toHaveAttribute("href", `/${emailAccountId}/mail?type=sent`);
     await expect(
-      delivery.getByRole("button", { name: "Retry send" }),
+      delivery.getByRole("button", { name: "重试发送" }),
     ).toHaveCount(0);
     await expect(
-      delivery.getByRole("button", { name: "Cancel send" }),
+      delivery.getByRole("button", { name: "取消发送" }),
     ).toHaveCount(0);
     await capturePlaywrightCheckpoint(page, testInfo, "21-uncertain-delivery");
   } finally {
@@ -151,22 +151,22 @@ test("sends a reply with a reminder through the local email provider", async ({
     .filter((message) => message.labelIds?.includes("SENT"))
     .map((message) => message.id);
   const message = `Confirmed for Thursday. Please bring the updated proposal. Attempt ${testInfo.retry}.`;
-  await page.getByRole("textbox", { name: "Email message" }).fill(message);
+  await page.getByRole("textbox", { name: "邮件内容" }).fill(message);
   try {
-    await page.getByRole("button", { name: "Remind me", exact: true }).click();
+    await page.getByRole("button", { name: "提醒我", exact: true }).click();
     await page
-      .getByRole("dialog", { name: "Remind me" })
-      .getByRole("button", { name: /Tomorrow morning/ })
+      .getByRole("dialog", { name: "提醒我" })
+      .getByRole("button", { name: /明天上午/ })
       .click();
-    await page.getByRole("button", { name: "Send", exact: true }).click();
+    await page.getByRole("button", { name: "发送", exact: true }).click();
     const delivery = page.getByRole("region", {
-      name: "Reply delivery status",
+      name: "回复投递状态",
     });
-    await expect(delivery.getByText("Reply sent", { exact: true })).toBeVisible(
+    await expect(delivery.getByText("回复已发送", { exact: true })).toBeVisible(
       { timeout: 60_000 },
     );
     await expect(
-      delivery.getByRole("button", { name: "Cancel reminder" }),
+      delivery.getByRole("button", { name: "取消提醒" }),
     ).toBeVisible();
     const scheduled = await withClient((client) =>
       client.query(
@@ -216,8 +216,8 @@ test("schedules a reply with a file from its mailbox draft and hides that draft"
 }, testInfo) => {
   test.setTimeout(240_000);
   const emailAccountId = await openReply(page);
-  const delivery = page.getByRole("region", { name: "Reply delivery status" });
-  const editor = page.getByRole("textbox", { name: "Email message" });
+  const delivery = page.getByRole("region", { name: "回复投递状态" });
+  const editor = page.getByRole("textbox", { name: "邮件内容" });
   let providerDraftId: string | null = null;
   try {
     await page.getByTestId("compose-attachments-input").setInputFiles({
@@ -225,7 +225,7 @@ test("schedules a reply with a file from its mailbox draft and hides that draft"
       mimeType: "text/plain",
       buffer: Buffer.from("Example agenda"),
     });
-    const attachments = page.getByRole("list", { name: "Attachments" });
+    const attachments = page.getByRole("list", { name: "附件" });
     await expect(attachments).toContainText("agenda.txt");
     await expect(attachments.locator("li[aria-busy]")).toHaveCount(0, {
       timeout: 90_000,
@@ -252,12 +252,12 @@ test("schedules a reply with a file from its mailbox draft and hides that draft"
     await page.reload();
     await expect(editor).toContainText(reopenedText);
 
-    await page.getByRole("button", { name: "Send later", exact: true }).click();
+    await page.getByRole("button", { name: "定时发送", exact: true }).click();
     await page
-      .getByRole("dialog", { name: "Send later" })
-      .getByRole("button", { name: /Tomorrow morning/ })
+      .getByRole("dialog", { name: "定时发送" })
+      .getByRole("button", { name: /明天上午/ })
       .click();
-    await page.getByRole("button", { name: "Send", exact: true }).click();
+    await page.getByRole("button", { name: "发送", exact: true }).click();
     await expect(delivery.getByText(/^Scheduled for/)).toBeVisible();
 
     const scheduled = await readScheduledReply(emailAccountId);
@@ -285,7 +285,7 @@ test("schedules a reply with a file from its mailbox draft and hides that draft"
 
     // Cancelling brings the draft back with its text, and reopening it again
     // (after autosave has had its chance to write) keeps that text.
-    await delivery.getByRole("button", { name: "Cancel send" }).click();
+    await delivery.getByRole("button", { name: "取消发送" }).click();
     await expect(delivery.getByText(/^Scheduled for/)).toHaveCount(0);
     for (let reopen = 0; reopen < 2; reopen++) {
       await page.reload();
@@ -331,27 +331,27 @@ test("schedules a new message from the composer", async ({
   const { emailAccountId } = await openMail(page);
   const subject = `Playwright Scheduled Message ${testInfo.retry}`;
   try {
-    await page.getByRole("button", { name: /^Compose/ }).click();
-    const dialog = page.getByRole("dialog", { name: "New Message" });
+    await page.getByRole("button", { name: /写邮件/ }).click();
+    const dialog = page.getByRole("dialog", { name: "新邮件" });
     await dialog
-      .getByRole("combobox", { name: "To" })
+      .getByRole("combobox", { name: "收件人" })
       .fill("recipient@example.com");
-    await dialog.getByPlaceholder("Subject").fill(subject);
+    await dialog.getByPlaceholder("主题").fill(subject);
     await dialog
       .locator("[contenteditable='true']")
       .pressSequentially("A scheduled message body.");
     await dialog
-      .getByRole("button", { name: "Send later", exact: true })
+      .getByRole("button", { name: "定时发送", exact: true })
       .click();
     await page
-      .getByRole("dialog", { name: "Send later" })
-      .getByRole("button", { name: /Tomorrow morning/ })
+      .getByRole("dialog", { name: "定时发送" })
+      .getByRole("button", { name: /明天上午/ })
       .click();
-    await dialog.getByRole("button", { name: "Send", exact: true }).click();
+    await dialog.getByRole("button", { name: "发送", exact: true }).click();
 
     await expect(dialog).toBeHidden();
     await expect(
-      page.getByText("Email scheduled.", { exact: true }),
+      page.getByText("邮件已定时发送。", { exact: true }),
     ).toBeVisible();
     const scheduled = await withClient((client) =>
       client.query(
@@ -380,15 +380,15 @@ test("hides a scheduled new message's mailbox draft from Drafts until it's cance
   const draftInList = conversationWithSubject(page, conversations, subject);
   try {
     await openMailboxFromSidebar(page, "Drafts");
-    await page.getByRole("button", { name: /^Compose/ }).click();
-    const dialog = page.getByRole("dialog", { name: "New Message" });
+    await page.getByRole("button", { name: /写邮件/ }).click();
+    const dialog = page.getByRole("dialog", { name: "新邮件" });
     await dialog
-      .getByRole("combobox", { name: "To", exact: true })
+      .getByRole("combobox", { name: "收件人", exact: true })
       .fill("recipient@example.com");
     await page.keyboard.press("Enter");
-    await dialog.getByPlaceholder("Subject").fill(subject);
+    await dialog.getByPlaceholder("主题").fill(subject);
     await dialog
-      .getByRole("textbox", { name: "Email message" })
+      .getByRole("textbox", { name: "邮件内容" })
       .fill("A scheduled message saved in the mailbox.");
     await expect
       .poll(() => readMailboxDrafts(page, emailAccountId, subject), {
@@ -398,16 +398,16 @@ test("hides a scheduled new message's mailbox draft from Drafts until it's cance
     await expect(draftInList).toBeVisible({ timeout: 60_000 });
 
     await dialog
-      .getByRole("button", { name: "Send later", exact: true })
+      .getByRole("button", { name: "定时发送", exact: true })
       .click();
     await page
-      .getByRole("dialog", { name: "Send later" })
-      .getByRole("button", { name: /Tomorrow morning/ })
+      .getByRole("dialog", { name: "定时发送" })
+      .getByRole("button", { name: /明天上午/ })
       .click();
-    await dialog.getByRole("button", { name: "Send", exact: true }).click();
+    await dialog.getByRole("button", { name: "发送", exact: true }).click();
     await expect(dialog).toBeHidden();
     await expect(
-      page.getByText("Email scheduled.", { exact: true }),
+      page.getByText("邮件已定时发送。", { exact: true }),
     ).toBeVisible();
 
     const scheduled = await withClient((client) =>
@@ -439,10 +439,10 @@ test("hides a scheduled new message's mailbox draft from Drafts until it's cance
       waitUntil: "domcontentloaded",
     });
     await page
-      .getByRole("list", { name: "Scheduled emails" })
+      .getByRole("list", { name: "定时发送邮件" })
       .getByRole("listitem")
       .filter({ hasText: subject })
-      .getByRole("button", { name: "Cancel send" })
+      .getByRole("button", { name: "取消发送" })
       .click();
     await expect(page.getByText(subject, { exact: true })).toHaveCount(0);
     await openMailboxFromSidebar(page, "Drafts");
@@ -486,23 +486,23 @@ test("adds a newly scheduled message to the Scheduled view already on screen", a
   });
 
   try {
-    await page.getByRole("button", { name: /^Compose/ }).click();
-    const dialog = page.getByRole("dialog", { name: "New Message" });
+    await page.getByRole("button", { name: /写邮件/ }).click();
+    const dialog = page.getByRole("dialog", { name: "新邮件" });
     await dialog
-      .getByRole("combobox", { name: "To" })
+      .getByRole("combobox", { name: "收件人" })
       .fill("recipient@example.com");
-    await dialog.getByPlaceholder("Subject").fill(subject);
+    await dialog.getByPlaceholder("主题").fill(subject);
     await dialog
       .locator("[contenteditable='true']")
       .pressSequentially("A scheduled message body.");
     await dialog
-      .getByRole("button", { name: "Send later", exact: true })
+      .getByRole("button", { name: "定时发送", exact: true })
       .click();
     await page
-      .getByRole("dialog", { name: "Send later" })
-      .getByRole("button", { name: /Tomorrow morning/ })
+      .getByRole("dialog", { name: "定时发送" })
+      .getByRole("button", { name: /明天上午/ })
       .click();
-    await dialog.getByRole("button", { name: "Send", exact: true }).click();
+    await dialog.getByRole("button", { name: "发送", exact: true }).click();
 
     await expect(dialog).toBeHidden();
     await expect(page.getByText(subject, { exact: true })).toBeVisible();
@@ -527,10 +527,10 @@ async function openReply(page: Page) {
   ).toBeVisible();
   await page
     .locator('li[data-thread-message-id="msg_playwright_reply"]')
-    .getByRole("button", { name: "Reply", exact: true })
+    .getByRole("button", { name: "回复", exact: true })
     .click();
   await page
-    .getByRole("textbox", { name: "Email message" })
+    .getByRole("textbox", { name: "邮件内容" })
     .fill("Thanks Leslie, Thursday works. I will bring the updated proposal.");
   return emailAccountId;
 }

@@ -28,22 +28,21 @@ export default function InvoiceEmail({
           <Container className="mx-auto w-full max-w-[600px] p-0">
             <Section className="px-8 py-10">
               <Text className="m-0 text-2xl font-semibold text-gray-900">
-                Your Inbox Zero invoice is ready
+                十组邮件小助手发票已准备好
               </Text>
               <Text className="mb-6 mt-4 text-[15px] leading-6 text-gray-600">
-                Your Stripe payment was successful. You can download the paid
-                invoice below.
+                Stripe 付款成功，可在下方下载已付款发票。
               </Text>
               <Button
                 href={invoiceUrl}
                 className="box-border rounded-lg bg-blue-600 px-5 py-3 text-[15px] font-semibold text-white no-underline"
               >
-                Download invoice
+                下载发票
               </Button>
               <Text className="mb-0 mt-8 text-[13px] leading-5 text-gray-500">
-                You can turn off automatic invoice emails in your{" "}
+                可在以下位置关闭自动发票邮件：{" "}
                 <Link href={`${baseUrl}/settings`} className="text-blue-600">
-                  billing settings
+                  账单设置
                 </Link>
                 .
               </Text>

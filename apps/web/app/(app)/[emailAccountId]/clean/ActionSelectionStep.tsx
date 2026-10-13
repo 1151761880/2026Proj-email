@@ -25,17 +25,17 @@ export function ActionSelectionStep() {
   return (
     <div className="text-center">
       <TypographyH3 className="mx-auto max-w-lg">
-        Would you like cleaned emails to be archived or marked as read?
+        整理后的邮件需要归档还是标为已读？
       </TypographyH3>
 
       <ButtonListSurvey
         className="mt-6"
         options={[
           {
-            label: "Archive",
+            label: "归档",
             value: CleanAction.ARCHIVE,
           },
-          { label: "Mark as Read", value: CleanAction.MARK_READ },
+          { label: "标为已读", value: CleanAction.MARK_READ },
         ]}
         onClick={(value) => onSetAction(value as CleanAction)}
       />

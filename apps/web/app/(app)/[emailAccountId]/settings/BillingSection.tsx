@@ -82,13 +82,11 @@ export function BillingSection() {
             <ItemTitle>{getPremiumTierName(tier)} plan</ItemTitle>
             {hasAppleSubscription ? (
               <ItemDescription>
-                This subscription is billed through Apple. Manage or cancel it
-                from your iPhone or iPad subscription settings.
+                此订阅由 Apple 计费，请在 iPhone 或 iPad 的订阅设置中管理或取消。
               </ItemDescription>
             ) : isLegacyStripePlan ? (
               <ItemDescription>
-                You&apos;re on grandfathered Stripe pricing. The current plan
-                prices shown elsewhere in the app are for new subscriptions.
+                你正在使用原有 Stripe 套餐价格，应用其他位置显示的是新订阅价格。
               </ItemDescription>
             ) : null}
           </ItemContent>
@@ -97,7 +95,7 @@ export function BillingSection() {
             <ViewInvoicesButton premium={premium} />
             {!hasAppleSubscription && (
               <Button asChild variant="outline" size="sm">
-                <Link href="/premium">Change plan</Link>
+                <Link href="/premium">更改套餐</Link>
               </Button>
             )}
           </ItemActions>
@@ -105,12 +103,12 @@ export function BillingSection() {
       ) : (
         <Item size="sm">
           <ItemContent>
-            <ItemTitle>No active plan</ItemTitle>
+            <ItemTitle>暂无有效套餐</ItemTitle>
           </ItemContent>
           <ItemActions>
             {premium && <ViewInvoicesButton premium={premium} />}
             <Button asChild variant="outline" size="sm">
-              <Link href="/premium">Upgrade</Link>
+              <Link href="/premium">升级</Link>
             </Button>
           </ItemActions>
         </Item>
@@ -121,14 +119,14 @@ export function BillingSection() {
           <ItemSeparator />
           <Item size="sm">
             <ItemContent>
-              <ItemTitle>Email paid invoices</ItemTitle>
+              <ItemTitle>通过邮件发送已付款发票</ItemTitle>
               <ItemDescription>
-                Automatically send each Stripe invoice to the billing email.
+                自动将每份 Stripe 发票发送到帐单邮箱。
               </ItemDescription>
             </ItemContent>
             <ItemActions>
               <Switch
-                aria-label="Email paid Stripe invoices"
+                aria-label="通过邮件发送已付款 Stripe 发票"
                 checked={premium.stripeInvoiceEmailsEnabled}
                 disabled={isExecuting}
                 onCheckedChange={handleInvoiceEmailToggle}

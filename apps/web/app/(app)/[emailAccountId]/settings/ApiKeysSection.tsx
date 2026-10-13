@@ -39,32 +39,32 @@ export function ApiKeysSection() {
   return (
     <Item size="sm">
       <ItemContent>
-        <ItemTitle>API Access</ItemTitle>
+        <ItemTitle>API 访问</ItemTitle>
       </ItemContent>
       <ItemActions>
         <Dialog>
           <DialogTrigger asChild>
             <Button variant="outline" size="sm">
-              View keys{keyCount > 0 ? ` (${keyCount})` : ""}
+              查看密钥{keyCount > 0 ? ` (${keyCount})` : ""}
             </Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-2xl">
             <DialogHeader>
-              <DialogTitle>API Keys</DialogTitle>
+              <DialogTitle>API 密钥</DialogTitle>
             </DialogHeader>
             <p className="text-sm text-muted-foreground">
-              Keys created here are limited to the current inbox account.
+              此处创建的密钥仅限当前邮箱账户使用。
             </p>
             <LoadingContent loading={isLoading} error={error}>
               {keyCount > 0 ? (
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead>Name</TableHead>
-                      <TableHead>Permissions</TableHead>
-                      <TableHead>Created</TableHead>
-                      <TableHead>Expires</TableHead>
-                      <TableHead>Last used</TableHead>
+                      <TableHead>名称</TableHead>
+                      <TableHead>权限</TableHead>
+                      <TableHead>创建时间</TableHead>
+                      <TableHead>到期时间</TableHead>
+                      <TableHead>最后使用</TableHead>
                       <TableHead />
                     </TableRow>
                   </TableHeader>
@@ -76,17 +76,17 @@ export function ApiKeysSection() {
                           {apiKey.scopes.map(formatApiKeyScope).join(", ")}
                         </TableCell>
                         <TableCell>
-                          {new Date(apiKey.createdAt).toLocaleString()}
+                          {new Date(apiKey.createdAt).toLocaleString("zh-CN")}
                         </TableCell>
                         <TableCell>
                           {apiKey.expiresAt
-                            ? new Date(apiKey.expiresAt).toLocaleString()
-                            : "Never"}
+                            ? new Date(apiKey.expiresAt).toLocaleString("zh-CN")
+                            : "永不"}
                         </TableCell>
                         <TableCell>
                           {apiKey.lastUsedAt
-                            ? new Date(apiKey.lastUsedAt).toLocaleString()
-                            : "Never"}
+                            ? new Date(apiKey.lastUsedAt).toLocaleString("zh-CN")
+                            : "永不"}
                         </TableCell>
                         <TableCell>
                           <ApiKeysDeactivateButton
@@ -101,7 +101,7 @@ export function ApiKeysSection() {
                 </Table>
               ) : (
                 <p className="text-sm text-muted-foreground">
-                  No API keys yet.
+                  暂无 API 密钥。
                 </p>
               )}
             </LoadingContent>

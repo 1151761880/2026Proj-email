@@ -48,12 +48,12 @@ export function DriveConnectionCard({
     useAction(disconnectDriveAction.bind(null, emailAccountId));
 
   const handleDisconnect = async () => {
-    if (confirm("Are you sure you want to disconnect this drive?")) {
+    if (confirm("确定断开此云存储连接吗？")) {
       const result = await executeDisconnect({ connectionId: connection.id });
 
       if (result?.serverError) {
         toastError({
-          title: "Error disconnecting drive",
+          title: "断开云存储失败",
           description: result.serverError,
         });
       } else {
@@ -77,7 +77,7 @@ export function DriveConnectionCard({
       {!connection.isConnected && (
         <div className="flex items-center gap-1 text-red-600">
           <XCircle className="h-3 w-3" />
-          <span className="text-xs">Disconnected</span>
+          <span className="text-xs">未连接</span>
         </div>
       )}
       <DropdownMenu>
@@ -85,7 +85,7 @@ export function DriveConnectionCard({
           <Button
             variant="ghost"
             size="icon2xs"
-            aria-label="Connection options"
+            aria-label="连接选项"
           >
             <MoreVertical className="h-4 w-4" />
           </Button>
@@ -97,7 +97,7 @@ export function DriveConnectionCard({
             className="text-red-600 focus:text-red-600"
           >
             <Trash2 className="mr-2 h-4 w-4" />
-            Disconnect
+            断开连接
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

@@ -231,9 +231,9 @@ function getErrorMessage(
   errorType?: FieldError["type"],
   errorMessage?: FieldError["message"],
 ) {
-  if (errorType === "required") return "This field is required";
-  if (errorType === "minLength") return "This field is too short";
-  if (errorType === "maxLength") return "This field is too long";
+  if (errorType === "required") return "此项必填";
+  if (errorType === "minLength") return "内容过短";
+  if (errorType === "maxLength") return "内容过长";
 
   return errorMessage;
 }

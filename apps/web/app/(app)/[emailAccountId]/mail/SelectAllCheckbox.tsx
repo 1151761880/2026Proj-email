@@ -25,15 +25,15 @@ export function SelectAllCheckbox({
 
   return (
     <Tooltip
-      content={allSelected ? "Deselect all conversations" : undefined}
+      content={allSelected ? "取消选择全部会话" : undefined}
       shortcuts={
         allSelected
           ? undefined
-          : [{ id: "selectAll", label: "Select all conversations" }]
+          : [{ id: "selectAll", label: "选择全部会话" }]
       }
     >
       <Checkbox
-        aria-label="Select all conversations"
+        aria-label="选择全部会话"
         checked={checked}
         className={cn(mailCheckboxClassName, "shrink-0")}
         disabled={threadCount === 0}

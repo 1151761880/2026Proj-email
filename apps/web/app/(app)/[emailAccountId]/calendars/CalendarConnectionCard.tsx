@@ -48,14 +48,14 @@ interface CalendarConnectionCardProps {
 const getProviderInfo = (provider: string) => {
   const providers = {
     microsoft: {
-      name: "Microsoft Calendar",
+      name: "Microsoft 日历",
       icon: "/images/product/outlook-calendar.svg",
-      alt: "Microsoft Calendar",
+      alt: "Microsoft 日历",
     },
     google: {
-      name: "Google Calendar",
+      name: "Google 日历",
       icon: "/images/product/google-calendar.svg",
-      alt: "Google Calendar",
+      alt: "Google 日历",
     },
   };
 
@@ -89,7 +89,7 @@ export function CalendarConnectionCard({
   const handleDisconnect = async () => {
     if (
       confirm(
-        "Are you sure you want to disconnect this calendar? This will remove all associated calendars.",
+        "确定断开此日历账户吗？所有关联日历将被移除。",
       )
     ) {
       executeDisconnect({ connectionId: connection.id });
@@ -161,7 +161,7 @@ export function CalendarConnectionCard({
                 {!connection.isConnected && (
                   <div className="flex shrink-0 items-center gap-1 text-red-600">
                     <XCircle className="h-3 w-3" />
-                    <span className="text-xs">Disconnected</span>
+                    <span className="text-xs">未连接</span>
                   </div>
                 )}
               </CardDescription>
@@ -172,7 +172,7 @@ export function CalendarConnectionCard({
               <DropdownMenuTrigger asChild>
                 <Button
                   type="button"
-                  aria-label="Calendar options"
+                  aria-label="日历选项"
                   disabled={isDisconnecting}
                   variant="ghostMuted"
                   size="iconSm"
@@ -189,7 +189,7 @@ export function CalendarConnectionCard({
                   className="text-destructive focus:text-destructive"
                 >
                   <Trash2Icon className="mr-2 size-4" />
-                  Disconnect
+                  断开连接
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -206,8 +206,7 @@ export function CalendarConnectionCard({
                 className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors w-full text-left"
               >
                 <span>
-                  {enabledCalendars.length} of {calendars.length} calendars
-                  selected for availability
+                  {enabledCalendars.length} of {calendars.length} 个日历用于检查可预约时间
                 </span>
                 <ChevronDown
                   className={`h-4 w-4 transition-transform ${
@@ -231,7 +230,7 @@ export function CalendarConnectionCard({
           </Collapsible>
         ) : (
           <TypographyP className="text-sm">
-            No calendars found. Your calendars will be synced automatically.
+            未找到日历，日历将自动同步。
           </TypographyP>
         )}
       </CardContent>

@@ -13,7 +13,7 @@ declare global {
 
 const ipc = window.inboxZeroDesktop;
 if (!ipc?.mailEngine) {
-  throw new Error("Desktop mail engine IPC is unavailable");
+  throw new Error("桌面邮件通信服务不可用");
 }
 
 const client = createMailIpcClient(ipc.mailEngine, {

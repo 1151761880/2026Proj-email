@@ -30,14 +30,14 @@ test("Outlook replies keep sending from the account address", async ({
     '[data-thread-message-id="msg_playwright_reply"]',
   );
   await expect(message).toBeVisible({ timeout: 60_000 });
-  await message.getByRole("button", { name: "Reply", exact: true }).click();
+  await message.getByRole("button", { name: "回复", exact: true }).click();
 
-  const summary = page.getByRole("button", { name: /^Draft to/ });
+  const summary = page.getByRole("button", { name: /草稿投递至/ });
   await expect(summary).toBeVisible();
   await expect(summary).not.toContainText(" from ");
   await summary.click();
-  await expect(page.getByRole("combobox", { name: "To" })).toBeVisible();
-  await expect(page.getByRole("combobox", { name: "From" })).toHaveCount(0);
+  await expect(page.getByRole("combobox", { name: "收件人" })).toBeVisible();
+  await expect(page.getByRole("combobox", { name: "发件人" })).toHaveCount(0);
   await clearWorkflowMailboxDrafts(page);
 });
 
@@ -72,18 +72,18 @@ test("replies from the alias a message was sent to", async ({
   await requestMailSync(page);
   await page.goto(`/${emailAccountId}/mail?thread-id=${threadId}`);
 
-  const reply = page.getByRole("button", { name: "Reply", exact: true });
+  const reply = page.getByRole("button", { name: "回复", exact: true });
   await expect(reply.first()).toBeVisible({ timeout: 60_000 });
   await reply.first().click();
 
-  const summary = page.getByRole("button", { name: /^Draft to/ });
+  const summary = page.getByRole("button", { name: /草稿投递至/ });
   await expect(summary).toContainText(`from ${ALIAS.email}`);
   await capturePlaywrightCheckpoint(page, testInfo, "reply-summary-from-alias");
 
   await summary.click();
-  const from = page.getByRole("combobox", { name: "From" });
+  const from = page.getByRole("combobox", { name: "发件人" });
   await expect(from).toContainText(ALIAS.email);
-  const editor = page.getByRole("textbox", { name: "Email message" });
+  const editor = page.getByRole("textbox", { name: "邮件内容" });
   await page.getByRole("button", { name: /^Show signature/ }).click();
   await expect(
     editor.locator("[data-smartmail]").getByText(ALIAS_SIGNATURE_TEXT),
@@ -93,7 +93,7 @@ test("replies from the alias a message was sent to", async ({
   await editor.click();
   await editor.press("ControlOrMeta+Home");
   await editor.pressSequentially("Thanks for reaching out.");
-  await page.getByRole("button", { name: "Send", exact: true }).click();
+  await page.getByRole("button", { name: "发送", exact: true }).click();
 
   await expect
     .poll(() => readSentFrom(page, threadId), {
@@ -119,29 +119,29 @@ test("switching the sender swaps the signature and sends from it", async ({
   await requestMailSync(page);
   await page.goto(`/${emailAccountId}/mail?thread-id=${threadId}`);
 
-  const reply = page.getByRole("button", { name: "Reply", exact: true });
+  const reply = page.getByRole("button", { name: "回复", exact: true });
   await expect(reply.first()).toBeVisible({ timeout: 60_000 });
   await reply.first().click();
-  await page.getByRole("button", { name: /^Draft to/ }).click();
+  await page.getByRole("button", { name: /草稿投递至/ }).click();
 
-  const editor = page.getByRole("textbox", { name: "Email message" });
+  const editor = page.getByRole("textbox", { name: "邮件内容" });
   await editor.pressSequentially("Written before switching.");
   await page.getByRole("button", { name: /^Show signature/ }).click();
   const signature = editor.locator("[data-smartmail]");
   await expect(signature.getByText(ALIAS_SIGNATURE_TEXT)).toBeVisible();
 
   const accountEmail = process.env.PLAYWRIGHT_TEST_EMAIL ?? "";
-  await page.getByRole("combobox", { name: "From" }).click();
+  await page.getByRole("combobox", { name: "发件人" }).click();
   await page.getByRole("option", { name: accountEmail }).click();
 
-  await expect(page.getByRole("combobox", { name: "From" })).toContainText(
+  await expect(page.getByRole("combobox", { name: "发件人" })).toContainText(
     accountEmail,
   );
   await expect(editor.getByText(ALIAS_SIGNATURE_TEXT)).toHaveCount(0);
   await expect(editor).toContainText("Written before switching.");
   await capturePlaywrightCheckpoint(page, testInfo, "switched-to-default");
 
-  await page.getByRole("button", { name: "Send", exact: true }).click();
+  await page.getByRole("button", { name: "发送", exact: true }).click();
   await expect
     .poll(() => readSentFrom(page, threadId), {
       timeout: UNDO_WINDOW_SEND_TIMEOUT_MS,
@@ -158,28 +158,28 @@ test("composes a new message from an alias", async ({ page }, testInfo) => {
   await openMail(page);
   const subject = `Composed from alias ${testInfo.retry}`;
 
-  await page.getByRole("button", { name: /^Compose/ }).click();
-  const dialog = page.getByRole("dialog", { name: "New Message" });
-  await dialog.getByRole("combobox", { name: "From" }).click();
+  await page.getByRole("button", { name: /写邮件/ }).click();
+  const dialog = page.getByRole("dialog", { name: "新邮件" });
+  await dialog.getByRole("combobox", { name: "发件人" }).click();
   await page
     .getByRole("option", { name: `${ALIAS.name} (${ALIAS.email})` })
     .click();
-  await expect(dialog.getByRole("combobox", { name: "From" })).toContainText(
+  await expect(dialog.getByRole("combobox", { name: "发件人" })).toContainText(
     ALIAS.email,
   );
 
   await dialog
-    .getByRole("combobox", { name: "To" })
+    .getByRole("combobox", { name: "收件人" })
     .fill("recipient@example.com");
-  await dialog.getByPlaceholder("Subject").fill(subject);
-  const editor = dialog.getByRole("textbox", { name: "Email message" });
+  await dialog.getByPlaceholder("主题").fill(subject);
+  const editor = dialog.getByRole("textbox", { name: "邮件内容" });
   await editor.pressSequentially("Sent from the support alias.");
   await dialog.getByRole("button", { name: "Show signature" }).click();
   await expect(
     editor.locator("[data-smartmail]").getByText(ALIAS_SIGNATURE_TEXT),
   ).toBeVisible();
   await capturePlaywrightCheckpoint(page, testInfo, "compose-from-alias");
-  await dialog.getByRole("button", { exact: true, name: "Send" }).click();
+  await dialog.getByRole("button", { exact: true, name: "发送" }).click();
   await expect(dialog).toBeHidden();
 
   await expect

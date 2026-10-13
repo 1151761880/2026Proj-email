@@ -21,27 +21,27 @@ import { captureException, getActionErrorMessage } from "@/utils/error";
 const COMPANY_SIZES = [
   {
     value: 1,
-    label: "Only me",
+    label: "仅我一人",
     icon: <User className="size-4" />,
   },
   {
     value: 5,
-    label: "2-10 people",
+    label: "2–10 人",
     icon: <Users className="size-4" />,
   },
   {
     value: 50,
-    label: "11-100 people",
+    label: "11–100 人",
     icon: <Building className="size-4" />,
   },
   {
     value: 500,
-    label: "101-1000 people",
+    label: "101–1000 人",
     icon: <Factory className="size-4" />,
   },
   {
     value: 1000,
-    label: "1000+ people",
+    label: "1000 人以上",
     icon: <Landmark className="size-4" />,
   },
 ];
@@ -63,7 +63,7 @@ export function StepCompanySize({ onNext }: { onNext: () => void }) {
         .then((result) => {
           if (result?.serverError || result?.validationErrors) {
             captureException(
-              new Error("Failed to save onboarding company size"),
+              new Error("保存公司规模失败"),
               {
                 extra: {
                   context: "onboarding",
@@ -96,7 +96,7 @@ export function StepCompanySize({ onNext }: { onNext: () => void }) {
           });
           toastError({
             description:
-              "We couldn't save that answer, but you can keep going.",
+              "未能保存此回答，你可以继续。",
           });
         });
     },
@@ -110,9 +110,9 @@ export function StepCompanySize({ onNext }: { onNext: () => void }) {
       </IconCircle>
 
       <div className="text-center mt-4">
-        <PageHeading>What's the size of your company?</PageHeading>
+        <PageHeading>公司有多少人？</PageHeading>
         <TypographyP className="mt-2 max-w-lg mx-auto">
-          This helps us tailor the experience to your organization's needs.
+          用于根据组织需求调整使用体验。
         </TypographyP>
       </div>
 

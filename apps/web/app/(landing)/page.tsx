@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Testimonials } from "@/components/new-landing/sections/Testimonials";
 import { Hero, HeroContent } from "@/app/(landing)/home/Hero";
 import { Pricing } from "@/components/new-landing/sections/Pricing";
 import { Awards } from "@/components/new-landing/sections/Awards";
@@ -23,8 +22,8 @@ export default function NewLanding() {
     return (
       <BasicLayout>
         <Hero
-          title={`${BRAND_NAME} for self-hosted teams`}
-          subtitle={`Deploy ${BRAND_NAME} on your own infrastructure and automate your inbox with full data control.`}
+          title={`适合自主部署团队的 ${BRAND_NAME}`}
+          subtitle={`在自己的服务器部署 ${BRAND_NAME}，自动管理收件箱并掌控数据。`}
         />
       </BasicLayout>
     );
@@ -37,45 +36,39 @@ export default function NewLanding() {
           <WordReveal
             spaceBetween="w-2 md:w-3"
             words={[
-              "Meet",
-              "your",
-              "AI",
-              "email",
-              "assistant",
-              "that",
-              <em key="actually">actually</em>,
-              "works",
+              "十组邮件小助手",
+              "让邮件",
+              <em key="actually">井然有序</em>,
             ]}
           />
         }
-        subtitle={`${BRAND_NAME} organizes your inbox and calendar, drafts replies in your voice, and helps you reach inbox zero fast. Never miss an important email again.`}
+        subtitle={`${BRAND_NAME} 自动整理收件箱和日历，按你的风格起草回复，帮助及时处理重要邮件。`}
       >
         <HeroContent />
       </Hero>
       <OrganizedInbox
         title={
           <>
-            Automatically organized.
+            自动整理。
             <br />
-            Never miss an important email again.
+            及时处理重要邮件。
           </>
         }
-        subtitle="Drowning in emails? Don't waste energy trying to prioritize your emails. Our AI assistant will label everything automatically."
+        subtitle="面对大量邮件，智能助手会自动添加标签，帮助你安排处理顺序。"
       />
       <PreWrittenDrafts
-        title="Pre-written drafts waiting in your inbox"
-        subtitle="When you check your inbox, every email needing a response will have a pre-drafted reply in your tone, ready for you to send."
+        title="回复草稿已准备好"
+        subtitle="查看收件箱时，需要回复的邮件已有符合你风格的草稿，等待确认发送。"
       />
       <ManageFromAnywhere />
       <StartedInMinutes
-        title="Get started in minutes"
-        subtitle="One-click setup. Start organizing and drafting replies in minutes."
+        title="快速开始"
+        subtitle="快速配置，开始整理邮件和起草回复。"
       />
       <BulkUnsubscribe />
       <EverythingElseSection />
       <Awards />
       <Pricing />
-      <Testimonials />
       <FinalCTA />
       <FAQs />
     </BasicLayout>

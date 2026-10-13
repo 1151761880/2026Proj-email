@@ -123,8 +123,7 @@ export function CommentComposer({
   };
   const notice = newlyShared.length ? (
     <span>
-      Sending will also share all past and future messages in this conversation
-      with{" "}
+      发送后，会将此会话的历史和后续邮件共享给{" "}
       <span className="font-medium text-foreground">
         {new Intl.ListFormat(undefined, { type: "conjunction" }).format(
           newlyShared.map((candidate) => candidate.name),
@@ -147,7 +146,7 @@ export function CommentComposer({
           <div
             id="comment-mentions"
             role="listbox"
-            aria-label="Mention a teammate"
+            aria-label="提及团队成员"
             className="absolute bottom-full left-0 z-10 mb-1 w-64 rounded-md border bg-popover p-1 shadow-md"
           >
             {suggestions.map((candidate, index) => (
@@ -165,7 +164,7 @@ export function CommentComposer({
                 {candidate.name}
                 {!participantIds.includes(candidate.memberId) && (
                   <span className="text-muted-foreground text-xs">
-                    Not shared yet
+                    尚未共享
                   </span>
                 )}
               </button>
@@ -174,7 +173,7 @@ export function CommentComposer({
         )}
         <div className="flex items-end gap-2 rounded-lg border bg-background py-1.5 pr-1.5 pl-3 transition-[box-shadow] focus-within:border-ring focus-within:ring-[3px] focus-within:ring-ring/50">
           <label className="sr-only" htmlFor="internal-comment">
-            Internal comment
+            内部评论
           </label>
           <AutosizeTextarea
             id="internal-comment"
@@ -182,7 +181,7 @@ export function CommentComposer({
             minRows={1}
             maxRows={10}
             maxLength={10_000}
-            placeholder="Comment and @mention a teammate"
+            placeholder="发表评论，使用 @ 提及成员"
             value={body}
             onChange={(event: ChangeEvent<HTMLTextAreaElement>) => {
               const next = event.target.value;
@@ -212,7 +211,7 @@ export function CommentComposer({
             className="rounded-full"
             variant={canSubmit ? "default" : "ghost"}
             disabled={!canSubmit}
-            aria-label={error ? "Retry comment" : "Post comment"}
+            aria-label={error ? "重新提交评论" : "发表评论"}
             onClick={submit}
           >
             <ArrowUpIcon className="size-4" />
@@ -221,12 +220,12 @@ export function CommentComposer({
       </div>
       {!online && (
         <p className="px-1 text-muted-foreground text-xs" role="status">
-          Offline. Reconnect to post your comment.
+          当前离线，连接网络后可发表评论。
         </p>
       )}
       {error && (
         <p className="px-1 text-destructive text-xs" role="alert">
-          {error} Your draft is saved here; retry when ready.
+          {error} 草稿已保存在此，准备好后可重试。
         </p>
       )}
     </div>

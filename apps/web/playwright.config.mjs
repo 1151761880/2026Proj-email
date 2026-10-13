@@ -276,6 +276,9 @@ export default defineConfig({
         // Every model role resolves to the emulator so no spec depends on a
         // live provider.
         DEFAULT_LLMS: `openai-compatible:${llmModelName}`,
+        MAIL_TRIAGE_API_KEY: "playwright-only-key",
+        MAIL_TRIAGE_BASE_URL: llmBaseUrl,
+        MAIL_TRIAGE_MODEL: llmModelName,
         ECONOMY_LLMS: "",
         CHAT_LLMS: "",
         NANO_LLMS: "",
@@ -295,7 +298,7 @@ export default defineConfig({
         RESEND_API_KEY: "playwright-email-key",
         RESEND_BASE_URL: emailBaseUrl,
         RESEND_AUDIENCE_ID: "playwright-audience",
-        RESEND_FROM_EMAIL: "Inbox Zero <signin@example.com>",
+        RESEND_FROM_EMAIL: "十组邮件小助手 <signin@example.com>",
         LOOPS_API_SECRET: "",
         DUB_API_KEY: "",
         FB_CONVERSION_API_ACCESS_TOKEN: "",
@@ -491,7 +494,7 @@ function createCalendarInviteMessage({ recipient, start, end }) {
   const ics = [
     "BEGIN:VCALENDAR",
     "VERSION:2.0",
-    "PRODID:-//Inbox Zero//Playwright//EN",
+    "PRODID:-//十组邮件小助手//Playwright//EN",
     "METHOD:REQUEST",
     "BEGIN:VEVENT",
     "UID:playwright-calendar-invite@example.com",

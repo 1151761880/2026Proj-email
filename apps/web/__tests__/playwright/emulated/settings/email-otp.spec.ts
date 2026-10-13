@@ -9,7 +9,7 @@ test("an assistant signs in after owner opt-in and loses access when it is disab
 }) => {
   await openSettings(page);
   const toggle = page.getByRole("switch", {
-    name: "Allow sign-in with a one-time email code",
+    name: "允许通过一次性邮件验证码登录",
     exact: true,
   });
   const settingsResponse = await page.request.get("/api/user/email-otp");
@@ -39,10 +39,10 @@ test("an assistant signs in after owner opt-in and loses access when it is disab
       path: test.info().outputPath("login-options.png"),
       fullPage: true,
     });
-    await assistantPage.getByRole("link", { name: "Other options" }).click();
+    await assistantPage.getByRole("link", { name: "其他方式" }).click();
     await expect(
       assistantPage.getByRole("link", {
-        name: "Email code (existing accounts)",
+        name: "邮件验证码（已有账户）",
         exact: true,
       }),
     ).toBeVisible();
@@ -52,24 +52,24 @@ test("an assistant signs in after owner opt-in and loses access when it is disab
     });
     await assistantPage
       .getByRole("link", {
-        name: "Email code (existing accounts)",
+        name: "邮件验证码（已有账户）",
         exact: true,
       })
       .click();
     await expect(assistantPage).toHaveURL(/\/login\/email\?next=/);
     await expect(
-      assistantPage.getByRole("button", { name: "Sign in with Google" }),
+      assistantPage.getByRole("button", { name: "使用 Google 登录" }),
     ).toHaveCount(0);
     await assistantPage.screenshot({
       path: test.info().outputPath("email-code-login.png"),
       fullPage: true,
     });
-    await assistantPage.getByLabel("Email", { exact: true }).fill(email);
+    await assistantPage.getByLabel("邮件", { exact: true }).fill(email);
     await assistantPage
-      .getByRole("button", { name: "Send code", exact: true })
+      .getByRole("button", { name: "发送验证码", exact: true })
       .click();
     await expect(
-      assistantPage.getByLabel("Sign-in code", { exact: true }),
+      assistantPage.getByLabel("登录验证码", { exact: true }),
     ).toBeVisible();
     await assistantPage.screenshot({
       path: test.info().outputPath("email-code-verification.png"),
@@ -88,19 +88,19 @@ test("an assistant signs in after owner opt-in and loses access when it is disab
         }[];
         code = messages
           .findLast(
-            (message) => message.subject === "Your Inbox Zero sign-in code",
+            (message) => message.subject === "十组邮件小助手登录验证码",
           )
           ?.text.match(/\b\d{6}\b/)?.[0];
         return !!code;
       })
       .toBe(true);
-    await assistantPage.getByLabel("Sign-in code", { exact: true }).fill(code!);
+    await assistantPage.getByLabel("登录验证码", { exact: true }).fill(code!);
     await assistantPage
-      .getByRole("button", { name: "Sign in", exact: true })
+      .getByRole("button", { name: "登录", exact: true })
       .click();
     await expect(assistantPage).toHaveURL(/\/settings$/);
     const assistantToggle = assistantPage.getByRole("switch", {
-      name: "Allow sign-in with a one-time email code",
+      name: "允许通过一次性邮件验证码登录",
       exact: true,
     });
     await expect(assistantToggle).toBeChecked();
@@ -141,15 +141,15 @@ test("email code login does not disclose account existence", async ({
 }) => {
   await page.context().clearCookies();
   await page.goto("/login");
-  await page.getByRole("link", { name: "Other options" }).click();
+  await page.getByRole("link", { name: "其他方式" }).click();
   await page
-    .getByRole("link", { name: "Email code (existing accounts)", exact: true })
+    .getByRole("link", { name: "邮件验证码（已有账户）", exact: true })
     .click();
-  await page.getByLabel("Email", { exact: true }).fill("unknown@example.com");
-  await page.getByRole("button", { name: "Send code", exact: true }).click();
-  await expect(page.getByLabel("Sign-in code", { exact: true })).toBeVisible();
+  await page.getByLabel("邮件", { exact: true }).fill("unknown@example.com");
+  await page.getByRole("button", { name: "发送验证码", exact: true }).click();
+  await expect(page.getByLabel("登录验证码", { exact: true })).toBeVisible();
   await expect(
-    page.getByRole("heading", { name: "Check your email" }),
+    page.getByRole("heading", { name: "请查看邮件" }),
   ).toBeVisible();
 });
 

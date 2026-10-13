@@ -17,11 +17,11 @@ test("refreshes date groups after midnight when the tab resumes", async ({
   await page.clock.install({ time: mailboxDay });
   const { conversations } = await openMail(page);
   const today = conversations.getByRole("group", {
-    name: "Today",
+    name: "今天",
     exact: true,
   });
   await expect(today).toBeVisible();
-  await expect(today.getByText("Today", { exact: true })).toHaveCount(0);
+  await expect(today.getByText("今天", { exact: true })).toHaveCount(0);
   const todaySubjects = await today
     .locator("[data-mail-thread-subject]")
     .allTextContents();
@@ -38,14 +38,14 @@ test("refreshes date groups after midnight when the tab resumes", async ({
   await page.evaluate(() => window.dispatchEvent(new Event("focus")));
 
   const yesterday = conversations.getByRole("group", {
-    name: "Yesterday",
+    name: "昨天",
     exact: true,
   });
   for (const subject of todaySubjects) {
     await expect(yesterday.getByText(subject, { exact: true })).toBeVisible();
     await expect(today.getByText(subject, { exact: true })).toHaveCount(0);
   }
-  await expect(yesterday.getByText("Yesterday", { exact: true })).toBeVisible();
+  await expect(yesterday.getByText("昨天", { exact: true })).toBeVisible();
   await capturePlaywrightCheckpoint(page, testInfo, "mail-date-rollover");
 });
 
@@ -53,11 +53,11 @@ test("switches between list and split reading layouts", async ({
   page,
 }, testInfo) => {
   const { conversations } = await openMail(page);
-  const emptyReader = page.getByText("Nothing selected", { exact: true });
+  const emptyReader = page.getByText("未选择邮件", { exact: true });
   await expect(emptyReader).toBeHidden();
   await capturePlaywrightCheckpoint(page, testInfo, "mail-list-layout");
 
-  await page.getByRole("button", { name: "Switch list or split view" }).click();
+  await page.getByRole("button", { name: "切换列表或分栏视图" }).click();
   await expect(emptyReader).toBeVisible();
   await expect(conversations).toBeVisible();
   await capturePlaywrightCheckpoint(page, testInfo, "mail-split-layout");
@@ -84,7 +84,7 @@ test("switches between list and split reading layouts", async ({
   await expect(page.getByRole("button", { name: /Focus mode/i })).toHaveCount(
     0,
   );
-  await page.getByRole("button", { name: "Switch list or split view" }).click();
+  await page.getByRole("button", { name: "切换列表或分栏视图" }).click();
   await page.keyboard.press("Escape");
   await expect(conversations).toBeVisible();
 });
@@ -96,11 +96,11 @@ test("expands and shortens the conversation preview text", async ({
   // Only the wide list puts the snippet beside the subject, so the split
   // preference has to be off for the two preview branches to differ.
   await expect(
-    page.getByText("Nothing selected", { exact: true }),
+    page.getByText("未选择邮件", { exact: true }),
   ).toBeHidden();
 
   const toggle = page.getByRole("button", {
-    name: "Expand or shorten preview text",
+    name: "展开或缩短预览文字",
   });
   // Both preferences outlive a test, so start from short rather than assume it.
   if ((await toggle.getAttribute("aria-pressed")) === "true") {

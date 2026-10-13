@@ -47,13 +47,13 @@ export function RegisterSSOModal() {
 
       if (result?.serverError) {
         toastError({
-          title: "Error registering SSO",
+          title: "注册单点登录失败",
           description: result.serverError,
         });
       } else {
         toastSuccess({
-          title: "SSO registered successfully",
-          description: `ACS URL: ${result?.data?.callbackUrl}`,
+          title: "单点登录已注册",
+          description: `ACS 地址：${result?.data?.callbackUrl}`,
         });
         reset();
         onClose();
@@ -65,15 +65,14 @@ export function RegisterSSOModal() {
   return (
     <Dialog open={isOpen} onOpenChange={onToggle}>
       <DialogTrigger asChild>
-        <Button>Register SSO Provider</Button>
+        <Button>注册单点登录服务</Button>
       </DialogTrigger>
 
       <DialogContent className="max-w-2xl">
         <DialogHeader>
-          <DialogTitle>Enterprise SSO Registration (SAML)</DialogTitle>
+          <DialogTitle>企业单点登录注册（SAML）</DialogTitle>
           <DialogDescription>
-            Configure Single Sign-On (SAML) for your organization. This will
-            enable your team to sign in using your SAML identity provider.
+            为组织配置 SAML 单点登录，团队成员可使用对应身份服务登录。
           </DialogDescription>
         </DialogHeader>
 
@@ -82,8 +81,8 @@ export function RegisterSSOModal() {
             <Input
               type="text"
               name="organizationName"
-              label="Organization Name"
-              placeholder="e.g., Your Company"
+              label="组织名称"
+              placeholder="例如：公司名称"
               registerProps={register("organizationName")}
               error={errors.organizationName}
             />
@@ -91,8 +90,8 @@ export function RegisterSSOModal() {
             <Input
               type="text"
               name="organizationId"
-              label="Existing Organization ID (optional)"
-              placeholder="Required when attaching SSO to an existing organization"
+              label="现有组织 ID（可选）"
+              placeholder="关联现有组织的单点登录时必填"
               registerProps={register("organizationId", {
                 setValueAs: (value) => value || undefined,
               })}
@@ -102,7 +101,7 @@ export function RegisterSSOModal() {
             <Input
               type="text"
               name="providerId"
-              label="Provider ID"
+              label="服务提供商 ID"
               placeholder="e.g., your-company-saml"
               registerProps={register("providerId")}
               error={errors.providerId}
@@ -111,20 +110,20 @@ export function RegisterSSOModal() {
             <Input
               type="text"
               name="domain"
-              label="Domain"
+              label="域名"
               placeholder="e.g., your-company.com"
               registerProps={register("domain")}
               error={errors.domain}
             />
 
             <div className="space-y-2">
-              <Label name="idpMetadata" label="IDP Metadata (XML)" />
+              <Label name="idpMetadata" label="身份服务元数据（XML）" />
               <AutosizeTextarea
                 id="idpMetadata"
                 minRows={3}
                 rows={3}
                 {...register("idpMetadata")}
-                placeholder="Paste your SAML IDP metadata XML from your identity provider here."
+                placeholder="在此粘贴身份服务提供的 SAML 元数据 XML。"
               />
               {errors.idpMetadata && (
                 <ErrorMessage message={errors.idpMetadata.message ?? ""} />
@@ -134,10 +133,10 @@ export function RegisterSSOModal() {
 
           <DialogFooter>
             <DialogClose asChild>
-              <Button variant="outline">Cancel</Button>
+              <Button variant="outline">取消</Button>
             </DialogClose>
             <Button type="submit" loading={isExecuting}>
-              Register SSO
+              注册单点登录
             </Button>
           </DialogFooter>
         </form>

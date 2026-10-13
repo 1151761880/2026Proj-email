@@ -27,8 +27,8 @@ export function ResetAnalyticsSection({
       <ItemSeparator />
       <Item size="sm">
         <ItemContent>
-          <ItemTitle>Reset Analytics</ItemTitle>
-          <ItemDescription>Permanently delete all analytics</ItemDescription>
+          <ItemTitle>重置统计数据</ItemTitle>
+          <ItemDescription>永久删除全部统计数据</ItemDescription>
         </ItemContent>
         <ItemActions>
           <Button
@@ -36,17 +36,15 @@ export function ResetAnalyticsSection({
             variant="outline"
             onClick={async () => {
               toast.promise(() => executeResetAnalytics(), {
-                loading: "Resetting analytics...",
+                loading: "正在重置统计数据…",
                 success: () =>
-                  "Analytics reset! Visit the Unsubscriber or Analytics page and click the 'Load More' button to reload your data.",
+                  "统计数据已重置！在退订或统计页面点击“加载更多”重新加载数据。",
                 error: (err: unknown) =>
-                  `Error resetting analytics: ${
-                    err instanceof Error ? err.message : "Unknown error"
-                  }`,
+                  `重置统计数据失败：${err instanceof Error ? err.message : "未知错误"}`,
               });
             }}
           >
-            Reset
+            重置
           </Button>
         </ItemActions>
       </Item>

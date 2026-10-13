@@ -59,7 +59,7 @@ export function CalendarInvitation({ messageId }: { messageId: string }) {
   return (
     <section
       className="mb-4 rounded-lg border bg-muted/30 p-4"
-      aria-label="Calendar invitation"
+      aria-label="日历邀请"
     >
       <LoadingContent loading={isLoading} error={error}>
         {invitation && (
@@ -76,7 +76,7 @@ export function CalendarInvitation({ messageId }: { messageId: string }) {
                 </p>
                 {invitation.recurring && (
                   <p className="text-sm text-muted-foreground">
-                    Recurring invitation
+                    重复日历邀请
                   </p>
                 )}
               </div>
@@ -102,12 +102,12 @@ export function CalendarInvitation({ messageId }: { messageId: string }) {
             )}
 
             <fieldset className="flex flex-wrap gap-2">
-              <legend className="sr-only">Your response</legend>
+              <legend className="sr-only">你的答复</legend>
               {(
                 [
-                  ["accepted", "Yes"],
-                  ["declined", "No"],
-                  ["tentative", "Maybe"],
+                  ["accepted", "是"],
+                  ["declined", "否"],
+                  ["tentative", "待定"],
                 ] as const
               ).map(([value, label]) => (
                 <Button

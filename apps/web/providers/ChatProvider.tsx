@@ -401,7 +401,7 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
 
     try {
       const response = await stopRequest;
-      if (!response.ok) throw new Error(`Status ${response.status}`);
+      if (!response.ok) throw new Error(`状态 ${response.status}`);
     } catch (error) {
       logger.warn("Failed to stop assistant chat run", {
         chatId,
@@ -554,7 +554,7 @@ function reportChatRequestError({
   });
   logger.flush().catch(() => undefined);
   toastError({
-    description: "We couldn't send your message. Please try again.",
+    description: "无法发送消息，请重试。",
   });
   console.error(error);
   captureException(error);

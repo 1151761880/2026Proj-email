@@ -87,7 +87,7 @@ describe.skipIf(!RUN_INTEGRATION_TESTS)(
               {
                 client_id: CLIENT_ID,
                 client_secret: CLIENT_SECRET,
-                name: "Inbox Zero SSO",
+                name: "十组邮件小助手 SSO",
                 redirect_uris: [CALLBACK_URL],
                 auth_server_id: "default",
                 token_endpoint_auth_method: "client_secret_post",

@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Inbox Zero Documentation",
+  "name": "十组邮件小助手中文文档",
   "colors": {
     "primary": "#2563eb",
     "light": "#60a5fa",
@@ -11,171 +11,83 @@
   "navigation": {
     "anchors": [
       {
-        "anchor": "Documentation",
+        "anchor": "项目与使用",
         "icon": "book-open",
         "groups": [
           {
-            "group": "Get Started",
+            "group": "项目说明",
             "pages": [
-              "introduction",
-              "essentials/getting-started"
+              "zh-CN/overview",
+              "zh-CN/quick-start",
+              "zh-CN/architecture",
+              "zh-CN/glossary"
             ]
           },
           {
-            "group": "Assistant & Automation",
+            "group": "邮箱与智能助手",
             "pages": [
-              "essentials/ai-chat",
-              "essentials/email-ai-personal-assistant",
-              "essentials/assistant-settings",
-              "essentials/email-digest",
-              "essentials/delayed-actions",
-              "essentials/call-webhook"
+              "zh-CN/mail",
+              "zh-CN/assistant",
+              "zh-CN/mail-triage",
+              "zh-CN/cleanup",
+              "zh-CN/drafts-and-follow-up"
             ]
           },
           {
-            "group": "Cleanup",
+            "group": "日历与协作",
             "pages": [
-              "essentials/bulk-email-unsubscriber",
-              "essentials/bulk-archiver",
-              "essentials/email-analytics"
+              "zh-CN/calendar-and-meetings",
+              "zh-CN/attachments-and-integrations",
+              "zh-CN/channels",
+              "zh-CN/accounts-and-team",
+              "zh-CN/clients"
             ]
           },
           {
-            "group": "Calendar & Meetings",
+            "group": "数据与安全",
             "pages": [
-              "essentials/calendar-integration",
-              "essentials/booking-links",
-              "essentials/meeting-briefs"
-            ]
-          },
-          {
-            "group": "Channels & Integrations",
-            "pages": [
-              "essentials/channels",
-              "essentials/slack-integration",
-              "essentials/telegram-integration",
-              "essentials/mcp"
-            ]
-          },
-          {
-            "group": "Inbox Features",
-            "pages": [
-              "essentials/auto-file-attachments",
-              "essentials/cold-email-blocker"
-            ]
-          },
-          {
-            "group": "Apps",
-            "pages": [
-              "essentials/mobile-apps",
-              "essentials/inbox-zero-tabs-extension"
-            ]
-          },
-          {
-            "group": "Teams & Account",
-            "pages": [
-              "essentials/organizations",
-              "essentials/api-keys"
-            ]
-          },
-          {
-            "group": "Safety & Help",
-            "pages": [
-              "essentials/security-and-data",
-              "essentials/outlook-guide",
-              "essentials/troubleshooting",
-              "essentials/faq"
-            ]
-          },
-          {
-            "group": "Early Access",
-            "pages": [
-              "essentials/meeting-recorder",
-              "essentials/deep-clean",
-              "essentials/reply-zero",
-              "essentials/context-integrations"
+              "zh-CN/data-and-security"
             ]
           }
         ]
       },
       {
-        "anchor": "Developers",
+        "anchor": "部署与开发",
         "icon": "code",
         "groups": [
           {
-            "group": "Quick Start",
+            "group": "部署准备",
             "pages": [
-              "hosting/quick-start",
-              "hosting/setup-cli-reference"
+              "zh-CN/configuration",
+              "zh-CN/self-hosting",
+              "zh-CN/oauth",
+              "zh-CN/ai-models"
             ]
           },
           {
-            "group": "Setup Guides",
+            "group": "后台与运维",
             "pages": [
-              "hosting/setup-guides",
-              "hosting/google-oauth",
-              "hosting/google-pubsub",
-              "hosting/microsoft-oauth",
-              "hosting/sso",
-              "hosting/llm-setup"
+              "zh-CN/jobs-and-webhooks",
+              "zh-CN/cloud-deployment",
+              "zh-CN/operations",
+              "zh-CN/troubleshooting"
             ]
           },
           {
-            "group": "Self-Hosting",
+            "group": "开发与接口",
             "pages": [
-              "hosting/self-hosting",
-              "hosting/environment-variables",
-              "hosting/production-operations",
-              "hosting/security-hardening",
-              "hosting/vercel",
-              "hosting/kubernetes",
-              "hosting/troubleshooting",
-              "hosting/image-proxy"
+              "zh-CN/development",
+              "zh-CN/testing",
+              "zh-CN/mail-engine",
+              "zh-CN/api",
+              "zh-CN/cli-and-mcp"
             ]
           },
           {
-            "group": "AWS Deployment",
+            "group": "版本与参考",
             "pages": [
-              "hosting/aws",
-              "hosting/ec2-deployment",
-              "hosting/terraform",
-              "hosting/aws-copilot"
-            ]
-          },
-          {
-            "group": "GCP Deployment",
-            "pages": [
-              "hosting/gcp-cloudflare-tunnel"
-            ]
-          },
-          {
-            "group": "Contributing",
-            "pages": [
-              "contributing"
-            ]
-          },
-          {
-            "group": "Integrations",
-            "pages": [
-              "slack/setup",
-              "teams/setup",
-              "telegram/setup"
-            ]
-          },
-          {
-            "group": "API",
-            "pages": [
-              "api-reference/introduction",
-              "api-reference/cli",
-              "api-reference/mcp",
-              "api-reference/endpoint/get-statsby-period",
-              "api-reference/endpoint/get-statsresponse-time",
-              "api-reference/endpoint/get-rules",
-              "api-reference/endpoint/post-rules",
-              "api-reference/endpoint/get-rules-id",
-              "api-reference/endpoint/put-rules-id",
-              "api-reference/endpoint/delete-rules-id",
-              "api-reference/endpoint/post-senders-unsubscribe"
+              "zh-CN/version-history",
+              "zh-CN/source-references"
             ]
           }
         ]
@@ -184,48 +96,41 @@
     "global": {
       "anchors": [
         {
-          "anchor": "Changelog",
-          "href": "/changelog",
+          "anchor": "变更说明",
+          "href": "/zh-CN/version-history",
           "icon": "clock-rotate-left"
         },
         {
-          "anchor": "Community",
-          "href": "https://getinboxzero.com/discord",
-          "icon": "discord"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://www.getinboxzero.com/blog",
-          "icon": "newspaper"
+          "anchor": "原文与备份",
+          "href": "/zh-CN/source-references",
+          "icon": "box-archive"
         }
       ]
     }
   },
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "/logo/shizu.svg",
+    "dark": "/logo/shizu-dark.svg"
   },
   "api": {
-    "openapi": "openapi.json"
+    "openapi": "zh-CN/openapi.json"
   },
   "navbar": {
     "links": [
       {
-        "label": "Support",
-        "href": "mailto:support@getinboxzero.com"
+        "label": "文档概览",
+        "href": "/zh-CN/overview"
       }
     ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://www.getinboxzero.com/welcome"
+      "label": "本地应用",
+      "href": "http://localhost:3000/mail"
     }
   },
   "footer": {
     "socials": {
-      "twitter": "https://www.getinboxzero.com/twitter",
-      "github": "https://www.getinboxzero.com/github",
-      "linkedin": "https://www.getinboxzero.com/linkedin"
+      "github": "https://github.com/elie222/inbox-zero"
     }
   }
 }

@@ -16,17 +16,13 @@ import { Button } from "@/components/ui/button";
 import { WELCOME_PATH } from "@/utils/config";
 import { CrispChatLoggedOutVisible } from "@/components/CrispChat";
 import { MutedText } from "@/components/Typography";
+import { Logo } from "@/components/Logo";
 import { normalizeInternalPath } from "@/utils/path";
-import {
-  BRAND_NAME,
-  SUPPORT_EMAIL,
-  getBrandTitle,
-  getPossessiveBrandName,
-} from "@/utils/branding";
+import { BRAND_NAME, SUPPORT_EMAIL, getBrandTitle } from "@/utils/branding";
 
 export const metadata: Metadata = {
-  title: getBrandTitle("Log in"),
-  description: `Log in to ${BRAND_NAME}.`,
+  title: getBrandTitle("登录"),
+  description: `登录 ${BRAND_NAME}。`,
   alternates: { canonical: "/login" },
 };
 
@@ -48,10 +44,9 @@ export default async function AuthenticationPage(props: {
     <div className="flex min-h-screen flex-col justify-center py-10 text-foreground">
       <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
         <div className="flex flex-col text-center">
-          <h1 className="font-title text-2xl text-foreground">Sign In</h1>
-          <p className="mt-4 text-muted-foreground">
-            Your AI personal assistant for email.
-          </p>
+          <Logo className="mx-auto mb-6 h-6 w-auto text-foreground" />
+          <h1 className="font-title text-2xl text-foreground">登录</h1>
+          <p className="mt-4 text-muted-foreground">你的智能邮件小助手。</p>
         </div>
         <div className="mt-4">
           <Suspense>
@@ -66,19 +61,19 @@ export default async function AuthenticationPage(props: {
 
         {!isSelfHosted ? (
           <MutedText className="px-8 pt-10 text-center">
-            By clicking continue, you agree to our{" "}
+            点击继续即表示同意{" "}
             <Link
               href="/terms"
               className="underline underline-offset-4 hover:text-foreground"
             >
-              Terms of Service
+              服务条款
             </Link>{" "}
-            and{" "}
+            和{" "}
             <Link
               href="/privacy"
               className="underline underline-offset-4 hover:text-foreground"
             >
-              Privacy Policy
+              隐私政策
             </Link>
             .
           </MutedText>
@@ -121,15 +116,14 @@ function LoginFooter({
         isSelfHosted ? "px-4 pt-10 text-center" : "px-4 pt-4 text-center"
       }
     >
-      {getPossessiveBrandName()} use and transfer of information received from
-      Google APIs to any other app will adhere to{" "}
+      {BRAND_NAME}对从 Google API 获取的信息进行使用和传输时，将遵守{" "}
       <a
         href="https://developers.google.com/terms/api-services-user-data-policy"
         className="underline underline-offset-4 hover:text-foreground"
       >
-        Google API Services User Data
+        Google API 服务用户数据
       </a>{" "}
-      Policy, including the Limited Use requirements.
+      政策，包括有限使用要求。
     </MutedText>
   );
 }
@@ -139,7 +133,7 @@ function ErrorAlert({ error }: { error: string }) {
     return (
       <AlertBasic
         variant="destructive"
-        title="Permissions need to be refreshed"
+        title="需要刷新权限"
         description={getRequiresReconsentDescription({
           includeSupportText: true,
         })}
@@ -151,12 +145,12 @@ function ErrorAlert({ error }: { error: string }) {
     return (
       <AlertBasic
         variant="destructive"
-        title="Account already attached to another user"
+        title="账户已关联其他用户"
         description={
           <>
-            <span>You can merge accounts instead.</span>
+            <span>可通过合并账户继续。</span>
             <Button asChild className="mt-2">
-              <Link href="/accounts">Merge accounts</Link>
+              <Link href="/accounts">合并账户</Link>
             </Button>
           </>
         }
@@ -168,7 +162,7 @@ function ErrorAlert({ error }: { error: string }) {
     return (
       <AlertBasic
         variant="destructive"
-        title="Email Already Linked"
+        title="邮箱已关联"
         description={getEmailAlreadyLinkedDescription({
           includeSupportText: true,
         })}
@@ -180,8 +174,8 @@ function ErrorAlert({ error }: { error: string }) {
     <>
       <AlertBasic
         variant="destructive"
-        title="Error logging in"
-        description={`There was an error logging in. Please try logging in again. If this error persists please contact support at ${SUPPORT_EMAIL}`}
+        title="登录失败"
+        description={`登录失败，请重试。若问题持续，请联系支持：${SUPPORT_EMAIL}`}
       />
       <Suspense>
         <CrispChatLoggedOutVisible />

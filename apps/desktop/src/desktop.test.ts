@@ -137,7 +137,7 @@ describe("desktop shell helpers", () => {
       parseDesktopAuthCallback("https://example.com/auth-callback?code=x"),
     ).toEqual({
       ok: false,
-      error: "Invalid authentication callback",
+      error: "身份验证回调无效",
     });
   });
 

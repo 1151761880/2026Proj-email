@@ -26,49 +26,48 @@ export default function DebugFollowUpPage() {
 
   return (
     <PageWrapper>
-      <PageHeading>Follow-up Debug</PageHeading>
+      <PageHeading>跟进调试</PageHeading>
 
       <LoadingContent loading={isLoading} error={error}>
         <div className="mt-6 space-y-6">
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             <DebugStat
-              label="Awaiting Reply (days)"
+              label="等待回复（天）"
               value={data?.emailAccount.followUpAwaitingReplyDays ?? "Off"}
             />
             <DebugStat
-              label="Needs Reply (days)"
+              label="需要回复（天）"
               value={data?.emailAccount.followUpNeedsReplyDays ?? "Off"}
             />
             <DebugStat
-              label="Auto Draft"
+              label="自动草稿"
               value={data?.emailAccount.followUpAutoDraftEnabled ? "On" : "Off"}
             />
             <DebugStat
-              label="Unresolved Trackers"
+              label="未解决的跟踪项"
               value={data?.summary.unresolvedTrackers ?? 0}
             />
             <DebugStat
-              label="Unresolved + Applied"
+              label="未解决 + 已应用"
               value={data?.summary.unresolvedWithFollowUpApplied ?? 0}
             />
             <DebugStat
-              label="Unresolved + Draft"
+              label="未解决 + 草稿"
               value={data?.summary.unresolvedWithFollowUpDraft ?? 0}
             />
           </div>
 
           <div className="rounded-lg border p-4 text-sm">
             <p>
-              <span className="font-medium">Last Follow-up Applied:</span>{" "}
+              <span className="font-medium">最后跟进时间：</span>{" "}
               {formatDate(data?.summary.lastFollowUpAppliedAt)}
             </p>
             <p className="mt-2">
-              <span className="font-medium">Last Tracker Activity:</span>{" "}
+              <span className="font-medium">最后跟踪活动：</span>{" "}
               {formatDate(data?.summary.lastTrackerActivityAt)}
             </p>
             <p className="mt-2 text-muted-foreground">
-              Last tracker activity is a proxy for follow-up processing
-              activity.
+              最后跟踪活动用于反映跟进处理活动。
             </p>
           </div>
 
@@ -84,13 +83,13 @@ export default function DebugFollowUpPage() {
               ) : (
                 <CopyIcon className="mr-2 h-4 w-4" />
               )}
-              {copied ? "Copied" : "Copy JSON"}
+              {copied ? "已复制" : "复制 JSON"}
             </Button>
           </div>
 
           <div className="rounded-lg border bg-muted/50 p-4">
             <pre className="overflow-auto text-sm">
-              {data ? JSON.stringify(data, null, 2) : "Loading..."}
+              {data ? JSON.stringify(data, null, 2) : "正在加载…"}
             </pre>
           </div>
         </div>
@@ -115,7 +114,7 @@ function DebugStat({
 }
 
 function formatDate(value: Date | string | null | undefined) {
-  if (!value) return "Never";
+  if (!value) return "永不";
   const date = typeof value === "string" ? new Date(value) : value;
   return date.toISOString();
 }

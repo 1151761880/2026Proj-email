@@ -232,7 +232,7 @@ test("opens saved mail offline, reconnects, and clears it on sign-out", async ({
     );
 
     if (production) {
-      const search = page.getByPlaceholder("Search mail");
+      const search = page.getByPlaceholder("搜索邮件");
       await search.fill('subject:"Archive Action Message"');
       await expect(
         conversationWithSubject(page, conversations, "Archive Action Message"),
@@ -249,7 +249,7 @@ test("opens saved mail offline, reconnects, and clears it on sign-out", async ({
         testInfo,
         "local-search-after-offline-reload",
       );
-      await page.getByRole("button", { name: "Clear search" }).click();
+      await page.getByRole("button", { name: "清除搜索" }).click();
     }
 
     await context.setOffline(false);
@@ -279,7 +279,7 @@ test("opens saved mail offline, reconnects, and clears it on sign-out", async ({
     await signOutFromAppNav(page);
     await expect(
       page
-        .getByRole("link", { name: "Log in" })
+        .getByRole("link", { name: "登录" })
         .or(page.getByText("Logged out", { exact: true })),
     ).toBeVisible({ timeout: 30_000 });
     await expect
@@ -370,12 +370,12 @@ async function mailEngineOpfsExists(page: Page) {
 async function signOutFromAppNav(page: Page) {
   await page.goto("/settings");
   await expect(
-    page.getByRole("heading", { name: "Settings", exact: true }),
+    page.getByRole("heading", { name: "设置", exact: true }),
   ).toBeVisible({ timeout: 60_000 });
   const trigger = page.getByRole("button", {
     name: /Smoke Test User Smoke Test User/,
   });
-  const signOut = page.getByRole("menuitem", { name: "Sign out" });
+  const signOut = page.getByRole("menuitem", { name: "退出登录" });
   await trigger.click();
   await expect(signOut).toBeVisible();
   await signOut.click();

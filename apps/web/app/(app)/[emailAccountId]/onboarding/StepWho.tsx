@@ -102,9 +102,9 @@ export function StepWho({
       </div>
 
       <div className="text-center">
-        <PageHeading className="mt-4">What do you do?</PageHeading>
+        <PageHeading className="mt-4">你的职业是什么？</PageHeading>
         <TypographyP className="mt-2">
-          This helps us set up your inbox the way you actually need it.
+          用于根据实际需求配置收件箱。
         </TypographyP>
       </div>
 
@@ -122,7 +122,7 @@ export function StepWho({
               .then((result) => {
                 if (result?.serverError || result?.validationErrors) {
                   captureException(
-                    new Error("Failed to save onboarding role"),
+                    new Error("保存职业信息失败"),
                     {
                       extra: {
                         context: "onboarding",
@@ -217,7 +217,7 @@ export function StepWho({
               <Input
                 name="customRole"
                 type="text"
-                placeholder="Enter your role..."
+                placeholder="请输入职业…"
                 registerProps={{
                   value: customRole,
                   onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
@@ -238,7 +238,7 @@ export function StepWho({
                 !watchedRole || (watchedRole === "Other" && !customRole.trim())
               }
             >
-              Continue
+              继续
               <ArrowRightIcon className="size-4 ml-2" />
             </Button>
           </div>

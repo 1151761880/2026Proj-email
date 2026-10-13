@@ -25,7 +25,7 @@ export function FilingStatusCell({
     return (
       <span className="flex items-center gap-2 text-muted-foreground">
         <LoaderIcon className="size-4 animate-spin" />
-        <span>Analyzing...</span>
+        <span>正在分析…</span>
       </span>
     );
   }
@@ -35,7 +35,7 @@ export function FilingStatusCell({
     return (
       <Tooltip content={tooltipContent}>
         <span className="flex items-center gap-1.5 text-muted-foreground italic">
-          Skipped
+          已跳过
           <InfoIcon className="size-3.5 flex-shrink-0" />
         </span>
       </Tooltip>

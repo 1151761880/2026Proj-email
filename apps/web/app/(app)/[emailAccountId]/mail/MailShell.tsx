@@ -238,7 +238,7 @@ export function MailShell() {
         },
       ).catch((error) => {
         toast.error(
-          error instanceof Error ? error.message : "Couldn't save that",
+          error instanceof Error ? error.message : "保存失败",
         );
       });
     },
@@ -331,7 +331,7 @@ export function MailShell() {
           ? [
               {
                 id: OTHER_SPLIT_ID,
-                name: "Other",
+                name: "其他",
                 matchAll: true,
                 filters: [],
               },
@@ -434,7 +434,7 @@ export function MailShell() {
   }, [orderedIds, focusedIndex, searchQuery, searchViewIdentity]);
   let emptySearchMessage: string | undefined;
   if (searchQuery && hasProviderResponse && !threads.length) {
-    emptySearchMessage = "No emails in this view";
+    emptySearchMessage = "此视图暂无邮件";
   }
 
   const selection = useThreadSelection(orderedIds);
@@ -1276,7 +1276,7 @@ export function MailShell() {
         );
       }
     } catch {
-      toast.error("Couldn't remove label");
+      toast.error("移除标签失败");
     }
   });
 
@@ -1473,8 +1473,7 @@ export function MailShell() {
               )}
               {isAllAccounts && combinedThreadState.failedAccountIds.length ? (
                 <div className="border-border border-b bg-amber-50 px-3 py-2 text-amber-900 text-xs dark:bg-amber-950/30 dark:text-amber-200">
-                  Some inboxes couldn&apos;t be loaded. Try again shortly or
-                  check their connections.
+                  部分收件箱无法加载，请稍后重试或检查连接。
                 </div>
               ) : null}
               <MailPanelErrorBoundary
@@ -1485,7 +1484,7 @@ export function MailShell() {
                   displayedActiveSplitId,
                   searchQuery,
                 ])}
-                title="Unable to show your mail list"
+                title="无法显示邮件列表"
               >
                 {isScheduledView ? (
                   <ScheduledEmailList />

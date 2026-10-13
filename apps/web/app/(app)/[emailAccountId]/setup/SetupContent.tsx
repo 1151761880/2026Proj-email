@@ -83,27 +83,27 @@ function getFeatures() {
     {
       href: "/assistant",
       icon: MessageSquareIcon,
-      title: "Chat",
-      description: "Chat with your inbox to find information and take actions",
+      title: "对话",
+      description: "通过对话查找邮箱信息并执行操作",
     },
     {
       href: "/automation",
       icon: BotIcon,
-      title: "Assistant",
+      title: "智能助手",
       description:
-        "Your personal email assistant that organizes, archives, and drafts replies",
+        "自动整理、归档和起草回复的个人邮件助手",
     },
     {
       href: "/bulk-unsubscribe",
       icon: ArchiveIcon,
-      title: "Bulk Unsubscribe",
-      description: "Easily unsubscribe from unwanted newsletters in one click",
+      title: "批量退订",
+      description: "一键退订不需要的订阅邮件",
     },
     {
       href: "/bulk-archive",
       icon: InboxIcon,
-      title: "Bulk Archive",
-      description: "Quickly clean up your inbox by archiving old emails",
+      title: "批量归档",
+      description: "归档旧邮件，快速整理收件箱",
     },
   ] as const;
 
@@ -286,7 +286,7 @@ function Checklist({
         );
 
         if (result?.serverError || result?.validationErrors) {
-          toastError({ description: "Failed to skip this step" });
+          toastError({ description: "跳过此步骤失败" });
           return;
         }
 
@@ -297,7 +297,7 @@ function Checklist({
           error: error instanceof Error ? error.message : "Unknown error",
         });
         toastError({
-          description: "Failed to skip this step. Please try again.",
+          description: "跳过此步骤失败，请重试。",
         });
       } finally {
         setPendingStep(null);
@@ -314,7 +314,7 @@ function Checklist({
     <Card className="mb-6 overflow-hidden">
       <div className="border-b border-border p-4">
         <div className="flex items-center justify-between">
-          <h2 className="font-semibold text-foreground">Complete your setup</h2>
+          <h2 className="font-semibold text-foreground">完成配置</h2>
           <div className="flex items-center gap-3">
             <span className="text-sm text-muted-foreground hidden sm:block">
               {completedCount} of {totalSteps} completed
@@ -332,10 +332,10 @@ function Checklist({
       <StepItem
         href={getOnboardingStepHref(emailAccountId, STEP_KEYS.LABELS)}
         icon={<BotIcon size={18} />}
-        title="Set up your Personal Assistant"
+        title="配置个人助手"
         timeEstimate="5 minutes"
         completed={isAiAssistantConfigured}
-        actionText="Set up"
+        actionText="配置"
         onMarkDone={() => handleMarkStepDone("aiAssistant")}
         showMarkDone
         markDoneDisabled={pendingStep !== null}
@@ -345,10 +345,10 @@ function Checklist({
       <StepItem
         href={prefixPath(emailAccountId, "/bulk-unsubscribe")}
         icon={<ArchiveIcon size={18} />}
-        title="Unsubscribe from a newsletter you don't read"
+        title="退订一份很少阅读的订阅邮件"
         timeEstimate="2 minutes"
         completed={isBulkUnsubscribeConfigured}
-        actionText="View"
+        actionText="查看"
         onMarkDone={() => handleMarkStepDone("bulkUnsubscribe")}
         showMarkDone
         markDoneDisabled={pendingStep !== null}
@@ -359,10 +359,10 @@ function Checklist({
         <StepItem
           href={prefixPath(emailAccountId, "/calendars")}
           icon={<CalendarIcon size={18} />}
-          title="Connect your calendar"
+          title="连接日历"
           timeEstimate="2 minutes"
           completed={isCalendarConnected}
-          actionText="Connect"
+          actionText="连接"
           onMarkDone={() => handleMarkStepDone("calendarConnected")}
           showMarkDone
           markDoneDisabled={pendingStep !== null}
@@ -374,15 +374,15 @@ function Checklist({
         <StepItem
           href={prefixPath(emailAccountId, "/organization")}
           icon={<UsersIcon size={18} />}
-          title="Invite team members"
+          title="邀请团队成员"
           timeEstimate="2 minutes"
           completed={teamInvite.completed}
-          actionText="Invite"
+          actionText="邀请"
           onMarkDone={() => handleMarkStepDone("teamInvite")}
           markDoneDisabled={pendingStep !== null}
           markDonePending={pendingStep === "teamInvite"}
           showMarkDone
-          markDoneText="Skip"
+          markDoneText="跳过"
           onActionClick={handleOpenInviteModal}
         />
       )}
@@ -401,10 +401,10 @@ function Checklist({
           href={EXTENSION_URL}
           linkProps={{ target: "_blank", rel: "noopener noreferrer" }}
           icon={<GlobeIcon size={18} />}
-          title={`Optional: Install the ${BRAND_NAME} Tabs extension`}
+          title={`可选：安装 ${BRAND_NAME} 标签页扩展`}
           timeEstimate="1 minute"
           completed={isTabsExtensionCompleted}
-          actionText="Install"
+          actionText="安装"
           onMarkDone={() => handleMarkStepDone("tabsExtension")}
           markDoneDisabled={pendingStep !== null}
           markDonePending={pendingStep === "tabsExtension"}
@@ -493,11 +493,11 @@ function SetupPageContent({
   return (
     <div className="mx-auto flex min-h-screen w-full max-w-3xl flex-col p-6">
       <div className="mb-4 sm:mb-8">
-        <PageHeading className="text-center">{`Welcome to ${BRAND_NAME}`}</PageHeading>
+        <PageHeading className="text-center">{`欢迎使用 ${BRAND_NAME}`}</PageHeading>
         <SectionDescription className="mt-2 text-center text-base">
           {shouldShowSetupChecklist
-            ? `Complete these steps to get the most out of ${BRAND_NAME}`
-            : "What would you like to do?"}
+            ? `完成以下步骤以配置 ${BRAND_NAME}`
+            : "需要执行什么操作？"}
         </SectionDescription>
       </div>
 

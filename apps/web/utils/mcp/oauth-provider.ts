@@ -23,7 +23,7 @@ export function mcpOAuthPlugins() {
       resources: [
         {
           identifier: getMcpResourceUrl(),
-          name: "Inbox Zero MCP",
+          name: "十组邮件小助手 MCP",
           allowedScopes: [...MCP_SCOPES],
         },
       ],

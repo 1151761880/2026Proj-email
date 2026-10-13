@@ -171,7 +171,7 @@ export function Members({ organizationId }: { organizationId: string }) {
     <LoadingContent loading={isLoading} error={error}>
       <div>
         <div className="flex justify-between items-center">
-          <TypographyH3>Members ({data?.members.length || 0})</TypographyH3>
+          <TypographyH3>成员（{data?.members.length || 0})</TypographyH3>
           {isAdmin && (
             <InviteMemberModal
               organizationId={organizationId}
@@ -210,7 +210,7 @@ export function Members({ organizationId }: { organizationId: string }) {
             data.pendingInvitations.length === 0) && (
             <div className="text-center py-12">
               <p className="text-muted-foreground">
-                No members found in your organization.
+                组织暂无成员。
               </p>
             </div>
           )}
@@ -218,7 +218,7 @@ export function Members({ organizationId }: { organizationId: string }) {
         {data?.pendingInvitations && data.pendingInvitations.length > 0 && (
           <div className="space-y-4 mt-8">
             <TypographyH3>
-              Pending Invitations ({data.pendingInvitations.length})
+              待处理邀请（{data.pendingInvitations.length})
             </TypographyH3>
             <div className="space-y-2">
               {data.pendingInvitations.map((invitation) => (
@@ -307,7 +307,7 @@ function MemberCard({
             </TooltipTrigger>
             <TooltipContent>
               <p>
-                Joined at: {new Date(member.createdAt).toLocaleDateString()}
+                加入时间： {new Date(member.createdAt).toLocaleDateString("zh-CN")}
               </p>
             </TooltipContent>
           </Tooltip>
@@ -329,13 +329,13 @@ function MemberCard({
                   <DropdownMenuItem asChild>
                     <Link href={`/${member.emailAccount.id}/stats`}>
                       <BarChart3 className="mr-2 size-4" />
-                      Analytics
+                      统计分析
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
                     <Link href={`/${member.emailAccount.id}/usage`}>
                       <BarChartIcon className="mr-2 size-4" />
-                      Usage
+                      使用量
                     </Link>
                   </DropdownMenuItem>
                 </>
@@ -344,7 +344,7 @@ function MemberCard({
                 <DropdownMenuSub>
                   <DropdownMenuSubTrigger disabled={isPending}>
                     <ShieldIcon className="mr-2 size-4" />
-                    Role
+                    角色
                   </DropdownMenuSubTrigger>
                   <DropdownMenuSubContent>
                     <DropdownMenuRadioGroup
@@ -358,10 +358,10 @@ function MemberCard({
                         value="member"
                         disabled={isPending}
                       >
-                        Member
+                        成员
                       </DropdownMenuRadioItem>
                       <DropdownMenuRadioItem value="admin" disabled={isPending}>
-                        Admin
+                        管理后台
                       </DropdownMenuRadioItem>
                     </DropdownMenuRadioGroup>
                   </DropdownMenuSubContent>
@@ -378,12 +378,12 @@ function MemberCard({
                       disabled={isPending}
                     >
                       <CrownIcon className="mr-2 size-4" />
-                      Transfer ownership
+                      转移所有权
                     </DropdownMenuItem>
                   }
-                  title="Transfer ownership"
-                  description={`Transfer organization ownership to ${member.emailAccount.name || member.emailAccount.email}? You will become an admin.`}
-                  confirmText="Transfer"
+                  title="转移所有权"
+                  description={`确定将组织所有权转移给 ${member.emailAccount.name || member.emailAccount.email} 吗？你将成为管理员。`}
+                  confirmText="转移"
                   onConfirm={() => onTransferOwnership(member.id)}
                 />
               )}
@@ -393,7 +393,7 @@ function MemberCard({
                 className="text-red-600 hover:!bg-red-50 hover:!text-red-600"
               >
                 <TrashIcon className="mr-2 size-4" />
-                Remove
+                移除
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -426,7 +426,7 @@ function MemberCard({
           <>
             <span className="text-xs text-muted-foreground">∣</span>
             <span className="text-xs text-muted-foreground">
-              {executedRulesCount.toLocaleString()} assistant processed emails
+              {executedRulesCount.toLocaleString("zh-CN")} 封由助手处理的邮件
             </span>
           </>
         )}
@@ -483,8 +483,8 @@ function PendingInvitationCard({
             </TooltipTrigger>
             <TooltipContent>
               <p>
-                Expires at:{" "}
-                {new Date(invitation.expiresAt).toLocaleDateString()}
+                到期时间：{" "}
+                {new Date(invitation.expiresAt).toLocaleDateString("zh-CN")}
               </p>
             </TooltipContent>
           </Tooltip>
@@ -497,14 +497,14 @@ function PendingInvitationCard({
           onClick={() => onCancel(invitation.id)}
         >
           <XIcon className="size-4 mr-2" />
-          Cancel
+          取消
         </Button>
       }
     >
       <div className="flex items-center space-x-3">
         <p className="font-medium">{invitation.email}</p>
         <Badge variant="outline" className="text-xs">
-          Pending
+          待处理
         </Badge>
         {invitation.role && (
           <Badge variant="secondary" className="text-xs">
@@ -514,7 +514,7 @@ function PendingInvitationCard({
       </div>
       <div className="flex items-center space-x-3 mt-1">
         <span className="text-xs text-muted-foreground">
-          Invited by {invitation.inviter.name || invitation.inviter.email}
+          邀请人 {invitation.inviter.name || invitation.inviter.email}
         </span>
       </div>
     </CardWrapper>
@@ -541,13 +541,13 @@ const ACTIVITY_BADGE: Record<
   }
 > = {
   active: {
-    label: "Active",
+    label: "活跃",
     variant: "green",
     tooltip: ({ lastProcessedEmailAt }) =>
       `Last processed email ${formatRelativeDate(lastProcessedEmailAt)}.`,
   },
   disconnected: {
-    label: "Disconnected",
+    label: "未连接",
     variant: "red",
     tooltip: ({ disconnectedAt }) =>
       disconnectedAt
@@ -555,18 +555,18 @@ const ACTIVITY_BADGE: Record<
         : "Email account is disconnected.",
   },
   hidden: {
-    label: "Activity hidden",
+    label: "动态已隐藏",
     variant: "outline",
     tooltip: () => "This member has not allowed org admin analytics.",
   },
   inactive: {
-    label: `No activity in ${RECENT_ACTIVITY_HOURS}h`,
+    label: `最近 ${RECENT_ACTIVITY_HOURS} 小时无动态`,
     variant: "secondary",
     tooltip: ({ lastProcessedEmailAt }) =>
       `Last processed email ${formatRelativeDate(lastProcessedEmailAt)}.`,
   },
   none: {
-    label: "No activity yet",
+    label: "暂无动态",
     variant: "secondary",
     tooltip: () => "No assistant-processed email found for this account.",
   },

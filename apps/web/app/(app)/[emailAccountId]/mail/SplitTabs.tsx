@@ -118,14 +118,14 @@ export function SplitTabs({
             <ContextMenuContent className="w-44">
               {onEdit && (
                 <ContextMenuItem onSelect={() => onEdit(split.id)}>
-                  Edit filters and name
+                  编辑筛选条件和名称
                 </ContextMenuItem>
               )}
               <ContextMenuItem
                 className="text-destructive focus:text-destructive"
                 onSelect={() => onDelete(split.id)}
               >
-                Turn off split
+                关闭分栏
               </ContextMenuItem>
             </ContextMenuContent>
           </ContextMenu>
@@ -135,7 +135,7 @@ export function SplitTabs({
       {canCreateSplits && (
         <button
           type="button"
-          aria-label="New split"
+          aria-label="新建分栏"
           onClick={onNewSplit}
           className="flex size-6 shrink-0 items-center justify-center rounded-full text-muted-foreground hover:bg-accent hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
@@ -148,5 +148,5 @@ export function SplitTabs({
 
 function splitCountLabel(count: number | undefined): string | null {
   if (count == null || !Number.isFinite(count) || count <= 0) return null;
-  return count.toLocaleString("en-US");
+  return count.toLocaleString("zh-CN");
 }

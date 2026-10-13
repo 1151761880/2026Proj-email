@@ -17,10 +17,10 @@ describe("buildSnoozeCommandPalette", () => {
     expect(
       commands.map((command) => [command.label, command.description]),
     ).toEqual([
-      ["Tomorrow", "Wed, Aug 19 at 9:00 AM"],
-      ["End of week", "Fri, Aug 21 at 9:00 AM"],
-      ["This weekend", "Sat, Aug 22 at 9:00 AM"],
-      ["Next week", "Mon, Aug 24 at 9:00 AM"],
+      ["明天", "8月19日 周三 09:00"],
+      ["本周五", "8月21日 周五 09:00"],
+      ["本周末", "8月22日 周六 09:00"],
+      ["下周", "8月24日 周一 09:00"],
     ]);
   });
 
@@ -60,9 +60,21 @@ describe("buildSnoozeCommandPalette", () => {
     });
 
     expect(commands).toHaveLength(1);
-    expect(commands[0]?.label).toContain("Sun, Aug 16 at 3:00 PM");
+    expect(commands[0]?.label).toContain("8月16日 周日 15:00");
     commands[0]?.action();
     expect(onSnooze).toHaveBeenCalledWith(new Date(2026, 7, 16, 15));
+  });
+
+  it.each(["明天下午3点", "明天下午 3 点"])("parses Chinese time input %s", (input) => {
+    expect(parseSnoozeDate(input, new Date(2026, 7, 15, 10))).toEqual(
+      new Date(2026, 7, 16, 15),
+    );
+  });
+
+  it("uses 9am for a Chinese date and rejects a Chinese past date", () => {
+    const now = new Date(2026, 7, 15, 10);
+    expect(parseSnoozeDate("明天", now)).toEqual(new Date(2026, 7, 16, 9));
+    expect(parseSnoozeDate("昨天", now)).toBeNull();
   });
 
   it("defaults date-only input to 9am", () => {

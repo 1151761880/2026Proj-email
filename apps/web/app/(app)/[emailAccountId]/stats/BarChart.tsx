@@ -75,26 +75,26 @@ export function BarChart({
     const date = new Date(value);
 
     if (period === "year") {
-      return date.toLocaleDateString("en-US", {
+      return date.toLocaleDateString("zh-CN", {
         year: "numeric",
       });
     }
 
     if (period === "month") {
-      return date.toLocaleDateString("en-US", {
+      return date.toLocaleDateString("zh-CN", {
         month: "short",
         year: "numeric",
       });
     }
 
     if (period === "week" || period === "day") {
-      return date.toLocaleDateString("en-US", {
+      return date.toLocaleDateString("zh-CN", {
         month: "short",
         day: "numeric",
       });
     }
 
-    return date.toLocaleDateString("en-US", {
+    return date.toLocaleDateString("zh-CN", {
       month: "short",
       day: "numeric",
     });
@@ -176,7 +176,7 @@ export function BarChart({
                     year: "numeric",
                   };
                 }
-                label = date.toLocaleDateString("en-US", dateFormat);
+                label = date.toLocaleDateString("zh-CN", dateFormat);
               }
             }
 

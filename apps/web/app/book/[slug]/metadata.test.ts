@@ -8,7 +8,7 @@ import {
 vi.mock("@/env", () => ({
   env: {
     NEXT_PUBLIC_BASE_URL: "https://app.example.com",
-    NEXT_PUBLIC_BRAND_NAME: "Inbox Zero",
+    NEXT_PUBLIC_BRAND_NAME: "十组邮件小助手",
   },
 }));
 
@@ -36,7 +36,7 @@ describe("booking link metadata", () => {
         title: "Intro call | Host User",
         description: "Talk through fit.",
         url: "https://app.example.com/book/intro-call",
-        siteName: "Inbox Zero",
+        siteName: "十组邮件小助手",
         type: "website",
         images: [
           {
@@ -87,7 +87,7 @@ describe("booking link metadata", () => {
       hostName: null,
     };
 
-    expect(buildBookingLinkTitle(bookingLink)).toBe("Intro call | Inbox Zero");
+    expect(buildBookingLinkTitle(bookingLink)).toBe("Intro call | 十组邮件小助手");
     expect(buildBookingLinkDescription(bookingLink)).toBe("30 min meeting");
   });
 });

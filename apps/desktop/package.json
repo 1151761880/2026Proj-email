@@ -1,10 +1,10 @@
 {
   "name": "@inboxzero/desktop",
-  "productName": "Inbox Zero",
+  "productName": "十组邮件小助手",
   "private": true,
   "version": "0.1.0",
-  "description": "Electron shell for the Inbox Zero web app",
-  "author": "Inbox Zero",
+  "description": "十组邮件小助手桌面客户端",
+  "author": "十组邮件小助手",
   "type": "module",
   "main": "dist/main.js",
   "scripts": {

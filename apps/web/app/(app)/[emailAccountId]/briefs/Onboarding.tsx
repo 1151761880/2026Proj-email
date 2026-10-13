@@ -9,18 +9,18 @@ import { ConnectCalendar } from "@/app/(app)/[emailAccountId]/calendars/ConnectC
 const features = [
   {
     icon: <UserSearchIcon className="size-4 text-blue-500" />,
-    title: "Attendee research",
-    description: "Who they are, their company, and role",
+    title: "参会者背景",
+    description: "参会者、所属公司及职务",
   },
   {
     icon: <MailIcon className="size-4 text-blue-500" />,
-    title: "Email history",
-    description: "Recent conversations with this person",
+    title: "邮件历史",
+    description: "与此人的近期往来",
   },
   {
     icon: <LightbulbIcon className="size-4 text-blue-500" />,
-    title: "Key context",
-    description: "Important details from past discussions",
+    title: "关键信息",
+    description: "历史讨论中的重要细节",
   },
 ];
 
@@ -39,22 +39,22 @@ export function BriefsOnboarding({
     <SetupCard
       imageSrc="/images/illustrations/communication.svg"
       imageAlt="Meeting Briefs"
-      title="Meeting Briefs"
-      description="Receive briefings by email or in your chat app before meetings with external guests."
+      title="会前简报"
+      description="与外部人员开会前，通过邮件或聊天应用接收简报。"
       features={features}
     >
       {hasCalendarConnected ? (
         <>
           <MessageText>
-            You're all set! Enable meeting briefs to get started:
+            配置完成！启用会前简报即可开始：
           </MessageText>
           <Button onClick={onEnable} loading={isEnabling}>
-            Enable Meeting Briefs
+            启用会前简报
           </Button>
         </>
       ) : (
         <>
-          <MessageText>Connect your calendar to get started:</MessageText>
+          <MessageText>连接日历后即可开始：</MessageText>
           <ConnectCalendar
             analyticsPage="meeting_briefs"
             onboardingReturnPath={`/${emailAccountId}/briefs`}

@@ -12,7 +12,7 @@ vi.mock("@/env", () => ({
 }));
 
 vi.mock("@/utils/branding", () => ({
-  BRAND_NAME: "Inbox Zero",
+  BRAND_NAME: "十组邮件小助手",
 }));
 
 describe("createPublicOpenApiDocument", () => {

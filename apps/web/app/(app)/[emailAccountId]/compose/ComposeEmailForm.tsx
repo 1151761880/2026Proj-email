@@ -645,13 +645,13 @@ function ComposeEmailFormContent({
       });
       if (!draftId)
         throw new Error(
-          "Could not find this draft in your mailbox. Reopen it and try again.",
+          "邮箱中未找到此草稿，请重新打开后重试。",
         );
       providerDraftId.current = draftId;
       return draftId;
     }
     if (!localDraftIdentity)
-      throw new Error("Local draft storage is required to save attachments.");
+      throw new Error("保存附件需要启用本地草稿存储。");
     const deletedDraftId = storedDraft?.content?.providerDraftId;
     if (initialDraftMissing && deletedDraftId)
       await forgetReplyDraftProvider(localDraftIdentity, deletedDraftId);
@@ -664,7 +664,7 @@ function ComposeEmailFormContent({
     let createdMessageId: string | null = null;
     if (!draftId) {
       const content = getProviderDraftContent();
-      if (!content) throw new Error("This draft is not ready to save yet.");
+      if (!content) throw new Error("此草稿尚未准备好保存。");
       const created = await saveComposeDraftAction(selectedEmailAccountId, {
         content: {
           ...content,
@@ -673,7 +673,7 @@ function ComposeEmailFormContent({
       });
       if (!created?.data)
         throw new Error(
-          "Mailbox draft creation could not be confirmed. Check Drafts in Gmail or Outlook; your message is still saved on this device.",
+          "无法确认邮箱草稿是否已创建。请检查 Gmail 或 Outlook 草稿箱；邮件仍保存在此设备。",
         );
       draftId = created.data.draftId;
       createdMessageId = created.data.messageId;
@@ -897,7 +897,7 @@ function ComposeEmailFormContent({
       for (const { file } of created) {
         if (!(await isInlineImageContent(file))) {
           toastError({
-            description: "Inline image content does not match its file type.",
+            description: "内嵌图片内容与文件类型不匹配。",
           });
           return;
         }
@@ -920,7 +920,7 @@ function ComposeEmailFormContent({
     });
     if (accepted.length !== created.length) {
       toastError({
-        description: "One of the inline images could not be inserted.",
+        description: "部分内嵌图片无法插入。",
       });
     }
     if (!accepted.length) return;
@@ -979,7 +979,7 @@ function ComposeEmailFormContent({
         pendingRecipients: pendingRecipientsRef.current,
       });
       if (!recipients.to) {
-        toastError({ description: "Enter a valid recipient email address." });
+        toastError({ description: "请输入有效的收件人邮箱地址。" });
         return;
       }
 
@@ -991,7 +991,7 @@ function ComposeEmailFormContent({
       );
       if (failedAttachment) {
         toastError({
-          description: `${failedAttachment.filename} isn't attached. Remove it or attach it again before sending.`,
+          description: `尚未附加 ${failedAttachment.filename}。请移除或重新附加后再发送。`,
         });
         return;
       }
@@ -1046,7 +1046,7 @@ function ComposeEmailFormContent({
         if (attachmentsRef.current.length && !enrichedData.providerDraftId) {
           toastError({
             description:
-              "Could not find this draft in your mailbox to send its attachments. Reopen it and try again.",
+              "邮箱中未找到可用于发送附件的草稿，请重新打开后重试。",
           });
           return;
         }
@@ -1101,7 +1101,7 @@ function ComposeEmailFormContent({
           } catch {
             toastError({
               description:
-                "Reply scheduled, but its local draft copy could not be cleared.",
+                "回复已定时发送，但未能清除本地草稿副本。",
             });
           }
           if (markDoneAfterSend) onMarkDone?.();
@@ -1115,7 +1115,7 @@ function ComposeEmailFormContent({
             scheduledThreadId,
           );
           if (!scheduledThreadId) {
-            toastSuccess({ description: "Email scheduled." });
+            toastSuccess({ description: "邮件已定时发送。" });
           }
           onClose?.();
           refetch?.();
@@ -1136,7 +1136,7 @@ function ComposeEmailFormContent({
           );
           toastError({
             description:
-              "Mail is still starting. Try sending again in a moment.",
+              "邮箱正在启动，请稍后重试发送。",
           });
           return;
         }
@@ -1228,7 +1228,7 @@ function ComposeEmailFormContent({
               ) {
                 toastError({
                   description:
-                    "This reply may have been sent. Check Sent before retrying.",
+                    "此回复可能已发送，请先检查已发送文件夹再重试。",
                 });
               }
             })
@@ -1239,7 +1239,7 @@ function ComposeEmailFormContent({
           showDraftAgain();
         await discardLocalDraft();
         if (outcome.status === "sent") {
-          if (!isInlineReply) toastSuccess({ description: "Email sent!" });
+          if (!isInlineReply) toastSuccess({ description: "邮件已发送！" });
           if (markDoneAfterSend) onMarkDone?.();
           onSuccess?.(outcome.messageId, outcome.threadId);
           refetch?.();
@@ -1254,7 +1254,7 @@ function ComposeEmailFormContent({
           if (outcome.ownsNotification) {
             toastError({
               description:
-                "This reply may have been sent. Check Sent before retrying.",
+                "此回复可能已发送，请先检查已发送文件夹再重试。",
             });
           }
           onClose?.();
@@ -1266,7 +1266,7 @@ function ComposeEmailFormContent({
         setSubmissionError(
           "Could not confirm delivery. Check the thread status before trying again.",
         );
-        toastError({ description: "There was an error sending the email :(" });
+        toastError({ description: "发送邮件失败。" });
       } finally {
         if (!deliveryAccepted) resumeProviderAutosave();
       }
@@ -1317,7 +1317,7 @@ function ComposeEmailFormContent({
       redirectToSafeUrl(url, { allowExternal: true });
     } catch (error) {
       toastError({
-        title: "Error initiating reconnection",
+        title: "发起重新连接失败",
         description:
           error instanceof Error
             ? error.message
@@ -1359,7 +1359,7 @@ function ComposeEmailFormContent({
       event.target.value = "";
       if (files.length) {
         addFiles(files, disposition).catch(() =>
-          toastError({ description: "One of the files could not be read." }),
+          toastError({ description: "部分文件无法读取。" }),
         );
       }
     };
@@ -1435,7 +1435,7 @@ function ComposeEmailFormContent({
         )
           toastError({
             description:
-              "The local draft will be discarded. A mailbox draft may still exist; check Drafts in Gmail or Outlook.",
+              "本地草稿将被丢弃。邮箱中可能仍有副本，请检查 Gmail 或 Outlook 草稿箱。",
           });
       }
       if ((await onDiscard(providerDraftId.current)) === false) {
@@ -1476,7 +1476,7 @@ function ComposeEmailFormContent({
   const popOutButton = onPopOut && (
     <Tooltip shortcuts={["popOutDraft"]}>
       <Button
-        aria-label="Pop out draft"
+        aria-label="在独立窗口打开草稿"
         className="ml-auto size-7 shrink-0 hover:bg-transparent"
         disabled={isSubmitting}
         onClick={handlePopOut}
@@ -1572,7 +1572,7 @@ function ComposeEmailFormContent({
       <div className={cn(isComposeWindow ? "shrink-0 px-4 pt-3" : "contents")}>
         {showAccountPicker && (
           <div className="flex min-h-7 items-center gap-2">
-            <ComposeFieldLabel htmlFor="from-account" label="From" />
+            <ComposeFieldLabel htmlFor="from-account" label="发件人" />
             <Select
               value={
                 selectedSendAs
@@ -1586,7 +1586,7 @@ function ComposeEmailFormContent({
               }}
             >
               <SelectTrigger
-                aria-label="From"
+                aria-label="发件人"
                 className="h-7 min-w-0 flex-1 rounded-none border-0 bg-transparent px-0 text-sm shadow-none focus:ring-0 focus:ring-offset-0"
                 id="from-account"
               >
@@ -1627,7 +1627,7 @@ function ComposeEmailFormContent({
               className="flex min-w-0 items-center gap-1.5 rounded-sm text-left text-sm font-medium leading-5 text-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               <span className="text-emerald-600 dark:text-emerald-400">
-                Draft
+                草稿
               </span>
               <span className="min-w-0 truncate">
                 to{" "}
@@ -1656,13 +1656,13 @@ function ComposeEmailFormContent({
           <div className="space-y-1 [&_input]:bg-transparent">
             {selectedSendAs && !showAccountPicker && (
               <div className="flex min-h-7 items-center gap-2">
-                <ComposeFieldLabel htmlFor="from-address" label="From" />
+                <ComposeFieldLabel htmlFor="from-address" label="发件人" />
                 <Select
                   value={selectedSendAs.email}
                   onValueChange={changeSendAs}
                 >
                   <SelectTrigger
-                    aria-label="From"
+                    aria-label="发件人"
                     className="h-7 min-w-0 flex-1 rounded-none border-0 bg-transparent px-0 text-sm shadow-none focus:ring-0 focus:ring-offset-0"
                     id="from-address"
                   >
@@ -1711,7 +1711,7 @@ function ComposeEmailFormContent({
                 {field === "to" && canCollapseInlineReplyFields && (
                   <button
                     type="button"
-                    aria-label="Hide recipients"
+                    aria-label="隐藏收件人"
                     ref={collapseInlineReplyFieldsButtonRef}
                     onClick={closeInlineReplyFields}
                     className="rounded-sm text-muted-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring"
@@ -1728,7 +1728,7 @@ function ComposeEmailFormContent({
                 name="subject"
                 registerProps={register("subject", { required: true })}
                 error={errors.subject}
-                placeholder="Subject"
+                placeholder="主题"
                 className="h-8 rounded-none border-0 bg-transparent p-0 text-sm font-medium text-foreground shadow-none focus:border-transparent focus:ring-0 sm:text-sm"
               />
             </div>
@@ -1748,7 +1748,7 @@ function ComposeEmailFormContent({
         onStateChange={handleEditorStateChange}
         onImageFiles={(files) => {
           addFiles(files, "inline").catch(() =>
-            toastError({ description: "The image could not be read." }),
+            toastError({ description: "无法读取图片。" }),
           );
         }}
         preservedBlocks={preservedBlocks}
@@ -1768,7 +1768,7 @@ function ComposeEmailFormContent({
       )}
       {!!(attachments.length || forwardedAttachments.length) && (
         <ul
-          aria-label="Attachments"
+          aria-label="附件"
           className={cn(
             "flex flex-wrap gap-2",
             isComposeWindow && "shrink-0 px-4 py-2",
@@ -1778,7 +1778,7 @@ function ComposeEmailFormContent({
             <li
               className="flex max-w-full items-center gap-2 rounded-md border bg-muted/40 px-2 py-1 text-xs"
               key={attachment.id}
-              title="Included from the message you are forwarding"
+              title="来自正在转发的邮件"
             >
               <PaperclipIcon aria-hidden className="size-3.5 shrink-0" />
               <span className="max-w-52 truncate">{attachment.filename}</span>
@@ -1805,7 +1805,7 @@ function ComposeEmailFormContent({
                   formatFileSize(attachment.size)}
               </span>
               <button
-                aria-label={`Remove ${attachment.filename}`}
+                aria-label={`移除 ${attachment.filename}`}
                 className="rounded-sm p-0.5 hover:bg-muted"
                 onClick={() => removeAttachment(attachment)}
                 type="button"
@@ -1829,7 +1829,7 @@ function ComposeEmailFormContent({
           >
             <Button disabled={isSubmitting} type="submit" variant="gradient">
               {isSubmitting && <ButtonLoader />}
-              Send
+              发送
             </Button>
           </Tooltip>
           <button
@@ -1876,7 +1876,7 @@ function ComposeEmailFormContent({
           />
           <Tooltip shortcuts={["attachFiles"]}>
             <Button
-              aria-label="Attach files"
+              aria-label="添加附件"
               className="hover:bg-transparent"
               disabled={isSubmitting}
               onClick={() => attachmentInputRef.current?.click()}
@@ -1897,7 +1897,7 @@ function ComposeEmailFormContent({
             type="file"
           />
           <Button
-            aria-label="Insert inline images"
+            aria-label="插入内嵌图片"
             className="hover:bg-transparent"
             disabled={isSubmitting}
             onClick={() => inlineImageInputRef.current?.click()}
@@ -1910,7 +1910,7 @@ function ComposeEmailFormContent({
           {onDiscard && (
             <Tooltip shortcuts={["discardDraft"]}>
               <Button
-                aria-label="Discard draft"
+                aria-label="丢弃草稿"
                 className="hover:bg-transparent"
                 disabled={isSubmitting}
                 onClick={handleDiscard}
@@ -2026,12 +2026,12 @@ function getQueuedEmailDescription(
   reason: "offline" | "pending" | "blocked_auth",
 ) {
   if (reason === "offline") {
-    return "Email queued. It will send when you're back online.";
+    return "邮件已加入队列，恢复网络后发送。";
   }
   if (reason === "blocked_auth") {
-    return "Email queued. Reconnect this account to send it.";
+    return "邮件已加入队列，重新连接账户后发送。";
   }
-  return "Email queued and will keep sending in the background.";
+  return "邮件已加入队列，将在后台继续发送。";
 }
 
 function isShortcutForForm(
@@ -2104,7 +2104,7 @@ function findSelectableSendAs(
   return findReplySendAsAddress(candidates, addresses);
 }
 
-// The default address keeps the signature set in Inbox Zero; an alias uses
+// The default address keeps the signature set in 十组邮件小助手; an alias uses
 // its own when the provider has one.
 function getSendAsSignatureHtml(
   address: SendAsAddress | undefined,

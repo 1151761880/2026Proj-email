@@ -36,7 +36,7 @@ export function AdminScimCredentials() {
     },
     onError: (error) =>
       toastError({
-        title: "Could not create SCIM credential",
+        title: "无法创建 SCIM 凭据",
         description: getActionErrorMessage(error.error),
       }),
   });
@@ -44,11 +44,10 @@ export function AdminScimCredentials() {
   return (
     <section aria-labelledby="scim-heading" className="max-w-xl space-y-4">
       <h2 id="scim-heading" className="text-lg font-semibold">
-        SCIM provisioning
+        SCIM 用户管理
       </h2>
       <p className="text-sm text-muted-foreground">
-        Create a connection for a registered organization SSO provider. Save the
-        token and identifiers securely; the token is shown only once.
+        为已注册的组织单点登录服务创建连接。请妥善保存令牌和标识，令牌仅显示一次。
       </p>
       <form
         className="space-y-3"
@@ -62,20 +61,20 @@ export function AdminScimCredentials() {
       >
         <Input
           name="scim-provider"
-          label="SSO provider ID"
+          label="单点登录服务 ID"
           type="text"
           registerProps={register("providerId", { required: true })}
           error={errors.providerId}
         />
         <Input
           name="scim-expiry"
-          label="Credential expires at"
+          label="凭据到期时间"
           type="datetime-local"
           registerProps={register("expiresAt", { required: true })}
           error={errors.expiresAt}
         />
         <Button type="submit" loading={isExecuting} disabled={!!credential}>
-          Create SCIM connection
+          创建 SCIM 连接
         </Button>
       </form>
       {credential && (
@@ -84,7 +83,7 @@ export function AdminScimCredentials() {
             htmlFor="scim-issued-credential"
             className="text-sm font-medium"
           >
-            New SCIM credential — save before leaving
+            新 SCIM 凭据，请在离开前保存
           </label>
           <textarea
             id="scim-issued-credential"
@@ -94,7 +93,7 @@ export function AdminScimCredentials() {
             value={`Bearer token: ${credential.token}\nConnection ID: ${credential.connectionId}\nCredential ID: ${credential.credentialId}`}
           />
           <Button variant="outline" onClick={() => setCredential(null)}>
-            Clear saved credential from screen
+            清除屏幕上的凭据
           </Button>
         </div>
       )}
@@ -117,40 +116,40 @@ function RevokeScimCredentialForm() {
   const { execute, isExecuting } = useAction(revokeScimCredentialAction, {
     onSuccess: () => {
       reset();
-      toastSuccess({ description: "SCIM credential revoked" });
+      toastSuccess({ description: "SCIM 凭据已撤销" });
     },
     onError: (error) =>
       toastError({
-        title: "Could not revoke SCIM credential",
+        title: "无法撤销 SCIM 凭据",
         description: getActionErrorMessage(error.error),
       }),
   });
   return (
     <form className="space-y-3 border-t pt-4" onSubmit={handleSubmit(execute)}>
-      <h3 className="font-medium">Revoke a credential</h3>
+      <h3 className="font-medium">撤销凭据</h3>
       <Input
         name="scim-revoke-provider"
-        label="SSO provider ID to revoke"
+        label="待撤销的单点登录服务 ID"
         type="text"
         registerProps={register("providerId", { required: true })}
         error={errors.providerId}
       />
       <Input
         name="scim-revoke-connection"
-        label="Connection ID"
+        label="连接 ID"
         type="text"
         registerProps={register("connectionId", { required: true })}
         error={errors.connectionId}
       />
       <Input
         name="scim-revoke-credential"
-        label="Credential ID"
+        label="凭据 ID"
         type="text"
         registerProps={register("credentialId", { required: true })}
         error={errors.credentialId}
       />
       <Button type="submit" variant="destructive" loading={isExecuting}>
-        Revoke SCIM credential
+        撤销 SCIM 凭据
       </Button>
     </form>
   );

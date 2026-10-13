@@ -105,18 +105,18 @@ export const MAIL_SCHEDULED_TYPE = "scheduled";
 
 /** Everything the inbox isn't. Visited rarely enough to stay behind a toggle. */
 const MAILBOX_ITEMS: SystemItem[] = [
-  { name: "Drafts", type: "draft", countId: "DRAFT", Icon: FileIcon },
-  { name: "Sent", type: "sent", countId: null, Icon: SendIcon },
-  { name: "Archived", type: "archive", countId: null, Icon: ArchiveIcon },
-  { name: "Starred", type: "starred", countId: null, Icon: StarIcon },
+  { name: "草稿箱", type: "draft", countId: "DRAFT", Icon: FileIcon },
+  { name: "已发送", type: "sent", countId: null, Icon: SendIcon },
+  { name: "已归档", type: "archive", countId: null, Icon: ArchiveIcon },
+  { name: "星标邮件", type: "starred", countId: null, Icon: StarIcon },
   {
-    name: "Scheduled",
+    name: "定时发送",
     type: MAIL_SCHEDULED_TYPE,
     countId: null,
     Icon: Clock3Icon,
   },
-  { name: "Spam", type: "spam", countId: null, Icon: ShieldAlertIcon },
-  { name: "Trash", type: "trash", countId: null, Icon: Trash2Icon },
+  { name: "垃圾邮件", type: "spam", countId: null, Icon: ShieldAlertIcon },
+  { name: "回收站", type: "trash", countId: null, Icon: Trash2Icon },
 ];
 
 export type MailCategory = {
@@ -127,27 +127,27 @@ export type MailCategory = {
 
 export const MAIL_CATEGORIES: MailCategory[] = [
   {
-    name: "Personal",
+    name: "个人邮件",
     type: GmailLabel.PERSONAL,
     Icon: UserIcon,
   },
   {
-    name: "Social",
+    name: "社交邮件",
     type: GmailLabel.SOCIAL,
     Icon: Users2Icon,
   },
   {
-    name: "Updates",
+    name: "更新",
     type: GmailLabel.UPDATES,
     Icon: BellIcon,
   },
   {
-    name: "Forums",
+    name: "论坛邮件",
     type: GmailLabel.FORUMS,
     Icon: MessagesSquareIcon,
   },
   {
-    name: "Promotions",
+    name: "推广邮件",
     type: GmailLabel.PROMOTIONS,
     Icon: MegaphoneIcon,
   },
@@ -272,7 +272,7 @@ export function MailSidebar({
           >
             <ArrowLeftIcon className="size-3.5 shrink-0" />
             <span className="flex-1 truncate" data-hide-on-desktop-mac>
-              Inbox Zero
+              十组邮件小助手
             </span>
           </Link>
           <SidebarTrigger
@@ -283,7 +283,7 @@ export function MailSidebar({
       )}
 
       <ShortcutTooltip
-        shortcuts={[{ id: "compose", label: "Compose" }]}
+        shortcuts={[{ id: "compose", label: "写邮件" }]}
         side={collapsed ? "right" : "bottom"}
       >
         {collapsed ? (
@@ -291,7 +291,7 @@ export function MailSidebar({
             variant="gradient"
             size="icon"
             onClick={onCompose}
-            aria-label="Compose"
+            aria-label="写邮件"
             className="mb-3.5 size-10 shrink-0 self-center rounded-xl"
           >
             <PenLineIcon className="size-4" />
@@ -303,7 +303,7 @@ export function MailSidebar({
             className="mb-3.5 w-full shrink-0 justify-start gap-2 rounded-xl px-3"
           >
             <PenLineIcon className="size-4 shrink-0" />
-            Compose
+            写邮件
           </Button>
         )}
       </ShortcutTooltip>
@@ -321,7 +321,7 @@ export function MailSidebar({
               (!activeLabelId && !activeFolderId && activeType === "inbox")
             }
             icon={<InboxIcon className="size-4 shrink-0" />}
-            name={unified ? "All inboxes" : "Inbox"}
+            name={unified ? "全部收件箱" : "收件箱"}
             count={unified ? null : displayCount(countsById.get("INBOX"))}
             emphasizeCount
             collapsed={collapsed}
@@ -335,7 +335,7 @@ export function MailSidebar({
               expanded={showMailboxes}
               onToggle={() => setShowMailboxes((open) => !open)}
             >
-              Mail
+              邮箱
             </GroupHeading>
             {showMailboxRows && (
               <nav className="flex flex-col gap-px">
@@ -398,7 +398,7 @@ export function MailSidebar({
 
         {!unified && sidebarFolders.length > 0 && (
           <>
-            <GroupHeading collapsed={collapsed}>Folders</GroupHeading>
+            <GroupHeading collapsed={collapsed}>文件夹</GroupHeading>
             <nav className="flex flex-col gap-px">
               {sidebarFolders.map((folder) => (
                 <MailboxItemContextMenu
@@ -450,7 +450,7 @@ export function MailSidebar({
                     setIsAddingLabel((open) => !open);
                   }}
                   aria-expanded={isAddingLabel}
-                  aria-label={`Create ${labelSingular}`}
+                  aria-label={`创建${labelSingular}`}
                   className="rounded-md p-0.5 text-muted-foreground hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 >
                   <PlusIcon className="size-3.5" />
@@ -494,7 +494,7 @@ export function MailSidebar({
                   ) : (
                     <ChevronRightIcon className="size-3" />
                   )}
-                  More
+                  更多
                 </button>
                 {showHiddenLabels && (
                   <nav className="flex flex-col gap-px">
@@ -531,8 +531,8 @@ export function MailSidebar({
                   onKeyDown={(event) => {
                     if (event.key === "Escape") setIsAddingLabel(false);
                   }}
-                  placeholder={`${labelSingular} name`}
-                  aria-label={`New ${labelSingular} name`}
+                  placeholder={`${labelSingular}名称`}
+                  aria-label={`新${labelSingular}名称`}
                   autoFocus
                   className="h-7 min-w-0 flex-1 px-2 text-xs"
                 />
@@ -542,7 +542,7 @@ export function MailSidebar({
                   size="xs-2"
                   disabled={!newLabelName.trim()}
                 >
-                  Add
+                  添加
                 </Button>
               </form>
             ) : null}
@@ -616,7 +616,7 @@ function LabelBranch({
           {children.length > 0 && !collapsed && (
             <button
               type="button"
-              aria-label={`${expanded ? "Collapse" : "Expand"} ${label.name}`}
+              aria-label={`${expanded ? "收起" : "展开"} ${label.name}`}
               aria-expanded={expanded}
               onClick={() =>
                 setExpansion({ activeDescendantId, expanded: !expanded })

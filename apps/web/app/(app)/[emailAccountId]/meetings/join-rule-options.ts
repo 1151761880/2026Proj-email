@@ -1,11 +1,11 @@
 import { MeetingJoinRule } from "@/generated/prisma/enums";
 
 export const JOIN_RULE_OPTIONS = [
-  { value: MeetingJoinRule.ALL, label: "Every call with a video link" },
+  { value: MeetingJoinRule.ALL, label: "所有包含视频链接的会议" },
   {
     value: MeetingJoinRule.EXTERNAL_ONLY,
-    label: "Only calls with people outside my company",
+    label: "仅包含公司外部人员的会议",
   },
-  { value: MeetingJoinRule.HOST_ONLY, label: "Only calls I organize" },
-  { value: MeetingJoinRule.OFF, label: "Only the ones I turn on myself" },
+  { value: MeetingJoinRule.HOST_ONLY, label: "仅我组织的会议" },
+  { value: MeetingJoinRule.OFF, label: "仅我手动启用的会议" },
 ];

@@ -29,7 +29,7 @@ test("control arm opens onboarding on the first step with no paywall", async ({
   const emailAccountId = await getEmailAccountId(page);
   await page.goto(`/${emailAccountId}/onboarding`);
   await expect(
-    page.getByRole("heading", { name: "Your inbox, automatically sorted" }),
+    page.getByRole("heading", { name: "自动整理收件箱" }),
   ).toBeVisible({ timeout: 60_000 });
   await expect(page).toHaveURL(new RegExp(`/${emailAccountId}/onboarding`));
   await capturePlaywrightCheckpoint(page, testInfo, "control-first-step");
@@ -51,7 +51,7 @@ test("paywall-first arm shows pricing, then onboarding after payment, then setup
     timeout: 60_000,
   });
   await expect(
-    page.getByRole("heading", { name: "Start your 7-day FREE trial" }),
+    page.getByRole("heading", { name: "开始 7 天免费试用" }),
   ).toBeVisible({ timeout: 60_000 });
   await loadedSignedInUser;
   await capturePlaywrightCheckpoint(page, testInfo, "paywall-pricing-first");
@@ -81,7 +81,7 @@ test("paywall-first arm shows pricing, then onboarding after payment, then setup
     stripeSubscriptionStatus: "trialing",
   });
   await expect(
-    page.getByRole("heading", { name: "Your inbox, automatically sorted" }),
+    page.getByRole("heading", { name: "自动整理收件箱" }),
   ).toBeVisible({ timeout: 60_000 });
   await capturePlaywrightCheckpoint(
     page,
@@ -92,17 +92,17 @@ test("paywall-first arm shows pricing, then onboarding after payment, then setup
   // A paying user re-entering the paywall arm stays in onboarding.
   await page.goto(`/${emailAccountId}/onboarding?paywallFirst=true&step=who`);
   await expect(
-    page.getByRole("heading", { name: "What do you do?" }),
+    page.getByRole("heading", { name: "你的职业是什么？" }),
   ).toBeVisible({ timeout: 60_000 });
   await expect(page).toHaveURL(new RegExp(`/${emailAccountId}/onboarding`));
 
   await completeOnboardingFromWhoStep(page);
 
   await expect(page).toHaveURL(/\/setup(?:\?.*)?$/, { timeout: 60_000 });
-  await expect(page.getByText("Set up your Personal Assistant")).toBeVisible({
+  await expect(page.getByText("配置个人助手")).toBeVisible({
     timeout: 60_000,
   });
-  await expect(page.getByText("There was an error")).toHaveCount(0);
+  await expect(page.getByText("发生错误")).toHaveCount(0);
   await capturePlaywrightCheckpoint(
     page,
     testInfo,
@@ -133,38 +133,38 @@ async function waitForCheckoutSessionUrl() {
 }
 
 async function completeOnboardingFromWhoStep(page: Page) {
-  await page.getByRole("button", { name: "Founder", exact: true }).click();
-  await page.getByRole("button", { name: "Continue", exact: true }).click();
+  await page.getByRole("button", { name: "创业者", exact: true }).click();
+  await page.getByRole("button", { name: "继续", exact: true }).click();
   await expect(
-    page.getByRole("heading", { name: "What's the size of your company?" }),
+    page.getByRole("heading", { name: "公司有多少人？" }),
   ).toBeVisible({ timeout: 60_000 });
   await page
-    .getByRole("button", { name: "11-100 people", exact: true })
+    .getByRole("button", { name: "11–100 人", exact: true })
     .click();
   await expect(
-    page.getByRole("heading", { name: "How did you hear about Inbox Zero?" }),
+    page.getByRole("heading", { name: "How did you hear about 十组邮件小助手?" }),
   ).toBeVisible({ timeout: 60_000 });
   await page.getByRole("button", { name: "GitHub", exact: true }).click();
   await expect(
     page.getByRole("heading", {
-      name: "How do you want your inbox organized?",
+      name: "希望如何整理收件箱？",
     }),
   ).toBeVisible({ timeout: 60_000 });
-  await page.getByRole("button", { name: "Continue", exact: true }).click();
+  await page.getByRole("button", { name: "继续", exact: true }).click();
   await expect(
-    page.getByRole("heading", { name: "Should we draft replies for you?" }),
+    page.getByRole("heading", { name: "是否自动起草回复？" }),
   ).toBeVisible({ timeout: 60_000 });
-  await page.getByRole("button", { name: "Yes, please", exact: true }).click();
+  await page.getByRole("button", { name: "启用", exact: true }).click();
   await expect(
-    page.getByRole("heading", { name: "Custom rules", exact: true }),
+    page.getByRole("heading", { name: "自定义规则", exact: true }),
   ).toBeVisible({ timeout: 60_000 });
-  await page.getByRole("button", { name: "Continue", exact: true }).click();
+  await page.getByRole("button", { name: "继续", exact: true }).click();
   await expect(
-    page.getByRole("heading", { name: "Invite your team", exact: true }),
+    page.getByRole("heading", { name: "邀请团队", exact: true }),
   ).toBeVisible({ timeout: 60_000 });
-  await page.getByRole("button", { name: "Skip", exact: true }).click();
+  await page.getByRole("button", { name: "跳过", exact: true }).click();
   await expect(
     page.getByRole("heading", { name: "Labels are ready", exact: true }),
   ).toBeVisible({ timeout: 60_000 });
-  await page.getByRole("button", { name: "Continue", exact: true }).click();
+  await page.getByRole("button", { name: "继续", exact: true }).click();
 }

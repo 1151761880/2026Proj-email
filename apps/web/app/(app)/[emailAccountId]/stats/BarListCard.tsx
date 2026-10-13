@@ -61,10 +61,10 @@ export function BarListCard({ tabs, icon, title }: BarListCardProps) {
           <div className="absolute inset-0 flex items-center justify-center z-30 pointer-events-none">
             <div className="text-center space-y-2 px-4">
               <div className="text-muted-foreground text-sm">
-                No data available
+                暂无数据
               </div>
               <p className="text-xs text-muted-foreground/70">
-                Select a different time period to view statistics
+                请选择其他时间段查看统计
               </p>
             </div>
           </div>
@@ -78,7 +78,7 @@ export function BarListCard({ tabs, icon, title }: BarListCardProps) {
                 <Dialog>
                   <DialogTrigger asChild>
                     <Button variant="outline" size="xs-2">
-                      View more
+                      查看更多
                     </Button>
                   </DialogTrigger>
                   <DialogContent className="max-w-2xl p-0 gap-0">

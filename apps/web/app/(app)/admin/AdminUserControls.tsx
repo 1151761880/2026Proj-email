@@ -35,14 +35,14 @@ export const AdminUserControls = () => {
     {
       onSuccess: () => {
         toastSuccess({
-          title: "History processed",
-          description: "History processed",
+          title: "历史邮件已处理",
+          description: "历史邮件已处理",
         });
       },
       onError: () => {
         toastError({
-          title: "Error processing history",
-          description: "Error processing history",
+          title: "处理历史邮件失败",
+          description: "处理历史邮件失败",
         });
       },
     },
@@ -51,18 +51,16 @@ export const AdminUserControls = () => {
     useAction(adminCheckPermissionsAction, {
       onSuccess: (result) => {
         toastSuccess({
-          title: "Permissions checked",
-          description: `Permissions checked. ${
-            result.data?.hasAllPermissions
+          title: "权限已检查",
+          description: `权限已检查。${result.data?.hasAllPermissions
               ? "Has all permissions"
-              : "Missing permissions"
-          }`,
+              : "Missing permissions"}`,
         });
       },
       onError: (error) => {
         console.error(error);
         toastError({
-          title: "Error checking permissions",
+          title: "检查权限失败",
           description: getActionErrorMessage(error.error),
         });
       },
@@ -83,13 +81,13 @@ export const AdminUserControls = () => {
               ? `0 succeeded, ${errorCount} failed`
               : "No watchable email accounts found";
         toastSuccess({
-          title: "Watch completed",
+          title: "监听已设置",
           description,
         });
       },
       onError: (error) => {
         toastError({
-          title: "Error watching emails",
+          title: "监听邮件失败",
           description: getActionErrorMessage(error.error),
         });
       },
@@ -100,13 +98,13 @@ export const AdminUserControls = () => {
     {
       onSuccess: (result) => {
         toastSuccess({
-          title: "Stripe synced",
-          description: `Status: ${result.data?.stripeSubscriptionStatus ?? "none"}`,
+          title: "Stripe 已同步",
+          description: `状态：${result.data?.stripeSubscriptionStatus ?? "none"}`,
         });
       },
       onError: (error) => {
         toastError({
-          title: "Error syncing Stripe",
+          title: "同步 Stripe 失败",
           description: getActionErrorMessage(error.error),
         });
       },
@@ -117,13 +115,13 @@ export const AdminUserControls = () => {
     {
       onSuccess: (result) => {
         toastSuccess({
-          title: "Apple synced",
-          description: `Status: ${result.data?.appleSubscriptionStatus ?? "none"}; tier: ${result.data?.tier ?? "none"}`,
+          title: "Apple 已同步",
+          description: `状态：${result.data?.appleSubscriptionStatus ?? "none"}；套餐：${result.data?.tier ?? "none"}`,
         });
       },
       onError: (error) => {
         toastError({
-          title: "Error syncing Apple",
+          title: "同步 Apple 失败",
           description: getActionErrorMessage(error.error),
         });
       },
@@ -134,13 +132,13 @@ export const AdminUserControls = () => {
     {
       onSuccess: (result) => {
         toastSuccess({
-          title: "Rules disabled",
-          description: `Disabled rules and follow-up for ${result.data?.emailAccountCount} account(s)`,
+          title: "规则已禁用",
+          description: `已禁用 ${result.data?.emailAccountCount} 个账户的规则和跟进提醒`,
         });
       },
       onError: (error) => {
         toastError({
-          title: "Error disabling rules",
+          title: "禁用规则失败",
           description: getActionErrorMessage(error.error),
         });
       },
@@ -151,13 +149,13 @@ export const AdminUserControls = () => {
     {
       onSuccess: (result) => {
         toastSuccess({
-          title: "Drafts cleaned up",
-          description: `Deleted ${result.data?.deleted ?? 0} draft(s), skipped ${result.data?.skippedModified ?? 0} modified`,
+          title: "草稿已清理",
+          description: `删除 ${result.data?.deleted ?? 0} 份草稿，跳过 ${result.data?.skippedModified ?? 0} 份已修改草稿`,
         });
       },
       onError: (error) => {
         toastError({
-          title: "Error cleaning up drafts",
+          title: "清理草稿失败",
           description: getActionErrorMessage(error.error),
         });
       },
@@ -167,13 +165,13 @@ export const AdminUserControls = () => {
     useAction(adminLoadResponseTimeDataAction, {
       onSuccess: (result) => {
         toastSuccess({
-          title: "Response times loaded",
-          description: `Analyzed ${result.data?.emailsAnalyzed ?? 0} email(s) with a cap of ${result.data?.maxEmailsCap ?? responseTimeMaxSentMessages}`,
+          title: "回复时间已加载",
+          description: `已分析 ${result.data?.emailsAnalyzed ?? 0} 封邮件，上限 ${result.data?.maxEmailsCap ?? responseTimeMaxSentMessages} 封`,
         });
       },
       onError: (error) => {
         toastError({
-          title: "Error loading response times",
+          title: "加载回复时间失败",
           description: getActionErrorMessage(error.error),
         });
       },
@@ -183,13 +181,13 @@ export const AdminUserControls = () => {
     {
       onSuccess: () => {
         toastSuccess({
-          title: "User deleted",
-          description: "User deleted",
+          title: "用户已删除",
+          description: "用户已删除",
         });
       },
       onError: (error) => {
         toastError({
-          title: "Error deleting user",
+          title: "删除用户失败",
           description: getActionErrorMessage(error.error),
         });
       },
@@ -209,14 +207,14 @@ export const AdminUserControls = () => {
       <Input
         type="email"
         name="email"
-        label="Email"
+        label="邮件"
         registerProps={register("email", { required: true })}
         error={errors.email}
       />
       <Input
         type="number"
         name="responseTimeMaxSentMessages"
-        label="Response time sent messages"
+        label="用于回复时间统计的已发送邮件数"
         min={1}
         max={2000}
         step={50}
@@ -229,7 +227,7 @@ export const AdminUserControls = () => {
       <Input
         type="text"
         name="appleOriginalTransactionId"
-        label="Apple original transaction ID"
+        label="Apple 原始交易 ID"
         placeholder="200000000000000"
         registerProps={{
           value: appleOriginalTransactionId,
@@ -245,7 +243,7 @@ export const AdminUserControls = () => {
             processHistory({ emailAddress: getValues("email") });
           }}
         >
-          Process History
+          处理历史邮件
         </Button>
         <Button
           variant="outline"
@@ -254,7 +252,7 @@ export const AdminUserControls = () => {
             checkPermissions({ email: getValues("email") });
           }}
         >
-          Check Permissions
+          检查权限
         </Button>
         <Button
           variant="outline"
@@ -263,7 +261,7 @@ export const AdminUserControls = () => {
             watchEmails({ email: getValues("email") });
           }}
         >
-          Watch
+          监听
         </Button>
         <Button
           type="button"
@@ -273,7 +271,7 @@ export const AdminUserControls = () => {
             syncStripe({ email: getValues("email") });
           }}
         >
-          Sync Stripe
+          同步 Stripe
         </Button>
         <Button
           type="button"
@@ -286,7 +284,7 @@ export const AdminUserControls = () => {
             });
           }}
         >
-          Sync Apple
+          同步 Apple
         </Button>
         <Button
           variant="outline"
@@ -295,7 +293,7 @@ export const AdminUserControls = () => {
             disableRules({ email: getValues("email") });
           }}
         >
-          Disable Rules
+          禁用规则
         </Button>
         <Button
           variant="outline"
@@ -304,7 +302,7 @@ export const AdminUserControls = () => {
             cleanupDrafts({ email: getValues("email") });
           }}
         >
-          Cleanup Drafts
+          清理草稿
         </Button>
         <Button
           variant="outline"
@@ -316,7 +314,7 @@ export const AdminUserControls = () => {
             });
           }}
         >
-          Load Response Times
+          加载回复时间
         </Button>
         <Button
           variant="destructive"
@@ -325,7 +323,7 @@ export const AdminUserControls = () => {
             deleteAccount({ email: getValues("email") });
           }}
         >
-          Delete User
+          删除用户
         </Button>
       </div>
     </form>

@@ -40,7 +40,7 @@ function handleStaleDeployment() {
     window.location.reload();
     return;
   }
-  toast.info("Inbox Zero was updated", {
+  toast.info("十组邮件小助手 was updated", {
     id: TOAST_ID,
     description: "Reload to keep using the latest version.",
     duration: Number.POSITIVE_INFINITY,

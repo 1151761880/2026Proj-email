@@ -47,7 +47,7 @@ test("never paints an empty reader when moving between loaded HTML threads", asy
     requestAnimationFrame(sample);
   });
   const initialUrl = page.url();
-  await page.getByRole("button", { name: /^More actions/ }).click();
+  await page.getByRole("button", { name: /更多操作/ }).click();
   await expect(page.getByRole("menu")).toBeVisible();
   for (const key of ["j", "k", "j", "k"]) {
     await page.keyboard.press(key);
@@ -99,13 +99,13 @@ test("never paints an empty reader when moving between loaded HTML threads", asy
   await expect(page).not.toHaveURL(initialUrl);
   const historyDestination = page.url();
   await expect(page.locator('[aria-busy="true"]')).toHaveCount(0);
-  await page.getByRole("button", { name: /^More actions/ }).click();
+  await page.getByRole("button", { name: /更多操作/ }).click();
   await expect(page.getByRole("menu")).toBeVisible();
   await page.goBack();
   await expect(page).toHaveURL(initialUrl);
   await expect(page.locator('[aria-busy="true"]')).toHaveCount(0);
   await expect(page.getByRole("menu")).toHaveCount(0);
-  await page.getByRole("button", { name: /^More actions/ }).click();
+  await page.getByRole("button", { name: /更多操作/ }).click();
   await expect(page.getByRole("menu")).toBeVisible();
   await page.goForward();
   await expect(page).toHaveURL(historyDestination);
@@ -145,7 +145,7 @@ test("never paints an empty reader when moving between loaded HTML threads", asy
       .last()
       .getByText(`Navigation body for ${nextThreadId}`),
   ).toBeVisible({ timeout: 10_000 });
-  await page.getByRole("button", { name: /^More actions/ }).click();
+  await page.getByRole("button", { name: /更多操作/ }).click();
   await expect(page.getByRole("menu")).toBeVisible();
   await page.keyboard.press("Escape");
   await page.evaluate(() => {

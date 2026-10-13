@@ -97,11 +97,11 @@ export function ExamplesDialog({
                 onClick={handleBackToPersonas}
               >
                 <ArrowLeftIcon className="size-4" />
-                <span className="sr-only">Back to personas</span>
+                <span className="sr-only">返回身份选择</span>
               </Button>
             )}
             <DialogTitle>
-              {selectedPersona ? "Choose examples" : "Choose persona"}
+              {selectedPersona ? "选择示例" : "选择身份"}
             </DialogTitle>
           </div>
         </DialogHeader>
@@ -149,7 +149,7 @@ export function ExamplesDialog({
                   variant="default"
                 >
                   <PlusIcon className="size-4" />
-                  Add Selected ({selectedExamples.length})
+                  添加所选（{selectedExamples.length})
                 </Button>
               </div>
             )}

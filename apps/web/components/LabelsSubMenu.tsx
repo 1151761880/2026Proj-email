@@ -38,7 +38,7 @@ export function LabelsSubMenu({
         })
       ) : (
         <DropdownMenuItem>
-          You don't have any {terminology.label.plural} yet.
+          暂无 {terminology.label.plural} yet.
         </DropdownMenuItem>
       )}
     </DropdownMenuSubContent>

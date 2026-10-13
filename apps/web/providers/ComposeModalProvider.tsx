@@ -179,14 +179,14 @@ export function ComposeModalProvider(props: { children: React.ReactNode }) {
                 isExpanded && "text-2xl font-medium",
               )}
             >
-              {reply ? reply.replyingToEmail.subject || "Reply" : "New Message"}
+              {reply ? reply.replyingToEmail.subject || "Reply" : "新邮件"}
             </DialogTitle>
             <div className="flex items-center gap-0.5">
               <Button
-                aria-label={isExpanded ? "Restore compose" : "Expand compose"}
+                aria-label={isExpanded ? "还原写信窗口" : "展开写信窗口"}
                 onClick={() => setIsExpanded((expanded) => !expanded)}
                 size="iconSm"
-                title={isExpanded ? "Restore compose" : "Expand compose"}
+                title={isExpanded ? "还原写信窗口" : "展开写信窗口"}
                 variant="ghost"
               >
                 {isExpanded ? (
@@ -197,9 +197,9 @@ export function ComposeModalProvider(props: { children: React.ReactNode }) {
               </Button>
               <DialogClose asChild>
                 <Button
-                  aria-label="Close compose"
+                  aria-label="关闭写信窗口"
                   size="iconSm"
-                  title="Close compose"
+                  title="关闭写信窗口"
                   variant="ghost"
                 >
                   <XIcon className="size-4" />

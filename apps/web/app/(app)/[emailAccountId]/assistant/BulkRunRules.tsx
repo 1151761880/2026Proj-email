@@ -106,13 +106,13 @@ export function BulkRunRules() {
     dispatch({ type: "START" });
 
     if (!startDate) {
-      toastError({ description: "Please select a start date" });
+      toastError({ description: "请选择开始日期" });
       dispatch({ type: "RESET" });
       return;
     }
     if (!emailAccountId) {
       toastError({
-        description: "Email account ID is missing. Please refresh the page.",
+        description: "缺少邮箱账户 ID，请刷新页面。",
       });
       dispatch({ type: "RESET" });
       return;
@@ -147,8 +147,8 @@ export function BulkRunRules() {
     } catch (error) {
       console.error("Failed to start bulk processing:", error);
       toastError({
-        title: "Failed to start",
-        description: "An error occurred. Please try again.",
+        title: "启动失败",
+        description: "发生错误，请重试。",
       });
       dispatch({ type: "RESET" });
     }
@@ -176,14 +176,14 @@ export function BulkRunRules() {
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogTrigger asChild>
           <Button type="button" variant="outline" size="sm">
-            Process Past Emails
+            处理历史邮件
           </Button>
         </DialogTrigger>
         <DialogContent className="max-w-3xl">
           <DialogHeader>
-            <DialogTitle>Bulk Process Emails</DialogTitle>
+            <DialogTitle>批量处理邮件</DialogTitle>
             <DialogDescription>
-              Run your rules on emails already in your inbox.
+              对收件箱中的已有邮件执行规则。
             </DialogDescription>
           </DialogHeader>
           {progressMessage && (
@@ -204,7 +204,7 @@ export function BulkRunRules() {
                     dispatch({ type: "RESET" });
                   }}
                   value={startDate}
-                  placeholder="Set start date"
+                  placeholder="设置开始日期"
                   disabled={isProcessing}
                 />
                 <SetDateDropdown
@@ -213,14 +213,14 @@ export function BulkRunRules() {
                     dispatch({ type: "RESET" });
                   }}
                   value={endDate}
-                  placeholder="Set end date (optional)"
+                  placeholder="设置结束日期（可选）"
                   disabled={isProcessing}
                 />
               </div>
 
               <ItemCard>
                 <ToggleRow
-                  title="Include read emails"
+                  title="包含已读邮件"
                   checked={isIncludeReadEnabled}
                   onCheckedChange={setIncludeRead}
                   disabled={isProcessing}
@@ -228,7 +228,7 @@ export function BulkRunRules() {
                 />
                 <ItemSeparator />
                 <ToggleRow
-                  title="Rerun rules on already processed emails"
+                  title="对已处理邮件重新执行规则"
                   checked={isRerunEnabled}
                   onCheckedChange={setRerun}
                   disabled={isProcessing}
@@ -236,7 +236,7 @@ export function BulkRunRules() {
                 />
                 <ItemSeparator />
                 <ToggleRow
-                  title="Generate draft replies"
+                  title="生成回复草稿"
                   checked={generateDraftReplies}
                   onCheckedChange={setGenerateDraftReplies}
                   disabled={isBusy}
@@ -283,7 +283,7 @@ export function BulkRunRules() {
                     }
                     onClick={handleStart}
                   >
-                    Process Emails
+                    处理邮件
                   </Button>
                 )}
               {isBusy && (
@@ -292,30 +292,30 @@ export function BulkRunRules() {
                     {isPaused ? (
                       <>
                         <PlayIcon className="mr-1.5 h-3.5 w-3.5" />
-                        Resume
+                        继续
                       </>
                     ) : (
                       <>
                         <PauseIcon className="mr-1.5 h-3.5 w-3.5" />
-                        Pause
+                        暂停
                       </>
                     )}
                   </Button>
                   <Button variant="outline" size="sm" onClick={handleStop}>
                     <SquareIcon className="mr-1.5 h-3.5 w-3.5" />
-                    Stop
+                    停止
                   </Button>
                 </div>
               )}
 
               {state.runResult && state.runResult.count === 0 && (
                 <div className="mt-4 rounded-md border border-blue-200 bg-blue-50 px-3 py-2 text-sm text-blue-800 dark:border-blue-800 dark:bg-blue-950 dark:text-blue-200">
-                  No{" "}
+                  否{" "}
                   {describeTargetedEmails({
                     includeRead: isIncludeReadEnabled,
                     rerun: isRerunEnabled,
                   })}{" "}
-                  found in your inbox in the selected date range.
+                  封邮件在所选时间范围内。
                 </div>
               )}
             </div>
@@ -345,7 +345,7 @@ function ToggleRow({
       <ItemContent>
         <ItemTitle>{title}</ItemTitle>
         {onUpgrade && (
-          <ItemDescription>Available on the Professional plan.</ItemDescription>
+          <ItemDescription>专业版可用。</ItemDescription>
         )}
       </ItemContent>
       <ItemActions>
@@ -354,10 +354,10 @@ function ToggleRow({
             type="button"
             size="sm"
             variant="outline"
-            aria-label={`Upgrade to use ${title.toLowerCase()}`}
+            aria-label={`升级后使用 ${title.toLowerCase()}`}
             onClick={onUpgrade}
           >
-            Upgrade
+            升级
           </Button>
         ) : (
           <Switch

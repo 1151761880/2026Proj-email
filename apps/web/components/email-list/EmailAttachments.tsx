@@ -75,7 +75,7 @@ export function EmailAttachments({ message }: { message: ThreadMessage }) {
       saveBlob(blob, filename);
     } catch {
       if (!signal.aborted)
-        toastError({ description: "Failed to download attachment" });
+        toastError({ description: "下载附件失败" });
     } finally {
       setIsDownloading(false);
     }
@@ -107,7 +107,7 @@ export function EmailAttachments({ message }: { message: ThreadMessage }) {
               <button
                 type="button"
                 className="absolute inset-0 rounded-[inherit] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset"
-                aria-label={`Preview ${attachment.filename}`}
+                aria-label={`预览 ${attachment.filename}`}
                 title={attachment.filename}
                 onClick={() => setPreviewingId(attachment.attachmentId)}
               />
@@ -138,8 +138,8 @@ export function EmailAttachments({ message }: { message: ThreadMessage }) {
                   size="iconSm"
                   type="button"
                   className="relative"
-                  aria-label={`Download ${attachment.filename}`}
-                  title="Download attachment"
+                  aria-label={`下载 ${attachment.filename}`}
+                  title="下载附件"
                   disabled={!emailAccountId || isDownloading}
                   onClick={() =>
                     downloadAttachment({
@@ -233,7 +233,7 @@ function AttachmentPreviewDialogContent({
           {filename}
         </DialogTitle>
         <DialogDescription className="sr-only">
-          Attachment preview
+          附件预览
         </DialogDescription>
         <Button
           variant="outline"
@@ -243,7 +243,7 @@ function AttachmentPreviewDialogContent({
           onClick={() => file && saveBlob(file, filename)}
         >
           <DownloadIcon className="mr-2 size-4" aria-hidden="true" />
-          Download
+          下载
         </Button>
       </div>
       <div className="relative flex min-h-0 flex-1 items-center justify-center bg-muted/40">

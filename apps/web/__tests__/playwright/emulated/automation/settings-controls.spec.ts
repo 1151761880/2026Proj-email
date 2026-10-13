@@ -30,7 +30,7 @@ test("persists personalization, drafting, and advanced settings", async ({
 
   await page.goto(`/${emailAccountId}/automation?tab=settings`);
   await expect(
-    page.getByRole("button", { name: "Settings", exact: true }),
+    page.getByRole("button", { name: "设置", exact: true }),
   ).toHaveAttribute("data-selected", "true");
 
   for (const heading of [
@@ -56,15 +56,15 @@ test("persists personalization, drafting, and advanced settings", async ({
     page,
     "Personal instructions",
   );
-  await personalInstructionsItem.getByRole("button", { name: "Edit" }).click();
+  await personalInstructionsItem.getByRole("button", { name: "编辑" }).click();
   const personalInstructionsDialog = page.getByRole("dialog", {
-    name: "Personal instructions",
+    name: "个人指令",
   });
   await personalInstructionsDialog
     .getByRole("textbox")
     .fill("I lead product. Keep replies concise and surface customer risks.");
   await personalInstructionsDialog
-    .getByRole("button", { name: "Save" })
+    .getByRole("button", { name: "保存" })
     .click();
   await expect
     .poll(() => getAutomationSettingsState(emailAccountId), {
@@ -75,16 +75,16 @@ test("persists personalization, drafting, and advanced settings", async ({
     });
 
   const writingStyleItem = getAutomationSettingsCard(page, "Writing style");
-  await writingStyleItem.getByRole("button", { name: "Edit" }).click();
+  await writingStyleItem.getByRole("button", { name: "编辑" }).click();
   const writingStyleDialog = page.getByRole("dialog", {
-    name: "Writing style",
+    name: "写作风格",
   });
   await writingStyleDialog
     .locator('[contenteditable="true"]')
     .fill("Use short paragraphs, a warm tone, and direct recommendations.");
-  await writingStyleDialog.getByRole("button", { name: "Save" }).click();
+  await writingStyleDialog.getByRole("button", { name: "保存" }).click();
   await expect(
-    page.getByText("Writing style saved!", { exact: true }),
+    page.getByText("写作风格已保存！", { exact: true }),
   ).toBeVisible({ timeout: 60_000 });
   await expect
     .poll(() => getAutomationSettingsState(emailAccountId), {
@@ -96,7 +96,7 @@ test("persists personalization, drafting, and advanced settings", async ({
     });
 
   const draftConfidence = page.getByRole("combobox", {
-    name: "Draft confidence",
+    name: "草稿置信度",
   });
   await draftConfidence.click();
   await page.getByRole("option", { name: /High confidence/ }).click();
@@ -137,10 +137,10 @@ test("persists personalization, drafting, and advanced settings", async ({
     .toMatchObject({ allowHiddenAiDraftLinks: true });
 
   const sensitiveData = page.getByRole("combobox", {
-    name: "Sensitive data protection",
+    name: "敏感数据保护",
   });
   await sensitiveData.click();
-  await page.getByRole("option", { name: /Block/ }).click();
+  await page.getByRole("option", { name: /阻止/ }).click();
   await expect
     .poll(() => getAutomationSettingsState(emailAccountId), {
       timeout: 60_000,
@@ -154,12 +154,12 @@ test("persists personalization, drafting, and advanced settings", async ({
   await expect(multiRuleItem.getByRole("switch")).toBeChecked();
   await expect(referralItem.getByRole("switch")).toBeChecked();
   await expect(hiddenLinksItem.getByRole("switch")).toBeChecked();
-  await expect(sensitiveData).toContainText("Block");
+  await expect(sensitiveData).toContainText("阻止");
 
   await expect(
-    writingStyleItem.getByRole("button", { name: "Edit" }),
+    writingStyleItem.getByRole("button", { name: "编辑" }),
   ).toBeVisible({ timeout: 60_000 });
-  await writingStyleItem.getByRole("button", { name: "Edit" }).click();
+  await writingStyleItem.getByRole("button", { name: "编辑" }).click();
   await expect(
     writingStyleDialog.locator('[contenteditable="true"]'),
   ).toHaveText(
@@ -167,7 +167,7 @@ test("persists personalization, drafting, and advanced settings", async ({
   );
   await page.keyboard.press("Escape");
 
-  await personalInstructionsItem.getByRole("button", { name: "Edit" }).click();
+  await personalInstructionsItem.getByRole("button", { name: "编辑" }).click();
   await expect(personalInstructionsDialog.getByRole("textbox")).toHaveValue(
     "I lead product. Keep replies concise and surface customer risks.",
   );

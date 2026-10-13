@@ -18,6 +18,7 @@ import { createLlmEmulator } from "../__tests__/emulators/llm";
 import { createStripeEmulator } from "../__tests__/emulators/stripe";
 import { writeEmulateSeed } from "./emulate-seed";
 import { createLocalEnvironment } from "./local-dev/environment";
+import { readMailTriageEnvironment } from "./local-dev/mail-triage-environment";
 import { acquireLocalLock } from "./local-dev/lock";
 import { createProcessManager } from "./local-dev/processes";
 import { createRedisHttpServer } from "./local-dev/redis-http";
@@ -52,10 +53,6 @@ async function main() {
   }
   if (Number(process.versions.node.split(".")[0]) !== 24)
     throw new Error("Use Node.js 24, matching package.json engines.");
-  if (process.platform === "win32")
-    throw new Error(
-      "Local development currently supports macOS and Linux. On Windows, run this command inside WSL.",
-    );
   const appPort = Number(values.port);
   if (!Number.isInteger(appPort) || appPort < 1 || appPort > 65_535)
     throw new Error("--port must be an integer between 1 and 65535");
@@ -139,11 +136,12 @@ async function main() {
       secrets,
       inherited: process.env,
     });
+    Object.assign(env, readMailTriageEnvironment(join(APP_DIR, ".env.local")));
     // Give this launcher its own Next output and lock, separate from pnpm dev and Playwright.
     env.PLAYWRIGHT_RUN_ID = "local-dev";
     env.RESEND_API_KEY = "local-email-key";
     env.RESEND_BASE_URL = `http://127.0.0.1:${emailPort}`;
-    env.RESEND_FROM_EMAIL = "Inbox Zero <signin@example.com>";
+    env.RESEND_FROM_EMAIL = "十组邮件小助手 <signin@example.com>";
     env.RESEND_AUDIENCE_ID = "playwright-audience";
     manager = createProcessManager(APP_DIR, env);
     const processes = manager;
@@ -160,6 +158,7 @@ async function main() {
             "-U",
             "postgres",
             "--auth=scram-sha-256",
+            "--encoding=UTF8",
             "--pwfile",
             passwordFile,
           ]);
@@ -400,12 +399,17 @@ async function configureDemoOnboarding(databaseUrl: string) {
 
 function findExecutable(name: string) {
   const directories = [
+    join(ROOT_DIR, ".context/native/postgresql/pgsql/bin"),
+    join(ROOT_DIR, ".context/native/redis"),
+    join(ROOT_DIR, ".context/native/redis/Redis-8.10.2-Windows-x64-msys2"),
     ...(process.env.PATH ?? "").split(delimiter),
     "/opt/homebrew/opt/postgresql@16/bin",
     "/usr/local/opt/postgresql@16/bin",
   ];
   return directories
-    .map((directory) => join(directory, name))
+    .map((directory) =>
+      join(directory, process.platform === "win32" ? `${name}.exe` : name),
+    )
     .find((path) => existsSync(path));
 }
 

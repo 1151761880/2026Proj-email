@@ -33,17 +33,17 @@ const OTHER_VALUE = "other";
 const SOURCES = [
   {
     value: "search",
-    label: "Search",
+    label: "搜索",
     icon: <Search className="size-4" />,
   },
   {
     value: "llm",
-    label: "ChatGPT, Claude, or other AI",
+    label: "ChatGPT、Claude 或其他 AI",
     icon: <Sparkles className="size-4" />,
   },
   {
     value: "friend",
-    label: "Friend or colleague",
+    label: "朋友或同事",
     icon: <Users className="size-4" />,
   },
   {
@@ -78,7 +78,7 @@ const SOURCES = [
   },
   {
     value: OTHER_VALUE,
-    label: "Other",
+    label: "其他",
     icon: <MoreHorizontal className="size-4" />,
   },
 ];
@@ -99,7 +99,7 @@ export function StepHowYouHeard({ onNext }: { onNext: () => void }) {
       })
         .then((result) => {
           if (result?.serverError || result?.validationErrors) {
-            captureException(new Error("Failed to save onboarding source"), {
+            captureException(new Error("保存来源失败"), {
               extra: {
                 context: "onboarding",
                 step: "source",
@@ -127,7 +127,7 @@ export function StepHowYouHeard({ onNext }: { onNext: () => void }) {
           });
           toastError({
             description:
-              "We couldn't save that answer, but you can keep going.",
+              "未能保存此回答，你可以继续。",
           });
         });
     },
@@ -152,9 +152,9 @@ export function StepHowYouHeard({ onNext }: { onNext: () => void }) {
       </IconCircle>
 
       <div className="text-center mt-4">
-        <PageHeading>How did you hear about Inbox Zero?</PageHeading>
+        <PageHeading>你是如何了解到十组邮件小助手的？</PageHeading>
         <TypographyP className="mt-2 max-w-lg mx-auto">
-          We'd love to know how you found us.
+          请选择了解本项目的渠道。
         </TypographyP>
       </div>
 
@@ -180,7 +180,7 @@ export function StepHowYouHeard({ onNext }: { onNext: () => void }) {
           <Input
             name="customSource"
             type="text"
-            placeholder="Where did you hear about us?"
+            placeholder="通过什么渠道了解到本项目？"
             registerProps={{
               value: customSource,
               onChange: (event: React.ChangeEvent<HTMLInputElement>) =>
@@ -194,7 +194,7 @@ export function StepHowYouHeard({ onNext }: { onNext: () => void }) {
               className="w-full"
               disabled={!customSource.trim()}
             >
-              Continue
+              继续
               <ArrowRightIcon className="size-4 ml-2" />
             </Button>
           </div>

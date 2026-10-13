@@ -42,15 +42,15 @@ export default function GuestBookingConfirmationEmail({
     >
       <Section className="mb-6 rounded-lg border border-green-200 bg-green-50 px-4 py-3">
         <Text className="m-0 text-[13px] font-medium text-green-800">
-          You're booked. A calendar invite has been added to your inbox.
+          预约成功，日历邀请已发送至收件箱。
         </Text>
       </Section>
 
       <Text className="mb-1 mt-0 text-[15px] text-gray-900">
-        Hi {guestName},
+        你好 {guestName},
       </Text>
       <Text className="m-0 mb-5 text-[15px] text-gray-900">
-        Looking forward to our chat. Here are the details:
+        期待交流，预约信息如下：
       </Text>
 
       <Section className="mb-5 overflow-hidden rounded-2xl border border-gray-200">
@@ -96,7 +96,7 @@ export default function GuestBookingConfirmationEmail({
           <Section className="px-6 py-3">
             {meetingLink ? (
               <Text className="m-0 mb-1 text-[13px] text-gray-700">
-                Join meeting:{" "}
+                加入会议：{" "}
                 <Link
                   href={meetingLink}
                   className="font-mono text-[12px] text-blue-600 underline"
@@ -107,7 +107,7 @@ export default function GuestBookingConfirmationEmail({
             ) : null}
             {location && !meetingLink ? (
               <Text className="m-0 text-[13px] text-gray-700">
-                Location: <strong>{location}</strong>
+                地点： <strong>{location}</strong>
               </Text>
             ) : null}
           </Section>
@@ -117,7 +117,7 @@ export default function GuestBookingConfirmationEmail({
       {guestNote ? (
         <Section className="mb-6 rounded-r-lg border-l-[3px] border-blue-600 bg-[#FAFBFD] px-4 py-3">
           <Text className="m-0 text-[11px] font-semibold uppercase tracking-wider text-gray-500">
-            Your note
+            你的备注
           </Text>
           <Text className="m-0 mt-1 text-[13px] italic text-gray-900">
             "{guestNote}"
@@ -131,24 +131,24 @@ export default function GuestBookingConfirmationEmail({
             href={meetingLink}
             className="mb-2 mr-2 inline-block rounded-md bg-gray-900 px-4 py-2 text-[13px] font-medium text-white no-underline"
           >
-            Join meeting
+            加入会议
           </Link>
         ) : null}
         <Link
           href={rescheduleUrl}
           className="mb-2 mr-2 inline-block rounded-md border border-gray-200 bg-white px-4 py-2 text-[13px] font-medium text-gray-700 no-underline"
         >
-          Reschedule
+          重新预约
         </Link>
         <Link
           href={cancelUrl}
           className="mb-2 mr-2 inline-block rounded-md border border-gray-200 bg-white px-4 py-2 text-[13px] font-medium text-gray-700 no-underline"
         >
-          Cancel
+          取消
         </Link>
       </Section>
 
-      <Text className="m-0 mb-1 text-[14px] text-gray-700">See you soon,</Text>
+      <Text className="m-0 mb-1 text-[14px] text-gray-700">期待见面，</Text>
       <Text className="m-0 text-[14px] font-medium text-gray-900">
         {hostName}
       </Text>
@@ -161,7 +161,7 @@ GuestBookingConfirmationEmail.PreviewProps = {
     "https://www.getinboxzero.com/book/cancel/example?token=test-token",
   rescheduleUrl:
     "https://www.getinboxzero.com/book/reschedule/example?token=test-token",
-  eventTitle: "15 min intro",
+  eventTitle: "15 分钟交流",
   formattedTime: "Thu, Nov 12, 2026 · 10:00 AM",
   guestName: "Sarah Chen",
   hostName: "Elie",

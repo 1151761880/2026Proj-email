@@ -60,7 +60,7 @@ function MailQueue({ emailAccountId }: { emailAccountId: string }) {
   const { data, error, isLoading, isValidating, mutate } = useSWR(
     client ? ["mail-queue-diagnostics", emailAccountId, filter, limit] : null,
     async () => {
-      if (!client) throw new Error("Mail engine is unavailable");
+      if (!client) throw new Error("邮件服务暂时不可用");
       const diagnostics = await client.getDiagnostics(emailAccountId);
       return {
         ...summarizeDiagnostics(diagnostics, filter, limit),
@@ -75,16 +75,15 @@ function MailQueue({ emailAccountId }: { emailAccountId: string }) {
     <PageWrapper className="space-y-6 py-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <PageHeading>Mail queue</PageHeading>
+          <PageHeading>邮件队列</PageHeading>
           <p className="mt-2 text-sm text-muted-foreground">
-            Engine operations for this account in this browser. Refreshes every
-            2 seconds while open.
+            此浏览器中当前账户的邮件操作，打开期间每 2 秒刷新。
           </p>
         </div>
         <div className="flex gap-2">
           <Button variant="outline" asChild>
             <Link href={prefixPath(emailAccountId, "/debug")}>
-              Back to debug
+              返回调试
             </Link>
           </Button>
           <Button
@@ -92,7 +91,7 @@ function MailQueue({ emailAccountId }: { emailAccountId: string }) {
             disabled={isValidating || !client}
             onClick={() => mutate()}
           >
-            Refresh
+            刷新
           </Button>
         </div>
       </div>
@@ -104,7 +103,7 @@ function MailQueue({ emailAccountId }: { emailAccountId: string }) {
                 error:
                   error instanceof Error
                     ? error.message
-                    : "Could not read the mail engine queue.",
+                    : "无法读取邮件操作队列。",
               }
             : undefined
         }
@@ -114,48 +113,46 @@ function MailQueue({ emailAccountId }: { emailAccountId: string }) {
             <div className="grid gap-4 sm:grid-cols-3">
               <Card>
                 <CardHeader>
-                  <CardTitle>Pending actions</CardTitle>
+                  <CardTitle>待处理操作</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-3xl font-semibold">{data.activeCount}</p>
                   <p className="mt-2 text-sm text-muted-foreground">
-                    Uncertain: {data.uncertainCount} · Sync jobs:{" "}
+                    待确认： {data.uncertainCount} · 同步任务：{" "}
                     {data.pendingJobs}
                   </p>
                 </CardContent>
               </Card>
               <Card>
                 <CardHeader>
-                  <CardTitle>Connection</CardTitle>
+                  <CardTitle>连接</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p>{connectionLabel(data.connection, data.online)}</p>
                   <p className="mt-2 text-sm text-muted-foreground">
-                    Updated {formatTime(data.readAt)}
+                    已更新 {formatTime(data.readAt)}
                   </p>
                 </CardContent>
               </Card>
               <Card>
                 <CardHeader>
-                  <CardTitle>Mailbox coverage</CardTitle>
+                  <CardTitle>邮箱同步覆盖</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-2 text-sm">
                   <p>{coverageLabel(data.coverage)}</p>
                   <p className="text-muted-foreground">
-                    Last completed sync:{" "}
+                    最后完成同步：{" "}
                     {formatTime(data.lastCompletedSyncAtMs)}
                   </p>
                 </CardContent>
               </Card>
             </div>
             <p className="text-sm text-muted-foreground">
-              Pending includes admitted operations that have not reached a
-              terminal state. This shows the local engine, not the provider’s
-              internal processing.
+              待处理包含尚未结束的已接收操作。此处显示本地邮件引擎状态。
             </p>
             <div className="flex flex-wrap items-center gap-2">
               <label htmlFor="queue-status" className="text-sm font-medium">
-                Status
+                状态
               </label>
               <Select
                 value={filter}
@@ -169,9 +166,9 @@ function MailQueue({ emailAccountId }: { emailAccountId: string }) {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="active">
-                    Pending actions ({data.activeCount})
+                    待处理操作（{data.activeCount})
                   </SelectItem>
-                  <SelectItem value="all">All ({data.total})</SelectItem>
+                  <SelectItem value="all">全部（{data.total})</SelectItem>
                   {Object.entries(STATUS_DESCRIPTIONS).map(
                     ([status, description]) => (
                       <SelectItem key={status} value={status}>
@@ -182,22 +179,22 @@ function MailQueue({ emailAccountId }: { emailAccountId: string }) {
                 </SelectContent>
               </Select>
               <span className="text-sm text-muted-foreground">
-                Showing {data.commands.length} of {data.matchingCount} actions
+                显示 {data.commands.length} of {data.matchingCount} actions
               </span>
             </div>
             {data.matchingCount === 0 ? (
               <p className="rounded-md border p-6 text-sm text-muted-foreground">
-                No actions match this status.
+                此状态暂无操作。
               </p>
             ) : (
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Action</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead>Messages</TableHead>
-                    <TableHead>Conversations</TableHead>
-                    <TableHead>Details</TableHead>
+                    <TableHead>操作</TableHead>
+                    <TableHead>状态</TableHead>
+                    <TableHead>邮件</TableHead>
+                    <TableHead>会话</TableHead>
+                    <TableHead>详情</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody className="[&_td]:align-top">
@@ -228,20 +225,20 @@ function MailQueue({ emailAccountId }: { emailAccountId: string }) {
                       <TableCell>
                         <details>
                           <summary className="cursor-pointer whitespace-nowrap">
-                            Inspect action
+                            查看操作
                           </summary>
                           <dl className="mt-3 min-w-56 space-y-2 break-all text-xs">
-                            <dt>Operation ID</dt>
+                            <dt>操作 ID</dt>
                             <dd>{command.operationId}</dd>
                             {command.conversationIds.length > 0 && (
                               <>
-                                <dt>Conversation IDs</dt>
+                                <dt>会话 ID</dt>
                                 <dd>{command.conversationIds.join(", ")}</dd>
                               </>
                             )}
                             {command.messageIds.length > 0 && (
                               <>
-                                <dt>Message IDs</dt>
+                                <dt>邮件 ID</dt>
                                 <dd>{command.messageIds.join(", ")}</dd>
                               </>
                             )}
@@ -255,7 +252,7 @@ function MailQueue({ emailAccountId }: { emailAccountId: string }) {
             )}
             {data.matchingCount > limit && (
               <Button variant="outline" onClick={() => setLimit(limit + 50)}>
-                Show more
+                展开
               </Button>
             )}
           </>
@@ -307,22 +304,22 @@ function formatTime(timestamp?: number | null) {
     !Number.isFinite(timestamp)
   )
     return "—";
-  return new Date(timestamp).toLocaleString();
+  return new Date(timestamp).toLocaleString("zh-CN");
 }
 
 function connectionLabel(
   connection: MailDiagnostics["connection"],
   online: boolean,
 ) {
-  if (connection === "blocked_auth") return "Reconnect account";
+  if (connection === "blocked_auth") return "重新连接账户";
   if (connection === "offline" || !online)
-    return "Offline — actions wait for connection";
-  return "Online";
+    return "当前离线，操作等待网络恢复";
+  return "在线";
 }
 
 function coverageLabel(
   metadata?: MailDiagnostics["coverage"][number]["metadata"],
 ) {
-  if (!metadata) return "No coverage recorded";
+  if (!metadata) return "暂无同步覆盖记录";
   return metadata === "complete" ? "Metadata complete" : "Catching up";
 }

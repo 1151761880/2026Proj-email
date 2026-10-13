@@ -32,36 +32,36 @@ test("persists draft cleanup settings and disables all account rules", async ({
   await accountCard.toggle.click();
 
   await expect(
-    accountCard.card.getByText("Read status", { exact: true }),
+    accountCard.card.getByText("阅读状态", { exact: true }),
   ).toBeVisible({ timeout: 60_000 });
   await expect(
-    accountCard.card.getByRole("switch", { name: "Toggle read status" }),
+    accountCard.card.getByRole("switch", { name: "启用或关闭阅读状态" }),
   ).toBeChecked();
 
   let cleanupDaysInput = accountCard.card.getByRole("spinbutton", {
-    name: "Draft cleanup age in days",
+    name: "草稿保留天数",
   });
   await expect(cleanupDaysInput).toHaveValue("7", { timeout: 60_000 });
   await cleanupDaysInput.fill("21");
   await cleanupDaysInput
     .locator('xpath=ancestor::*[@data-slot="item-actions"]')
-    .getByRole("button", { name: "Save" })
+    .getByRole("button", { name: "保存" })
     .click();
   await expect(
-    page.getByText("Draft cleanup settings updated.", { exact: true }),
+    page.getByText("草稿清理设置已更新。", { exact: true }),
   ).toBeVisible({ timeout: 60_000 });
 
   const disableRulesItem = accountCard.card
     .locator('[data-slot="item"]')
     .filter({ hasText: "Disable All Rules" });
   await expect(disableRulesItem).toBeVisible({ timeout: 60_000 });
-  await disableRulesItem.getByRole("button", { name: "Disable All" }).click();
+  await disableRulesItem.getByRole("button", { name: "全部禁用" }).click();
   const confirmation = page.getByRole("alertdialog", {
-    name: "Disable all rules?",
+    name: "禁用全部规则？",
   });
-  await confirmation.getByRole("button", { name: "Disable All" }).click();
+  await confirmation.getByRole("button", { name: "全部禁用" }).click();
   await expect(
-    page.getByText("All rules disabled", { exact: true }),
+    page.getByText("全部规则已禁用", { exact: true }),
   ).toBeVisible({ timeout: 60_000 });
 
   await expect
@@ -75,14 +75,14 @@ test("persists draft cleanup settings and disables all account rules", async ({
 
   await page.reload();
   await expect(
-    page.getByRole("heading", { name: "Settings", exact: true }),
+    page.getByRole("heading", { name: "设置", exact: true }),
   ).toBeVisible({ timeout: 60_000 });
   accountCard = getEmailAccountSettingsCard(page, settingsFixture.email);
   await expect(accountCard.toggle).toBeVisible({ timeout: 60_000 });
   await accountCard.toggle.click();
   cleanupDaysInput = accountCard.card.getByRole("spinbutton", {
-    name: "Draft cleanup age in days",
+    name: "草稿保留天数",
   });
   await expect(cleanupDaysInput).toHaveValue("21", { timeout: 60_000 });
-  await expect(accountCard.card.getByText("Disable All Rules")).toHaveCount(0);
+  await expect(accountCard.card.getByText("禁用全部规则")).toHaveCount(0);
 });

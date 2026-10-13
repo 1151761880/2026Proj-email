@@ -26,7 +26,7 @@ export default function EmailReportPage() {
   const emailAccountId = params.emailAccountId;
 
   if (typeof emailAccountId !== "string")
-    throw new Error("Email account ID is required");
+    throw new Error("缺少邮箱账户 ID");
 
   const [report, setReport] = useState<EmailReportData | null>(null);
 
@@ -36,14 +36,14 @@ export default function EmailReportPage() {
       onSuccess: () => {
         if (result?.data) {
           setReport(result.data);
-          toastSuccess({ description: "Report generated successfully" });
+          toastSuccess({ description: "报告已生成" });
         } else {
-          toastError({ description: "Failed to generate report" });
+          toastError({ description: "生成报告失败" });
         }
       },
       onError: (result) => {
         toastError({
-          title: "Failed to generate report",
+          title: "生成报告失败",
           description: result.error.serverError || "Unknown error",
         });
       },
@@ -56,12 +56,12 @@ export default function EmailReportPage() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Mail className="h-5 w-5" />
-            Email Report
+            邮件报告
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <Button onClick={() => executeAsync({})} loading={isExecuting}>
-            Generate Report
+            生成报告
           </Button>
 
           <LoadingContent
@@ -71,8 +71,7 @@ export default function EmailReportPage() {
             }
           >
             <p className="text-gray-600">
-              Comprehensive analysis of your email patterns and personalized
-              recommendations.
+              分析邮件规律并提供个性化建议。
             </p>
 
             {/* Report Display */}
@@ -83,36 +82,36 @@ export default function EmailReportPage() {
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <Target className="h-5 w-5" />
-                      Executive Summary
+                      概览
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                       <div className="bg-white p-4 rounded-lg border">
                         <h4 className="font-semibold text-gray-900">
-                          Professional Persona
+                          职业画像
                         </h4>
                         <p className="text-2xl font-bold text-blue-600">
                           {report.executiveSummary?.userProfile.persona}
                         </p>
                         <p className="text-sm text-gray-500">
-                          Confidence:{" "}
+                          置信度：{" "}
                           {report.executiveSummary?.userProfile.confidence}%
                         </p>
                       </div>
                       <div className="bg-white p-4 rounded-lg border">
                         <h4 className="font-semibold text-gray-900">
-                          Email Sources
+                          邮件来源
                         </h4>
                         <div className="space-y-1">
                           <div className="flex justify-between">
-                            <span className="text-sm">Inbox:</span>
+                            <span className="text-sm">收件箱：</span>
                             <span className="font-medium">
                               {report.emailActivityOverview.dataSources.inbox}
                             </span>
                           </div>
                           <div className="flex justify-between">
-                            <span className="text-sm">Archived:</span>
+                            <span className="text-sm">已归档：</span>
                             <span className="font-medium">
                               {
                                 report.emailActivityOverview.dataSources
@@ -121,7 +120,7 @@ export default function EmailReportPage() {
                             </span>
                           </div>
                           <div className="flex justify-between">
-                            <span className="text-sm">Sent:</span>
+                            <span className="text-sm">已发送：</span>
                             <span className="font-medium">
                               {report.emailActivityOverview.dataSources.sent}
                             </span>
@@ -130,7 +129,7 @@ export default function EmailReportPage() {
                       </div>
                       <div className="bg-white p-4 rounded-lg border">
                         <h4 className="font-semibold text-gray-900">
-                          Quick Actions
+                          快捷操作
                         </h4>
                         <div className="space-y-2">
                           {report.executiveSummary?.quickActions
@@ -158,7 +157,7 @@ export default function EmailReportPage() {
 
                     <div>
                       <h4 className="font-semibold text-gray-900 mb-3">
-                        Top Insights
+                        主要发现
                       </h4>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                         {report.executiveSummary?.topInsights.map(
@@ -195,13 +194,13 @@ export default function EmailReportPage() {
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <TrendingUp className="h-5 w-5" />
-                      Professional Identity
+                      职业身份
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-6">
                     <div>
                       <h4 className="font-semibold text-gray-900 mb-3">
-                        Professional Identity
+                        职业身份
                       </h4>
                       <p className="text-lg font-medium text-blue-600 mb-2">
                         {report.userPersona?.professionalIdentity.persona}
@@ -223,7 +222,7 @@ export default function EmailReportPage() {
 
                     <div>
                       <h4 className="font-semibold text-gray-900 mb-3">
-                        Current Priorities
+                        当前重点
                       </h4>
                       <div className="flex flex-wrap gap-2">
                         {report.userPersona?.currentPriorities.map(
@@ -243,45 +242,45 @@ export default function EmailReportPage() {
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <Clock className="h-5 w-5" />
-                      Email Behavior Patterns
+                      邮件处理习惯
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                       <div className="bg-gray-50 p-4 rounded-lg">
                         <h5 className="font-medium text-gray-900 mb-2">
-                          Timing Patterns
+                          时间规律
                         </h5>
                         <p className="text-sm text-gray-600">
-                          Peak hours:{" "}
+                          高峰时段：{" "}
                           {report.emailBehavior?.timingPatterns.peakHours.join(
                             ", ",
                           )}
                         </p>
                         <p className="text-sm text-gray-600">
-                          Response preference:{" "}
+                          回复偏好：{" "}
                           {
                             report.emailBehavior?.timingPatterns
                               .responsePreference
                           }
                         </p>
                         <p className="text-sm text-gray-600">
-                          Frequency:{" "}
+                          频率：{" "}
                           {report.emailBehavior?.timingPatterns.frequency}
                         </p>
                       </div>
                       <div className="bg-gray-50 p-4 rounded-lg">
                         <h5 className="font-medium text-gray-900 mb-2">
-                          Content Preferences
+                          内容偏好
                         </h5>
                         <p className="text-sm text-gray-600">
-                          Preferred:{" "}
+                          偏好：{" "}
                           {report.emailBehavior?.contentPreferences.preferred.join(
                             ", ",
                           )}
                         </p>
                         <p className="text-sm text-gray-600">
-                          Avoided:{" "}
+                          避免：{" "}
                           {report.emailBehavior?.contentPreferences.avoided.join(
                             ", ",
                           )}
@@ -289,7 +288,7 @@ export default function EmailReportPage() {
                       </div>
                       <div className="bg-gray-50 p-4 rounded-lg">
                         <h5 className="font-medium text-gray-900 mb-2">
-                          Engagement Triggers
+                          互动触发因素
                         </h5>
                         <div className="space-y-1">
                           {report.emailBehavior?.engagementTriggers.map(
@@ -310,13 +309,13 @@ export default function EmailReportPage() {
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <Zap className="h-5 w-5" />
-                      Response Patterns & Categories
+                      回复规律和分类
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-6">
                     <div>
                       <h4 className="font-semibold text-gray-900 mb-3">
-                        Common Response Patterns
+                        常见回复规律
                       </h4>
                       <div className="space-y-4">
                         {report.responsePatterns?.commonResponses.map(
@@ -357,7 +356,7 @@ export default function EmailReportPage() {
 
                     <div>
                       <h4 className="font-semibold text-gray-900 mb-3">
-                        Email Categories
+                        邮件分类
                       </h4>
                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         {report.responsePatterns?.categoryOrganization.map(
@@ -397,13 +396,13 @@ export default function EmailReportPage() {
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <Mail className="h-5 w-5" />
-                      Label Analysis
+                      标签分析
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-6">
                     <div>
                       <h4 className="font-semibold text-gray-900 mb-3">
-                        Current Labels
+                        当前标签
                       </h4>
                       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
                         {report.labelAnalysis.currentLabels.map(
@@ -432,7 +431,7 @@ export default function EmailReportPage() {
 
                     <div>
                       <h4 className="font-semibold text-gray-900 mb-3">
-                        Optimization Suggestions
+                        优化建议
                       </h4>
                       <div className="space-y-3">
                         {report.labelAnalysis.optimizationSuggestions.map(
@@ -475,13 +474,13 @@ export default function EmailReportPage() {
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <CheckCircle className="h-5 w-5" />
-                      Actionable Recommendations
+                      可执行建议
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-6">
                     <div>
                       <h4 className="font-semibold text-gray-900 mb-3">
-                        Immediate Actions
+                        立即处理
                       </h4>
                       <div className="space-y-3">
                         {report.actionableRecommendations?.immediateActions.map(
@@ -495,7 +494,7 @@ export default function EmailReportPage() {
                                   {action.action}
                                 </p>
                                 <p className="text-sm text-gray-600">
-                                  Time required: {action.timeRequired}
+                                  所需时间： {action.timeRequired}
                                 </p>
                               </div>
                               <div className="flex gap-2">
@@ -520,7 +519,7 @@ export default function EmailReportPage() {
 
                     <div>
                       <h4 className="font-semibold text-gray-900 mb-3">
-                        Short-term Improvements
+                        短期改进
                       </h4>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {report.actionableRecommendations?.shortTermImprovements.map(
@@ -533,7 +532,7 @@ export default function EmailReportPage() {
                                 {improvement.improvement}
                               </h5>
                               <p className="text-sm text-gray-600 mb-2">
-                                Timeline: {improvement.timeline}
+                                时间安排： {improvement.timeline}
                               </p>
                               <p className="text-sm text-gray-600">
                                 {improvement.expectedBenefit}
@@ -546,7 +545,7 @@ export default function EmailReportPage() {
 
                     <div>
                       <h4 className="font-semibold text-gray-900 mb-3">
-                        Long-term Strategy
+                        长期规划
                       </h4>
                       <div className="space-y-4">
                         {report.actionableRecommendations?.longTermStrategy.map(

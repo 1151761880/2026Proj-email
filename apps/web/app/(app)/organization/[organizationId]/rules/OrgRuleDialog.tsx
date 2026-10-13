@@ -160,10 +160,10 @@ export function OrgRuleDialog({
       <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-2xl">
         <DialogHeader>
           <DialogTitle>
-            {editing ? "Edit organization rule" : "New organization rule"}
+            {editing ? "编辑组织规则" : "新建组织规则"}
           </DialogTitle>
           <DialogDescription>
-            This rule applies to every member of your organization.
+            此规则适用于组织中的所有成员。
           </DialogDescription>
         </DialogHeader>
 
@@ -172,18 +172,18 @@ export function OrgRuleDialog({
             <Input
               type="text"
               name="name"
-              label="Name"
+              label="名称"
               registerProps={register("name", {
                 required: "Please enter a name",
               })}
               error={errors.name}
-              placeholder="e.g. Label invoices"
+              placeholder="例如：为发票添加标签"
             />
 
             <RuleSectionCard
               icon={InboxIcon}
               color="blue"
-              title="When I get an email"
+              title="收到邮件时"
             >
               <ConditionSteps
                 conditionFields={conditionFields}
@@ -199,7 +199,7 @@ export function OrgRuleDialog({
               />
             </RuleSectionCard>
 
-            <RuleSectionCard icon={ZapIcon} color="green" title="Then">
+            <RuleSectionCard icon={ZapIcon} color="green" title="然后">
               <OrgActionSteps
                 fields={actionFields}
                 register={register}
@@ -212,15 +212,14 @@ export function OrgRuleDialog({
             </RuleSectionCard>
 
             <Collapsible open={isAdvancedOpen} onOpenChange={setIsAdvancedOpen}>
-              <CollapsibleHeading>Advanced options</CollapsibleHeading>
+              <CollapsibleHeading>高级选项</CollapsibleHeading>
               <CollapsibleContent>
                 <div className="rounded-md border">
                   <div className="flex items-center justify-between gap-4 px-4 py-3">
                     <div>
-                      <p className="text-sm font-medium">Apply to threads</p>
+                      <p className="text-sm font-medium">应用于整个会话</p>
                       <p className="text-sm text-muted-foreground">
-                        Run on every reply in a conversation, not just the first
-                        message.
+                        对会话中的每封回复执行此规则。
                       </p>
                     </div>
                     <div className="shrink-0">
@@ -239,10 +238,10 @@ export function OrgRuleDialog({
 
             <DialogFooter>
               <Button type="button" variant="outline" onClick={onClose}>
-                Cancel
+                取消
               </Button>
               <Button type="submit" loading={isSubmitting}>
-                {editing ? "Save rule" : "Create rule"}
+                {editing ? "保存规则" : "创建规则"}
               </Button>
             </DialogFooter>
           </form>

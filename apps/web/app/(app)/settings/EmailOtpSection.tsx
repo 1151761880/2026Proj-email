@@ -37,21 +37,21 @@ export function EmailOtpSection({
       {data && (
         <Item size="sm">
           <ItemContent>
-            <ItemTitle>Allow sign-in with a one-time email code</ItemTitle>
+            <ItemTitle>允许通过一次性邮件验证码登录</ItemTitle>
             {data.emailOtpEnabled && hasMultipleAccounts && (
               <ItemDescription className="line-clamp-none break-all">
-                Sign in with {data.email}.
+                登录方式 {data.email}.
               </ItemDescription>
             )}
             {!data.emailDeliveryConfigured && (
               <ItemDescription className="line-clamp-none">
-                Email delivery unavailable.
+                邮件发送暂时不可用。
               </ItemDescription>
             )}
           </ItemContent>
           <ItemActions>
             <Switch
-              aria-label="Allow sign-in with a one-time email code"
+              aria-label="允许通过一次性邮件验证码登录"
               checked={data.emailOtpEnabled}
               disabled={
                 isExecuting ||

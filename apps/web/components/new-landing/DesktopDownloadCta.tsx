@@ -89,7 +89,7 @@ export function DesktopDownloadCta({
               <a href={GITHUB_RELEASES_URL}>
                 <span className="relative z-10 flex items-center gap-2">
                   <Download className="size-4" />
-                  View desktop releases
+                  查看桌面端版本
                 </span>
               </a>
             </Button>
@@ -101,7 +101,7 @@ export function DesktopDownloadCta({
         <div className="mt-4 text-center">
           <Paragraph color="light" size="sm">
             <a href={allDownloadsHref} className="underline underline-offset-2">
-              Other downloads
+              其他下载
             </a>
           </Paragraph>
         </div>

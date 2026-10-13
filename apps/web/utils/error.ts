@@ -25,10 +25,10 @@ export type ApiErrorType = {
 };
 
 const RATE_LIMIT_MESSAGE_TEMPLATE =
-  "{provider} is temporarily limiting requests. Please try again shortly.";
+  "{provider} 暂时限制请求，请稍后重试。";
 export const EMAIL_PROVIDER_RATE_LIMIT_MESSAGE =
-  "Your email provider is temporarily limiting requests. Please try again shortly.";
-export const UNEXPECTED_ACTION_ERROR_MESSAGE = "An unknown error occurred.";
+  "邮箱服务暂时限制请求，请稍后重试。";
+export const UNEXPECTED_ACTION_ERROR_MESSAGE = "发生未知错误，请重试。";
 
 export function getEmailProviderRateLimitMessage(
   provider: EmailProviderRateLimitProvider,

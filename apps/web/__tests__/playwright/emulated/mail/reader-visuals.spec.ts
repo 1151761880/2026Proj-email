@@ -78,7 +78,7 @@ test("keeps the quote toggle between the reply and expanded history", async ({
   await expect(
     frame.getByText("The current reply stays concise and easy to scan."),
   ).toBeVisible();
-  const toggle = page.getByRole("button", { name: "Show quoted content" });
+  const toggle = page.getByRole("button", { name: "显示引用内容" });
   const initialTop = (await toggle.boundingBox())!.y;
   await toggle.click();
   const quoteFrame = page
@@ -92,7 +92,7 @@ test("keeps the quote toggle between the reply and expanded history", async ({
   await expect(
     frame.getByText("The current reply stays concise and easy to scan."),
   ).toBeVisible();
-  const collapse = page.getByRole("button", { name: "Hide quoted content" });
+  const collapse = page.getByRole("button", { name: "隐藏引用内容" });
   const expandedBox = (await collapse.boundingBox())!;
   expect(Math.abs(expandedBox.y - initialTop)).toBeLessThan(2);
   const quoteBox = (await page
@@ -160,13 +160,13 @@ test("captures the rich message reader states", async ({ page }, testInfo) => {
   ).toHaveCount(0);
 
   const archiveButton = page.getByRole("button", {
-    name: "Archive",
+    name: "归档",
     exact: true,
   });
   await expect(archiveButton.locator("kbd")).toHaveCount(0);
   await archiveButton.hover();
-  const archiveTooltip = page.getByRole("tooltip", { name: /Archive/ });
-  await expect(archiveTooltip).toContainText("Archive");
+  const archiveTooltip = page.getByRole("tooltip", { name: /归档/ });
+  await expect(archiveTooltip).toContainText("归档");
   await expect(archiveTooltip.locator("kbd")).toHaveText("E");
   await capturePlaywrightCheckpoint(page, testInfo, "mail-reader-toolbar");
 
@@ -175,18 +175,18 @@ test("captures the rich message reader states", async ({ page }, testInfo) => {
     .getByRole("heading", { name: "Re: Reader Visual Message" })
     .hover();
   await message.hover();
-  await message.getByRole("button", { name: "Reply", exact: true }).hover();
-  const replyTooltip = page.getByRole("tooltip", { name: /Reply/ });
-  await expect(replyTooltip).toContainText("Reply");
+  await message.getByRole("button", { name: "回复", exact: true }).hover();
+  const replyTooltip = page.getByRole("tooltip", { name: /回复/ });
+  await expect(replyTooltip).toContainText("回复");
   await expect(replyTooltip.locator("kbd")).toHaveText("R");
   await capturePlaywrightCheckpoint(
     page,
     testInfo,
     "mail-reader-reply-shortcut",
   );
-  await message.getByRole("button", { name: "Forward", exact: true }).hover();
-  const forwardTooltip = page.getByRole("tooltip", { name: /Forward/ });
-  await expect(forwardTooltip).toContainText("Forward");
+  await message.getByRole("button", { name: "转发", exact: true }).hover();
+  const forwardTooltip = page.getByRole("tooltip", { name: /转发/ });
+  await expect(forwardTooltip).toContainText("转发");
   await expect(forwardTooltip.locator("kbd")).toHaveText("F");
   await capturePlaywrightCheckpoint(
     page,
@@ -203,10 +203,10 @@ test("captures the rich message reader states", async ({ page }, testInfo) => {
   const senderStatsResponse = page.waitForResponse((response) =>
     response.url().includes("/api/user/stats/newsletters"),
   );
-  await page.getByRole("button", { name: /^More actions/ }).click();
+  await page.getByRole("button", { name: /更多操作/ }).click();
   const actionsMenu = page.getByRole("menu");
   const autoArchive = actionsMenu.getByRole("menuitem", {
-    name: "Auto archive future emails",
+    name: "自动归档后续邮件",
   });
   const openExternal = actionsMenu.getByRole("menuitem", {
     name: openExternalLabel,
@@ -227,7 +227,7 @@ test("captures the rich message reader states", async ({ page }, testInfo) => {
     openExternalOffsetBeforeLoad,
   );
   await expect(
-    actionsMenu.getByRole("menuitem", { name: "Mark as spam" }),
+    actionsMenu.getByRole("menuitem", { name: "标为垃圾邮件" }),
   ).toBeVisible();
   await expect(actionsMenu.getByRole("menuitem").last()).toContainText(
     openExternalLabel,
@@ -257,20 +257,20 @@ test("captures the rich message reader states", async ({ page }, testInfo) => {
     .locator("..");
   await expect(sentMessage.locator("img")).toBeVisible();
   await expect(
-    page.getByRole("button", { name: "Show quoted content" }),
+    page.getByRole("button", { name: "显示引用内容" }),
   ).toBeVisible();
 
   await capturePlaywrightCheckpoint(page, testInfo, "mail-reader-rich-message");
 
-  await page.getByRole("button", { name: "Show details", exact: true }).click();
-  await expect(page.getByText("From", { exact: true })).toBeVisible();
+  await page.getByRole("button", { name: "显示详情", exact: true }).click();
+  await expect(page.getByText("发件人", { exact: true })).toBeVisible();
   await capturePlaywrightCheckpoint(
     page,
     testInfo,
     "mail-reader-message-details",
   );
 
-  await page.getByRole("button", { name: "Show quoted content" }).click();
+  await page.getByRole("button", { name: "显示引用内容" }).click();
   await expect(
     page
       .frameLocator('iframe[title="Email content preview"]')
@@ -306,14 +306,14 @@ test("offers to disable auto archive for an enabled sender", async ({
     "Re: Reader Visual Message",
   ).click();
 
-  await page.getByRole("button", { name: /^More actions/ }).click();
+  await page.getByRole("button", { name: /更多操作/ }).click();
   const actionsMenu = page.getByRole("menu");
   await expect(
-    actionsMenu.getByRole("menuitem", { name: "Disable auto archive" }),
+    actionsMenu.getByRole("menuitem", { name: "关闭自动归档" }),
   ).toBeEnabled();
   await expect(
     actionsMenu.getByRole("menuitem", {
-      name: "Auto archive future emails",
+      name: "自动归档后续邮件",
     }),
   ).toHaveCount(0);
 });
@@ -384,7 +384,7 @@ test("opens the sender profile beside the reader", async ({
     "mail-reader-sender-profile-narrow",
   );
 
-  await sheet.getByRole("button", { name: "Close" }).click();
+  await sheet.getByRole("button", { name: "关闭" }).click();
   await expect(sheet).toHaveCount(0);
 
   await page.setViewportSize({ width: 1280, height: 720 });
@@ -395,7 +395,7 @@ test("opens the sender profile beside the reader", async ({
     })
     .click();
   await expect(panel).toBeVisible();
-  await panel.getByRole("button", { name: "Close sender profile" }).click();
+  await panel.getByRole("button", { name: "关闭发件人资料" }).click();
   await expect(panel).toHaveCount(0);
 
   // Escape dismisses the pane without also backing out of the thread.
@@ -430,7 +430,7 @@ for (const parent of ["none", "missing"] as const) {
       message.getByRole("button", { name: /^Draft to / }),
     ).toBeVisible();
     await expect(
-      message.getByRole("textbox", { name: "Email message" }),
+      message.getByRole("textbox", { name: "邮件内容" }),
     ).toContainText("This unsent draft should remain visible.");
     await capturePlaywrightCheckpoint(page, testInfo, "mail-reader-draft-only");
   });

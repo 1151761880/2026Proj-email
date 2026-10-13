@@ -22,7 +22,7 @@ test("keeps an archived conversation hidden through engine reconciliation", asyn
   const cleanupErrors: unknown[] = [];
   try {
     await conversation.getByRole("checkbox").click();
-    await page.getByRole("button", { name: "Archive", exact: true }).click();
+    await page.getByRole("button", { name: "归档", exact: true }).click();
     await expect(conversation).toHaveCount(0);
     await expect
       .poll(() =>
@@ -100,7 +100,7 @@ test("keeps a queued archive hidden after an OPFS reload", async ({
   const cleanupErrors: unknown[] = [];
   try {
     await conversation.getByRole("checkbox").click();
-    await page.getByRole("button", { name: "Archive", exact: true }).click();
+    await page.getByRole("button", { name: "归档", exact: true }).click();
     await expect(conversation).toHaveCount(0);
     await expect
       .poll(() =>
@@ -115,7 +115,7 @@ test("keeps a queued archive hidden after an OPFS reload", async ({
       });
     archiveQueued = true;
     await page.reload({ waitUntil: "domcontentloaded" });
-    const reloaded = page.getByRole("listbox", { name: "Conversations" });
+    const reloaded = page.getByRole("listbox", { name: "会话" });
     await expect(reloaded.getByRole("option").first()).toBeVisible({
       timeout: 60_000,
     });
@@ -174,10 +174,10 @@ test("drops Inbox and Unread counts when an unread conversation is archived", as
   const cleanupErrors: unknown[] = [];
   try {
     await conversation.getByRole("checkbox").click();
-    await page.getByRole("button", { name: "Archive", exact: true }).click();
+    await page.getByRole("button", { name: "归档", exact: true }).click();
     await expect(conversation).toHaveCount(0);
     await expect.poll(() => inboxUnreadBadge(page)).toBe(before - 1);
-    await page.getByRole("button", { name: "Unread", exact: true }).click();
+    await page.getByRole("button", { name: "未读", exact: true }).click();
     await expect(conversation).toHaveCount(0);
     await capturePlaywrightCheckpoint(
       page,
@@ -185,7 +185,7 @@ test("drops Inbox and Unread counts when an unread conversation is archived", as
       "unread-list-after-archive-count",
     );
 
-    await page.getByRole("button", { name: "All", exact: true }).click();
+    await page.getByRole("button", { name: "全部", exact: true }).click();
     await expect
       .poll(
         () =>
@@ -205,7 +205,7 @@ test("drops Inbox and Unread counts when an unread conversation is archived", as
     await requestMailSync(page);
     await expect(conversation).toBeVisible({ timeout: 60_000 });
     await expect.poll(() => inboxUnreadBadge(page)).toBe(before);
-    await page.getByRole("button", { name: "Unread", exact: true }).click();
+    await page.getByRole("button", { name: "未读", exact: true }).click();
     await expect(conversation).toBeVisible();
     await capturePlaywrightCheckpoint(
       page,
@@ -241,7 +241,7 @@ test("returns an archived conversation when new mail arrives in it", async ({
   const cleanupErrors: unknown[] = [];
   try {
     await conversation.getByRole("checkbox").click();
-    await page.getByRole("button", { name: "Archive", exact: true }).click();
+    await page.getByRole("button", { name: "归档", exact: true }).click();
     await expect(conversation).toHaveCount(0);
     await expect
       .poll(

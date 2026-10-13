@@ -111,7 +111,7 @@ export function useUnsubscribeSender(
 
     setIsUpdatingAutoArchive(true);
     const toastId = toast.loading(
-      `${isAutoArchived ? "Disabling" : "Enabling"} auto archive for ${senderName}`,
+      `${isAutoArchived ? "正在关闭" : "正在启用"} auto archive for ${senderName}`,
     );
 
     try {
@@ -128,7 +128,7 @@ export function useUnsubscribeSender(
     } catch (error) {
       captureException(error);
       toast.error(
-        `Couldn't ${isAutoArchived ? "disable" : "enable"} auto archive for ${senderName}`,
+        `无法修改 ${senderName} 的自动归档设置`,
         { id: toastId },
       );
       return;
@@ -137,13 +137,13 @@ export function useUnsubscribeSender(
     }
 
     if (isAutoArchived) {
-      toast.success(`Future emails from ${senderName} will stay in the inbox`, {
+      toast.success(`来自 ${senderName} 的后续邮件将保留在收件箱`, {
         id: toastId,
       });
       return;
     }
 
-    toast.success(`Future emails from ${senderName} will be archived`, {
+    toast.success(`来自 ${senderName} 的后续邮件将自动归档`, {
       id: toastId,
     });
 
@@ -198,10 +198,10 @@ export function useUnsubscribeSender(
 
     const toastId = toast.loading(`Unsubscribing from ${senderName}`);
     const failed = () =>
-      toast.error(`Couldn't unsubscribe from ${senderName}`, {
+      toast.error(`无法退订 ${senderName}`, {
         id: toastId,
         action: {
-          label: "Open page",
+          label: "打开页面",
           onClick: () => openUnsubscribePage(manualLink),
         },
       });
@@ -221,7 +221,7 @@ export function useUnsubscribeSender(
       return;
     }
 
-    toast.success(`Unsubscribed from ${senderName}`, { id: toastId });
+    toast.success(`已退订 ${senderName}`, { id: toastId });
 
     queueArchiveSenders({ senders: [senderEmail] }).catch(() => {});
 

@@ -48,13 +48,13 @@ export function StepReady() {
       });
 
       if (!result?.data?.url) {
-        toastError({ description: "Error creating checkout session" });
+        toastError({ description: "创建付款会话失败" });
         return;
       }
 
       redirectToSafeUrl(result.data.url, { allowExternal: true });
     } catch {
-      toastError({ description: "Error creating checkout session" });
+      toastError({ description: "创建付款会话失败" });
     } finally {
       setLoading(false);
     }
@@ -70,11 +70,10 @@ export function StepReady() {
 
       <div className="text-center">
         <PageHeading className="mt-4">
-          Ready to walk into every meeting prepared?
+          提前做好每次会议的准备
         </PageHeading>
         <TypographyP className="mt-2 max-w-lg mx-auto">
-          You'll get a brief like this before every external meeting,
-          automatically.
+          每次外部会议前都会自动收到类似简报。
         </TypographyP>
       </div>
 
@@ -84,7 +83,7 @@ export function StepReady() {
           setFrequency={setFrequency}
         >
           <div className="ml-1">
-            <DiscountBadge>2 months free!</DiscountBadge>
+            <DiscountBadge>赠送 2 个月！</DiscountBadge>
           </div>
         </PricingFrequencyToggle>
 
@@ -92,7 +91,7 @@ export function StepReady() {
           <div className="flex items-center justify-between mb-5">
             <div>
               <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                Meeting Briefs Pro
+                会前简报专业版
               </p>
               <p className="text-3xl font-bold text-foreground mt-1">
                 ${frequency.value === "annually" ? "7.50" : "9"}
@@ -102,12 +101,12 @@ export function StepReady() {
               </p>
               <p className="text-sm text-muted-foreground mt-1">
                 {frequency.value === "annually"
-                  ? "billed annually ($90/year)"
-                  : "billed monthly"}
+                  ? "按年计费（90 美元 / 年）"
+                  : "按月计费"}
               </p>
             </div>
             <div className="rounded-full border border-green-200 bg-green-50 px-3 py-1.5 text-sm font-semibold text-green-700">
-              7-day free trial
+              免费试用 7 天
             </div>
           </div>
 
@@ -131,7 +130,7 @@ export function StepReady() {
           onClick={handleCheckout}
           loading={loading}
         >
-          Start Free Trial
+          开始免费试用
           <ChevronRightIcon className="ml-2 h-4 w-4" />
         </Button>
 
@@ -147,7 +146,7 @@ export function StepReady() {
                 rel="noopener noreferrer"
               >
                 <ExternalLinkIcon className="mr-2 h-4 w-4" />
-                View test brief in Gmail
+                在 Gmail 查看测试简报
               </Link>
             </Button>
           )}

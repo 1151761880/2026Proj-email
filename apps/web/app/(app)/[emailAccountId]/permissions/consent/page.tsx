@@ -27,7 +27,7 @@ export default function PermissionsConsentPage() {
       redirectToSafeUrl(url, { allowExternal: true });
     } catch (error) {
       toastError({
-        title: "Error initiating reconnection",
+        title: "发起重新连接失败",
         description:
           error instanceof Error
             ? error.message
@@ -41,24 +41,23 @@ export default function PermissionsConsentPage() {
   return (
     <div className="flex flex-col items-center justify-center sm:p-20 md:p-32">
       <PageHeading className="text-center">
-        We are missing permissions 😔
+        缺少所需权限
       </PageHeading>
 
       <TypographyP className="mx-auto mt-4 max-w-prose text-center">
         {isMicrosoft
-          ? `Your Microsoft account is connected, but ${BRAND_NAME} is missing one or more required Microsoft 365 permissions.`
-          : `You must sign in and give access to all permissions for ${BRAND_NAME} to work.`}
+          ? `Microsoft 账户已连接，但 ${BRAND_NAME} 缺少部分 Microsoft 365 必需权限。`
+          : `请登录并授予全部所需权限，以便 ${BRAND_NAME} 正常运行。`}
       </TypographyP>
 
       {isMicrosoft && (
         <TypographyP className="mx-auto mt-3 max-w-prose text-center text-muted-foreground">
-          If your organization restricts user consent, ask your Microsoft 365
-          admin to approve {BRAND_NAME} and then reconnect your account.
+          若组织限制用户授权，请联系 Microsoft 365 管理员批准 {BRAND_NAME} ，然后重新连接账户。
         </TypographyP>
       )}
       {!isMicrosoft && (
         <TypographyP className="mx-auto mt-3 max-w-prose text-center text-muted-foreground">
-          Reconnect your account and approve every requested permission.
+          重新连接账户并批准全部请求权限。
         </TypographyP>
       )}
 
@@ -68,15 +67,15 @@ export default function PermissionsConsentPage() {
         loading={isReconnecting}
         disabled={isReconnecting || accountLoading}
       >
-        Reconnect account
+        重新连接账户
       </Button>
 
       <p className="mt-8 text-center text-muted-foreground">
-        Having trouble?{" "}
+        遇到问题？{" "}
         <Link href="/logout" className="underline hover:text-primary">
-          Sign out
+          退出登录
         </Link>{" "}
-        and sign back in again.
+        后重新登录。
       </p>
 
       <div className="mt-8">

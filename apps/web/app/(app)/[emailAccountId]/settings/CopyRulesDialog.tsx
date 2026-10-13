@@ -82,10 +82,10 @@ export function CopyRulesDialog({
   const { execute, isExecuting } = useAction(copyRulesFromAccountAction, {
     onSuccess: (result) => {
       const { copiedCount, replacedCount } = result.data || {};
-      toast.success("Rules transferred successfully", {
-        description: `${copiedCount || 0} rules transferred, ${replacedCount || 0} rules updated.`,
+      toast.success("规则已复制", {
+        description: `已复制 ${copiedCount || 0} 条规则，更新 ${replacedCount || 0} 条规则。`,
         action: {
-          label: "View rules",
+          label: "查看规则",
           onClick: () => {
             router.push(prefixPath(targetAccountId, "/automation"));
           },
@@ -96,7 +96,7 @@ export function CopyRulesDialog({
     },
     onError: (error) => {
       toastError({
-        title: "Error transferring rules",
+        title: "复制规则失败",
         description: getActionErrorMessage(error.error),
       });
     },
@@ -164,17 +164,16 @@ export function CopyRulesDialog({
       <DialogContent className="max-w-md">
         <DialogHeader className="pr-6">
           <DialogTitle className="break-words">
-            Transfer rules to {targetAccountEmail}
+            复制规则到 {targetAccountEmail}
           </DialogTitle>
           <DialogDescription>
-            Select an account to transfer rules from. Rules with matching names
-            will be replaced.
+            选择复制来源账户，同名规则将被替换。
           </DialogDescription>
         </DialogHeader>
 
         <div className="space-y-4">
           <div>
-            <span className="text-sm font-medium">Transfer from</span>
+            <span className="text-sm font-medium">复制来源</span>
             <Select
               value={selectedSourceId}
               onValueChange={(value) => {
@@ -183,7 +182,7 @@ export function CopyRulesDialog({
               }}
             >
               <SelectTrigger className="mt-1.5">
-                <SelectValue placeholder="Select source account" />
+                <SelectValue placeholder="选择来源账户" />
               </SelectTrigger>
               <SelectContent>
                 {sourceAccounts.map((account) => (
@@ -214,11 +213,11 @@ export function CopyRulesDialog({
                                 allSelected || (someSelected && "indeterminate")
                               }
                               onCheckedChange={handleSelectAll}
-                              aria-label="Select all"
+                              aria-label="全选"
                             />
                           </div>
                         </TableHead>
-                        <TableHead>Rule</TableHead>
+                        <TableHead>规则</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -231,7 +230,7 @@ export function CopyRulesDialog({
                                 onCheckedChange={(checked) =>
                                   handleToggleRule(rule.id, !!checked)
                                 }
-                                aria-label={`Select ${rule.name}`}
+                                aria-label={`选择 ${rule.name}`}
                               />
                             </div>
                           </TableCell>
@@ -248,7 +247,7 @@ export function CopyRulesDialog({
                 </div>
               ) : (
                 <MutedText className="py-4 text-center">
-                  No rules found in {selectedSource?.email}
+                  未找到规则： {selectedSource?.email}
                 </MutedText>
               )}
             </LoadingContent>
@@ -257,14 +256,14 @@ export function CopyRulesDialog({
 
         <DialogFooter>
           <Button variant="outline" onClick={() => handleOpenChange(false)}>
-            Cancel
+            取消
           </Button>
           <Button
             onClick={handleCopy}
             disabled={selectedRuleIds.size === 0}
             loading={isExecuting}
           >
-            Transfer{" "}
+            转移{" "}
             {selectedRuleIds.size > 0 ? `${selectedRuleIds.size} ` : ""}
             rule{selectedRuleIds.size !== 1 ? "s" : ""}
           </Button>

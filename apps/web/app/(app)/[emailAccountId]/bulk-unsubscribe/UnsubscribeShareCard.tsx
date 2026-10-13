@@ -18,12 +18,12 @@ export const UnsubscribeShareCard = forwardRef<
   const hero = yearlyEmails
     ? {
         number: yearlyEmails,
-        label: `fewer ${yearlyEmails === 1 ? "email" : "emails"} a year`,
+        label: `每年减少 ${yearlyEmails === 1 ? "email" : "emails"}`,
         caption: `after unsubscribing from ${senderCount} ${senders}`,
       }
     : {
         number: senderCount,
-        label: `${senders} unsubscribed`,
+        label: `已退订 ${senders}`,
         caption: null,
       };
 
@@ -45,7 +45,7 @@ export const UnsubscribeShareCard = forwardRef<
 
       <div className="relative mt-7">
         <div className="bg-gradient-to-b from-white to-sky-100 bg-clip-text text-7xl font-bold leading-none tracking-tight text-transparent tabular-nums sm:text-8xl">
-          {hero.number.toLocaleString("en-US")}
+          {hero.number.toLocaleString("zh-CN")}
         </div>
         <div className="mt-2 text-2xl font-semibold tracking-tight">
           {hero.label}
@@ -60,7 +60,7 @@ export const UnsubscribeShareCard = forwardRef<
       )}
 
       <div className="relative mt-7 text-sm font-medium text-white/70">
-        Cleaned up with {BRAND_NAME}
+        整理工具： {BRAND_NAME}
       </div>
     </div>
   );

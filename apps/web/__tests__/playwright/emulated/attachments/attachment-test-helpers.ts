@@ -11,7 +11,7 @@ export async function openAttachments(page: Page) {
   await navigateUntilReady(
     page,
     `/${emailAccountId}/drive`,
-    page.getByRole("heading", { name: "Let's set up auto-filing" }),
+    page.getByRole("heading", { name: "配置自动整理" }),
   );
 }
 

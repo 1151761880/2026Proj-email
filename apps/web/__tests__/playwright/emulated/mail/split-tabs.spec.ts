@@ -84,10 +84,10 @@ test("restores a deleted All tab and protects it from removal", async ({
   await expect(allTab).toBeVisible();
   await allTab.click({ button: "right" });
   await expect(
-    page.getByRole("menuitem", { name: "Turn off split" }),
+    page.getByRole("menuitem", { name: "关闭分栏" }),
   ).toBeHidden();
   await capturePlaywrightCheckpoint(page, testInfo, "mail-protected-all-split");
-  await page.getByRole("button", { name: "New split", exact: true }).click();
+  await page.getByRole("button", { name: "新建分栏", exact: true }).click();
   await expect(
     page.getByRole("button", { name: "Move All down", exact: true }),
   ).toBeDisabled();
@@ -111,7 +111,7 @@ test("restores a deleted All tab and protects it from removal", async ({
     ...original.slice(3),
   ];
   await expect(tabs).toHaveText(expected);
-  await page.getByRole("button", { name: "Close", exact: true }).click();
+  await page.getByRole("button", { name: "关闭", exact: true }).click();
   await page.reload();
   await expect(tabs).toHaveText(expected);
 });
@@ -139,22 +139,22 @@ test("creates and edits a domain sender condition", async ({
   page,
 }, testInfo) => {
   await openMail(page);
-  await page.getByRole("button", { name: "New split" }).click();
-  await page.getByRole("button", { name: "Build your own" }).click();
-  await page.getByLabel("Condition field").first().selectOption("FROM");
-  await page.getByLabel("Sender", { exact: true }).fill("@example.com");
-  await page.getByLabel("Split name").fill("Example domain");
+  await page.getByRole("button", { name: "新建分栏" }).click();
+  await page.getByRole("button", { name: "自定义" }).click();
+  await page.getByLabel("条件字段").first().selectOption("FROM");
+  await page.getByLabel("发件人", { exact: true }).fill("@example.com");
+  await page.getByLabel("分栏名称").fill("Example domain");
   await capturePlaywrightCheckpoint(
     page,
     testInfo,
     "mail-domain-split-builder",
   );
-  await page.getByRole("button", { name: "Add split", exact: true }).click();
+  await page.getByRole("button", { name: "添加分栏", exact: true }).click();
   const tab = page.getByRole("button", { name: "Example domain", exact: true });
   await expect(tab).toBeVisible();
   await tab.click({ button: "right" });
-  await page.getByRole("menuitem", { name: "Edit filters and name" }).click();
-  await expect(page.getByLabel("Sender", { exact: true })).toHaveValue(
+  await page.getByRole("menuitem", { name: "编辑筛选条件和名称" }).click();
+  await expect(page.getByLabel("发件人", { exact: true })).toHaveValue(
     "@example.com",
   );
   await capturePlaywrightCheckpoint(page, testInfo, "mail-domain-split-edit");
@@ -165,26 +165,26 @@ test("builds a split from conditions and shows only matching mail", async ({
 }, testInfo) => {
   const { conversations } = await openMail(page);
 
-  await page.getByRole("button", { name: "New split" }).click();
+  await page.getByRole("button", { name: "新建分栏" }).click();
   await expect(page.getByText("New split inbox")).toBeVisible();
   await expect(page.getByText(/Compiling/)).toBeHidden();
   await hideDevIndicator(page);
   await capturePlaywrightCheckpoint(page, testInfo, "mail-new-split-library");
 
-  await page.getByRole("button", { name: "Build your own" }).click();
-  await expect(page.getByText("Show mail matching")).toBeVisible();
+  await page.getByRole("button", { name: "自定义" }).click();
+  await expect(page.getByText("显示匹配以下条件的邮件")).toBeVisible();
 
   await page
-    .getByLabel("Condition field")
+    .getByLabel("条件字段")
     .first()
     .selectOption(isMicrosoft ? "LABEL" : "CATEGORY");
-  await page.getByLabel("Condition value").first().selectOption({
+  await page.getByLabel("条件值").first().selectOption({
     label: "Promotions",
   });
-  await page.getByLabel("Split name").fill("Promos");
+  await page.getByLabel("分栏名称").fill("Promos");
   await capturePlaywrightCheckpoint(page, testInfo, "mail-new-split-builder");
 
-  await page.getByRole("button", { name: "Add split" }).click();
+  await page.getByRole("button", { name: "添加分栏" }).click();
 
   const promosSplit = page.getByRole("button", { name: "Promos", exact: true });
   await expect(promosSplit).toBeVisible();
@@ -198,21 +198,21 @@ test("builds a split from conditions and shows only matching mail", async ({
 
   // The tab's own menu edits the split rather than sending you back to the list.
   await promosSplit.click({ button: "right" });
-  await page.getByRole("menuitem", { name: "Edit filters and name" }).click();
+  await page.getByRole("menuitem", { name: "编辑筛选条件和名称" }).click();
   await expect(page.getByText("Edit split")).toBeVisible();
-  await expect(page.getByLabel("Condition value").first()).toHaveValue(
+  await expect(page.getByLabel("条件值").first()).toHaveValue(
     isMicrosoft ? "Label_promotions" : "CATEGORY_PROMOTIONS",
   );
   await hideDevIndicator(page);
   await capturePlaywrightCheckpoint(page, testInfo, "mail-split-edit");
 
-  await page.getByRole("button", { name: "Add condition" }).click();
-  await expect(page.getByLabel("Condition field")).toHaveCount(2);
-  await page.getByRole("button", { name: "Save changes" }).click();
+  await page.getByRole("button", { name: "添加条件" }).click();
+  await expect(page.getByLabel("条件字段")).toHaveCount(2);
+  await page.getByRole("button", { name: "保存更改" }).click();
   await expect(promosSplit).toBeVisible();
 
   await promosSplit.click({ button: "right" });
-  await page.getByRole("menuitem", { name: "Turn off split" }).click();
+  await page.getByRole("menuitem", { name: "关闭分栏" }).click();
   await expect(promosSplit).toHaveCount(0);
 });
 
@@ -224,8 +224,8 @@ test("turns a prepared split on from the library", async ({
   defaultSplitEmailAccountId = emailAccountId;
   await openMail(page);
 
-  await page.getByRole("button", { name: "New split" }).click();
-  await page.getByRole("button", { name: "General", exact: true }).click();
+  await page.getByRole("button", { name: "新建分栏" }).click();
+  await page.getByRole("button", { name: "常规", exact: true }).click();
 
   const templateName = isMicrosoft ? "GitHub" : "Starred";
   // OTP is opt-in: offer it even when the account does not already have the label.
@@ -247,7 +247,7 @@ test("turns a prepared split on from the library", async ({
     page.getByRole("button", { name: `Turn off the ${templateName} split` }),
   ).toBeVisible();
 
-  await page.getByRole("button", { name: "Close" }).click();
+  await page.getByRole("button", { name: "关闭" }).click();
   const templateSplit = page.getByRole("button", {
     name: templateName,
     exact: true,
@@ -261,7 +261,7 @@ test("turns a prepared split on from the library", async ({
   );
 
   await templateSplit.click({ button: "right" });
-  await page.getByRole("menuitem", { name: "Turn off split" }).click();
+  await page.getByRole("menuitem", { name: "关闭分栏" }).click();
   await expect(templateSplit).toHaveCount(0);
 });
 
@@ -272,8 +272,8 @@ test("reorders splits with arrows and dragging and persists tab order", async ({
   const tabs = page.locator("[data-split-name]");
   const original = await tabs.allTextContents();
   expect(original.length).toBeGreaterThan(1);
-  await page.getByRole("button", { name: "New split", exact: true }).click();
-  const list = page.getByRole("list", { name: "Split order" });
+  await page.getByRole("button", { name: "新建分栏", exact: true }).click();
+  const list = page.getByRole("list", { name: "分栏顺序" });
   await page
     .getByRole("button", { name: `Move ${original[0]} down`, exact: true })
     .click();
@@ -285,14 +285,14 @@ test("reorders splits with arrows and dragging and persists tab order", async ({
   ).toBeDisabled();
   await hideDevIndicator(page);
   await capturePlaywrightCheckpoint(page, testInfo, "mail-sortable-splits");
-  await page.getByRole("button", { name: "Close", exact: true }).click();
+  await page.getByRole("button", { name: "关闭", exact: true }).click();
   await page.reload();
   await expect(tabs).toHaveText(expected);
-  await page.getByRole("button", { name: "New split", exact: true }).click();
+  await page.getByRole("button", { name: "新建分栏", exact: true }).click();
   const rows = list.getByRole("listitem");
   await rows.nth(0).locator("[data-drag-split]").dragTo(rows.nth(1));
   await expect(tabs).toHaveText(original);
-  await page.getByRole("button", { name: "Close", exact: true }).click();
+  await page.getByRole("button", { name: "关闭", exact: true }).click();
   await page.reload();
   await expect(tabs).toHaveText(original);
 });
@@ -307,10 +307,10 @@ test("Other excludes enabled splits and restores mail when a split is disabled",
   const { conversations } = await openMail(page);
   // Remove Unread so category membership alone determines this partition.
   await page
-    .getByRole("button", { name: "Unread", exact: true })
+    .getByRole("button", { name: "未读", exact: true })
     .click({ button: "right" });
-  await page.getByRole("menuitem", { name: "Turn off split" }).click();
-  await page.getByRole("button", { name: "Other", exact: true }).click();
+  await page.getByRole("menuitem", { name: "关闭分栏" }).click();
+  await page.getByRole("button", { name: "其他", exact: true }).click();
   const promotion = conversationWithSubject(
     page,
     conversations,
@@ -318,8 +318,8 @@ test("Other excludes enabled splits and restores mail when a split is disabled",
   );
   await expect(promotion).toBeVisible();
 
-  await page.getByRole("button", { name: "New split" }).click();
-  await page.getByRole("button", { name: "General", exact: true }).click();
+  await page.getByRole("button", { name: "新建分栏" }).click();
+  await page.getByRole("button", { name: "常规", exact: true }).click();
   await page
     .getByRole("button", { name: "Turn on the Important split", exact: true })
     .click();
@@ -329,22 +329,22 @@ test("Other excludes enabled splits and restores mail when a split is disabled",
       exact: true,
     }),
   ).toBeVisible();
-  await page.getByRole("button", { name: "Close" }).click();
+  await page.getByRole("button", { name: "关闭" }).click();
   await expect(
-    page.getByRole("button", { name: "Important", exact: true }),
+    page.getByRole("button", { name: "重要", exact: true }),
   ).toBeVisible();
 
-  await page.getByRole("button", { name: "New split" }).click();
-  await page.getByRole("button", { name: "Build your own" }).click();
-  await page.getByLabel("Condition field").first().selectOption("CATEGORY");
+  await page.getByRole("button", { name: "新建分栏" }).click();
+  await page.getByRole("button", { name: "自定义" }).click();
+  await page.getByLabel("条件字段").first().selectOption("CATEGORY");
   await page
-    .getByLabel("Condition value")
+    .getByLabel("条件值")
     .first()
     .selectOption({ label: "Promotions" });
-  await page.getByLabel("Split name").fill("Promos");
-  await page.getByRole("button", { name: "Add split" }).click();
+  await page.getByLabel("分栏名称").fill("Promos");
+  await page.getByRole("button", { name: "添加分栏" }).click();
   await expect(promotion).toBeVisible();
-  await page.getByRole("button", { name: "Other", exact: true }).click();
+  await page.getByRole("button", { name: "其他", exact: true }).click();
   await expect(promotion).toHaveCount(0);
   await capturePlaywrightCheckpoint(
     page,
@@ -355,22 +355,22 @@ test("Other excludes enabled splits and restores mail when a split is disabled",
   await page
     .getByRole("button", { name: "Promos", exact: true })
     .click({ button: "right" });
-  await page.getByRole("menuitem", { name: "Turn off split" }).click();
-  await page.getByRole("button", { name: "Other", exact: true }).click();
+  await page.getByRole("menuitem", { name: "关闭分栏" }).click();
+  await page.getByRole("button", { name: "其他", exact: true }).click();
   await expect(
-    page.getByRole("button", { name: "Other", exact: true }),
+    page.getByRole("button", { name: "其他", exact: true }),
   ).toHaveAttribute("aria-current", "true");
   await expect(promotion).toBeVisible();
 
-  await page.getByRole("button", { name: "New split" }).click();
-  await page.getByRole("button", { name: "Build your own" }).click();
-  await page.getByLabel("Condition field").first().selectOption("STARRED");
-  await page.getByLabel("Split name").fill("Other");
-  await page.getByRole("button", { name: "Add split" }).click();
+  await page.getByRole("button", { name: "新建分栏" }).click();
+  await page.getByRole("button", { name: "自定义" }).click();
+  await page.getByLabel("条件字段").first().selectOption("STARRED");
+  await page.getByLabel("分栏名称").fill("Other");
+  await page.getByRole("button", { name: "添加分栏" }).click();
   await expect(
     page.getByRole("button", { name: "Other (custom)", exact: true }),
   ).toBeVisible();
   await expect(
-    page.getByRole("button", { name: "Other", exact: true }),
+    page.getByRole("button", { name: "其他", exact: true }),
   ).toBeVisible();
 });

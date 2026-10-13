@@ -41,8 +41,8 @@ export function AccountCommandList({
     <LoadingContent loading={isLoading} error={error}>
       {data && (
         <>
-          <CommandEmpty>No accounts found.</CommandEmpty>
-          <CommandGroup heading="Accounts">
+          <CommandEmpty>未找到账户。</CommandEmpty>
+          <CommandGroup heading="账户">
             {accounts?.map((account) => (
               <CommandItem
                 key={account.id}
@@ -85,7 +85,7 @@ export function AccountCommandList({
                   (!isMail || searchParams.get("accountScope") !== "all") && (
                     <CheckIcon
                       className="ml-2 size-4 shrink-0"
-                      aria-label="Current account"
+                      aria-label="当前账户"
                     />
                   )}
               </CommandItem>
@@ -103,11 +103,11 @@ export function AccountCommandList({
                   }}
                 >
                   <PlusIcon className="mr-2 size-4" />
-                  Add or manage accounts
+                  添加或管理账户
                 </CommandItem>
                 <CommandItem value="accounts-back" onSelect={onBack}>
                   <ArrowLeftIcon className="mr-2 size-4" />
-                  Back to commands
+                  返回命令
                 </CommandItem>
               </CommandGroup>
             </>

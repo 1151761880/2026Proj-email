@@ -1,16 +1,16 @@
-# Desktop app
+# 十组邮件小助手桌面端
 
-Electron shell for the hosted Inbox Zero web app.
+桌面端默认连接本地中文应用 `http://localhost:3000`。可通过 `INBOX_ZERO_APP_URL` 指定自己的部署地址。
 
 ## Run
 
-Against production:
+连接已启动的本地应用：
 
 ```sh
 pnpm --filter @inboxzero/desktop dev
 ```
 
-Against a local web app:
+指定自己的应用地址：
 
 ```sh
 INBOX_ZERO_APP_URL=http://localhost:3000 pnpm --filter @inboxzero/desktop dev
@@ -34,7 +34,7 @@ The app must remain running; hiding the Mac window is supported, fully quitting 
 
 ## Record diagnostics
 
-Help → Record Diagnostics… captures 30 seconds of performance data while the user reproduces a slowdown (clicking the progress notification stops early). It writes an `Inbox-Zero-Diagnostics-<timestamp>` folder to Downloads and reveals it:
+Help → Record Diagnostics… captures 30 seconds of performance data while the user reproduces a slowdown (clicking the progress notification stops early). It writes an `十组邮件小助手-Diagnostics-<timestamp>` folder to Downloads and reveals it:
 
 - `trace.json.gz`: a Chromium trace of the main and renderer processes (timeline, task, IPC, and sampled JS stack categories). Open it in the DevTools Performance panel or [Perfetto](https://ui.perfetto.dev). Paint, layer, and screenshot categories are excluded, and URL query strings are stripped.
 - `diagnostics.json`: app, Electron, and OS versions, per-process CPU and memory, system memory, mail database file sizes, and local mail engine sync and queue counts. It contains no messages, subjects, or addresses.

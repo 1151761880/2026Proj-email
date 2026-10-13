@@ -191,7 +191,7 @@ async function fetchUpstreamAsset(
     headers: {
       Accept:
         "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
-      "User-Agent": "Inbox Zero Image Proxy",
+      "User-Agent": "十组邮件小助手 Image Proxy",
     },
     redirect: "manual",
   });

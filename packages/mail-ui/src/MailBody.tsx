@@ -361,7 +361,7 @@ function MailHtmlFrame({
       }}
       aria-hidden={pending || undefined}
       title={
-        pending ? "Preparing email content preview" : "Email content preview"
+        pending ? "正在准备邮件内容预览" : "邮件内容预览"
       }
       sandbox="allow-same-origin allow-popups allow-popups-to-escape-sandbox"
       referrerPolicy="no-referrer"

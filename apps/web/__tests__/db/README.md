@@ -9,7 +9,7 @@ your mental model of Postgres, which is exactly the assumption these bugs hide
 in.
 
 Everything else belongs in a unit test (mocked) or an integration test
-(emulator-backed). See `.claude/skills/testing/`.
+(emulator-backed).
 
 ## Running
 

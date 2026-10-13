@@ -70,7 +70,7 @@ export function SlackNotificationTargetSelect({
     updateSlackRouteAction.bind(null, emailAccountId),
     {
       onSuccess: () => {
-        toastSuccess({ description: "Destination updated" });
+        toastSuccess({ description: "接收位置已更新" });
         onUpdate();
       },
       onError: (actionError) => {
@@ -103,7 +103,7 @@ export function SlackNotificationTargetSelect({
       <SelectTrigger className={className}>
         <SelectValue
           placeholder={
-            isLoading ? "Loading..." : hasError ? "Failed to load" : placeholder
+            isLoading ? "正在加载…" : hasError ? "加载失败" : placeholder
           }
         >
           {selectedTargetLabel}
@@ -113,7 +113,7 @@ export function SlackNotificationTargetSelect({
         {canSendAsDm && (
           <SelectItem value="dm">
             <MessageSquareIcon className="mr-1 inline h-3 w-3" />
-            Direct message
+            私信
           </SelectItem>
         )}
         {privateTargets.map((target) => (
@@ -126,11 +126,11 @@ export function SlackNotificationTargetSelect({
           <div className="border-t px-2 py-1.5 text-xs text-muted-foreground">
             <div>
               {privateTargets.length === 0
-                ? "No channels found."
-                : "Don't see your channel?"}
+                ? "未找到渠道。"
+                : "未找到所需渠道？"}
             </div>
             <div>
-              Invite the bot with{" "}
+              邀请机器人，使用命令：{" "}
               <code className="rounded bg-muted px-1">
                 /invite @{env.NEXT_PUBLIC_SLACK_BOT_NAME}
               </code>
@@ -139,13 +139,13 @@ export function SlackNotificationTargetSelect({
         )}
         {hasError && (
           <div className="px-2 py-1.5 text-xs text-muted-foreground">
-            Failed to load channels.{" "}
+            加载渠道失败。{" "}
             <button
               type="button"
               className="underline underline-offset-4"
               onClick={() => mutateTargets()}
             >
-              Retry
+              重试
             </button>
           </div>
         )}
@@ -167,7 +167,7 @@ function getSelectedTargetLabel({
   privateTargets: Array<{ id: string; name: string }>;
   isLoading: boolean;
 }) {
-  if (isDm) return "Direct message";
+  if (isDm) return "私信";
   if (!targetId) return targetLabel;
 
   const loadedTargetLabel = privateTargets.find(

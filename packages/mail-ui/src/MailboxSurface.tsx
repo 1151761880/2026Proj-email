@@ -64,7 +64,7 @@ export function MailboxThreadList<T>({
   getKey,
   getGroupLabel = () => null,
   renderItem,
-  emptyMessage = "No emails in this view",
+  emptyMessage = "此视图暂无邮件",
   selectionEnabled = true,
   focusedIndex,
   isSelected,
@@ -87,7 +87,7 @@ export function MailboxThreadList<T>({
   listStyle,
   loadMoreStyle,
   emptyStyle,
-  loadingMoreIndicator = "Loading more",
+  loadingMoreIndicator = "正在加载更多",
   loadMoreButton,
 }: MailboxThreadListProps<T>) {
   const [scrollRoot, setScrollRoot] = useState<HTMLDivElement | null>(null);
@@ -160,7 +160,7 @@ export function MailboxThreadList<T>({
         ) : (
           <>
             <div
-              aria-label="Conversations"
+              aria-label="会话"
               aria-multiselectable={selectionEnabled || undefined}
               className={listClassName}
               role="listbox"
@@ -212,7 +212,7 @@ export function MailboxThreadList<T>({
                 ) : (
                   (loadMoreButton ?? (
                     <button onClick={onLoadMore} type="button">
-                      Load more
+                      加载更多
                     </button>
                   ))
                 )}
@@ -249,14 +249,14 @@ export function MailReaderPane({
   bodyStyle,
 }: MailReaderPaneProps) {
   return (
-    <section aria-label="Reader" className={className} style={style}>
+    <section aria-label="阅读区" className={className} style={style}>
       {!selected ? (
         <div className={bodyClassName} style={bodyStyle}>
           {empty}
         </div>
       ) : loading ? (
         <div className={bodyClassName} style={bodyStyle}>
-          Loading…
+          正在加载…
         </div>
       ) : error ? (
         <div className={bodyClassName} style={bodyStyle}>

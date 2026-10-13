@@ -818,7 +818,7 @@ export const SquireEmailEditor = forwardRef<
       >
         <div className={styles.squireBody}>
           <div
-            aria-label="Email message"
+            aria-label="邮件内容"
             aria-multiline="true"
             className={styles.squireContent}
             data-email-editor-content=""
@@ -834,7 +834,7 @@ export const SquireEmailEditor = forwardRef<
           />
           {removeButtonTop !== null && (
             <button
-              aria-label="Remove signature"
+              aria-label="移除签名"
               className={styles.squireRemoveSignature}
               onClick={removeSignature}
               onMouseDown={(event) => event.preventDefault()}

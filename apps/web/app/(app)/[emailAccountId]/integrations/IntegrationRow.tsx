@@ -66,8 +66,8 @@ export function IntegrationRow({
         reason: "unsupported_auth_type",
       });
       toastError({
-        title: "Error connecting to integration",
-        description: "API token connections are not supported yet",
+        title: "连接集成失败",
+        description: "暂不支持 API 令牌连接",
       });
       return;
     }
@@ -91,7 +91,7 @@ export function IntegrationRow({
         error,
       );
       toastError({
-        title: `Error connecting to ${integration.displayName}`,
+        title: `连接 ${integration.displayName} 失败`,
         description:
           error instanceof Error && error.message
             ? error.message
@@ -128,7 +128,7 @@ export function IntegrationRow({
 
       if (result?.serverError) {
         toastError({
-          title: "Error updating integration",
+          title: "更新集成失败",
           description: result.serverError,
         });
       } else {
@@ -139,7 +139,7 @@ export function IntegrationRow({
       }
     } catch (error) {
       toastError({
-        title: "Error updating integration",
+        title: "更新集成失败",
         description: error instanceof Error ? error.message : "Unknown error",
       });
     }
@@ -159,16 +159,16 @@ export function IntegrationRow({
 
       if (result?.serverError) {
         toastError({
-          title: "Error toggling tool",
+          title: "切换工具状态失败",
           description: result.serverError,
         });
       } else {
-        toastSuccess({ description: "Tool updated" });
+        toastSuccess({ description: "工具已更新" });
         onConnectionChange();
       }
     } catch (error) {
       toastError({
-        title: "Error toggling tool",
+        title: "切换工具状态失败",
         description: error instanceof Error ? error.message : "Unknown error",
       });
     }
@@ -199,7 +199,7 @@ export function IntegrationRow({
 
       if (result?.serverError) {
         toastError({
-          title: "Error disconnecting",
+          title: "断开连接失败",
           description: result.serverError,
         });
       } else {
@@ -216,7 +216,7 @@ export function IntegrationRow({
       }
     } catch (error) {
       toastError({
-        title: "Error disconnecting",
+        title: "断开连接失败",
         description: error instanceof Error ? error.message : "Unknown error",
       });
     } finally {
@@ -234,9 +234,9 @@ export function IntegrationRow({
               <div className="flex items-center gap-2">
                 <span>{integration.shortName || integration.displayName}</span>
                 {integration.comingSoon && (
-                  <Badge variant="secondary">Coming soon</Badge>
+                  <Badge variant="secondary">即将推出</Badge>
                 )}
-                {isCustom && <Badge variant="secondary">Custom</Badge>}
+                {isCustom && <Badge variant="secondary">自定义</Badge>}
               </div>
               {integration.description && (
                 <MutedText>{integration.description}</MutedText>
@@ -251,9 +251,9 @@ export function IntegrationRow({
             <div className="flex items-center gap-2">
               {connected ? (
                 isActive ? (
-                  <span className="text-green-600 text-sm">✓ Connected</span>
+                  <span className="text-green-600 text-sm">✓ 已连接</span>
                 ) : (
-                  <span className="text-muted-foreground text-sm">Paused</span>
+                  <span className="text-muted-foreground text-sm">已暂停</span>
                 )
               ) : (
                 <Button
@@ -263,16 +263,16 @@ export function IntegrationRow({
                   disabled={connecting}
                 >
                   {connecting
-                    ? "Connecting..."
+                    ? "正在连接…"
                     : integration.authType === "api-token"
-                      ? "Connect with API Key"
-                      : "Connect"}
+                      ? "通过 API 密钥连接"
+                      : "连接"}
                 </Button>
               )}
             </div>
           ) : (
             <TypographyP className="text-sm text-gray-500">
-              No Auth Required
+              无需身份验证
             </TypographyP>
           )}
         </TableCell>
@@ -283,7 +283,7 @@ export function IntegrationRow({
                 <Button
                   variant="ghost"
                   size="iconSm"
-                  aria-label="Integration actions"
+                  aria-label="集成操作"
                 >
                   <MoreVertical className="h-4 w-4" />
                 </Button>
@@ -294,19 +294,19 @@ export function IntegrationRow({
                     {tools.length > 0 && (
                       <DropdownMenuItem onClick={handleToggleToolsExpanded}>
                         {expandedTools
-                          ? "Hide tools"
-                          : `Manage tools (${toolsCount} of ${totalTools} on)`}
+                          ? "隐藏工具"
+                          : `管理工具（已启用 ${toolsCount} / ${totalTools}）`}
                       </DropdownMenuItem>
                     )}
                     <DropdownMenuItem onClick={handleTogglePause}>
-                      {isActive ? "Pause" : "Resume"}
+                      {isActive ? "暂停" : "继续"}
                     </DropdownMenuItem>
                     {integration.authType === "oauth" && (
                       <DropdownMenuItem
                         onClick={handleConnect}
                         disabled={connecting}
                       >
-                        {connecting ? "Reconnecting..." : "Reconnect"}
+                        {connecting ? "正在重新连接…" : "重新连接"}
                       </DropdownMenuItem>
                     )}
                   </>

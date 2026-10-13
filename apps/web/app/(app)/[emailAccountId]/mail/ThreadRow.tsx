@@ -165,7 +165,7 @@ function AccountAvatar({
 
   return (
     <Avatar
-      aria-label={`Inbox: ${label}`}
+      aria-label={`收件箱：${label}`}
       className="size-5"
       title={account.email}
     >

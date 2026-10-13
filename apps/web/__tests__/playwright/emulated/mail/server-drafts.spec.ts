@@ -26,7 +26,7 @@ test("preserves multiple server drafts without reply headers", async ({
     conversations,
     "Multiple Server Drafts",
   ).click();
-  const editors = page.getByRole("textbox", { name: "Email message" });
+  const editors = page.getByRole("textbox", { name: "邮件内容" });
   await expect(editors).toHaveCount(2);
   await expect(editors.nth(0)).toContainText("First saved reply");
   await expect(editors.nth(1)).toContainText("Second saved reply");
@@ -39,7 +39,7 @@ test("preserves multiple server drafts without reply headers", async ({
 
   await page
     .locator('[data-thread-message-id="msg_playwright_multi_draft_parent"]')
-    .getByRole("button", { name: "Forward", exact: true })
+    .getByRole("button", { name: "转发", exact: true })
     .click();
   await expect(editors).toHaveCount(3);
   await expect(editors.nth(0)).toContainText("Independent first edit");
@@ -66,12 +66,12 @@ test("preserves multiple server drafts without reply headers", async ({
     await route.fallback();
   });
   await page
-    .getByRole("button", { name: "Discard draft", exact: true })
+    .getByRole("button", { name: "丢弃草稿", exact: true })
     .nth(0)
     .click();
   await expect(editors).toHaveCount(2);
   await page
-    .getByRole("button", { name: "Discard draft", exact: true })
+    .getByRole("button", { name: "丢弃草稿", exact: true })
     .nth(0)
     .click();
   await expect(editors).toHaveCount(1);
@@ -96,7 +96,7 @@ test("preserves multiple server drafts without a sent parent", async ({
     conversations,
     "Drafts Without Parent",
   ).click();
-  const editors = page.getByRole("textbox", { name: "Email message" });
+  const editors = page.getByRole("textbox", { name: "邮件内容" });
   await expect(editors).toHaveCount(2);
   await expect(editors.nth(0)).toContainText("First saved reply");
   await expect(editors.nth(1)).toContainText("Second saved reply");

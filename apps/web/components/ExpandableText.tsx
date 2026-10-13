@@ -54,12 +54,12 @@ export function ExpandableText({
         {isExpanded ? (
           <>
             <ChevronUpIcon className="mr-1 h-3 w-3" />
-            Less
+            收起
           </>
         ) : (
           <>
             <ChevronDownIcon className="mr-1 h-3 w-3" />
-            More
+            更多
           </>
         )}
       </motion.button>

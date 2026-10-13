@@ -61,11 +61,11 @@ export function ResponseTimeAnalytics({
   }, [data]);
 
   const distributionChartConfig: ChartConfig = {
-    count: { label: "Emails", color: COLORS.analytics.blue },
+    count: { label: "邮件", color: COLORS.analytics.blue },
   };
 
   const trendChartConfig: ChartConfig = {
-    median: { label: "Median Response Time", color: COLORS.analytics.purple },
+    median: { label: "回复时间中位数", color: COLORS.analytics.purple },
   };
 
   return (
@@ -78,25 +78,25 @@ export function ResponseTimeAnalytics({
         <div className="space-y-4">
           {data.emailsAnalyzed > 0 && (
             <p className="text-muted-foreground text-sm">
-              Response time data based on last {data.emailsAnalyzed}{" "}
+              回复时间数据基于最近 {data.emailsAnalyzed}{" "}
               {pluralize(data.emailsAnalyzed, "email")}
             </p>
           )}
 
           <div className="grid gap-2 sm:gap-4 grid-cols-3">
             <SummaryCard
-              title="Median Response"
+              title="回复中位时间"
               value={formatTime(data.summary.medianResponseTime)}
               icon={<Clock className="h-4 w-4" />}
               comparison={data.summary.previousPeriodComparison}
             />
             <SummaryCard
-              title="Average Response"
+              title="平均回复时间"
               value={formatTime(data.summary.averageResponseTime)}
               icon={<Timer className="h-4 w-4" />}
             />
             <SummaryCard
-              title="Within 1 Hour"
+              title="一小时内"
               value={`${data.summary.within1Hour}%`}
               icon={<TrendingUp className="h-4 w-4" />}
             />
@@ -105,7 +105,7 @@ export function ResponseTimeAnalytics({
           {/* Distribution Chart */}
           {distributionData.some((d) => d.count > 0) && (
             <CardBasic>
-              <p>Response Time Distribution</p>
+              <p>回复时间分布</p>
               <div className="mt-4">
                 <BarChart
                   data={distributionData}
@@ -122,7 +122,7 @@ export function ResponseTimeAnalytics({
           {/* Trend Chart */}
           {trendData.length > 0 && (
             <CardBasic>
-              <p>Weekly Response Time Trend</p>
+              <p>每周回复时间趋势</p>
               <div className="mt-4">
                 <BarChart
                   data={trendData}
@@ -141,9 +141,9 @@ export function ResponseTimeAnalytics({
           {!distributionData.some((d) => d.count > 0) &&
             trendData.length === 0 && (
               <CardBasic>
-                <p>Response Time Analytics</p>
+                <p>回复时间统计</p>
                 <div className="mt-4 h-32 flex items-center justify-center text-muted-foreground">
-                  <p>No response time data available for this period.</p>
+                  <p>此期间暂无回复时间数据。</p>
                 </div>
               </CardBasic>
             )}
@@ -194,9 +194,9 @@ function SummaryCard({
               <TrendingUp className="h-3 w-3" />
             ) : null}
             {comparison.percentChange === 0
-              ? "No change"
+              ? "无变化"
               : `${Math.abs(comparison.percentChange)}% ${comparison.percentChange < 0 ? "faster" : "slower"}`}
-            <span className="text-muted-foreground ml-1">vs previous</span>
+            <span className="text-muted-foreground ml-1">与上一期间相比</span>
           </p>
         )}
       </CardContent>
@@ -206,7 +206,7 @@ function SummaryCard({
 
 function formatTime(minutes: number): string {
   if (minutes === 0) return "0m";
-  if (minutes < 60) return `${Math.round(minutes)}m`;
+  if (minutes < 60) return `${Math.round(minutes)} 分钟`;
   if (minutes < 1440) {
     let hours = Math.floor(minutes / 60);
     let mins = Math.round(minutes % 60);
@@ -230,11 +230,11 @@ function formatTime(minutes: number): string {
 // Shorter format for Y-axis labels
 function formatTimeShort(minutes: number): string {
   if (minutes === 0) return "0";
-  if (minutes < 60) return `${Math.round(minutes)}m`;
+  if (minutes < 60) return `${Math.round(minutes)} 分钟`;
   if (minutes < 1440) {
     const hours = Math.round(minutes / 60);
-    return `${hours}h`;
+    return `${hours} 小时`;
   }
   const days = Math.round(minutes / 1440);
-  return `${days}d`;
+  return `${days} 天`;
 }

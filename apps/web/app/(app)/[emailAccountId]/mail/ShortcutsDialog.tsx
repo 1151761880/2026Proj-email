@@ -37,9 +37,9 @@ export function ShortcutsDialog() {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent className="max-w-2xl">
         <DialogHeader>
-          <DialogTitle>Keyboard shortcuts</DialogTitle>
+          <DialogTitle>键盘快捷键</DialogTitle>
           <DialogDescription>
-            Everything here works without the mouse.
+            这里的操作都可通过键盘完成。
           </DialogDescription>
         </DialogHeader>
 

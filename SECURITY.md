@@ -1,5 +1,7 @@
 # Security Policy
 
+> 本文件保留 Inbox Zero 上游安全策略。文中的官网和联系方式属于上游服务；当前定制部署的问题由实际部署维护者处理。
+
 ## Reporting a Vulnerability
 
 If you discover a security vulnerability, please report it privately:

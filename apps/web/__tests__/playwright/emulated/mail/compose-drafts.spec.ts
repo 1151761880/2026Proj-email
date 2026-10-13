@@ -15,22 +15,22 @@ test("saves a closed new message with attachments in Drafts and discards it from
   page,
 }, testInfo) => {
   const { emailAccountId, conversations } = await openMail(page);
-  await page.getByRole("button", { name: /^Compose/ }).click();
-  const dialog = page.getByRole("dialog", { name: "New Message" });
+  await page.getByRole("button", { name: /写邮件/ }).click();
+  const dialog = page.getByRole("dialog", { name: "新邮件" });
   await dialog
-    .getByRole("combobox", { name: "To", exact: true })
+    .getByRole("combobox", { name: "收件人", exact: true })
     .fill("recipient@example.com");
   await page.keyboard.press("Enter");
-  await dialog.getByPlaceholder("Subject").fill("Mailbox draft example");
+  await dialog.getByPlaceholder("主题").fill("Mailbox draft example");
   await dialog
-    .getByRole("textbox", { name: "Email message" })
+    .getByRole("textbox", { name: "邮件内容" })
     .fill("A saved example message.");
   await dialog.getByTestId("compose-attachments-input").setInputFiles({
     name: "example.txt",
     mimeType: "text/plain",
     buffer: Buffer.from("Example attachment"),
   });
-  await dialog.getByRole("button", { name: "Close compose" }).click();
+  await dialog.getByRole("button", { name: "关闭写信窗口" }).click();
   await expect(dialog).toBeHidden();
   await expect
     .poll(async () => {
@@ -76,16 +76,16 @@ test("saves a closed new message with attachments in Drafts and discards it from
       ),
     ),
   ).toBe(true);
-  await page.getByRole("button", { name: "Back to inbox" }).click();
+  await page.getByRole("button", { name: "返回收件箱" }).click();
   await page.reload();
-  await page.getByRole("button", { name: /^Compose/ }).click();
+  await page.getByRole("button", { name: /写邮件/ }).click();
   await expect(
-    dialog.getByRole("textbox", { name: "Email message" }),
+    dialog.getByRole("textbox", { name: "邮件内容" }),
   ).toContainText("A saved example message.");
-  await expect(dialog.getByRole("list", { name: "Attachments" })).toContainText(
+  await expect(dialog.getByRole("list", { name: "附件" })).toContainText(
     "example.txt",
   );
-  await dialog.getByRole("button", { name: "Discard draft" }).click();
+  await dialog.getByRole("button", { name: "丢弃草稿" }).click();
   await expect(dialog).toBeHidden();
   await expect
     .poll(() =>
@@ -103,22 +103,22 @@ test("removes the mailbox draft after sending a new message", async ({
   page,
 }) => {
   const { emailAccountId } = await openMail(page);
-  await page.getByRole("button", { name: /^Compose/ }).click();
-  const dialog = page.getByRole("dialog", { name: "New Message" });
+  await page.getByRole("button", { name: /写邮件/ }).click();
+  const dialog = page.getByRole("dialog", { name: "新邮件" });
   await dialog
-    .getByRole("combobox", { name: "To", exact: true })
+    .getByRole("combobox", { name: "收件人", exact: true })
     .fill("recipient@example.com");
   await page.keyboard.press("Enter");
-  await dialog.getByPlaceholder("Subject").fill("Send saved example");
+  await dialog.getByPlaceholder("主题").fill("Send saved example");
   await dialog
-    .getByRole("textbox", { name: "Email message" })
+    .getByRole("textbox", { name: "邮件内容" })
     .fill("An example to send.");
   await expect
     .poll(() => readMailboxDrafts(page, emailAccountId, "Send saved example"), {
       timeout: 15_000,
     })
     .toHaveLength(1);
-  await dialog.getByRole("button", { name: "Send", exact: true }).click();
+  await dialog.getByRole("button", { name: "发送", exact: true }).click();
   await waitForComposeOutboxSend(page, emailAccountId);
   await expect
     .poll(() => readMailboxDrafts(page, emailAccountId, "Send saved example"))
@@ -134,8 +134,8 @@ test("saves a reply in the mailbox and reopens it after a reload", async ({
     '[data-thread-message-id="msg_playwright_reply"]',
   );
   await expect(message).toBeVisible({ timeout: 60_000 });
-  await message.getByRole("button", { name: "Reply", exact: true }).click();
-  const editors = page.getByRole("textbox", { name: "Email message" });
+  await message.getByRole("button", { name: "回复", exact: true }).click();
+  const editors = page.getByRole("textbox", { name: "邮件内容" });
   const replyBody = `A reply saved to the mailbox. ${testInfo.retry}`;
   await editors.fill(replyBody);
   await expect
@@ -158,7 +158,7 @@ test("saves a reply in the mailbox and reopens it after a reload", async ({
   await expect(editors).toContainText(replyBody);
   await capturePlaywrightCheckpoint(page, testInfo, "reply-draft-after-reload");
 
-  await page.getByRole("button", { name: "Discard draft" }).click();
+  await page.getByRole("button", { name: "丢弃草稿" }).click();
   await expect(editors).toHaveCount(0);
   await expect
     .poll(() =>

@@ -1,6 +1,6 @@
 # @inbox-zero/api
 
-CLI tool for managing [Inbox Zero](https://www.getinboxzero.com) through the external API.
+CLI tool for managing [十组邮件小助手](https://www.getinboxzero.com) through the external API.
 
 This package is separate from `@inbox-zero/cli`, which is focused on self-hosting and deployment.
 
@@ -57,7 +57,7 @@ inbox-zero-api config get base-url
 
 ### `inbox-zero-api openapi`
 
-Fetch the live OpenAPI document from the configured Inbox Zero deployment.
+Fetch the live OpenAPI document from the configured 十组邮件小助手 deployment.
 
 ```bash
 inbox-zero-api openapi --json

@@ -58,9 +58,9 @@ export function SentMessageOpenTrackingSetting({
           <ItemSeparator />
           <Item size="sm">
             <ItemContent>
-              <ItemTitle>Read status</ItemTitle>
+              <ItemTitle>阅读状态</ItemTitle>
               <ItemDescription>
-                See when recipients open emails you send from the mail client.
+                查看收件人何时打开你发送的邮件。
               </ItemDescription>
             </ItemContent>
             <ItemActions>
@@ -75,15 +75,14 @@ export function SentMessageOpenTrackingSetting({
           <ItemSeparator />
           <Item size="sm">
             <ItemContent>
-              <ItemTitle>Read status</ItemTitle>
+              <ItemTitle>阅读状态</ItemTitle>
               <ItemDescription>
-                See when recipients open emails you send from the mail client.
-                Some apps block this, so an unopened status is not a guarantee.
+                查看收件人何时打开邮件。部分应用会阻止追踪，因此“未打开”状态不一定准确。
               </ItemDescription>
             </ItemContent>
             <ItemActions>
               <Switch
-                aria-label="Toggle read status"
+                aria-label="启用或关闭阅读状态"
                 checked={data.sentMessageOpenTrackingEnabled}
                 disabled={isExecuting}
                 onCheckedChange={handleToggle}

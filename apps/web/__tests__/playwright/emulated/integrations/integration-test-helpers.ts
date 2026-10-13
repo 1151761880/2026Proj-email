@@ -12,7 +12,7 @@ export async function openIntegrations(page: Page) {
   await navigateUntilReady(
     page,
     `/${emailAccountId}/integrations`,
-    page.getByRole("heading", { name: "Integrations", exact: true }),
+    page.getByRole("heading", { name: "集成", exact: true }),
   );
 }
 

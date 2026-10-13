@@ -25,7 +25,7 @@ test("shows matched reasons only for the selected message", async ({
       page.getByRole("heading", { name: "Matched Reason Message" }),
     ).toBeVisible({ timeout: 60_000 });
     const expand = page.getByRole("button", {
-      name: "Expand all messages",
+      name: "展开全部邮件",
       exact: true,
     });
     if (await expand.isVisible()) await expand.click();
@@ -45,15 +45,15 @@ test("shows matched reasons only for the selected message", async ({
       const message = page.locator(`[data-thread-message-id="${id}"]`);
       await message.hover();
       await expect(
-        message.getByRole("button", { name: "Reply", exact: true }),
+        message.getByRole("button", { name: "回复", exact: true }),
       ).toBeVisible();
       await expect(
-        message.getByRole("button", { name: "Forward", exact: true }),
+        message.getByRole("button", { name: "转发", exact: true }),
       ).toBeVisible();
       await message
-        .getByRole("button", { name: "More message actions", exact: true })
+        .getByRole("button", { name: "更多邮件操作", exact: true })
         .click();
-      await page.getByRole("menuitem", { name: "Matched reason" }).click();
+      await page.getByRole("menuitem", { name: "匹配原因" }).click();
       await expect(page.getByText(reason, { exact: true })).toBeVisible({
         timeout: 60_000,
       });
@@ -73,7 +73,7 @@ test("shows matched reasons only for the selected message", async ({
       ).toBeVisible();
       await expect(
         page.getByText(
-          id === EARLIER_MESSAGE_ID ? "Actions applied" : "Rule actions",
+          id === EARLIER_MESSAGE_ID ? "已应用操作" : "规则操作",
           { exact: true },
         ),
       ).toBeVisible();
@@ -84,7 +84,7 @@ test("shows matched reasons only for the selected message", async ({
           }),
         ).toBeVisible();
         await expect(
-          page.getByText("Actions applied", { exact: true }),
+          page.getByText("已应用操作", { exact: true }),
         ).not.toBeVisible();
       }
       await capturePlaywrightCheckpoint(page, testInfo, `matched-reason-${id}`);

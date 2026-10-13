@@ -87,11 +87,11 @@ export function UnsubscribeCelebrationDialog({
     });
     try {
       await navigator.clipboard.writeText(shareLink);
-      toastSuccess({ description: "Link copied to clipboard!" });
+      toastSuccess({ description: "链接已复制！" });
     } catch {
       toastError({
-        title: "Failed to copy link",
-        description: "Please try again",
+        title: "复制链接失败",
+        description: "请重试",
       });
     }
   };
@@ -101,7 +101,7 @@ export function UnsubscribeCelebrationDialog({
       <DialogContent className="sm:max-w-xl">
         <DialogHeader>
           <DialogTitle>
-            You unsubscribed from {senderCount}{" "}
+            你已退订 {senderCount}{" "}
             {senderCount === 1 ? "sender" : "senders"}
           </DialogTitle>
           {emailCount > 0 && (
@@ -131,7 +131,7 @@ export function UnsubscribeCelebrationDialog({
             disabled={!shareParams}
           >
             <TwitterIcon className="mr-2 size-4" />
-            Share on X
+            分享到 X
           </Button>
           <Button
             variant="outline"
@@ -140,7 +140,7 @@ export function UnsubscribeCelebrationDialog({
             disabled={!shareParams}
           >
             <LinkedinIcon className="mr-2 size-4" />
-            Share on LinkedIn
+            分享到 LinkedIn
           </Button>
           <Button
             variant="outline"
@@ -149,7 +149,7 @@ export function UnsubscribeCelebrationDialog({
             disabled={!shareLink}
           >
             <CopyIcon className="mr-2 size-4" />
-            Copy link
+            复制链接
           </Button>
         </div>
       </DialogContent>

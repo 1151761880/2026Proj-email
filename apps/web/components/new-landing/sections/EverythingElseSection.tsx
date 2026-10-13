@@ -17,9 +17,9 @@ import { Link } from "@/components/new-landing/icons/Link";
 export function EverythingElseSection() {
   return (
     <Section>
-      <SectionHeading>Designed around how you actually work</SectionHeading>
+      <SectionHeading>贴合实际工作方式</SectionHeading>
       <SectionSubtitle>
-        Flexible enough to fit any workflow. Simple enough to set up in minutes.
+        灵活配置邮件流程，快速完成设置。
       </SectionSubtitle>
       <SectionContent
         noMarginTop
@@ -28,8 +28,8 @@ export function EverythingElseSection() {
         <CardWrapper className="w-full grid grid-cols-1 lg:grid-cols-3 gap-5">
           <BlurFade inView>
             <DisplayCard
-              title="Email analytics. What gets measured, gets managed"
-              description="See who emails you most and what's clogging your inbox. Get clear insights, then take action."
+              title="了解邮箱数据，更好地管理邮件"
+              description="了解主要发件人和邮件来源，并据此整理收件箱。"
               icon={<Analytics />}
             >
               <Image
@@ -42,13 +42,13 @@ export function EverythingElseSection() {
           </BlurFade>
           <BlurFade delay={0.25} inView>
             <DisplayCard
-              title="Drafts that know your schedule and availability"
-              description="Connects to your calendar and CRM to draft emails based on your actual schedule and customer data."
+              title="结合日程和空闲时间起草回复"
+              description="连接日历和 CRM，根据实际日程及客户资料起草回复。"
               icon={<Link />}
             >
               <Image
                 src="/images/new-landing/integrations.png"
-                alt="App integrations"
+                alt="应用集成"
                 width={1000}
                 height={400}
               />
@@ -56,13 +56,13 @@ export function EverythingElseSection() {
           </BlurFade>
           <BlurFade delay={0.25 * 2} inView>
             <DisplayCard
-              title="Built to fit your workflow. Customize in plain English"
-              description="Your inbox, your rules. Configure everything in plain English. Make it work the way you actually work."
+              title="用自然语言配置邮件流程"
+              description="用自然语言配置规则，让收件箱符合你的工作方式。"
               icon={<ChatTwo />}
             >
               <Image
                 src="/images/new-landing/create-rules.png"
-                alt="Customize"
+                alt="自定义"
                 width={1000}
                 height={400}
               />

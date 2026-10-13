@@ -26,7 +26,7 @@ export function StepDraft({
 
       if (result?.serverError) {
         toastError({
-          description: `There was an error: ${result.serverError || ""}`,
+          description: `发生错误：${result.serverError || ""}`,
         });
       }
 
@@ -44,24 +44,23 @@ export function StepDraft({
           </IconCircle>
 
           <div className="text-center mt-4">
-            <PageHeading>Should we draft replies for you?</PageHeading>
+            <PageHeading>是否自动起草回复？</PageHeading>
             <TypographyP className="mt-2 max-w-lg mx-auto">
-              The drafts will appear in your inbox, written in your tone.
+              草稿会显示在收件箱中，使用你的表达风格。
               <br />
-              Our AI learns from your previous conversations to draft the best
-              reply.
+              AI 会参考历史往来邮件起草回复。
             </TypographyP>
           </div>
 
           <div className="mt-4 grid gap-2">
             <OnboardingButton
-              text="Yes, please"
+              text="启用"
               icon={<CheckIcon className="size-4" />}
               onClick={() => onSetDraftReplies("yes")}
             />
 
             <OnboardingButton
-              text="No, thanks"
+              text="暂不启用"
               icon={<XIcon className="size-4" />}
               onClick={() => onSetDraftReplies("no")}
             />
@@ -73,7 +72,7 @@ export function StepDraft({
         <div className="rounded-2xl p-4 bg-slate-50 border border-slate-200">
           <Image
             src="/images/onboarding/draft.png"
-            alt="Draft replies"
+            alt="起草回复"
             width={1200}
             height={800}
             className="rounded-xl border border-slate-200"

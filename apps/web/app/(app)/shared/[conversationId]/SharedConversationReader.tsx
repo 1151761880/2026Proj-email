@@ -21,9 +21,9 @@ export function SharedConversationReader({
     return (
       <main className="mx-auto max-w-3xl p-6">
         <p>
-          Select your organization membership from{" "}
+          选择组织：{" "}
           <Link href="/shared" className="text-primary underline">
-            Shared with me
+            与我共享
           </Link>
           .
         </p>
@@ -61,17 +61,17 @@ function AuthorizedReader({
   if (access.revoked || accessDenied)
     return (
       <main className="mx-auto max-w-3xl p-6" role="alert">
-        Your access to this conversation has ended.
+        你对此会话的访问权限已结束。
       </main>
     );
   if (access.summary.error)
     return (
       <main className="mx-auto max-w-3xl p-6" role="alert">
-        Could not check conversation access. Retry or refresh this page.
+        无法验证会话访问权限，请重试或刷新页面。
       </main>
     );
   if (!access.summary.data)
-    return <main className="mx-auto max-w-3xl p-6">Checking access…</main>;
+    return <main className="mx-auto max-w-3xl p-6">正在验证访问权限…</main>;
   return (
     <main className="mx-auto max-w-3xl space-y-6 px-4 py-6">
       <div className="flex items-center justify-between gap-2">
@@ -79,24 +79,23 @@ function AuthorizedReader({
           href={`/shared?memberId=${encodeURIComponent(memberId)}`}
           className="text-primary text-sm underline"
         >
-          Shared with me
+          与我共享
         </Link>
         <Button size="sm" variant="ghost" onClick={() => messages.mutate()}>
-          Refresh email
+          刷新邮件
         </Button>
       </div>
       <LoadingContent loading={messages.isLoading} error={messages.error}>
         {messages.data?.status === "unavailable" && (
           <div className="rounded-lg border p-4" role="status">
-            Email content is unavailable ({messages.data.reason}). Internal
-            comments remain available.
+            邮件内容不可用（{messages.data.reason}）。仍可查看内部评论。
           </div>
         )}
         {messages.data?.status === "available" && (
           <div className="space-y-4">
             {!messages.data.complete && (
               <p className="text-amber-700 text-sm" role="status">
-                This email history is incomplete.
+                此邮件的历史记录不完整。
               </p>
             )}
             {messages.data.messages.map((message) => (
@@ -108,11 +107,11 @@ function AuthorizedReader({
                   {message.subject || "(no subject)"}
                 </h1>
                 <div className="text-muted-foreground text-xs">
-                  <p>From: {message.from}</p>
-                  <p>To: {message.to}</p>
-                  {message.cc && <p>Cc: {message.cc}</p>}
+                  <p>发件人： {message.from}</p>
+                  <p>收件人： {message.to}</p>
+                  {message.cc && <p>抄送： {message.cc}</p>}
                   <time>
-                    {new Date(message.date).toLocaleString(undefined, {
+                    {new Date(message.date).toLocaleString("zh-CN", {
                       dateStyle: "medium",
                       timeStyle: "short",
                     })}

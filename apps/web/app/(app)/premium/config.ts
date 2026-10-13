@@ -223,7 +223,7 @@ export function shouldShowLegacyStripePricingNotice(
 export function getPremiumTierName(
   tier: PremiumTier | null | undefined,
 ): string {
-  if (!tier) return "Premium";
+  if (!tier) return "高级版";
 
   const tierMap: Partial<Record<PremiumTier, string>> = {
     STARTER_MONTHLY: "Starter",
@@ -264,27 +264,27 @@ const starterTier: Tier = {
     annually: discount(pricing.STARTER_MONTHLY, pricing.STARTER_ANNUALLY),
   },
   description:
-    "For individuals, entrepreneurs, and executives looking to buy back their time.",
+    "适合希望节省邮件处理时间的个人、创业者和管理者。",
   features: [
     {
-      text: "Sorts and labels every email",
+      text: "自动分类并标记每封邮件",
     },
     {
-      text: "Drafts replies in your voice",
+      text: "按你的风格起草回复",
     },
     {
-      text: "Blocks cold emails",
+      text: "拦截陌生推广邮件",
     },
     {
-      text: "Bulk unsubscribe and archive emails",
+      text: "批量退订和归档邮件",
     },
     {
-      text: "Email analytics",
+      text: "邮件统计",
     },
     {
-      text: "Pre-meeting briefings",
+      text: "会前简报",
       tooltip:
-        "Get AI briefings before every meeting with research on attendees and context from your inbox.",
+        "会议前获取 AI 简报，包含参会者背景和相关邮件内容。",
     },
   ],
   cta: "Try free for 7 days",
@@ -292,7 +292,7 @@ const starterTier: Tier = {
 };
 
 const plusTier: Tier = {
-  name: "Plus",
+  name: "进阶版",
   tiers: {
     monthly: "PLUS_MONTHLY",
     annually: "PLUS_ANNUALLY",
@@ -306,45 +306,45 @@ const plusTier: Tier = {
     annually: discount(pricing.PLUS_MONTHLY, pricing.PLUS_ANNUALLY),
   },
   description:
-    "For power users who need integrations and deeper knowledge base support.",
+    "适合需要应用集成和更丰富知识库的用户。",
   features: [
     {
-      text: "Everything in Starter, plus:",
+      text: "包含基础版全部功能，并提供：",
     },
     {
-      text: "2 email accounts included per user",
+      text: "每位用户可使用 2 个邮箱账户",
       tooltip:
-        "Each user gets 2 email accounts included. Additional email accounts are billed at the standard per-seat rate.",
+        "每位用户包含 2 个邮箱账户，额外账户按标准席位价格计费。",
     },
     {
-      text: "AI meeting notetaker",
+      text: "AI 会议记录",
       tooltip:
-        "A notetaker joins your video calls and turns them into transcripts, summaries, recap emails, and follow-up drafts.",
+        "会议助手参加视频会议，生成文字记录、摘要、总结邮件和跟进草稿。",
     },
     {
-      text: "Slack integration",
+      text: "Slack 集成",
       tooltip:
-        "Forward important emails and notifications to your Slack channels automatically.",
+        "自动将重要邮件和通知转发至 Slack 频道。",
     },
     {
-      text: "App integrations",
+      text: "应用集成",
       tooltip:
-        "Connect Notion, Stripe, Monday.com, and more so the AI can use data from your tools when drafting replies and meeting briefs.",
+        "连接 Notion、Stripe、Monday.com 等应用，让 AI 结合相关数据起草回复和会前简报。",
     },
     {
-      text: "Email digests",
+      text: "邮件摘要",
       tooltip:
-        "Group emails from selected rules into a scheduled summary instead of reading each message individually.",
+        "将指定规则匹配的邮件汇总为定时摘要。",
     },
     {
-      text: "Auto-file attachments",
+      text: "自动整理附件",
       tooltip:
-        "Automatically organize and file email attachments to your preferred storage.",
+        "自动将邮件附件整理到指定存储位置。",
     },
     {
-      text: "Unlimited knowledge base",
+      text: "不限容量的知识库",
       tooltip:
-        "The knowledge base is used to help draft responses. Store unlimited content in your knowledge base.",
+        "知识库用于辅助起草回复，可存储不限数量的内容。",
     },
   ],
   cta: "Try free for 7 days",
@@ -352,7 +352,7 @@ const plusTier: Tier = {
 };
 
 const professionalTier: Tier = {
-  name: "Professional",
+  name: "专业版",
   tiers: {
     monthly: "PROFESSIONAL_MONTHLY",
     annually: "PROFESSIONAL_ANNUALLY",
@@ -368,17 +368,17 @@ const professionalTier: Tier = {
       pricing.PROFESSIONAL_ANNUALLY,
     ),
   },
-  description: "For teams and growing businesses handling high email volumes.",
+  description: "适合邮件量较大的团队和成长型企业。",
   features: [
     {
-      text: "Everything in Plus, plus:",
+      text: "包含进阶版全部功能，并提供：",
     },
-    { text: "Team-wide analytics" },
-    { text: "Priority support" },
+    { text: "团队统计" },
+    { text: "优先支持" },
     {
-      text: "Dedicated onboarding manager",
+      text: "专属入门指导",
       tooltip:
-        "We'll help you get set up on an onboarding call. Book as many free calls as needed.",
+        "提供免费的设置指导通话，可按需预约。",
     },
   ],
   cta: "Try free for 7 days",
@@ -386,7 +386,7 @@ const professionalTier: Tier = {
 };
 
 const enterpriseTier: Tier = {
-  name: "Enterprise",
+  name: "企业版",
   tiers: {
     monthly: "COPILOT_MONTHLY",
     annually: "COPILOT_MONTHLY",
@@ -394,25 +394,25 @@ const enterpriseTier: Tier = {
   price: { monthly: 0, annually: 0 },
   discount: { monthly: 0, annually: 0 },
   description:
-    "For organizations with enterprise-grade security and compliance requirements.",
+    "适合有企业级安全与合规要求的组织。",
   features: [
     {
-      text: "Everything in Team, plus:",
+      text: "包含团队版全部功能，并提供：",
     },
     {
-      text: "SSO login",
+      text: "单点登录",
     },
     {
-      text: "SCIM user provisioning",
+      text: "SCIM 用户管理",
     },
     {
-      text: "On-premise deployment (optional)",
+      text: "本地部署（可选）",
     },
     {
-      text: "Advanced security & SLA",
+      text: "高级安全和服务保障",
     },
     {
-      text: "Dedicated account manager & training",
+      text: "专属客户经理和培训",
     },
   ],
   cta: "Speak to sales",

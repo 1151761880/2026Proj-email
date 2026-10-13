@@ -43,7 +43,7 @@ export function LearnedPatternsDialog({
           setLearnedPatternGroupId(data.data.groupId);
         } else {
           toastError({
-            description: "There was an error setting up learned patterns.",
+            description: "配置学习规律失败。",
           });
         }
       },
@@ -76,11 +76,9 @@ export function LearnedPatternsDialog({
 
       <DialogContent className="max-w-2xl">
         <DialogHeader>
-          <DialogTitle>Learned patterns</DialogTitle>
+          <DialogTitle>已学习的规律</DialogTitle>
           <DialogDescription>
-            Learned patterns are patterns that the AI has learned from your
-            email history. When a learned pattern is matched other rules
-            conditions are skipped and this rule is automatically selected.
+            AI 从邮件历史中学习规律。匹配该规律时，将直接选择此规则并跳过其他条件。
           </DialogDescription>
         </DialogHeader>
 

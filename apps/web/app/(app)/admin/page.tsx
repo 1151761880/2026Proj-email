@@ -28,15 +28,15 @@ export default async function AdminPage() {
   if (!isAdmin({ email: session?.user.email })) {
     return (
       <ErrorPage
-        title="No Access"
-        description="You do not have permission to access this page."
+        title="无访问权限"
+        description="无权访问此页面。"
       />
     );
   }
 
   return (
     <PageWrapper>
-      <PageHeader title="Admin" />
+      <PageHeader title="管理后台" />
 
       <div className="space-y-8 mt-4 mb-20">
         <AdminUpgradeUserForm />

@@ -60,7 +60,7 @@ export function AvailableActionsPanel() {
               }),
             ]}
             notifyActionName={notifyActionName}
-            title="Available Actions"
+            title="可用操作"
           />
         </div>
       </CardContent>
@@ -124,5 +124,5 @@ function formatProviderList(providerNames: string[]) {
   if (providerNames.length === 1) return providerNames[0];
   if (providerNames.length === 2) return providerNames.join(" or ");
 
-  return `${providerNames.slice(0, -1).join(", ")}, or ${providerNames.at(-1)}`;
+  return `${providerNames.slice(0, -1).join(", ")} 或 ${providerNames.at(-1)}`;
 }

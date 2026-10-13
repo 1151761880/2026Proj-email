@@ -23,20 +23,20 @@ export default function RequestAccessPage() {
         <EarlyAccessFeatures />
         <Card>
           <CardHeader>
-            <CardTitle>Mail</CardTitle>
+            <CardTitle>邮箱</CardTitle>
             <CardDescription>
-              Open your inbox in the Inbox Zero mail client.
+              在十组邮件小助手中打开收件箱。
             </CardDescription>
           </CardHeader>
           <CardContent>
             {emailAccountId ? (
               <Button asChild>
                 <Link href={prefixPath(emailAccountId, "/mail")}>
-                  Open Mail
+                  打开邮箱
                 </Link>
               </Button>
             ) : (
-              <Button disabled>Open Mail</Button>
+              <Button disabled>打开邮箱</Button>
             )}
           </CardContent>
         </Card>
@@ -44,16 +44,14 @@ export default function RequestAccessPage() {
           <>
             <Card>
               <CardHeader>
-                <CardTitle>Sender categories</CardTitle>
+                <CardTitle>发件人分类</CardTitle>
                 <CardDescription>
-                  Sender Categories is a feature that allows you to categorize
-                  emails by sender, and take bulk actions or apply rules to
-                  them.
+                  按发件人对邮件分类，并执行批量操作或应用规则。
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <Button asChild>
-                  <Link href="/smart-categories">Sender Categories</Link>
+                  <Link href="/smart-categories">发件人分类</Link>
                 </Button>
               </CardContent>
             </Card>
@@ -89,15 +87,15 @@ export default function RequestAccessPage() {
         )}
         <Card>
           <CardHeader>
-            <CardTitle>Early access</CardTitle>
+            <CardTitle>抢先体验</CardTitle>
             <CardDescription>
-              Give us feedback on what features you want to see.
+              告诉我们你希望增加的功能。
             </CardDescription>
           </CardHeader>
           <CardContent>
             <Button asChild>
               <Link href="/waitlist" target="_blank">
-                Feedback Form
+                反馈表单
               </Link>
             </Button>
           </CardContent>

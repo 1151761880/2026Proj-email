@@ -33,16 +33,16 @@ test("creates, edits, toggles, and deletes a manual automation rule", async ({
   await page.goto(`/${emailAccountId}/automation`);
   await expectVisibleAfterTransientFetch(
     page,
-    page.getByRole("heading", { name: "AI Assistant", exact: true }),
+    page.getByRole("heading", { name: "智能助手", exact: true }),
   );
 
-  const createDialog = page.getByRole("dialog", { name: "Create Rule" });
+  const createDialog = page.getByRole("dialog", { name: "创建规则" });
   const addRuleManually = page.getByRole("button", {
-    name: "Add rule manually",
+    name: "手动添加规则",
   });
   await expect(async () => {
     if (await addRuleManually.isVisible()) return;
-    await page.getByRole("button", { name: "Add Rule" }).click();
+    await page.getByRole("button", { name: "添加规则" }).click();
     await expect(addRuleManually).toBeVisible({ timeout: 5000 });
   }).toPass({ timeout: 30_000 });
   await addRuleManually.click();
@@ -50,15 +50,15 @@ test("creates, edits, toggles, and deletes a manual automation rule", async ({
 
   await createDialog
     .getByPlaceholder(
-      "e.g. Newsletters, regular content from publications, blogs, or services I've subscribed to",
+      "例如：来自已订阅的刊物、博客或服务的定期邮件",
     )
     .fill("Receipts and invoices from software vendors");
   await createDialog.getByRole("combobox").first().click();
-  await page.getByRole("option", { name: "Archive" }).click();
+  await page.getByRole("option", { name: "归档" }).click();
   await createDialog
-    .getByRole("textbox", { name: "Rule name" })
+    .getByRole("textbox", { name: "规则名称" })
     .fill(RULE_NAME);
-  const createButton = createDialog.getByRole("button", { name: "Create" });
+  const createButton = createDialog.getByRole("button", { name: "创建" });
   await expect(createButton).toBeEnabled();
   await createButton.click();
   await expect
@@ -76,13 +76,13 @@ test("creates, edits, toggles, and deletes a manual automation rule", async ({
   const ruleRow = page.getByRole("row").filter({ hasText: RULE_NAME });
   await expect(ruleRow).toBeVisible({ timeout: 60_000 });
 
-  await ruleRow.getByRole("button", { name: "Toggle menu" }).click();
-  await page.getByRole("menuitem", { name: "Edit manually" }).click();
-  const editDialog = page.getByRole("dialog", { name: "Edit Rule" });
+  await ruleRow.getByRole("button", { name: "展开或收起菜单" }).click();
+  await page.getByRole("menuitem", { name: "手动编辑" }).click();
+  const editDialog = page.getByRole("dialog", { name: "编辑规则" });
   await editDialog
-    .getByRole("textbox", { name: "Rule name" })
+    .getByRole("textbox", { name: "规则名称" })
     .fill(UPDATED_RULE_NAME);
-  await editDialog.getByRole("button", { name: "Save" }).click();
+  await editDialog.getByRole("button", { name: "保存" }).click();
   await expect
     .poll(() => getRuleState(emailAccountId), { timeout: 60_000 })
     .toMatchObject({ name: UPDATED_RULE_NAME });
@@ -105,9 +105,9 @@ test("creates, edits, toggles, and deletes a manual automation rule", async ({
     });
 
   page.once("dialog", (dialog) => dialog.accept());
-  await updatedRuleRow.getByRole("button", { name: "Toggle menu" }).click();
-  await page.getByRole("menuitem", { name: "Delete" }).click();
-  await expect(page.getByText("Rule deleted", { exact: true })).toBeVisible();
+  await updatedRuleRow.getByRole("button", { name: "展开或收起菜单" }).click();
+  await page.getByRole("menuitem", { name: "删除" }).click();
+  await expect(page.getByText("规则已删除", { exact: true })).toBeVisible();
   await expect(updatedRuleRow).toHaveCount(0);
   await expect
     .poll(() => getRuleState(emailAccountId), { timeout: 60_000 })
